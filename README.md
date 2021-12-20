@@ -8,7 +8,7 @@ Web aplikacija za otkup glazbenih instrumenata.
 -   Luka Blašković (lblaskovi@unipu.hr) - implementacija modula za otkup (klijentova strana), UI komponente
 
 ### Prototip aplikacije
-Figma: https://www.figma.com/proto/n4KoJWK6usMQB7detGP6bq/PI---IstraMusicShop---Tim-50%2F21?node-id=40%3A4&scaling=scale-down&page-id=5%3A14&starting-point-node-id=40%3A4&show-proto-sidebar=1
+Figma: https://bit.ly/30ITpU2
 
 ### Organizacija
 
