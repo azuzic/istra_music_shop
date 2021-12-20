@@ -1,19 +1,15 @@
-# epic
+# "IstraMusicShop"
 
-## Project setup
-```
-npm install
-```
+Web aplikacija za otkup glazbenih instrumenata.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+### Autori i zaduženja
 
-### Compiles and minifies for production
-```
-npm run build
-```
+-   Alesandro Žužić (azuzic@unipu.hr) - 
+-   Luka Blašković (lblaskovi@unipu.hr) - 
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Organizacija
+
+[Sveučilište Jurja Dobrile u Puli](http://www.unipu.hr/)
+[Fakultet informatike u Puli](https://fipu.unipu.hr/)
+Programsko inženjerstvo, ak.god. 20XX./20XX.
+Mentor: Nikola Tanković (https://fipu.unipu.hr/fipu/nikola.tankovic, nikola.tankovic@unipu.hr)
