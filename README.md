@@ -4,7 +4,7 @@ Web aplikacija za otkup glazbenih instrumenata.
 
 ### Autori i zaduženja
 
--   Alesandro Žužić (azuzic@unipu.hr) - implementacija modula za administraciju (admin side), UI komponente
+-   Alesandro Žužić (azuzic@unipu.hr) - implementacija modula za administraciju (employee side), UI komponente
 -   Luka Blašković (lblaskovi@unipu.hr) - implementacija modula za otkup (client side), UI komponente
 
 ### Prototip aplikacije
