@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "msg",
+  name: "CTitle",
   props: {
     msg1: String,
     msg2: String,

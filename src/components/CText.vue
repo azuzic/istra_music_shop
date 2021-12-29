@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "text",
+  name: "Ctext",
   props: {
     msg: String,
   },

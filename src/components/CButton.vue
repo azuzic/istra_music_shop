@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "btn",
+  name: "CButton",
   props: {
     btn: String,
     link_text: String,
