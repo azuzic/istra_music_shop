@@ -8,9 +8,9 @@
     <div>
       <p class="link-text justify-center mt-2">
         {{ link_text }}
-        <router-link v-bind:to="href_link"
-          >&nbsp{{ link_href_text }}</router-link
-        >
+        <router-link class="pl-1" v-bind:to="href_link">{{
+          link_href_text
+        }}</router-link>
       </p>
     </div>
   </div>
