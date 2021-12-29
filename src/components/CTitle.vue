@@ -26,7 +26,7 @@ export default {
 }
 
 .title-msg {
-  font-family: Alike;
+  font-family: "Lora", serif;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;

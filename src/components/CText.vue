@@ -13,7 +13,7 @@ export default {
 
 <style scoped lang="scss">
 .text-msg {
-  font-family: Alike;
+  font-family: "Lora", italic;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
