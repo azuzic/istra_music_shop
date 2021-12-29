@@ -6,6 +6,7 @@
     <p>
       Ime i prezime
       <input
+        v-model="nameSurname"
         class="border rounded"
         type="text"
         name="imeprezime"
@@ -14,13 +15,34 @@
     </p>
     <p>
       Email
-      <input class="border rounded" type="email" name="email" id="email" />
+      <input
+        class="border rounded"
+        type="email"
+        name="email"
+        id="email"
+        v-model="email"
+      />
     </p>
-    <p>OIB <input class="border rounded" type="text" name="oib" id="oib" /></p>
+    <p>
+      OIB
+      <input
+        class="border rounded"
+        type="text"
+        name="oib"
+        id="oib"
+        v-model="oib"
+      />
+    </p>
 
     <p>
       Broj mobitela
-      <input class="border rounded" type="text" name="mob" id="mob" />
+      <input
+        class="border rounded"
+        type="text"
+        name="mob"
+        id="mob"
+        v-model="mob"
+      />
     </p>
     <p>
       Lozinka
@@ -48,19 +70,46 @@
     <br />
     <hr />
 
-    <button>Registriraj se</button>
+    <button
+      type="button"
+      @click="signup"
+      class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Registriraj se
+    </button>
     <p>Imate račun? <button>Prijavite se.</button></p>
   </div>
 </template>
-
 <script>
+import { getAuth, createUserWithEmailAndPassword } from "@/firebase";
+const auth = getAuth();
 export default {
   name: "Registracija",
   data() {
     return {
+      nameSurname: "",
+      email: "",
+      oib: "",
+      mob: "",
       password: "",
       passwordRepeat: "",
     };
+  },
+  methods: {
+    signup() {
+      if (this.password !== this.passwordRepeat) {
+        return;
+      } else {
+        createUserWithEmailAndPassword(auth, this.email, this.password)
+          .then((userCredential) => {
+            // Signed in
+            console.log("Uspjesna registracija!");
+          })
+          .catch((error) => {
+            console.log("Doslo je do greske!", error);
+          });
+      }
+    },
   },
   components: {},
 };

@@ -22,7 +22,6 @@ const routes = [
   {
     path: "/registracija",
     name: "Registracija",
-
     component: () => import("../views/Registracija.vue"),
   },
 ];
