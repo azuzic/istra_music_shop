@@ -15,6 +15,7 @@
         <CText
           class="text-center pl-8 pr-8"
           msg="Ovdje možete otkupiti instrumente koje ne koristite pomoću automatiziranog sustava otkupa glazbenih instrumenata."
+          :size="50"
         />
       </div>
       <div class="place-self-center">
@@ -24,6 +25,7 @@
           link_href_text="Prijavite se."
           href_link="/prijava"
           href_btn="/registracija"
+          :btnClickHandler="this.dummy"
         />
       </div>
     </div>
@@ -41,6 +43,9 @@ export default {
     CTitle,
     CText,
     CButton,
+  },
+  methods: {
+    dummy() {},
   },
 };
 </script>

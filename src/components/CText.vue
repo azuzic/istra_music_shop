@@ -7,6 +7,7 @@ export default {
   name: "Ctext",
   props: {
     msg: String,
+    font_size: Number,
   },
 };
 </script>

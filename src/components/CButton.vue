@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="button-bg text-center pt-3 pb-3 pl-9 pr-9">
-      <button class="button-text">
+      <button class="button-text" type="button" @click="btnClickHandler">
         <router-link v-bind:to="href_btn">{{ btn }}</router-link>
       </button>
     </div>
@@ -25,6 +25,7 @@ export default {
     link_href_text: String,
     href_link: String,
     href_btn: String,
+    btnClickHandler: Function,
   },
 };
 </script>
