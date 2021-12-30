@@ -25,6 +25,7 @@
           link_href_text="Prijavite se."
           href_link="/prijava"
           href_btn="/registracija"
+          :btnClickHandler="this.dummy"
         />
       </div>
     </div>
@@ -42,6 +43,9 @@ export default {
     CTitle,
     CText,
     CButton,
+  },
+  methods: {
+    dummy() {},
   },
 };
 </script>

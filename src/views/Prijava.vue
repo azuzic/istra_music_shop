@@ -3,7 +3,7 @@
     <div>
       <img alt="Test logo" src="../assets/logo.svg" />
     </div>
-    <CText class="pl-8 pr-8" msg="Prijavite se za nastavak" />
+    <CText msg="Prijavite se za nastavak" />
     <form>
       <div class="form-group">
         <label for="emailInput">Email adresa</label>
@@ -27,6 +27,7 @@
         />
       </div>
       <br />
+      <!--
       <button
         type="button"
         @click="login()"
@@ -34,13 +35,15 @@
       >
         Prijava
       </button>
-      <div class="place-self-center">
+      -->
+      <div class="place-self-center pl-16 pr-16">
         <CButton
-          btn="REGISTRACIJA"
+          btn="PRIJAVI SE"
           link_text="Nemate račun?"
           link_href_text="Registrirajte se."
           href_link="/registracija"
           href_btn="/prijava"
+          :btnClickHandler="this.login"
         />
       </div>
     </form>
