@@ -1,17 +1,17 @@
 <template>
-  <div class="">
+  <div>
     <div>
       <img alt="Test logo" src="../assets/logo.svg" />
     </div>
     <div class="grid auto-rows-auto gap-4">
       <div>
-        <h1 class="text-center text-22px">
-          <CText msg="Kreirajte račun da možete započeti." />
+        <h1 class="text-center text-22px CText">
+          Kreirajte račun da možete započeti.
         </h1>
       </div>
       <div class="grid auto-rows-auto gap-4 pl-4 pr-4">
         <div>
-          <CText class="text-left text-18px m-0 p-0" msg="Ime i prezime" />
+          <p class="text-left text-18px m-0 p-0">Ime i prezime</p>
           <input
             v-model="nameSurname"
             type="text"
@@ -21,27 +21,27 @@
           <hr />
         </div>
         <div>
-          <CText class="text-left text-18px" msg="Email" />
+          <p class="text-left text-18px m-0 p-0">Email</p>
           <input type="email" name="email" id="email" v-model="email" />
           <hr />
         </div>
         <div>
-          <CText class="text-left text-18px" msg="OIB" />
+          <p class="text-left text-18px m-0 p-0">OIB</p>
           <input type="text" name="oib" id="oib" v-model="oib" />
           <hr />
         </div>
         <div>
-          <CText class="text-left text-18px" msg="Broj mobitela" />
+          <p class="text-left text-18px m-0 p-0">Broj mobitela</p>
           <input type="text" name="mob" id="mob" v-model="mob" />
           <hr />
         </div>
         <div>
-          <CText class="text-left text-18px" msg="Lozinka" />
+          <p class="text-left text-18px m-0 p-0">Lozinka</p>
           <input type="password" name="pass1" id="pass1" v-model="password" />
           <hr />
         </div>
         <div>
-          <CText class="text-left text-18px" msg="Potvrdi lozinku" />
+          <p class="text-left text-18px m-0 p-0">Potvrdi lozinku</p>
           <input
             type="password"
             name="pass2"
@@ -51,14 +51,12 @@
           <hr />
         </div>
         <div v-if="password != passwordRepeat">
-          <CText
-            class="text-left text-18px CWarning"
-            msg="Lozinke se ne podudaraju!"
-          />
+          <p class="text-left text-18px m-0 p-0 CWarning">
+            Lozinke se ne podudaraju!
+          </p>
         </div>
 
         <div class="place-self-center">
-          <!--REPLACE BUTTON HERE-->
           <CButton
             btn="REGISTRIRAJ SE"
             link_text="Imate račun?"
@@ -67,7 +65,6 @@
             href_btn="/registracija"
             :btnClickHandler="this.signup"
           />
-          <!--BUTTON END HERE-->
         </div>
       </div>
     </div>
@@ -75,7 +72,6 @@
 </template>
 <script>
 import CTitle from "@/components/CTitle.vue";
-import CText from "@/components/CText.vue";
 import CButton from "@/components/CButton.vue";
 
 import { getAuth, createUserWithEmailAndPassword } from "@/firebase";
@@ -112,76 +108,7 @@ export default {
   name: "Home",
   components: {
     CTitle,
-    CText,
     CButton,
   },
 };
 </script>
-<style>
-div hr {
-  border: 2px solid #3d3d3f;
-  border-radius: 16px;
-}
-
-input:focus + hr {
-  border: 2px solid #ff5252;
-  border-radius: 16px;
-}
-
-input:focus {
-  outline: none;
-  caret-color: #ff5252;
-}
-
-input {
-  width: 100%;
-  height: 24px;
-  border: none;
-}
-
-.CWarning {
-  color: #ff5252 !important;
-}
-
-.button-bg {
-  background: #3d3d3f;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 16px;
-}
-
-.button-text {
-  font-family: "Lora", serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 30px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #f5dada;
-}
-
-.link-text {
-  font-family: "Lora", serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 18px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #635a5a;
-}
-
-.href-link {
-  font-family: "Lora", serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 18px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #275d8fab;
-}
-</style>

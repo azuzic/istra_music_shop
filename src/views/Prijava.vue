@@ -3,55 +3,51 @@
     <div>
       <img alt="Test logo" src="../assets/logo.svg" />
     </div>
-    <CText msg="Prijavite se za nastavak" />
-    <form>
-      <div class="form-group">
-        <label for="emailInput">Email adresa</label>
-        <input
-          v-model="email"
-          type="email"
-          class="border rounded"
-          id="emailInput"
-          aria-describedby="emailHelp"
-          placeholder="Vaš email"
-        />
+    <div class="grid auto-rows-auto gap-4">
+      <div>
+        <h1 class="text-center text-22px CText">Prijavite se za nastavak</h1>
       </div>
-      <div class="form-group">
-        <label for="passInput">Lozinka</label>
-        <input
-          type="password"
-          v-model="password"
-          class="border rounded"
-          id="passInput"
-          placeholder="Lozinka"
-        />
+      <div class="grid auto-rows-auto gap-4 pl-4 pr-4">
+        <div class="form-group">
+          <p class="text-left text-18px m-0 p-0">Email adresa</p>
+          <input
+            v-model="email"
+            type="email"
+            class="border rounded"
+            id="emailInput"
+            aria-describedby="emailHelp"
+            placeholder="Vaš email"
+          />
+          <hr />
+        </div>
+        <div class="form-group">
+          <p class="text-left text-18px m-0 p-0">Lozinka</p>
+          <input
+            type="password"
+            v-model="password"
+            class="border rounded"
+            id="passInput"
+            placeholder="Lozinka"
+          />
+          <hr />
+        </div>
+        <br />
+        <div class="place-self-center">
+          <CButton
+            btn="PRIJAVI SE"
+            link_text="Nemate račun?"
+            link_href_text="Registrirajte se."
+            href_link="/registracija"
+            href_btn="/prijava"
+            :btnClickHandler="this.login"
+          />
+        </div>
       </div>
-      <br />
-      <!--
-      <button
-        type="button"
-        @click="login()"
-        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Prijava
-      </button>
-      -->
-      <div class="place-self-center pl-16 pr-16">
-        <CButton
-          btn="PRIJAVI SE"
-          link_text="Nemate račun?"
-          link_href_text="Registrirajte se."
-          href_link="/registracija"
-          href_btn="/prijava"
-          :btnClickHandler="this.login"
-        />
-      </div>
-    </form>
+    </div>
   </div>
 </template>
 <script>
 import CTitle from "@/components/CTitle.vue";
-import CText from "@/components/CText.vue";
 import CButton from "@/components/CButton.vue";
 import { getAuth, signInWithEmailAndPassword } from "@/firebase";
 export default {
@@ -64,7 +60,6 @@ export default {
   },
   components: {
     CTitle,
-    CText,
     CButton,
   },
   methods: {

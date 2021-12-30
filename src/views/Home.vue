@@ -11,12 +11,9 @@
           msg2="Istra Music Shop-a!"
         />
       </div>
-      <div class="place-self-center">
-        <CText
-          class="text-center pl-8 pr-8"
-          msg="Ovdje možete otkupiti instrumente koje ne koristite pomoću automatiziranog sustava otkupa glazbenih instrumenata."
-          :size="50"
-        />
+      <div class="place-self-center text-center pl-8 pr-8">
+        Ovdje možete otkupiti instrumente koje ne koristite pomoću
+        automatiziranog sustava otkupa glazbenih instrumenata.
       </div>
       <div class="place-self-center">
         <CButton
@@ -34,14 +31,12 @@
 
 <script>
 import CTitle from "@/components/CTitle.vue";
-import CText from "@/components/CText.vue";
 import CButton from "@/components/CButton.vue";
 
 export default {
   name: "Home",
   components: {
     CTitle,
-    CText,
     CButton,
   },
   methods: {
