@@ -59,21 +59,14 @@
 
         <div class="place-self-center">
           <!--REPLACE BUTTON HERE-->
-          <div>
-            <div class="button-bg text-center pt-3 pb-3 pl-9 pr-9">
-              <button type="button" @click="signup" class="button-text">
-                REGISTRIRAJ SE
-              </button>
-            </div>
-            <div>
-              <p class="link-text justify-center mt-2">
-                Imate račun?
-                <router-link class="pl-1 href-link" to="/prijava">
-                  <u>Prijavite se.</u>
-                </router-link>
-              </p>
-            </div>
-          </div>
+          <CButton
+            btn="REGISTRIRAJ SE"
+            link_text="Imate račun?"
+            link_href_text="Prijavite se."
+            href_link="/prijava"
+            href_btn="/registracija"
+            :btnClickHandler="this.signup"
+          />
           <!--BUTTON END HERE-->
         </div>
       </div>
