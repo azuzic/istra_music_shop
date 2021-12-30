@@ -20,6 +20,11 @@ const routes = [
     name: "Prijava",
     component: () => import("../views/Prijava.vue"),
   },
+  {
+    path: "/password-reset",
+    name: "PasswordReset",
+    component: () => import("../views/PasswordReset.vue"),
+  },
 ];
 
 const router = new VueRouter({

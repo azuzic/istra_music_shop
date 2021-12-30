@@ -16,7 +16,6 @@
             class="border rounded"
             id="emailInput"
             aria-describedby="emailHelp"
-            placeholder="Vaš email"
           />
           <hr />
         </div>
@@ -27,9 +26,11 @@
             v-model="password"
             class="border rounded"
             id="passInput"
-            placeholder="Lozinka"
           />
           <hr />
+          <router-link to="/password-reset"
+            ><small>Zaboravili ste lozinku?</small></router-link
+          >
         </div>
         <br />
         <div class="place-self-center">
