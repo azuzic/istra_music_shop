@@ -1,5 +1,5 @@
 <template>
-  <p class="text-msg text-center">{{ msg }}</p>
+  <p class="text-msg m-0 p-0">{{ msg }}</p>
 </template>
 
 <script>
@@ -16,7 +16,6 @@ export default {
   font-family: "Lora", italic;
   font-style: normal;
   font-weight: normal;
-  font-size: 16px;
   line-height: 23px;
   color: #3d3d3f;
 }
