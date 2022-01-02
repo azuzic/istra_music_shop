@@ -54,7 +54,7 @@
         <div>
           <p class="text-left text-18px m-0 p-0">Broj mobitela</p>
           <div class="flex">
-            <div>09&nbsp</div>
+            <div style="color: grey !important">09</div>
             <div class="w-full">
               <input
                 type="text"
@@ -62,13 +62,13 @@
                 id="mob"
                 v-model="UpdateMob"
                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
-                maxlength="8"
+                maxlength="10"
               />
             </div>
           </div>
           <hr />
           <h2
-            v-if="UpdateMob.length != 8 && UpdateMob.length != 9 && UpdateMob"
+            v-if="UpdateMob.length != 9 && UpdateMob.length != 10 && UpdateMob"
             class="CText CWarning"
             id="resultMob"
           >
@@ -235,9 +235,13 @@ export default {
         return `${this.mobTemp}`;
       },
       set() {
-        let br = document.getElementById("mob").value;
+        let br = document.getElementById("mob").value.replace(/-/g, "");
         this.mob = "09" + br;
-        this.mobTemp = br;
+        let l = br.length;
+        if (l >= 1 && l < 5) this.mobTemp = br.slice(0, 1) + "-" + br.slice(1);
+        else if (l >= 5)
+          this.mobTemp =
+            br.slice(0, 1) + "-" + br.slice(1, 4) + "-" + br.slice(4);
       },
     },
   },
