@@ -57,7 +57,6 @@
             <div class="">09</div>
             <div class="w-full">
               <input
-                v-on:change="validateMob($event)"
                 type="text"
                 name="mob"
                 id="mob"
