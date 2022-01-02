@@ -20,14 +20,14 @@
           <hr />
           <button
             class="float-right"
-            v-bind:disabled="!canSend"
-            @click.prevent="sendCode"
+            :disabled="sendEmailCheck == 0"
+            @click.prevent="sendCode()"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-12 w-12"
               viewBox="0 0 20 20"
-              :fill="hoverColor"
+              v-bind:fill="sendEmailCheck ? colorSend : colorNoSend"
             >
               <path
                 fill-rule="evenodd"
@@ -58,14 +58,15 @@
 <script>
 import CTitle from "@/components/CTitle.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
+import { getAuth, sendPasswordResetEmail } from "@/firebase";
 export default {
   name: "login",
   data() {
     return {
       email: "",
       code: "",
-      hoverColor: "lightgray",
-      canSend: false,
+      colorNoSend: "lightgray",
+      colorSend: "gray",
     };
   },
   components: {
@@ -74,18 +75,21 @@ export default {
   },
   computed: {
     sendEmailCheck() {
-      if (this.email.includes("@") && this.email.includes(".")) {
-        this.hoverColor = "gray";
-        this.canSend = true;
-      } else {
-        this.hoverColor = "lightgray";
-        this.canSend = false;
-      }
+      return this.email.includes("@") && this.email.includes(".") ? 1 : 0;
     },
   },
   methods: {
     sendCode() {
-      console.log("Code sent...");
+      const auth = getAuth();
+      sendPasswordResetEmail(auth, this.email)
+        .then(() => {
+          console.log("Password reset email sent!");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          // ..
+        });
     },
     confirmCode() {
       console.log("Code confirmation..." + this.hover);
