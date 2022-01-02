@@ -64,7 +64,7 @@ export default {
   data() {
     return {
       email: "",
-      code: "",
+      code: "123",
       colorNoSend: "lightgray",
       colorSend: "gray",
     };
