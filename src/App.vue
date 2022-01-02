@@ -1,7 +1,13 @@
 <template>
   <div id="app">
     <div class="CBg"></div>
-    <router-view />
+    <transition
+      mode="out-in"
+      enter-active-class="animate__animated animate__backInLeft"
+      leave-active-class="animate__animated animate__backOutRight"
+    >
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -52,5 +58,16 @@ input {
 }
 .CWarning {
   color: #ff5252 !important;
+}
+.href-link {
+  font-family: "Lora", serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #275d8fab;
 }
 </style>

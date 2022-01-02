@@ -28,9 +28,12 @@
             id="passInput"
           />
           <hr />
-          <router-link to="/password-reset"
-            ><small>Zaboravili ste lozinku?</small></router-link
+          <router-link
+            class="href-link font-14px float-right"
+            to="/password-reset"
           >
+            <u>Zaboravili ste lozinku?</u>
+          </router-link>
         </div>
         <br />
         <div class="place-self-center">

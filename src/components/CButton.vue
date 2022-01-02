@@ -8,7 +8,7 @@
     <div>
       <p class="link-text justify-center mt-2">
         {{ link_text }}
-        <router-link class="pl-1 href-link" v-bind:to="href_link">
+        <router-link class="pl-1 href-link font-14px" v-bind:to="href_link">
           <u>{{ link_href_text }}</u>
         </router-link>
       </p>
@@ -59,17 +59,5 @@ export default {
   align-items: center;
   text-align: center;
   color: #635a5a;
-}
-
-.href-link {
-  font-family: "Lora", serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 18px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  color: #275d8fab;
 }
 </style>

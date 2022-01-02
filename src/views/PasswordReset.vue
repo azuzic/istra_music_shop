@@ -17,18 +17,16 @@
             id="emailInput"
             aria-describedby="emailHelp"
           />
-
-          <hr />
           <button
-            class="float-right"
+            class="float-right arrow-pos"
             :disabled="sendEmailCheck == 0"
             @click.prevent="sendCode()"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-12 w-12"
+              style="height: 28px"
               viewBox="0 0 20 20"
-              v-bind:fill="sendEmailCheck ? colorSend : colorNoSend"
+              v-bind:fill="sendEmailCheck ? 'gray' : 'lightgray'"
             >
               <path
                 fill-rule="evenodd"
@@ -37,8 +35,9 @@
               />
             </svg>
           </button>
+          <hr />
         </div>
-        <div class="form-group">
+        <div :class="!codeIsSent ? 'tranparent' : ''">
           <p class="text-left text-18px m-0 p-0">6-znamenkasti kod</p>
           <input
             type="text"
@@ -46,12 +45,19 @@
             :disabled="!codeIsSent"
             class="border rounded"
             id="passInput"
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+            maxlength="6"
           />
           <hr />
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="h-12 w-12 float-right rotation"
+            :class="
+              codeIsSent
+                ? 'float-right rotation spin-pos'
+                : 'float-right spin-pos'
+            "
             viewBox="0 0 20 20"
+            style="height: 26px"
             fill="currentColor"
           >
             <path
@@ -77,10 +83,12 @@
             ></svg>
           </span>
         </div>
-
-        <br />
         <div class="place-self-center">
-          <CButtonSingle btn="POTVRDI" :btnClickHandler="confirmCode" />
+          <CButtonSingle
+            :class="codeEntered ? '' : 'tranparent'"
+            btn="POTVRDI"
+            :btnClickHandler="codeEntered ? confirmCode : dummy"
+          />
         </div>
         <br />
       </div>
@@ -101,8 +109,6 @@ export default {
       email: "",
       codeSent: "",
       codeEntered: "",
-      colorNoSend: "lightgray",
-      colorSend: "gray",
       codeIsSent: false,
       wrongCode: false,
     };
@@ -149,6 +155,7 @@ export default {
         return false;
       }
     },
+    dummy() {},
   },
 };
 </script>
@@ -169,5 +176,22 @@ export default {
   to {
     transform: rotate(0deg);
   }
+}
+.arrow-pos {
+  float: right;
+  margin-top: -28px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+.spin-pos {
+  float: right;
+  margin-top: -32px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+.tranparent {
+  opacity: 0.25;
 }
 </style>

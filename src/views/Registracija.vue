@@ -54,7 +54,7 @@
         <div>
           <p class="text-left text-18px m-0 p-0">Broj mobitela</p>
           <div class="flex">
-            <div class="">09</div>
+            <div>09&nbsp</div>
             <div class="w-full">
               <input
                 type="text"
@@ -253,6 +253,7 @@ export default {
 .inactive div .button-bg {
   background: #919192 !important;
 }
+
 .eye {
   float: right;
   margin-top: -24px;
