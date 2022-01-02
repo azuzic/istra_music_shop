@@ -58,13 +58,16 @@
 <script>
 import CTitle from "@/components/CTitle.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
-import { getAuth, sendPasswordResetEmail } from "@/firebase";
+import emailjs from "@emailjs/browser";
+//EmailJS
+import { init } from "@emailjs/browser";
+init("user_s3PvQJakdM1y9xnn80F4d");
 export default {
   name: "login",
   data() {
     return {
       email: "",
-      code: "123",
+      code: "",
       colorNoSend: "lightgray",
       colorSend: "gray",
     };
@@ -79,17 +82,24 @@ export default {
     },
   },
   methods: {
+    randomCodeGenerator() {
+      //Random 6 digit generator
+      return Math.round(Math.random() * (999999 - 100000) + 100000);
+      console.log(this.code);
+    },
     sendCode() {
-      const auth = getAuth();
-      sendPasswordResetEmail(auth, this.email)
-        .then(() => {
-          console.log("Password reset email sent!");
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // ..
-        });
+      var params = {
+        email: this.email,
+        code: this.randomCodeGenerator(),
+      };
+      emailjs.send("service_zbc9jzl", "template_gk25qkz", params).then(
+        (result) => {
+          console.log("SUCCESS!", result.text);
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
     },
     confirmCode() {
       console.log("Code confirmation..." + this.hover);
