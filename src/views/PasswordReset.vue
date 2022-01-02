@@ -5,6 +5,7 @@
     </div>
     <div class="grid auto-rows-auto gap-4">
       <br />
+
       <CTitle class="place-self-center" msg1="Resetiranje lozinke" />
       <div class="grid auto-rows-auto gap-4 pl-4 pr-4">
         <div class="form-group">
@@ -41,16 +42,47 @@
           <p class="text-left text-18px m-0 p-0">6-znamenkasti kod</p>
           <input
             type="text"
-            v-model="code"
+            v-model="codeEntered"
+            :disabled="!codeIsSent"
             class="border rounded"
             id="passInput"
           />
           <hr />
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-12 w-12 float-right rotation"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
+              clip-rule="evenodd"
+            />
+          </svg>
         </div>
+        <div
+          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+          role="alert"
+          v-if="wrongCode"
+        >
+          <strong class="font-bold">Upozorenje!</strong>
+          <span class="block sm:inline">Unijeli ste neispravan kod.</span>
+          <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+            <svg
+              class="fill-current h-6 w-6 text-red-500"
+              role="button"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            ></svg>
+          </span>
+        </div>
+
         <br />
         <div class="place-self-center">
           <CButtonSingle btn="POTVRDI" :btnClickHandler="confirmCode" />
         </div>
+        <br />
       </div>
     </div>
   </div>
@@ -67,9 +99,12 @@ export default {
   data() {
     return {
       email: "",
-      code: "",
+      codeSent: "",
+      codeEntered: "",
       colorNoSend: "lightgray",
       colorSend: "gray",
+      codeIsSent: false,
+      wrongCode: false,
     };
   },
   components: {
@@ -85,7 +120,6 @@ export default {
     randomCodeGenerator() {
       //Random 6 digit generator
       return Math.round(Math.random() * (999999 - 100000) + 100000);
-      console.log(this.code);
     },
     sendCode() {
       var params = {
@@ -94,15 +128,26 @@ export default {
       };
       emailjs.send("service_zbc9jzl", "template_gk25qkz", params).then(
         (result) => {
-          console.log("SUCCESS!", result.text);
+          console.log("SUCCESS! ", result.text);
+          this.codeSent = params.code;
+          this.codeIsSent = true;
         },
         (error) => {
           console.log("FAILED...", error.text);
+          this.codeIsSent = false;
         }
       );
     },
     confirmCode() {
-      console.log("Code confirmation..." + this.hover);
+      console.log("Code confirmation...");
+      if (this.codeSent == this.codeEntered && this.codeEntered != "") {
+        this.wrongCode = false;
+        console.log("OK");
+        return 1;
+      } else {
+        this.wrongCode = true;
+        return false;
+      }
     },
   },
 };
@@ -110,5 +155,19 @@ export default {
 <style>
 .disabled-click {
   pointer-events: none;
+}
+.rotation {
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes spin {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
 }
 </style>
