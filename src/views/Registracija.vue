@@ -24,16 +24,57 @@
           <p class="text-left text-18px m-0 p-0">Email</p>
           <input type="email" name="email" id="email" v-model="email" />
           <hr />
+          <h2
+            v-if="!checkEmail(email) && email"
+            class="CText CWarning"
+            id="resultEmail"
+          >
+            Email nije točno napisan!
+          </h2>
         </div>
         <div>
           <p class="text-left text-18px m-0 p-0">OIB</p>
-          <input type="text" name="oib" id="oib" v-model="oib" />
+          <input
+            type="text"
+            name="oib"
+            id="oib"
+            v-model="oib"
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+            maxlength="11"
+          />
           <hr />
+          <h2
+            v-if="oib.length != 11 && oib"
+            class="CText CWarning"
+            id="resultOIB"
+          >
+            OIB mora sadržavati 11 brojeva!
+          </h2>
         </div>
         <div>
           <p class="text-left text-18px m-0 p-0">Broj mobitela</p>
-          <input type="text" name="mob" id="mob" v-model="mob" />
+          <div class="flex">
+            <div class="">09</div>
+            <div class="w-full">
+              <input
+                v-on:change="validateMob($event)"
+                type="text"
+                name="mob"
+                id="mob"
+                v-model="UpdateMob"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                maxlength="8"
+              />
+            </div>
+          </div>
           <hr />
+          <h2
+            v-if="UpdateMob.length != 8 && UpdateMob.length != 9 && UpdateMob"
+            class="CText CWarning"
+            id="resultMob"
+          >
+            Broj mobitela mora sadržavati 10 ili 11 brojeva!
+          </h2>
         </div>
         <div>
           <p class="text-left text-18px m-0 p-0">Lozinka</p>
@@ -76,11 +117,12 @@
             src="@/assets/eye_open.png"
           />
           <hr />
-        </div>
-        <div v-if="password != passwordRepeat && passwordRepeat">
-          <p class="text-left text-18px m-0 p-0 CWarning">
+          <h2
+            v-if="password != passwordRepeat && passwordRepeat"
+            class="CText CWarning"
+          >
             Lozinke se ne podudaraju!
-          </p>
+          </h2>
         </div>
 
         <div
@@ -118,6 +160,7 @@ export default {
       nameSurname: "",
       email: "",
       oib: "",
+      mobTemp: "",
       mob: "",
       password: "",
       passwordRepeat: "",
@@ -166,6 +209,10 @@ export default {
         y.classList.remove("invisible");
       }
     },
+    checkEmail(email) {
+      let re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    },
     dummy() {},
   },
   name: "Home",
@@ -183,6 +230,16 @@ export default {
         this.passwordRepeat
         ? true
         : false;
+    },
+    UpdateMob: {
+      get() {
+        return `${this.mobTemp}`;
+      },
+      set() {
+        let br = document.getElementById("mob").value;
+        this.mob = "09" + br;
+        this.mobTemp = br;
+      },
     },
   },
 };
