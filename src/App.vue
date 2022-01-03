@@ -19,7 +19,7 @@
   font-family: "Lora", italic;
   font-style: normal;
   font-weight: normal;
-  line-height: 23px;
+  line-height: 24px;
   color: #3d3d3f;
 }
 html {
@@ -55,30 +55,6 @@ input {
   height: 24px;
   border: none;
 }
-
-/*.select {
-  outline: none;
-  width: 100%;
-  height: 33px;
-  background: #FFFFFF;
-  border: 3px solid #292E32 !important;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  color: #3F2C28 !important;
-  font-weight: 600;
-}
-.option {
-  outline: none;
-  width: 100%;
-  height: 33px !important;
-  background: #FFFFFF;
-  border: 3px solid #292E32 ;
-  color: #3F2C28 ;
-  font-weight: 600;
-}
-select:focus {
-  outline: none;
-}*/
 
 .CWarning {
   color: #ff5252 !important;

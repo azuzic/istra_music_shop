@@ -87,7 +87,22 @@
         <!--===================BROJ MOBITELA END===========-->
         <!--===================LOZINKA=====================-->
         <div>
-          <p class="text-left text-18px m-0 p-0">Lozinka</p>
+          <div class="text-left text-18px m-0 p-0 flex items-center">
+            <div class="mr-4">Lozinka</div>
+            <div class="grid grid-cols-5 divide-x strength">
+              <div :class=" PasswordStrength == 0 ? 'line' : 
+                            PasswordStrength == 1 || PasswordStrength == 2 ? 'line-red' : 
+                            PasswordStrength == 3 ? 'line-yellow' :
+                            PasswordStrength > 3 ? 'line-green' : 'line'"></div>
+              <div :class=" PasswordStrength == 2 ? 'line-red' : 
+                            PasswordStrength == 3 ? 'line-yellow' :
+                            PasswordStrength > 3 ? 'line-green' : 'line'"></div>
+              <div :class=" PasswordStrength == 3 ? 'line-yellow' :
+                            PasswordStrength > 3 ? 'line-green' : 'line'"></div>
+              <div :class=" PasswordStrength > 3 ? 'line-green' : 'line'"></div>
+              <div :class=" PasswordStrength > 4 ? 'line-green' : 'line'"></div>
+            </div>
+          </div>
           <div>
             <input type="password" name="pass1" id="pass1" v-model="password" />
             <img
@@ -107,10 +122,10 @@
         </div>
         <!--===================LOZINKA END=================-->
         <!--===================POTVRDI LOZINKU=============-->
-        <div :class="!password ? 'tranparent' : ''">
+        <div :class="!password || PasswordStrength < 3 ? 'tranparent' : ''">
           <p class="text-left text-18px m-0 p-0">Potvrdi lozinku</p>
           <input
-            :disabled="!password"
+            :disabled="!password || PasswordStrength < 3"
             type="password"
             name="pass2"
             id="pass2"
@@ -246,6 +261,22 @@ export default {
         ? true
         : false;
     },
+    PasswordStrength() {
+      let strength = "0"
+      let password = this.password;
+      if (password.toLowerCase() != password)
+        strength++;
+      if (password.toUpperCase() != password)
+        strength++;
+      if (/\d/.test(password))
+        strength++;
+      if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password))
+        strength++;
+      if (password.length > 8)
+        strength++;
+      console.log(strength);
+      return strength;
+    },
     UpdateMob: {
       get() {
         return `${this.mobTemp}`;
@@ -278,5 +309,37 @@ export default {
   z-index: 1;
   cursor: pointer;
   height: 20px;
+}
+.line {
+  height: 8px;
+  border-radius: 4px;
+  background-color: grey;
+}
+
+.line-red {
+  height: 8px;
+  border-radius: 4px;
+  background-color: red;
+}
+
+.line-yellow {
+  height: 8px;
+  border-radius: 4px;
+  background-color: yellow;
+}
+
+.line-green {
+  height: 8px;
+  border-radius: 4px;
+  background-color: green;
+}
+
+.strength {
+  width: 100%;
+}
+
+.strength-text {
+  font-size: 12px;
+  color: red !important;
 }
 </style>

@@ -5,8 +5,7 @@
     </div>
     <img class="float-right" :class="open ? 'spin-pos' : 'spin-pos2'" src="@/assets/dropdown_icon.svg">
     
-    <div class="items" :class="!open ? 'selectHide' : ''">
-        <!--<transition-group tag="ul" name="list"> -->
+    <div class="items" :class="!open ? 'selectHide' : 'selectShow'">
         <div
             transition="thing"
             v-for="(option, i) of options"
@@ -15,7 +14,6 @@
             @click="selected = option; open = false; $emit('input', option);">
             {{ option }}
         </div>
-        <!--</transition-group>-->
     </div>
     
   </div>
@@ -43,11 +41,6 @@ export default {
 </script>
 
 <style scoped>
-.thing {
-  /* applied to the element when moving */
-  transition: transform .5s cubic-bezier(.55,0,.1,1);
-}
-
 .custom-select .selected {
   outline: none;
   width: 100%;
@@ -72,6 +65,7 @@ export default {
   position: absolute;
   width: calc(100% - 1rem);
   z-index: 1;
+  transform-origin: 50% 0%;
 }
 
 .items div {
@@ -96,7 +90,12 @@ export default {
 }
 
 .selectHide {
-  display: none;
+  transition: 0.25s;
+  transform: scaleY(0);
+}
+.selectShow {
+  transition: 0.25s;
+  transform: scaleY(1);
 }
 .spin-pos {
   transition: 0.25s;
@@ -121,27 +120,4 @@ export default {
   cursor: pointer;
   height: 18px;
 }
-/*
-.list-enter-from {
-    opacity:0;
-    transform: scale(0.6); 
-}
-.list-enter-to {
-    opacity:1;
-    transform: scale(1); 
-}
-.list-enter-active {
-    transition: all 0.4s ease;
-}
-.list-leave-from {
-    opacity:1;
-    transform: scale(1); 
-}
-.list-leave-to {
-    opacity:0;
-    transform: scale(0.6); 
-}
-.list-leave-active {
-    transition: all 0.4s ease;
-}*/
 </style>
