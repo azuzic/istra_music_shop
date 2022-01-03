@@ -4,10 +4,9 @@
       <img alt="Test logo" src="../assets/logo.svg" />
     </div>
     <div class="grid auto-rows-auto gap-4">
-      <br />
-
-      <CTitle class="place-self-center" msg1="Resetiranje lozinke" />
+      <br />      <CTitle class="place-self-center" msg1="Resetiranje lozinke" />
       <div class="grid auto-rows-auto gap-4 pl-4 pr-4">
+        <!--===================EMAIL=======================-->
         <div class="form-group">
           <p class="text-left text-18px m-0 p-0">Unesite vašu e-mail adresu</p>
           <input
@@ -22,21 +21,13 @@
             :disabled="sendEmailCheck == 0"
             @click.prevent="sendCode()"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              style="height: 28px"
-              viewBox="0 0 20 20"
-              v-bind:fill="sendEmailCheck ? 'gray' : 'lightgray'"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z"
-                clip-rule="evenodd"
-              />
-            </svg>
+          <img style="height: 24px" :class="sendEmailCheck ? 'tranparent-75' : 'tranparent'" src="@/assets/arrow_icon.svg">
           </button>
           <hr />
         </div>
+        <!--===================EMAIL END===================-->
+        <!--===================CODE========================-->
+        <!--===================CODE========================-->
         <div :class="!codeIsSent ? 'tranparent' : ''">
           <p class="text-left text-18px m-0 p-0">6-znamenkasti kod</p>
           <input
@@ -49,66 +40,19 @@
             maxlength="6"
           />
           <hr />
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            :class="
-              codeIsSent
-                ? 'float-right rotation spin-pos'
-                : 'float-right spin-pos'
-            "
-            viewBox="0 0 20 20"
-            style="height: 26px"
-            fill="currentColor"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"
-              clip-rule="evenodd"
-            />
-          </svg>
+          <img class="float-right spin-pos" :class="codeIsSent ? 'rotation' : ''" src="@/assets/spin_icon.svg">
         </div>
-        <div
-          class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-          role="alert"
-          v-if="codeSent"
-        >
-          <strong class="font-bold">Kod poslan!</strong>
-          <span class="block sm:inline"
-            >Na uneseni email smo poslali 6-znamenkasti kod za resetiranje
-            lozinke.</span
-          >
-          <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-            <svg
-              class="fill-current h-6 w-6 text-red-500"
-              role="button"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            ></svg>
-          </span>
-        </div>
-        <div
-          class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-          role="alert"
-          v-if="wrongCode"
-        >
-          <strong class="font-bold">Upozorenje!</strong>
-          <span class="block sm:inline">Unijeli ste neispravan kod.</span>
-          <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-            <svg
-              class="fill-current h-6 w-6 text-red-500"
-              role="button"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            ></svg>
-          </span>
-        </div>
-        <div class="place-self-center">
+        <!--===================CODE END====================-->
+        <CWarning v-if="wrongCode"  msg1 = "Upozorenje!" msg2="Unijeli ste neispravan kod."/>
+        <CSuccess v-if="codeIsSent" msg1 = "Kod poslan!" msg2="Na uneseni email smo poslali 6-znamenkasti kod za resetiranje lozinke."/>
+        <!--===================POTVRDI BUTTON==============-->
+        <div class="place-self-center" :class="codeEntered ? 'active' : 'inactive'">
           <CButtonSingle
-            :class="codeEntered ? '' : 'tranparent'"
             btn="POTVRDI"
             :btnClickHandler="codeEntered ? confirmCode : dummy"
           />
         </div>
+        <!--===================POTVRDI BUTTON END==========-->
         <br />
       </div>
     </div>
@@ -116,6 +60,8 @@
 </template>
 <script>
 import CTitle from "@/components/CTitle.vue";
+import CWarning from "@/components/CWarning.vue";
+import CSuccess from "@/components/CSuccess.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
 import emailjs from "@emailjs/browser";
 import router from "@/router/index.js";
@@ -137,6 +83,8 @@ export default {
   },
   components: {
     CTitle,
+    CWarning,
+    CSuccess,
     CButtonSingle,
   },
   computed: {
@@ -187,12 +135,6 @@ export default {
 .disabled-click {
   pointer-events: none;
 }
-.rotation {
-  animation-name: spin;
-  animation-duration: 5000ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-}
 @keyframes spin {
   from {
     transform: rotate(360deg);
@@ -211,11 +153,16 @@ export default {
 .spin-pos {
   float: right;
   margin-top: -32px;
+  margin-right: 2px;
   position: relative;
   z-index: 1;
   cursor: pointer;
+  height: 24px;
 }
-.tranparent {
-  opacity: 0.25;
+.rotation {
+  animation-name: spin;
+  animation-duration: 5000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 </style>
