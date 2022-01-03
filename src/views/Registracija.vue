@@ -4,12 +4,15 @@
       <img alt="Test logo" src="../assets/logo.svg" />
     </div>
     <div class="grid auto-rows-auto gap-4">
+      <!--===================TITLE=======================-->
       <div>
-        <h1 class="text-center text-22px CText">
+        <h1 class="text-center text-22px">
           Kreirajte račun da možete započeti.
         </h1>
       </div>
+      <!--===================TITLE END===================-->
       <div class="grid auto-rows-auto gap-4 pl-4 pr-4">
+        <!--===================IME I PREZIME=============-->
         <div>
           <p class="text-left text-18px m-0 p-0">Ime i prezime</p>
           <input
@@ -20,18 +23,22 @@
           />
           <hr />
         </div>
+        <!--===================IME I PREZIME END===========-->
+        <!--===================EMAIL=======================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Email</p>
           <input type="email" name="email" id="email" v-model="email" />
           <hr />
           <h2
             v-if="!checkEmail(email) && email"
-            class="CText CWarning"
+            class="CWarning"
             id="resultEmail"
           >
             Email nije točno napisan!
           </h2>
         </div>
+        <!--===================EMAIL END===================-->
+        <!--===================OIB=========================-->
         <div>
           <p class="text-left text-18px m-0 p-0">OIB</p>
           <input
@@ -45,12 +52,14 @@
           <hr />
           <h2
             v-if="oib.length != 11 && oib"
-            class="CText CWarning"
+            class="CWarning"
             id="resultOIB"
           >
             OIB mora sadržavati 11 brojeva!
           </h2>
         </div>
+        <!--===================OIB END=====================-->
+        <!--===================BROJ MOBITELA===============-->
         <div>
           <p class="text-left text-18px m-0 p-0">Broj mobitela</p>
           <div class="flex">
@@ -69,12 +78,14 @@
           <hr />
           <h2
             v-if="UpdateMob.length != 9 && UpdateMob.length != 10 && UpdateMob"
-            class="CText CWarning"
+            class="CWarning"
             id="resultMob"
           >
             Broj mobitela mora sadržavati 10 ili 11 brojeva!
           </h2>
         </div>
+        <!--===================BROJ MOBITELA END===========-->
+        <!--===================LOZINKA=====================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Lozinka</p>
           <div>
@@ -94,6 +105,8 @@
           </div>
           <hr />
         </div>
+        <!--===================LOZINKA END=================-->
+        <!--===================POTVRDI LOZINKU=============-->
         <div :class="!password ? 'tranparent' : ''">
           <p class="text-left text-18px m-0 p-0">Potvrdi lozinku</p>
           <input
@@ -118,12 +131,13 @@
           <hr />
           <h2
             v-if="password != passwordRepeat && passwordRepeat"
-            class="CText CWarning"
+            class="CWarning"
           >
             Lozinke se ne podudaraju!
           </h2>
         </div>
-
+        <!--===================POTVRDI LOZINKU END=========-->
+        <!--===================REGISTRIRAJ SE BUTTON=======-->
         <div
           class="place-self-center"
           :class="IsAllFilled ? 'active' : 'inactive'"
@@ -137,6 +151,7 @@
             :btnClickHandler="IsAllFilled ? signup : dummy"
           />
         </div>
+        <!--===================REGISTRIRAJ SE BUTTON END===-->
       </div>
     </div>
   </div>
@@ -163,6 +178,7 @@ export default {
       mob: "",
       password: "",
       passwordRepeat: "",
+      brr:"",
     };
   },
   methods: {
@@ -236,9 +252,13 @@ export default {
       },
       set() {
         let br = document.getElementById("mob").value.replace(/-/g, "");
+        if (br=="") {
+          this.mob = ""; 
+          this.mobTemp = "";
+        }
         this.mob = "09" + br;
         let l = br.length;
-        if (l >= 1 && l < 5) this.mobTemp = br.slice(0, 1) + "-" + br.slice(1);
+        if (l >= 1 && l < 5 && br) this.mobTemp = br.slice(0, 1) + "-" + br.slice(1);
         else if (l >= 5)
           this.mobTemp =
             br.slice(0, 1) + "-" + br.slice(1, 4) + "-" + br.slice(4);
@@ -251,13 +271,6 @@ export default {
 </script>
 
 <style>
-.active div .button-bg {
-  background: #3d3d3f !important;
-}
-.inactive div .button-bg {
-  background: #919192 !important;
-}
-
 .eye {
   float: right;
   margin-top: -24px;
@@ -265,9 +278,5 @@ export default {
   z-index: 1;
   cursor: pointer;
   height: 20px;
-}
-
-.tranparent {
-  opacity: 0.25;
 }
 </style>
