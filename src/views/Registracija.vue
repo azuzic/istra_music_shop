@@ -274,7 +274,6 @@ export default {
         strength++;
       if (password.length > 8)
         strength++;
-      console.log(strength);
       return strength;
     },
     UpdateMob: {
