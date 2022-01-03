@@ -19,10 +19,11 @@
           />
           <hr />
         </div>
-        <div class="form-group">
+        <div :class="!password ? 'tranparent' : ''">
           <p class="text-left text-18px m-0 p-0">Ponovite novu lozinku</p>
           <input
             v-model="passwordRepeat"
+            :disabled="!password"
             type="email"
             class="border rounded"
             id="emailInput"
@@ -63,12 +64,12 @@
 <script>
 import CTitle from "@/components/CTitle.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
-import { getAuth, updatePassword } from "@/firebase";
-
+import store from "@/store";
 export default {
   name: "NewPassword",
   data() {
     return {
+      userEmail: store.userEmail,
       password: "",
       passwordRepeat: "",
     };
@@ -85,19 +86,7 @@ export default {
   },
   methods: {
     dummy() {},
-    resetPassword() {
-      const auth = getAuth();
-
-      const user = auth.currentUser;
-
-      updatePassword(user, this.password)
-        .then(() => {
-          console.log("Password reset!");
-        })
-        .catch((error) => {
-          console.error("Password reset ERROR!");
-        });
-    },
+    resetPassword() {},
   },
 };
 </script>

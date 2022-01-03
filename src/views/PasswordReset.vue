@@ -118,6 +118,8 @@
 import CTitle from "@/components/CTitle.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
 import emailjs from "@emailjs/browser";
+import router from "@/router/index.js";
+import store from "@/store";
 //EmailJS
 import { init } from "@emailjs/browser";
 init("user_s3PvQJakdM1y9xnn80F4d");
@@ -130,6 +132,7 @@ export default {
       codeEntered: "",
       codeIsSent: false,
       wrongCode: false,
+      store,
     };
   },
   components: {
@@ -168,6 +171,8 @@ export default {
       if (this.codeSent == this.codeEntered && this.codeEntered != "") {
         this.wrongCode = false;
         console.log("OK");
+        router.replace({ name: "NewPassword" });
+        this.store.userEmail = this.email;
         return 1;
       } else {
         this.wrongCode = true;
