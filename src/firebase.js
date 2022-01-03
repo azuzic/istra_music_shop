@@ -1,5 +1,4 @@
 import { initializeApp } from "firebase/app";
-
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -7,10 +6,7 @@ import {
   onAuthStateChanged,
   signOut,
   sendPasswordResetEmail,
-  updatePassword,
 } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyC7C9Kimzy4f2jyYBUPQ3wSdCPkbBf6xu0",
@@ -20,7 +16,6 @@ const firebaseConfig = {
   messagingSenderId: "574533141940",
   appId: "1:574533141940:web:65335fdcfc74488f545ee1",
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
@@ -30,4 +25,4 @@ export { signInWithEmailAndPassword };
 export { onAuthStateChanged };
 export { signOut };
 export { sendPasswordResetEmail };
-export { updatePassword };
+export { app };
