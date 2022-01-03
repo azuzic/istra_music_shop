@@ -46,7 +46,7 @@ export default {
   width: 100%;
   height: 40px;
   background: #FFFFFF;
-  border: 3px solid #292E32 !important;
+  border: 2px solid #292E32 !important;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   color: #3F2C28 !important;
@@ -73,7 +73,7 @@ export default {
   width: inherit;
   height: 40px !important;
   background: #FFFFFF;
-  border: 3px solid #292E32 ;
+  border: 2px solid #292E32 ;
   color: #3F2C28 ;
   font-weight: 600;
   cursor: pointer;
