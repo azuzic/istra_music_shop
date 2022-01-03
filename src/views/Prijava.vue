@@ -8,6 +8,7 @@
         <h1 class="text-center text-22px CText">Prijavite se za nastavak</h1>
       </div>
       <div class="grid auto-rows-auto gap-4 pl-4 pr-4">
+        <!--===================EMAIL=======================-->
         <div class="form-group">
           <p class="text-left text-18px m-0 p-0">Email adresa</p>
           <input
@@ -19,6 +20,8 @@
           />
           <hr />
         </div>
+        <!--===================EMAIL END===================-->
+        <!--===================PASSWORD====================-->
         <div class="form-group">
           <p class="text-left text-18px m-0 p-0">Lozinka</p>
           <input
@@ -35,17 +38,20 @@
             <u>Zaboravili ste lozinku?</u>
           </router-link>
         </div>
+        <!--================PASSWORD END===================-->
         <br />
-        <div class="place-self-center">
+        <!--==============PRIJAVI SE BUTTON================-->
+        <div class="place-self-center" :class="email && password ? 'active' : 'inactive'">
           <CButton
             btn="PRIJAVI SE"
             link_text="Nemate račun?"
             link_href_text="Registrirajte se."
             href_link="/registracija"
             href_btn="/prijava"
-            :btnClickHandler="this.login"
+            :btnClickHandler="email && password ? login : dummy"
           />
         </div>
+        <!--==============PRIJAVI SE BUTTON END============-->
       </div>
     </div>
   </div>
@@ -60,6 +66,8 @@ export default {
     return {
       email: "",
       password: "",
+      osoba: "",
+      greska: ""
     };
   },
   components: {
@@ -74,13 +82,19 @@ export default {
         //Koristi lambda/arrow funkcije u kombinaciji sa .then kako bi se sacuvao this iz parent konteksta
         .then((result) => {
           console.log("Uspješna prijava", result);
+          this.greska == "0"
           //Replace koristi prilikom logina, push za sve ostale stvari
           this.$router.replace({ name: "Home" });
         })
         .catch(function (e) {
-          console.error("greska");
+          console.error(e.message);
+          if (e.message == "auth/user-not-found")
+            this.greska == "1"
+          else if (e.message == "auth/wrong-password")
+            this.greska == "2"
         });
     },
+    dummy() {},
   },
 };
 </script>

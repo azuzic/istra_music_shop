@@ -251,13 +251,6 @@ export default {
 </script>
 
 <style>
-.active div .button-bg {
-  background: #3d3d3f !important;
-}
-.inactive div .button-bg {
-  background: #919192 !important;
-}
-
 .eye {
   float: right;
   margin-top: -24px;
@@ -265,9 +258,5 @@ export default {
   z-index: 1;
   cursor: pointer;
   height: 20px;
-}
-
-.tranparent {
-  opacity: 0.25;
 }
 </style>

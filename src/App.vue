@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <div class="CBg"></div>
+    <!--
     <transition
       mode="out-in"
       enter-active-class="animate__animated animate__backInLeft"
       leave-active-class="animate__animated animate__backOutRight"
     >
+    </transition> -->
       <router-view />
-    </transition>
+    
   </div>
 </template>
 
@@ -69,5 +71,14 @@ input {
   align-items: center;
   text-align: center;
   color: #275d8fab;
+}
+.tranparent {
+  opacity: 0.35;
+}
+.active div .button-bg {
+  background: #3d3d3f !important;
+}
+.inactive div .button-bg {
+  background: #919192 !important;
 }
 </style>

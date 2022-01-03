@@ -26,7 +26,7 @@
               xmlns="http://www.w3.org/2000/svg"
               style="height: 28px"
               viewBox="0 0 20 20"
-              v-bind:fill="sendEmailCheck ? 'gray' : 'lightgray'"
+              v-bind:fill="sendEmailCheck ? 'gray' : 'darkgray'"
             >
               <path
                 fill-rule="evenodd"
@@ -83,9 +83,8 @@
             ></svg>
           </span>
         </div>
-        <div class="place-self-center">
+        <div class="place-self-center" :class="email && password ? 'active' : 'inactive'">
           <CButtonSingle
-            :class="codeEntered ? '' : 'tranparent'"
             btn="POTVRDI"
             :btnClickHandler="codeEntered ? confirmCode : dummy"
           />
@@ -190,8 +189,5 @@ export default {
   position: relative;
   z-index: 1;
   cursor: pointer;
-}
-.tranparent {
-  opacity: 0.25;
 }
 </style>
