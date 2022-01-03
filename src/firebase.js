@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
   signOut,
   sendPasswordResetEmail,
+  updatePassword,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
@@ -28,3 +29,4 @@ export { signInWithEmailAndPassword };
 export { onAuthStateChanged };
 export { signOut };
 export { sendPasswordResetEmail };
+export { updatePassword };

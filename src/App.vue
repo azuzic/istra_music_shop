@@ -1,13 +1,15 @@
 <template>
   <div id="app">
     <div class="CBg"></div>
+    <!--
     <transition
       mode="out-in"
       enter-active-class="animate__animated animate__backInLeft"
       leave-active-class="animate__animated animate__backOutRight"
     >
-      <router-view />
-    </transition>
+        </transition>
+        -->
+    <router-view />
   </div>
 </template>
 
