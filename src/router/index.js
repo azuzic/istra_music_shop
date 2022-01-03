@@ -25,6 +25,11 @@ const routes = [
     name: "PasswordReset",
     component: () => import("../views/PasswordReset.vue"),
   },
+  {
+    path: "/korisnik-podaci",
+    name: "KorisnikPodaci",
+    component: () => import("../views/KorisnikPodaci.vue"),
+  },
 ];
 
 const router = new VueRouter({
