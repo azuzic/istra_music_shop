@@ -53,13 +53,10 @@
       </div>
     </div>
     <!--==============LOGUT - TEMPORARY================-->
-        <button
-          class="logout"
-          @click="signout"
-        >
-          <p class="pr-2 pb-1">Odjava </p>
-          <img class="exit-icon" src="@/assets/exit_icon.svg">
-        </button>
+    <button class="logout" @click="signout">
+      <p class="pr-2 pb-1">Odjava</p>
+      <img class="exit-icon" src="@/assets/exit_icon.svg" />
+    </button>
     <!--==============/LOGUT - TEMPORARY================-->
   </div>
 </template>
@@ -68,6 +65,8 @@ import CTitle from "@/components/CTitle.vue";
 import CWarning from "@/components/CWarning.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
 import { getAuth, signOut } from "@/firebase";
+import { collection, getDocs } from "@/firebase";
+import { db } from "@/firebase";
 export default {
   name: "KorisnikPodaci",
   data() {
@@ -107,7 +106,7 @@ export default {
   align-items: center;
   justify-content: center;
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
-  background: #FF5252;
+  background: #ff5252;
 }
 
 .logout p {
