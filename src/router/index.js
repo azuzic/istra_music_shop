@@ -33,6 +33,11 @@ const routes = [
     },
     component: () => import("../views/KorisnikPodaci.vue"),
   },
+  {
+    path: "/djelatnik",
+    name: "Djelatnik",
+    component: () => import("../views/Djelatnik.vue"),
+  },
 ];
 
 const router = new VueRouter({
