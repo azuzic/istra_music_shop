@@ -60,7 +60,7 @@ router.beforeEach((to, from, next) => {
     next("Prijava");
   } else {
     if (from.name === "Registracija" && to.name !== "Prijava") {
-      wait(5).then(() => {
+      wait(3).then(() => {
         next();
       });
     } else {
