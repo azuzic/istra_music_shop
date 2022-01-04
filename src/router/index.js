@@ -46,7 +46,7 @@ let wait = function (seconds) {
   });
 };
 router.beforeEach((to, from, next) => {
-  console.log("going from", from, " to ", to);
+  //console.log("going from", from, " to ", to);
   const noUser = store.currentUser === null;
   if (noUser && to.meta.needsUser) {
     next("Prijava");
@@ -56,7 +56,6 @@ router.beforeEach((to, from, next) => {
         next();
       });
     } else {
-      console.log("else");
       next();
     }
   }
