@@ -28,8 +28,8 @@ onAuthStateChanged(auth, (user) => {
     console.log("NO USER");
     store.currentUser = null;
 
-    if (router.name !== "Prijava") {
-      router.push({ name: "Prijava" });
+    if (router.name !== "Home") {
+      router.push({ name: "Home" }).catch(() => {});
     }
   }
 });
