@@ -19,11 +19,10 @@ export default {
 </script>
 <style>
 .CSuccess-bg {
-  background-color: #6DD277;
-  color: #3D3D3F;
+  background-color: #4dbd58;
+  color: #2e302d;
 }
 .CSuccess-border {
-  border-color: #6DD277;
-  color: #3D3D3F;
+  border-color: #4dbd58;
 }
 </style>

@@ -99,10 +99,10 @@ input {
   border: none;
 }
 .CWarning {
-  color: #FF5252 !important;
+  color: #e93a3a !important;
 }
 .CSuccess {
-  color: #0b9429 !important;
+  color: #068020 !important;
 }
 .href-link {
   font-family: "Lora", serif;

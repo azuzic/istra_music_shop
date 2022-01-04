@@ -1,9 +1,9 @@
 <template>
   <div role="alert">
-    <div class="CWarning-bg text-white font-bold rounded-t px-4 py-2">
+    <div class="CWarning-bg rounded-t px-4 py-2">
       {{ msg1 }}
     </div>
-    <div class="border-2 border-t-0 CWarning-border rounded-b bg-red-100 px-4 py-3">
+    <div class="border-2 border-t-0 CWarning-border rounded-b px-4 py-3">
       <p class="CWarning">{{ msg2 }}</p>
     </div>
   </div>
@@ -20,9 +20,12 @@ export default {
 </script>
 <style>
 .CWarning-bg {
-  background-color: #FF5252;
+  font-weight: bold;
+  font-size: 16px;
+  color: #1f0a0a;
+  background-color: #e93a3a;
 }
 .CWarning-border {
-  border-color: #FF5252;
+  border-color: #e93a3a;
 }
 </style>

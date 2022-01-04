@@ -172,10 +172,17 @@
           </h2>
         </div>
         <!--===================POTVRDI LOZINKU END=========-->
+        <!--================WARNING========================-->
+        <CWarning
+          v-if="greska != '0' && !registered"
+          msg1="Upozorenje!"
+          msg2="Upisani email je već registriran."
+        />
+        <!--================WARNING END====================-->
         <CSuccess
-          msg1="Uspješna registracija!"
-          msg2="Molimo potvrdite račun preko poveznice koju smo vam poslali na email."
           v-if="registered"
+          msg1="Uspješna registracija!"
+          msg2="Molimo potvrdite račun preko poveznice koju smo vam poslali na email." 
         />
         <!--===================REGISTRIRAJ SE BUTTON=======-->
         <div
@@ -200,6 +207,7 @@
 import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
 import CSuccess from "@/components/CSuccess.vue";
+import CWarning from "@/components/CWarning.vue";
 import router from "@/router";
 
 import { getAuth, createUserWithEmailAndPassword } from "@/firebase";
@@ -224,12 +232,14 @@ export default {
       password: "",
       passwordRepeat: "",
       registered: false,
+      greska: "0",
     };
   },
   components: {
     CTitle,
     CButton,
     CSuccess,
+    CWarning,
   },
   methods: {
     signup() {
@@ -242,9 +252,12 @@ export default {
             console.log("Uspjesna registracija!");
             this.registered = true;
           })
-          .catch((error) => {
-            console.log("Doslo je do greske!", error);
-          });
+          .catch((e) => {
+          let error = e.message.slice(22, -2).replace(/-/g, " ");
+          error = error.charAt(0).toUpperCase() + error.slice(1) + "!";
+          console.error(error);
+          if (error == "Email already in use!") this.greska = "1";
+        });
       }
     },
     eye() {
