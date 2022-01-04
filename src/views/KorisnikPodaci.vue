@@ -98,7 +98,6 @@ export default {
   },
   methods: {
     async readData() {
-      console.log("tjt");
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
         this.imeprezime = `${doc.data().imePrezime}`;
