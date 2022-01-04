@@ -50,11 +50,7 @@
             maxlength="11"
           />
           <hr />
-          <h2
-            v-if="oib.length != 11 && oib"
-            class="CWarning"
-            id="resultOIB"
-          >
+          <h2 v-if="oib.length != 11 && oib" class="CWarning" id="resultOIB">
             OIB mora sadržavati 11 brojeva!
           </h2>
         </div>
@@ -90,17 +86,41 @@
           <div class="text-left text-18px m-0 p-0 flex items-center">
             <div class="mr-4">Lozinka</div>
             <div class="grid grid-cols-5 divide-x strength">
-              <div :class=" PasswordStrength == 0 ? 'line' : 
-                            PasswordStrength == 1 || PasswordStrength == 2 ? 'line-red' : 
-                            PasswordStrength == 3 ? 'line-yellow' :
-                            PasswordStrength > 3 ? 'line-green' : 'line'"></div>
-              <div :class=" PasswordStrength == 2 ? 'line-red' : 
-                            PasswordStrength == 3 ? 'line-yellow' :
-                            PasswordStrength > 3 ? 'line-green' : 'line'"></div>
-              <div :class=" PasswordStrength == 3 ? 'line-yellow' :
-                            PasswordStrength > 3 ? 'line-green' : 'line'"></div>
-              <div :class=" PasswordStrength > 3 ? 'line-green' : 'line'"></div>
-              <div :class=" PasswordStrength > 4 ? 'line-green' : 'line'"></div>
+              <div
+                :class="
+                  PasswordStrength == 0
+                    ? 'line'
+                    : PasswordStrength == 1 || PasswordStrength == 2
+                    ? 'line-red'
+                    : PasswordStrength == 3
+                    ? 'line-yellow'
+                    : PasswordStrength > 3
+                    ? 'line-green'
+                    : 'line'
+                "
+              ></div>
+              <div
+                :class="
+                  PasswordStrength == 2
+                    ? 'line-red'
+                    : PasswordStrength == 3
+                    ? 'line-yellow'
+                    : PasswordStrength > 3
+                    ? 'line-green'
+                    : 'line'
+                "
+              ></div>
+              <div
+                :class="
+                  PasswordStrength == 3
+                    ? 'line-yellow'
+                    : PasswordStrength > 3
+                    ? 'line-green'
+                    : 'line'
+                "
+              ></div>
+              <div :class="PasswordStrength > 3 ? 'line-green' : 'line'"></div>
+              <div :class="PasswordStrength > 4 ? 'line-green' : 'line'"></div>
             </div>
           </div>
           <div>
@@ -152,6 +172,11 @@
           </h2>
         </div>
         <!--===================POTVRDI LOZINKU END=========-->
+        <CSuccess
+          msg1="Uspješna registracija!"
+          msg2="Molimo potvrdite račun preko poveznice koju smo vam poslali na email."
+          v-if="registered"
+        />
         <!--===================REGISTRIRAJ SE BUTTON=======-->
         <div
           class="place-self-center"
@@ -174,14 +199,24 @@
 <script>
 import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
+import CSuccess from "@/components/CSuccess.vue";
+import router from "@/router";
 
 import { getAuth, createUserWithEmailAndPassword } from "@/firebase";
 const auth = getAuth();
+
 let source = document.getElementById("source");
 let result = document.getElementById("result");
+
 let inputHandler = function (e) {
   result.innerHTML = e.target.value;
 };
+let wait = function (seconds) {
+  return new Promise((resolveFn) => {
+    setTimeout(resolveFn, seconds * 1000);
+  });
+};
+
 export default {
   name: "Registracija",
   data() {
@@ -193,8 +228,14 @@ export default {
       mob: "",
       password: "",
       passwordRepeat: "",
-      brr:"",
+      brr: "",
+      registered: false,
     };
+  },
+  components: {
+    CTitle,
+    CButton,
+    CSuccess,
   },
   methods: {
     signup() {
@@ -205,6 +246,10 @@ export default {
           .then((userCredential) => {
             // Signed in
             console.log("Uspjesna registracija!");
+            this.registered = true;
+            wait(5).then(() => {
+              router.push({ name: "Prijava" });
+            });
           })
           .catch((error) => {
             console.log("Doslo je do greske!", error);
@@ -245,11 +290,7 @@ export default {
     },
     dummy() {},
   },
-  name: "Home",
-  components: {
-    CTitle,
-    CButton,
-  },
+
   computed: {
     IsAllFilled() {
       return this.nameSurname &&
@@ -262,18 +303,13 @@ export default {
         : false;
     },
     PasswordStrength() {
-      let strength = "0"
+      let strength = "0";
       let password = this.password;
-      if (password.toLowerCase() != password)
-        strength++;
-      if (password.toUpperCase() != password)
-        strength++;
-      if (/\d/.test(password))
-        strength++;
-      if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password))
-        strength++;
-      if (password.length > 8)
-        strength++;
+      if (password.toLowerCase() != password) strength++;
+      if (password.toUpperCase() != password) strength++;
+      if (/\d/.test(password)) strength++;
+      if (/[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password)) strength++;
+      if (password.length > 8) strength++;
       return strength;
     },
     UpdateMob: {
@@ -282,13 +318,14 @@ export default {
       },
       set() {
         let br = document.getElementById("mob").value.replace(/-/g, "");
-        if (br=="") {
-          this.mob = ""; 
+        if (br == "") {
+          this.mob = "";
           this.mobTemp = "";
         }
         this.mob = "09" + br;
         let l = br.length;
-        if (l >= 1 && l < 5 && br) this.mobTemp = br.slice(0, 1) + "-" + br.slice(1);
+        if (l >= 1 && l < 5 && br)
+          this.mobTemp = br.slice(0, 1) + "-" + br.slice(1);
         else if (l >= 5)
           this.mobTemp =
             br.slice(0, 1) + "-" + br.slice(1, 4) + "-" + br.slice(4);

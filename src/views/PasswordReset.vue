@@ -83,7 +83,7 @@ export default {
         .then(() => {
           console.log("Uspjesno poslano!");
           this.sent = true;
-          wait(3).then(() => {
+          wait(4).then(() => {
             router.replace({ name: "Prijava" });
           });
         })
