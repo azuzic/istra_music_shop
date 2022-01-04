@@ -5,28 +5,48 @@
         <!--===================IME I PREZIME=======================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Ime i prezime:</p>
-          <input type="text" class="border rounded" id="nameInput" />
+          <input
+            type="text"
+            class="border rounded"
+            id="nameInput"
+            :value="imeprezime"
+          />
           <hr />
         </div>
         <!--===================/IME I PREZIME===================-->
         <!--===================EMAIL====================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Email:</p>
-          <input type="email" class="border rounded" id="emailInput" />
+          <input
+            type="email"
+            class="border rounded"
+            id="emailInput"
+            :value="email"
+          />
           <hr />
         </div>
         <!--================/EMAIL===================-->
         <!--===================OIB====================-->
         <div>
           <p class="text-left text-18px m-0 p-0">OIB:</p>
-          <input type="text" class="border rounded" id="oibInput" />
+          <input
+            type="text"
+            class="border rounded"
+            id="oibInput"
+            :value="oib"
+          />
           <hr />
         </div>
         <!--================/OIB===================-->
         <!--===================BROJ MOBITELA====================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Broj mobitela:</p>
-          <input type="text" class="border rounded" id="mobInput" />
+          <input
+            type="text"
+            class="border rounded"
+            id="mobInput"
+            :value="mob"
+          />
           <hr />
         </div>
         <!--================/BROJ MOBITELA===================-->
@@ -39,7 +59,7 @@
         <!--================/RESETIRAJ LOZINKU LOZINKU===================-->
         <!--==============SPREMI================-->
         <div class="place-self-center mt-16">
-          <CButtonAccept btn="SPREMI" :btnClickHandler="dummy" />
+          <CButtonAccept btn="SPREMI" :btnClickHandler="readData" />
         </div>
         <!--==============/SPREMI============-->
       </div>
@@ -64,8 +84,10 @@ export default {
   name: "KorisnikPodaci",
   data() {
     return {
+      imeprezime: "",
       email: "",
-      password: "",
+      oib: "",
+      mob: "",
     };
   },
   components: {
@@ -75,6 +97,17 @@ export default {
     CButtonDecline,
   },
   methods: {
+    async readData() {
+      console.log("tjt");
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+        this.imeprezime = `${doc.data().imePrezime}`;
+        this.email = `${doc.data().email}`;
+        this.oib = `${doc.data().oib}`;
+        this.mob = `${doc.data().mob}`;
+        console.log(`${doc.id} => ${doc.data()}`);
+      });
+    },
     dummy() {},
     signout() {
       const auth = getAuth();
