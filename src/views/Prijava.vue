@@ -30,6 +30,18 @@
             class="border rounded"
             id="passInput"
           />
+          <img
+              id="eye1"
+              @click="eye"
+              class="eye"
+              src="@/assets/eye_closed.png"
+            />
+            <img
+              id="eye2"
+              @click="eye"
+              class="eye invisible"
+              src="@/assets/eye_open.png"
+            />
           <hr />
           <router-link
             class="href-link font-14px float-right"
@@ -120,6 +132,31 @@ export default {
         });
     },
     dummy() {},
+    eye() {
+      let x = document.getElementById("passInput");
+      let y = document.getElementById("eye1");
+      let z = document.getElementById("eye2");
+      if (x.type === "password") {
+        x.type = "text";
+        y.classList.add("invisible");
+        z.classList.remove("invisible");
+      } else {
+        x.type = "password";
+        z.classList.add("invisible");
+        y.classList.remove("invisible");
+      }
+    }
   },
 };
 </script>
+
+<style>
+.eye {
+  float: right;
+  margin-top: -24px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  height: 20px;
+}
+</style>

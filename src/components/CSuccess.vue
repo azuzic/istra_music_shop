@@ -1,20 +1,12 @@
 <template>
-    <div
-    class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative"
-    role="alert">
-    <strong class="font-bold">{{ msg1 }}</strong>
-    <span class="block sm:inline"
-    >{{ msg2 }}</span
-    >
-    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-    <svg
-        class="fill-current h-6 w-6 text-red-500"
-        role="button"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-    ></svg>
-    </span>
-</div>
+  <div role="alert">
+    <div class="CSuccess-bg font-bold rounded-t px-4 py-2">
+      {{ msg1 }}
+    </div>
+    <div class="border-2 border-t-0 CSuccess-border rounded-b bg-red-100 px-4 py-3">
+      <p class="CSuccess">{{ msg2 }}</p>
+    </div>
+  </div>
 </template>
 <script>
 export default {
@@ -25,3 +17,13 @@ export default {
   },
 };
 </script>
+<style>
+.CSuccess-bg {
+  background-color: #6DD277;
+  color: #3D3D3F;
+}
+.CSuccess-border {
+  border-color: #6DD277;
+  color: #3D3D3F;
+}
+</style>

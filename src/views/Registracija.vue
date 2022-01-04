@@ -223,7 +223,6 @@ export default {
       mob: "",
       password: "",
       passwordRepeat: "",
-      brr: "",
       registered: false,
     };
   },
@@ -286,11 +285,14 @@ export default {
   computed: {
     IsAllFilled() {
       return this.nameSurname &&
+        this.checkEmail(this.email) &&
         this.email &&
         this.oib &&
-        this.mob &&
+        this.oib.length == 11 &&
+        this.UpdateMob.length > 8 && 
+        this.UpdateMob &&
         this.password &&
-        this.passwordRepeat
+        this.password == this.passwordRepeat 
         ? true
         : false;
     },

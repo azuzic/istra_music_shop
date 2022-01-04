@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div class="CBg"></div>
     <div v-if="currentRouteName == 'KorisnikPodaci'" class="menu grid grid-cols-3 mb-4">
       <div class="menu-item">
         <p>Status otkupa</p>
@@ -97,9 +98,11 @@ input {
   height: 24px;
   border: none;
 }
-
 .CWarning {
-  color: #ff5252 !important;
+  color: #FF5252 !important;
+}
+.CSuccess {
+  color: #0b9429 !important;
 }
 .href-link {
   font-family: "Lora", serif;
