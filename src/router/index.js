@@ -51,7 +51,7 @@ router.beforeEach((to, from, next) => {
   if (noUser && to.meta.needsUser) {
     next("Prijava");
   } else {
-    if (from.name === "Registracija") {
+    if (from.name === "Registracija" && to.name !== "Prijava") {
       wait(5).then(() => {
         next();
       });
