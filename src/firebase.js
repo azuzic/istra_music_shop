@@ -9,6 +9,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
+import { getDocs } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -34,4 +35,6 @@ export { app };
 
 //Firestore
 export { db };
-export { collection, addDoc };
+export { collection };
+export { addDoc };
+export { getDocs };

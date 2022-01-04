@@ -182,7 +182,7 @@
         <CSuccess
           v-if="registered"
           msg1="Uspješna registracija!"
-          msg2="Molimo potvrdite račun preko poveznice koju smo vam poslali na email." 
+          msg2="Molimo potvrdite račun preko poveznice koju smo vam poslali na email."
         />
         <!--===================REGISTRIRAJ SE BUTTON=======-->
         <div
@@ -208,21 +208,12 @@ import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
 import CSuccess from "@/components/CSuccess.vue";
 import CWarning from "@/components/CWarning.vue";
-import router from "@/router";
 
 import { getAuth, createUserWithEmailAndPassword } from "@/firebase";
 import { collection, addDoc } from "@/firebase";
-
 import { db } from "@/firebase";
 
 const auth = getAuth();
-
-let source = document.getElementById("source");
-let result = document.getElementById("result");
-
-let inputHandler = function (e) {
-  result.innerHTML = e.target.value;
-};
 
 export default {
   name: "Registracija",
@@ -261,7 +252,6 @@ export default {
                 email: this.email,
                 oib: this.oib,
                 mob: this.mob,
-                admin: false,
               });
               console.log("Document written with ID: ", docRef.id);
             } catch (e) {
@@ -269,11 +259,11 @@ export default {
             }
           })
           .catch((e) => {
-          let error = e.message.slice(22, -2).replace(/-/g, " ");
-          error = error.charAt(0).toUpperCase() + error.slice(1) + "!";
-          console.error(error);
-          if (error == "Email already in use!") this.greska = "1";
-        });
+            let error = e.message.slice(22, -2).replace(/-/g, " ");
+            error = error.charAt(0).toUpperCase() + error.slice(1) + "!";
+            console.error(error);
+            if (error == "Email already in use!") this.greska = "1";
+          });
       }
     },
     eye() {
@@ -318,10 +308,10 @@ export default {
         this.email &&
         this.oib &&
         this.oib.length == 11 &&
-        this.UpdateMob.length > 8 && 
+        this.UpdateMob.length > 8 &&
         this.UpdateMob &&
         this.password &&
-        this.password == this.passwordRepeat 
+        this.password == this.passwordRepeat
         ? true
         : false;
     },

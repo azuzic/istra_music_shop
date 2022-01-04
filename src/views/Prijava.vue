@@ -30,19 +30,19 @@
             class="border rounded"
             id="passInput"
           />
-          <hr />
           <img
-              id="eye1"
-              @click="eye"
-              class="eye"
-              src="@/assets/eye_closed.png"
-            />
-            <img
-              id="eye2"
-              @click="eye"
-              class="eye invisible"
-              src="@/assets/eye_open.png"
-            />
+            id="eye1"
+            @click="eye"
+            class="eye"
+            src="@/assets/eye_closed.png"
+          />
+          <img
+            id="eye2"
+            @click="eye"
+            class="eye invisible"
+            src="@/assets/eye_open.png"
+          />
+          <hr />
           <router-link
             class="href-link font-14px float-right"
             to="/password-reset"
@@ -89,6 +89,7 @@ import CWarning from "@/components/CWarning.vue";
 import CButton from "@/components/CButton.vue";
 import CSelect from "@/components/CSelect.vue";
 import { getAuth, signInWithEmailAndPassword } from "@/firebase";
+
 export default {
   name: "login",
   data() {
@@ -138,7 +139,7 @@ export default {
         z.classList.add("invisible");
         y.classList.remove("invisible");
       }
-    }
+    },
   },
 };
 </script>

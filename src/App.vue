@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <div class="CBg"></div>
-    <div v-if="currentRouteName == 'KorisnikPodaci'" class="menu top-0 grid grid-cols-3 mb-4">
+    <div
+      v-if="currentRouteName == 'KorisnikPodaci'"
+      class="menu top-0 grid grid-cols-3 mb-4"
+    >
       <div class="menu-item">
         <p>Status otkupa</p>
       </div>
@@ -17,7 +20,7 @@
 </template>
 <script>
 import store from "@/store";
-
+import Vue from "vue";
 import { getAuth, onAuthStateChanged } from "@/firebase";
 
 const auth = getAuth();
@@ -30,7 +33,12 @@ onAuthStateChanged(auth, (user) => {
     console.log("LOGGED IN: " + user.email);
     store.currentUser = user.email;
     if (!currentRoute.meta.needsUser) {
-      router.push({ name: "KorisnikPodaci" });
+      console.log("test");
+      if (store.currentUser === "djelatnik@gmail.com") {
+        router.push({ name: "Djelatnik" });
+      } else {
+        router.push({ name: "KorisnikPodaci" });
+      }
     }
   } else {
     console.log("NO USER");
@@ -38,7 +46,7 @@ onAuthStateChanged(auth, (user) => {
     if (currentRoute.meta.needsUser) {
       router.push({ name: "Prijava" });
     }
-  } 
+  }
 });
 
 export default {
@@ -50,9 +58,9 @@ export default {
   },
   computed: {
     currentRouteName() {
-        return this.$route.name;
-    }
-}
+      return this.$route.name;
+    },
+  },
 };
 </script>
 
@@ -156,21 +164,21 @@ input {
   display: flex;
   align-items: center;
   text-align: center;
-  background-color: #3D3D3F;
+  background-color: #3d3d3f;
 }
 .menu-item p {
   width: 100%;
-  color: #F5DADA;
+  color: #f5dada;
 }
 .menu-item-active {
   display: flex;
   align-items: center;
   text-align: center;
-  background-color: #FF5252;
+  background-color: #ff5252;
 }
 .menu-item-active p {
   width: 100%;
   font-weight: bold;
-  color: #3F2C28;
+  color: #3f2c28;
 }
 </style>
