@@ -247,9 +247,6 @@ export default {
             // Signed in
             console.log("Uspjesna registracija!");
             this.registered = true;
-            wait(5).then(() => {
-              router.push({ name: "Prijava" });
-            });
           })
           .catch((error) => {
             console.log("Doslo je do greske!", error);

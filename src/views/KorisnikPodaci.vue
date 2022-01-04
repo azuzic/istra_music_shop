@@ -53,6 +53,28 @@
           <CButtonSingle btn="SPREMI" :btnClickHandler="dummy" />
         </div>
         <!--==============/SPREMI============-->
+        <!--==============LOGUT - TEMPORARY================-->
+        <button
+          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center place-self-center"
+          @click="signout"
+        >
+          <span class="font-bold">Odjava </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+            />
+          </svg>
+        </button>
+        <!--==============/LOGUT - TEMPORARY================-->
       </div>
     </div>
   </div>
@@ -61,6 +83,7 @@
 import CTitle from "@/components/CTitle.vue";
 import CWarning from "@/components/CWarning.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
+import { getAuth, signOut } from "@/firebase";
 export default {
   name: "KorisnikPodaci",
   data() {
@@ -76,6 +99,16 @@ export default {
   },
   methods: {
     dummy() {},
+    signout() {
+      const auth = getAuth();
+      signOut(auth)
+        .then(() => {
+          console.log("Signed out!");
+        })
+        .catch((error) => {
+          console.error("Signed out error!");
+        });
+    },
   },
 };
 </script>

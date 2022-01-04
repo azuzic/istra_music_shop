@@ -15,37 +15,36 @@
 <script>
 import store from "@/store";
 
-import { getAuth, onAuthStateChanged, signOut } from "@/firebase";
+import { getAuth, onAuthStateChanged } from "@/firebase";
 
 const auth = getAuth();
+
 import router from "@/router";
 
 onAuthStateChanged(auth, (user) => {
+  const currentRoute = router.currentRoute;
   if (user) {
     console.log("LOGGED IN: " + user.email);
     store.currentUser = user.email;
+    if (!currentRoute.meta.needsUser) {
+      router.push({ name: "KorisnikPodaci" });
+    }
   } else {
     console.log("NO USER");
     store.currentUser = null;
 
-    if (router.name !== "Home") {
-      router.push({ name: "Home" }).catch(() => {});
+    if (currentRoute.meta.needsUser) {
+      router.push({ name: "Prijava" });
     }
   }
 });
+
 export default {
   name: "app",
   data() {
     return {
       store,
     };
-  },
-  methods: {
-    logout() {
-      signOut(auth).then(() => {
-        this.$router.push({ name: "Prijava" });
-      });
-    },
   },
 };
 </script>

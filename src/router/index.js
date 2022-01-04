@@ -1,7 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-
+import store from "@/store";
 Vue.use(VueRouter);
 
 const routes = [
@@ -28,6 +28,9 @@ const routes = [
   {
     path: "/korisnik-podaci",
     name: "KorisnikPodaci",
+    meta: {
+      needsUser: true,
+    },
     component: () => import("../views/KorisnikPodaci.vue"),
   },
 ];
@@ -37,5 +40,12 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
-
+router.beforeEach((to, from, next) => {
+  const noUser = store.currentUser === null;
+  if (noUser && to.meta.needsUser) {
+    next("Prijava");
+  } else {
+    next();
+  }
+});
 export default router;

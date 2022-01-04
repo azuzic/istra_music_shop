@@ -109,8 +109,6 @@ export default {
         .then((result) => {
           console.log("Uspješna prijava", result);
           this.greska == "0";
-          //Replace koristi prilikom logina, push za sve ostale stvari
-          this.$router.replace({ name: "KorisnikPodaci" });
         })
         .catch((e) => {
           let error = e.message.slice(22, -2).replace(/-/g, " ");
