@@ -70,7 +70,8 @@ export default {
   font-family: "Lora", italic;
   font-style: normal;
   font-weight: normal;
-  line-height: 24px;
+  line-height: normal;
+  letter-spacing: -0.25px;
   color: #3d3d3f;
 }
 html {
@@ -123,6 +124,9 @@ input {
   text-align: center;
   color: #275d8fab;
 }
+.tranparent-10 {
+  opacity: 0.10;
+}
 .tranparent {
   opacity: 0.35;
 }
@@ -146,18 +150,21 @@ input {
 }
 
 .menu {
-  position: sticky;
+  position: fixed;
+  top: 0px;
   width: 100%;
   height: 50px;
-
+  z-index: 500;
+  background-color: #3D3D3F;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 .menu-bottom {
   position: fixed;
+  bottom: -1px;
   width: 100%;
   height: 50px;
-
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  background-color: #3D3D3F;
+  filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .menu-item {
