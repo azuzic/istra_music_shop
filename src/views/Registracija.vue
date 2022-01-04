@@ -203,6 +203,10 @@ import CSuccess from "@/components/CSuccess.vue";
 import router from "@/router";
 
 import { getAuth, createUserWithEmailAndPassword } from "@/firebase";
+import { collection, addDoc } from "@/firebase";
+
+import { db } from "@/firebase";
+
 const auth = getAuth();
 
 let source = document.getElementById("source");
@@ -233,15 +237,26 @@ export default {
     CSuccess,
   },
   methods: {
-    signup() {
+    async signup() {
       if (this.password !== this.passwordRepeat) {
         return;
       } else {
         createUserWithEmailAndPassword(auth, this.email, this.password)
-          .then((userCredential) => {
+          .then(async (userCredential) => {
             // Signed in
             console.log("Uspjesna registracija!");
             this.registered = true;
+            try {
+              const docRef = await addDoc(collection(db, "users"), {
+                imePrezime: this.nameSurname,
+                email: this.email,
+                oib: this.oib,
+                mob: this.mob,
+              });
+              console.log("Document written with ID: ", docRef.id);
+            } catch (e) {
+              console.error("Error adding document: ", e);
+            }
           })
           .catch((error) => {
             console.log("Doslo je do greske!", error);
