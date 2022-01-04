@@ -39,13 +39,6 @@
           </router-link>
         </div>
         <!--================PASSWORD END===================-->
-        <!--===================OSOBA=======================-->
-        <CSelect
-          :options="['Korisnik', 'Djelatnik']"
-          :default="'Korisnik'"
-          v-model="osoba"
-        />
-        <!--===================OSOBA END===================-->
         <!--================WARNING========================-->
         <CWarning
           v-if="greska != '0'"
