@@ -40,12 +40,25 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+let wait = function (seconds) {
+  return new Promise((resolveFn) => {
+    setTimeout(resolveFn, seconds * 1000);
+  });
+};
 router.beforeEach((to, from, next) => {
+  console.log("going from", from, " to ", to);
   const noUser = store.currentUser === null;
   if (noUser && to.meta.needsUser) {
     next("Prijava");
   } else {
-    next();
+    if (from.name === "Registracija") {
+      wait(5).then(() => {
+        next();
+      });
+    } else {
+      console.log("else");
+      next();
+    }
   }
 });
 export default router;

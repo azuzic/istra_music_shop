@@ -211,11 +211,6 @@ let result = document.getElementById("result");
 let inputHandler = function (e) {
   result.innerHTML = e.target.value;
 };
-let wait = function (seconds) {
-  return new Promise((resolveFn) => {
-    setTimeout(resolveFn, seconds * 1000);
-  });
-};
 
 export default {
   name: "Registracija",
