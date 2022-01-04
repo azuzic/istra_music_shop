@@ -36,6 +36,9 @@ const routes = [
   {
     path: "/djelatnik",
     name: "Djelatnik",
+    meta: {
+      needsUser: true,
+    },
     component: () => import("../views/Djelatnik.vue"),
   },
 ];
