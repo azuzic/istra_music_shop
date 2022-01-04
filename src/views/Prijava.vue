@@ -30,6 +30,7 @@
             class="border rounded"
             id="passInput"
           />
+          <hr />
           <img
             id="eye1"
             @click="eye"
@@ -42,7 +43,7 @@
             class="eye invisible"
             src="@/assets/eye_open.png"
           />
-          <hr />
+
           <router-link
             class="href-link font-14px float-right"
             to="/password-reset"
@@ -147,7 +148,7 @@ export default {
 <style>
 .eye {
   float: right;
-  margin-top: -24px;
+  margin-top: -28px;
   position: relative;
   z-index: 1;
   cursor: pointer;
