@@ -12,6 +12,43 @@
     <router-view />
   </div>
 </template>
+<script>
+import store from "@/store";
+
+import { getAuth, onAuthStateChanged, signOut } from "@/firebase";
+
+const auth = getAuth();
+import router from "@/router";
+
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log("LOGGED IN: " + user.email);
+    store.currentUser = user.email;
+  } else {
+    console.log("NO USER");
+    store.currentUser = null;
+
+    if (router.name !== "Prijava") {
+      router.push({ name: "Prijava" });
+    }
+  }
+});
+export default {
+  name: "app",
+  data() {
+    return {
+      store,
+    };
+  },
+  methods: {
+    logout() {
+      signOut(auth).then(() => {
+        this.$router.push({ name: "Prijava" });
+      });
+    },
+  },
+};
+</script>
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Alike&display=swap");
@@ -77,7 +114,7 @@ input {
   opacity: 0.25;
 }
 .tranparent-50 {
-  opacity: 0.50;
+  opacity: 0.5;
 }
 .tranparent-65 {
   opacity: 0.65;

@@ -47,13 +47,23 @@
         />
         <!--===================OSOBA END===================-->
         <!--================WARNING========================-->
-        <CWarning v-if="greska!='0'" msg1 = "Upozorenje!" 
-        :msg2=" greska == '1' ? 'Unijeli ste krivu lozinku.' : 
-                greska == '2' ? 'Upisana email adresa ne postoji.' : 
-                              'Krivo ste napisali email adresu.'"/>
+        <CWarning
+          v-if="greska != '0'"
+          msg1="Upozorenje!"
+          :msg2="
+            greska == '1'
+              ? 'Unijeli ste krivu lozinku.'
+              : greska == '2'
+              ? 'Upisana email adresa ne postoji.'
+              : 'Krivo ste napisali email adresu.'
+          "
+        />
         <!--================WARNING END====================-->
         <!--==============PRIJAVI SE BUTTON================-->
-        <div class="place-self-center" :class="email && password ? 'active' : 'inactive'">
+        <div
+          class="place-self-center"
+          :class="email && password ? 'active' : 'inactive'"
+        >
           <CButton
             btn="PRIJAVI SE"
             link_text="Nemate račun?"
@@ -100,18 +110,15 @@ export default {
           console.log("Uspješna prijava", result);
           this.greska == "0";
           //Replace koristi prilikom logina, push za sve ostale stvari
-          this.$router.replace({ name: "Home" });
+          this.$router.replace({ name: "KorisnikPodaci" });
         })
         .catch((e) => {
-          let error = e.message.slice(22,-2).replace(/-/g, " ");
+          let error = e.message.slice(22, -2).replace(/-/g, " ");
           error = error.charAt(0).toUpperCase() + error.slice(1) + "!";
           console.error(error);
-          if (error == "Wrong password!")
-            this.greska = "1";
-          else if (error == "User not found!")
-            this.greska = "2";
-          else if (error == "Invalid email!")
-            this.greska = "3";
+          if (error == "Wrong password!") this.greska = "1";
+          else if (error == "User not found!") this.greska = "2";
+          else if (error == "Invalid email!") this.greska = "3";
         });
     },
     dummy() {},
