@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="button-bg text-center pt-3 pb-3 pl-9 pr-9">
+    <div class="button-bg text-center pt-3 pb-3">
       <button class="button-text" type="button" @click="btnClickHandler">
-        <router-link v-bind:to="href_btn">{{ btn }}</router-link>
+        <router-link class="p" v-bind:to="href_btn">{{ btn }}</router-link>
       </button>
     </div>
     <div>
@@ -32,18 +32,29 @@ export default {
 
 <style scoped lang="scss">
 .button-bg {
+  width: 226px;
   background: #3d3d3f;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
 }
 
 .button-text {
+  width: 100%;
   font-family: "Lora", serif;
   font-style: normal;
   font-weight: normal;
   font-size: 24px;
   line-height: 30px;
   display: flex;
+  align-items: center;
+  text-align: center;
+  color: #f5dada;
+}
+
+.button-text .p {
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
   align-items: center;
   text-align: center;
   color: #f5dada;

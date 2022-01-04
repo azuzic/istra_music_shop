@@ -1,14 +1,16 @@
 <template>
   <div id="app">
-    <div class="CBg"></div>
-    <!--
-    <transition
-      mode="out-in"
-      enter-active-class="animate__animated animate__backInLeft"
-      leave-active-class="animate__animated animate__backOutRight"
-    >
-        </transition>
-        -->
+    <div v-if="currentRouteName == 'KorisnikPodaci'" class="menu grid grid-cols-3 mb-4">
+      <div class="menu-item">
+        <p>Status otkupa</p>
+      </div>
+      <div class="menu-item">
+        <p>Otkup opreme</p>
+      </div>
+      <div class="menu-item-active">
+        <p>Račun</p>
+      </div>
+    </div>
     <router-view />
   </div>
 </template>
@@ -32,11 +34,10 @@ onAuthStateChanged(auth, (user) => {
   } else {
     console.log("NO USER");
     store.currentUser = null;
-
     if (currentRoute.meta.needsUser) {
       router.push({ name: "Prijava" });
     }
-  }
+  } 
 });
 
 export default {
@@ -46,6 +47,12 @@ export default {
       store,
     };
   },
+  computed: {
+    currentRouteName() {
+        console.log(this.$route.name);
+        return this.$route.name;
+    }
+}
 };
 </script>
 
@@ -126,5 +133,36 @@ input {
 }
 .inactive div .button-bg {
   background: #919192 !important;
+}
+
+.menu {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 50px;
+
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background-color: #3D3D3F;
+}
+.menu-item p {
+  width: 100%;
+  color: #F5DADA;
+}
+.menu-item-active {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background-color: #FF5252;
+}
+.menu-item-active p {
+  width: 100%;
+  font-weight: bold;
+  color: #3F2C28;
 }
 </style>

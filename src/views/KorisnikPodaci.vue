@@ -1,8 +1,5 @@
 <template>
   <div class="p-0 m-0">
-    <div>
-      <img alt="Test logo" src="../assets/logo.svg" />
-    </div>
     <div class="grid auto-rows-auto gap-4">
       <div class="grid auto-rows-auto gap-4 pl-4 pr-4">
         <!--===================IME I PREZIME=======================-->
@@ -49,34 +46,21 @@
         <!--================/POTVRDI NOVU LOZINKU===================-->
 
         <!--==============SPREMI================-->
-        <div class="place-self-center">
+        <div class="place-self-center mt-16">
           <CButtonSingle btn="SPREMI" :btnClickHandler="dummy" />
         </div>
         <!--==============/SPREMI============-->
-        <!--==============LOGUT - TEMPORARY================-->
-        <button
-          class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center place-self-center"
-          @click="signout"
-        >
-          <span class="font-bold">Odjava </span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-            />
-          </svg>
-        </button>
-        <!--==============/LOGUT - TEMPORARY================-->
       </div>
     </div>
+    <!--==============LOGUT - TEMPORARY================-->
+        <button
+          class="logout"
+          @click="signout"
+        >
+          <p class="pr-2 pb-1">Odjava </p>
+          <img class="exit-icon" src="@/assets/exit_icon.svg">
+        </button>
+    <!--==============/LOGUT - TEMPORARY================-->
   </div>
 </template>
 <script>
@@ -112,3 +96,35 @@ export default {
   },
 };
 </script>
+
+<style>
+.logout {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
+  background: #FF5252;
+}
+
+.logout p {
+  font-family: Alike;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: #000000d0;
+  font-weight: bold;
+}
+
+.exit-icon {
+  width: 32px;
+  height: 32px;
+  opacity: 0.75;
+}
+</style>
