@@ -30,6 +30,7 @@
             class="border rounded"
             id="passInput"
           />
+          <hr />
           <img
               id="eye1"
               @click="eye"
@@ -42,7 +43,6 @@
               class="eye invisible"
               src="@/assets/eye_open.png"
             />
-          <hr />
           <router-link
             class="href-link font-14px float-right"
             to="/password-reset"

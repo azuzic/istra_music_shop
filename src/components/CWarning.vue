@@ -22,10 +22,11 @@ export default {
 .CWarning-bg {
   font-weight: bold;
   font-size: 16px;
-  color: #1f0a0a;
+  color: #000000d0;
   background-color: #e93a3a;
 }
 .CWarning-border {
   border-color: #e93a3a;
+  background-color: white;
 }
 </style>

@@ -3,7 +3,7 @@
     <div class="CSuccess-bg font-bold rounded-t px-4 py-2">
       {{ msg1 }}
     </div>
-    <div class="border-2 border-t-0 CSuccess-border rounded-b bg-red-100 px-4 py-3">
+    <div class="border-2 border-t-0 CSuccess-border rounded-b px-4 py-3">
       <p class="CSuccess">{{ msg2 }}</p>
     </div>
   </div>
@@ -20,9 +20,10 @@ export default {
 <style>
 .CSuccess-bg {
   background-color: #4dbd58;
-  color: #2e302d;
+  color: #000000d0;
 }
 .CSuccess-border {
   border-color: #4dbd58;
+  background-color: white;
 }
 </style>

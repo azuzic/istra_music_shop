@@ -32,7 +32,7 @@ export default {
 
 <style scoped lang="scss">
 .button-bg {
-  width: 226px;
+  min-width: 226px;
   background: #3d3d3f;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 16px;

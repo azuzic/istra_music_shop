@@ -69,9 +69,9 @@
                 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
                 maxlength="10"
               />
+              <hr />
             </div>
           </div>
-          <hr />
           <h2
             v-if="UpdateMob.length != 9 && UpdateMob.length != 10 && UpdateMob"
             class="CWarning"
@@ -125,6 +125,7 @@
           </div>
           <div>
             <input type="password" name="pass1" id="pass1" v-model="password" />
+            <hr />
             <img
               id="eye1"
               @click="eye"
@@ -138,7 +139,6 @@
               src="@/assets/eye_open.png"
             />
           </div>
-          <hr />
         </div>
         <!--===================LOZINKA END=================-->
         <!--===================POTVRDI LOZINKU=============-->
@@ -151,6 +151,7 @@
             id="pass2"
             v-model="passwordRepeat"
           />
+          <hr />
           <img
             id="eye3"
             @click="eye2"
@@ -163,7 +164,6 @@
             class="eye invisible"
             src="@/assets/eye_open.png"
           />
-          <hr />
           <h2
             v-if="password != passwordRepeat && passwordRepeat"
             class="CWarning"
@@ -363,7 +363,7 @@ export default {
 <style>
 .eye {
   float: right;
-  margin-top: -24px;
+  margin-top: -28px;
   position: relative;
   z-index: 1;
   cursor: pointer;

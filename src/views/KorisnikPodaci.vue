@@ -30,24 +30,16 @@
           <hr />
         </div>
         <!--================/BROJ MOBITELA===================-->
-        <!--===================NOVA LOZINKA====================-->
-        <div>
-          <p class="text-left text-18px m-0 p-0">Nova lozinka:</p>
-          <input type="password" class="border rounded" id="passInput1" />
-          <hr />
+        <!--===================RESETIRAJ LOZINKU====================-->
+        <div class="place-self-center mt-4">
+          <router-link to="/password-reset">
+            <CButtonDecline btn="RESETIRAJ LOZINKU" :btnClickHandler="dummy" />
+          </router-link>
         </div>
-        <!--================/NOVA LOZINKA===================-->
-        <!--===================POTVRDI NOVU LOZINKU====================-->
-        <div>
-          <p class="text-left text-18px m-0 p-0">Potvrdi novu lozinku:</p>
-          <input type="password" class="border rounded" id="passInput2" />
-          <hr />
-        </div>
-        <!--================/POTVRDI NOVU LOZINKU===================-->
-
+        <!--================/RESETIRAJ LOZINKU LOZINKU===================-->
         <!--==============SPREMI================-->
         <div class="place-self-center mt-16">
-          <CButtonSingle btn="SPREMI" :btnClickHandler="dummy" />
+          <CButtonAccept btn="SPREMI" :btnClickHandler="dummy" />
         </div>
         <!--==============/SPREMI============-->
       </div>
@@ -66,7 +58,8 @@
 <script>
 import CTitle from "@/components/CTitle.vue";
 import CWarning from "@/components/CWarning.vue";
-import CButtonSingle from "@/components/CButtonSingle.vue";
+import CButtonAccept from "@/components/CButtonAccept.vue";
+import CButtonDecline from "@/components/CButtonDecline.vue";
 import { getAuth, signOut } from "@/firebase";
 export default {
   name: "KorisnikPodaci",
@@ -79,7 +72,8 @@ export default {
   components: {
     CTitle,
     CWarning,
-    CButtonSingle,
+    CButtonAccept,
+    CButtonDecline,
   },
   methods: {
     dummy() {},
