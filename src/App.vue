@@ -20,7 +20,6 @@
 </template>
 <script>
 import store from "@/store";
-import Vue from "vue";
 import { getAuth, onAuthStateChanged } from "@/firebase";
 
 const auth = getAuth();
