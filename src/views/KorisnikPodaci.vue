@@ -9,7 +9,7 @@
             type="text"
             class="border rounded"
             id="nameInput"
-            :value="imeprezime"
+            v-model="imeprezime"
           />
           <hr />
         </div>
@@ -21,7 +21,7 @@
             type="email"
             class="border rounded"
             id="emailInput"
-            :value="email"
+            v-model="email"
           />
           <hr />
         </div>
@@ -33,7 +33,7 @@
             type="text"
             class="border rounded"
             id="oibInput"
-            :value="oib"
+            v-model="oib"
           />
           <hr />
         </div>
@@ -45,7 +45,7 @@
             type="text"
             class="border rounded"
             id="mobInput"
-            :value="mob"
+            v-model="mob"
           />
           <hr />
         </div>
@@ -59,7 +59,7 @@
         <!--================/RESETIRAJ LOZINKU LOZINKU===================-->
         <!--==============SPREMI================-->
         <div class="place-self-center mt-16">
-          <CButtonAccept btn="SPREMI" :btnClickHandler="readData" />
+          <CButtonAccept btn="SPREMI" :btnClickHandler="dummy" />
         </div>
         <!--==============/SPREMI============-->
       </div>
@@ -77,6 +77,7 @@ import CTitle from "@/components/CTitle.vue";
 import CWarning from "@/components/CWarning.vue";
 import CButtonAccept from "@/components/CButtonAccept.vue";
 import CButtonDecline from "@/components/CButtonDecline.vue";
+import store from "@/store";
 import { getAuth, signOut } from "@/firebase";
 import { collection, getDocs } from "@/firebase";
 import { db } from "@/firebase";
@@ -96,15 +97,22 @@ export default {
     CButtonAccept,
     CButtonDecline,
   },
+  created() {
+    this.readData();
+  },
   methods: {
     async readData() {
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
-        this.imeprezime = `${doc.data().imePrezime}`;
-        this.email = `${doc.data().email}`;
-        this.oib = `${doc.data().oib}`;
-        this.mob = `${doc.data().mob}`;
-        console.log(`${doc.id} => ${doc.data()}`);
+        //console.log("store", store.currentUser);
+        //console.log("email", `${doc.data().email}`);
+        if (store.currentUser === `${doc.data().email}`) {
+          this.imeprezime = `${doc.data().imePrezime}`;
+          this.email = `${doc.data().email}`;
+          this.oib = `${doc.data().oib}`;
+          this.mob = `${doc.data().mob}`;
+        }
+        //console.log(`${doc.id} => ${doc.data()}`);
       });
     },
     dummy() {},
