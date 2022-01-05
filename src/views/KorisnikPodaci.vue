@@ -1,5 +1,5 @@
 <template>
-  <div class="p-0 m-0 mt-16">
+  <div class="p-0 m-0 pt-16">
     <div class="grid auto-rows-auto gap-4">
       <div class="grid auto-rows-auto gap-4 pl-4 pr-4">
         <!--===================IME I PREZIME=======================-->
