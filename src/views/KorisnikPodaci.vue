@@ -50,18 +50,18 @@
           <hr />
         </div>
         <!--================/BROJ MOBITELA===================-->
-        <!--===================RESETIRAJ LOZINKU====================-->
+        <!--==============SPREMI================-->
         <div class="place-self-center mt-4">
+          <CButtonAccept btn="SPREMI" :btnClickHandler="dummy" />
+        </div>
+        <!--==============/SPREMI============-->
+        <!--===================RESETIRAJ LOZINKU====================-->
+        <div class="place-self-center mt-16">
           <router-link to="/password-reset">
             <CButtonDecline btn="RESETIRAJ LOZINKU" :btnClickHandler="dummy" />
           </router-link>
         </div>
         <!--================/RESETIRAJ LOZINKU LOZINKU===================-->
-        <!--==============SPREMI================-->
-        <div class="place-self-center mt-16">
-          <CButtonAccept btn="SPREMI" :btnClickHandler="dummy" />
-        </div>
-        <!--==============/SPREMI============-->
       </div>
     </div>
     <!--==============LOGUT - TEMPORARY================-->

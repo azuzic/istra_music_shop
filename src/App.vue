@@ -20,12 +20,10 @@
 </template>
 <script>
 import store from "@/store";
-import Vue from "vue";
 import { getAuth, onAuthStateChanged } from "@/firebase";
+import router from "@/router";
 
 const auth = getAuth();
-
-import router from "@/router";
 
 onAuthStateChanged(auth, (user) => {
   const currentRoute = router.currentRoute;
@@ -33,12 +31,9 @@ onAuthStateChanged(auth, (user) => {
     console.log("LOGGED IN: " + user.email);
     store.currentUser = user.email;
     if (!currentRoute.meta.needsUser) {
-      console.log("test");
-      if (store.currentUser === "djelatnik@gmail.com") {
-        router.push({ name: "Djelatnik" });
-      } else {
-        router.push({ name: "KorisnikPodaci" });
-      }
+      store.currentUser === "djelatnik@gmail.com"
+        ? router.replace({ name: "Djelatnik" })
+        : router.replace({ name: "KorisnikPodaci" });
     }
   } else {
     console.log("NO USER");
@@ -125,7 +120,7 @@ input {
   color: #275d8fab;
 }
 .tranparent-10 {
-  opacity: 0.10;
+  opacity: 0.1;
 }
 .tranparent {
   opacity: 0.35;
@@ -155,7 +150,7 @@ input {
   width: 100%;
   height: 50px;
   z-index: 500;
-  background-color: #3D3D3F;
+  background-color: #3d3d3f;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 .menu-bottom {
@@ -163,7 +158,7 @@ input {
   bottom: -1px;
   width: 100%;
   height: 50px;
-  background-color: #3D3D3F;
+  background-color: #3d3d3f;
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
 }
 

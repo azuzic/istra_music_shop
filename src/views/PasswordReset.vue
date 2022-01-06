@@ -22,7 +22,7 @@
         <!--===================EMAIL END===================-->
         <CSuccess
           msg1="Poslano!"
-          msg2="Ukoliko postoji registrirani korisnički račun, dobit ćete poveznicu za resetiranje lozinke."
+          msg2="Na vašu email adresu dobit ćete poveznicu za resetiranje lozinke."
           v-if="sent"
         />
         <!--===================POTVRDI BUTTON==============-->
@@ -47,7 +47,9 @@ import CWarning from "@/components/CWarning.vue";
 import CSuccess from "@/components/CSuccess.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
 import router from "@/router";
+import store from "@/store";
 import { getAuth, sendPasswordResetEmail } from "@/firebase";
+import { signOut } from "@/firebase";
 
 let wait = function (seconds) {
   return new Promise((resolveFn) => {
@@ -61,6 +63,7 @@ export default {
     return {
       email: "",
       sent: false,
+      store,
     };
   },
   components: {
@@ -91,6 +94,16 @@ export default {
           const errorCode = error.code;
           const errorMessage = error.message;
           // ..
+        });
+    },
+    signout() {
+      const auth = getAuth();
+      signOut(auth)
+        .then(() => {
+          console.log("Signed out!");
+        })
+        .catch((error) => {
+          console.error("Signed out error!");
         });
     },
   },

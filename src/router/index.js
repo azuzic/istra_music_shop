@@ -53,8 +53,16 @@ let wait = function (seconds) {
     setTimeout(resolveFn, seconds * 1000);
   });
 };
+//next() -> slazem se s promjenom rute
 router.beforeEach((to, from, next) => {
-  //console.log("going from", from, " to ", to);
+  console.log(
+    "stara ruta",
+    from.name,
+    " --> ",
+    to.name,
+    ",korisnik",
+    store.currentUser
+  );
   const noUser = store.currentUser === null;
   if (noUser && to.meta.needsUser) {
     next("Prijava");

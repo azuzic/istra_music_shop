@@ -90,6 +90,8 @@ import CWarning from "@/components/CWarning.vue";
 import CButton from "@/components/CButton.vue";
 import CSelect from "@/components/CSelect.vue";
 import { getAuth, signInWithEmailAndPassword } from "@/firebase";
+import store from "@/store";
+import router from "@/router";
 
 export default {
   name: "login",
@@ -107,6 +109,7 @@ export default {
     CButton,
     CSelect,
   },
+
   methods: {
     login() {
       console.log("login..." + this.email);
