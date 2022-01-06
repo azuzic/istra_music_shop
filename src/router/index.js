@@ -41,6 +41,14 @@ const routes = [
     },
     component: () => import("../views/Djelatnik.vue"),
   },
+  {
+    path: "/pregled-otkupa",
+    name: "PregledOtkupa",
+    meta: {
+      needsUser: true,
+    },
+    component: () => import("../views/PregledOtkupa.vue"),
+  },
 ];
 
 const router = new VueRouter({

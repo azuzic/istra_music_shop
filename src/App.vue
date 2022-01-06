@@ -88,6 +88,9 @@ div hr {
   border: 2px solid #3d3d3f;
   border-radius: 16px;
 }
+.dotted {
+  border-style: dashed;
+}
 input:focus + hr {
   border: 2px solid #ff5252;
   border-radius: 16px;
@@ -162,6 +165,13 @@ input {
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
 }
 
+.menu-bottom2 {
+  width: 100%;
+  height: 50px;
+  background-color: #3D3D3F;
+  filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
+}
+
 .menu-item {
   display: flex;
   align-items: center;
@@ -172,6 +182,9 @@ input {
   width: 100%;
   color: #f5dada;
 }
+.menu-item p b {
+  width: 100%;
+}
 .menu-item-active {
   display: flex;
   align-items: center;
@@ -179,6 +192,11 @@ input {
   background-color: #ff5252;
 }
 .menu-item-active p {
+  width: 100%;
+  font-weight: bold;
+  color: #3f2c28;
+}
+.menu-item-active p a {
   width: 100%;
   font-weight: bold;
   color: #3f2c28;
