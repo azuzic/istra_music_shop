@@ -34,6 +34,14 @@ const routes = [
     component: () => import("../views/KorisnikRacun.vue"),
   },
   {
+    path: "/otkup-opreme",
+    name: "OtkupOpreme",
+    meta: {
+      needsUser: true,
+    },
+    component: () => import("../views/OtkupOpreme.vue"),
+  },
+  {
     path: "/djelatnik-racun",
     name: "DjelatnikRacun",
     meta: {

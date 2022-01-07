@@ -4,7 +4,7 @@
       <div class="grid auto-rows-auto gap-4 pl-4 pr-4">
         <!--===================IME I PREZIME=======================-->
         <div>
-          <p class="text-left text-18px m-0 p-0">Ime i prezime:</p>
+          <p class="text-left text-22px m-0 p-0">Ime i prezime:</p>
           <input
             type="text"
             class="border rounded"
@@ -16,7 +16,7 @@
         <!--===================/IME I PREZIME===================-->
         <!--===================EMAIL====================-->
         <div>
-          <p class="text-left text-18px m-0 p-0">Email:</p>
+          <p class="text-left text-22px m-0 p-0">Email:</p>
           <input
             type="email"
             class="border rounded"
@@ -28,7 +28,7 @@
         <!--================/EMAIL===================-->
         <!--===================OIB====================-->
         <div>
-          <p class="text-left text-18px m-0 p-0">OIB:</p>
+          <p class="text-left text-22px m-0 p-0">OIB:</p>
           <input
             type="text"
             class="border rounded"
@@ -40,7 +40,7 @@
         <!--================/OIB===================-->
         <!--===================BROJ MOBITELA====================-->
         <div>
-          <p class="text-left text-18px m-0 p-0">Broj mobitela:</p>
+          <p class="text-left text-22px m-0 p-0">Broj mobitela:</p>
           <input
             type="text"
             class="border rounded"

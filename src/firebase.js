@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { getDocs } from "firebase/firestore";
+import { query, where } from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -38,3 +39,5 @@ export { db };
 export { collection };
 export { addDoc };
 export { getDocs };
+export { query };
+export { where };
