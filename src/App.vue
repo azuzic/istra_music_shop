@@ -136,10 +136,16 @@ input:focus {
   caret-color: #ff5252;
 }
 input {
-  background-color: transparent;
+  background-color: #ff525200;
   width: 100%;
   height: 24px;
   border: none;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+  -webkit-box-shadow: 0 0 0 30px #E8E7E7 inset !important;
 }
 .CWarning {
   color: #e93a3a !important;

@@ -59,7 +59,7 @@
         <div>
           <p class="text-left text-18px m-0 p-0">Broj mobitela</p>
           <div class="flex">
-            <div style="color: grey !important">09</div>
+            <div class="mtc" style="color: grey !important">09</div>
             <div class="w-full">
               <input
                 type="text"
@@ -390,5 +390,9 @@ export default {
 .strength-text {
   font-size: 12px;
   color: red !important;
+}
+
+.mtc {
+  margin-top: 3px;
 }
 </style>
