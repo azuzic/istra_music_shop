@@ -77,6 +77,9 @@ export default {
       return this.email.includes("@") && this.email.includes(".") ? 1 : 0;
     },
   },
+  created() {
+    this.signout();
+  },
   methods: {
     dummy() {},
 
