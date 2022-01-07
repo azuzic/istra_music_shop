@@ -74,14 +74,14 @@ let wait = function (seconds) {
 };
 //next() -> slazem se s promjenom rute
 router.beforeEach((to, from, next) => {
-  console.log(
+  /*console.log(
     "stara ruta",
     from.name,
     " --> ",
     to.name,
     ",korisnik",
     store.currentUser
-  );
+  );*/
   const noUser = store.currentUser === null;
   if (noUser && to.meta.needsUser) {
     next("Prijava");

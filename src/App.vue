@@ -1,28 +1,53 @@
 <template>
   <div id="app">
     <div class="CBg"></div>
+
     <div
-      v-if="currentRouteName == 'KorisnikRacun'"
-      class="menu top-0 grid grid-cols-3 mb-4"
+      v-if="store.currentUser == 'djelatnik@gmail.com'"
+      class="menu top-0 grid grid-cols-2 mb-4"
     >
-      <div class="menu-item">
-        <p>Status otkupa</p>
+      <div
+        :class="
+          currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'
+        "
+      >
+        <p>Pregled otkupa</p>
       </div>
-      <div class="menu-item">
-        <p>Otkup opreme</p>
-      </div>
-      <div class="menu-item-active">
+      <div
+        :class="
+          currentRouteName == 'DjelatnikRacun'
+            ? 'menu-item-active'
+            : 'menu-item'
+        "
+      >
         <p>Račun</p>
       </div>
     </div>
     <div
-      v-if="currentRouteName == 'DjelatnikRacun'"
-      class="menu top-0 grid grid-cols-2 mb-4"
+      v-else-if="
+        store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'
+      "
+      class="menu top-0 grid grid-cols-3 mb-4"
     >
-      <div class="menu-item">
-        <p>Pregled otkupa</p>
+      <div
+        :class="
+          currentRouteName == 'Status otkupa' ? 'menu-item-active' : 'menu-item'
+        "
+      >
+        <p>Status otkupa</p>
       </div>
-      <div class="menu-item-active">
+      <div
+        :class="
+          currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'
+        "
+      >
+        <p>Otkup opreme</p>
+      </div>
+      <div
+        :class="
+          currentRouteName == 'KorisnikRacun' ? 'menu-item-active' : 'menu-item'
+        "
+      >
         <p>Račun</p>
       </div>
     </div>

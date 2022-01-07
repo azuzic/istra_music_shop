@@ -1,66 +1,56 @@
 <template>
   <div>
-    <!--==============MENU=============================-->
-    <div class="menu grid grid-cols-2 mb-4">
-      <div class="menu-item-active">
-        <p>Pregled otkupa</p>
-      </div>
-      <div class="menu-item">
-        <p>Račun</p>
-      </div>
-    </div>
-    <!--==============MENU END=========================-->
     <!--==============LIST ============================-->
     <div class="grid grid-rows-auto gap-5 pl-2 pr-2 pb-16 pt-16">
-      <CCard 
-      value="2" 
-      title="Gibson Les Paul" 
-      subtitle="Traditional" 
-      date="20.05.2022." 
-      price="2500"
-      img="https://picsum.photos/500/500/"
+      <CCard
+        value="2"
+        title="Gibson Les Paul"
+        subtitle="Traditional"
+        date="20.05.2022."
+        price="2500"
+        img="https://picsum.photos/500/500/"
       />
-      <CCard 
-      value="1" 
-      title="Ibanez RG" 
-      subtitle="RG Premium" 
-      date="12.04.2022." 
-      price="800"
-      img="https://picsum.photos/400/400/"
+      <CCard
+        value="1"
+        title="Ibanez RG"
+        subtitle="RG Premium"
+        date="12.04.2022."
+        price="800"
+        img="https://picsum.photos/400/400/"
       />
-      <CCard 
-      value="1" 
-      title="Fender Telecaster" 
-      subtitle="American Standard" 
-      date="29.08.2021." 
-      price="1200"
-      img="https://picsum.photos/600/600/"
+      <CCard
+        value="1"
+        title="Fender Telecaster"
+        subtitle="American Standard"
+        date="29.08.2021."
+        price="1200"
+        img="https://picsum.photos/600/600/"
       />
-      <CCard 
-      value="3" 
-      title="Fender Sratocaster" 
-      subtitle="Player Plus Strat" 
-      date="22.05.2022." 
-      price="4500"
-      img="https://picsum.photos/300/300/"
+      <CCard
+        value="3"
+        title="Fender Sratocaster"
+        subtitle="Player Plus Strat"
+        date="22.05.2022."
+        price="4500"
+        img="https://picsum.photos/300/300/"
       />
-      <CCard 
-      value="4" 
-      title="Epiphone SG" 
-      subtitle="Special" 
-      date="01.03.2022." 
-      price="5000"
-      img="https://picsum.photos/700/700/"
+      <CCard
+        value="4"
+        title="Epiphone SG"
+        subtitle="Special"
+        date="01.03.2022."
+        price="5000"
+        img="https://picsum.photos/700/700/"
       />
-      <CCard/>
-      <CCard/>
-      <CCard/>
-      <CCard/>
-      <CCard/>
+      <CCard />
+      <CCard />
+      <CCard />
+      <CCard />
+      <CCard />
     </div>
     <!--==============LIST END=========================-->
     <!--==============FOOTER===========================-->
-    <div class="menu-bottom grid grid-cols-4 mt-4">  
+    <div class="menu-bottom grid grid-cols-4 mt-4">
       <div class="menu-item">
         <p>U razradi</p>
       </div>
@@ -98,17 +88,17 @@ export default {
 
 <style>
 .menu-item-red {
-  background-color: #FF7F7F;
+  background-color: #ff7f7f;
 }
 .menu-item-yellow {
-  background-color: #FFF383;
+  background-color: #fff383;
 }
 .menu-item-green {
-  background-color: #6DD277;
+  background-color: #6dd277;
 }
 .menu-item-selected p {
   width: 100%;
   font-weight: bold;
-  color: #3F2C28;
+  color: #3f2c28;
 }
 </style>

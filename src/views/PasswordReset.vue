@@ -78,7 +78,7 @@ export default {
     },
   },
   created() {
-    this.signout();
+    if (store.currentUser) this.signout();
   },
   methods: {
     dummy() {},
