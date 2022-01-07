@@ -41,14 +41,14 @@
           currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'
         "
       >
-        <p>Otkup opreme</p>
+        <p><router-link to="otkup-opreme"> Otkup opreme </router-link></p>
       </div>
       <div
         :class="
           currentRouteName == 'KorisnikRacun' ? 'menu-item-active' : 'menu-item'
         "
       >
-        <p>Račun</p>
+        <p><router-link to="korisnik-racun"> Račun </router-link></p>
       </div>
     </div>
     <router-view />
@@ -142,10 +142,10 @@ input {
   border: none;
 }
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active{
-  -webkit-box-shadow: 0 0 0 30px #E8E7E7 inset !important;
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #e8e7e7 inset !important;
 }
 .CWarning {
   color: #e93a3a !important;
