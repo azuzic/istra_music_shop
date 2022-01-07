@@ -172,18 +172,18 @@
           </h2>
         </div>
         <!--===================POTVRDI LOZINKU END=========-->
-        <!--================WARNING========================-->
+        <!--================ALERT========================-->
         <CWarning
           v-if="greska != '0' && !registered"
           msg1="Upozorenje!"
           msg2="Upisani email je već registriran."
-        />
-        <!--================WARNING END====================-->
+        /> 
         <CSuccess
-          v-if="registered"
+          
           msg1="Uspješna registracija!"
           msg2="Molimo potvrdite račun preko poveznice koju smo vam poslali na email."
         />
+        <!--================ALERT END=====v-if="registered"===============-->
         <!--===================REGISTRIRAJ SE BUTTON=======-->
         <div
           class="place-self-center"

@@ -1,13 +1,15 @@
 <template>
   <div role="alert">
-    <div class="CSuccess-bg font-bold rounded-t px-4 py-2">
-      {{ msg1 }}
-    </div>
-    <div class="border-2 border-t-0 CSuccess-border rounded-b px-4 py-3">
-      <p class="CSuccess">{{ msg2 }}</p>
+    <div class="CSuccess-border p-2">
+      <div class="flex CSuccess-flex py-1">
+        <img class="img-success mr-2" src="@/assets/success_icon.png">
+        <p class="CSuccess-bg text-center">{{msg1}}</p>
+      </div>
+      <p class="text-center CSuccess-msg mt-2 mb-1">{{ msg2 }}</p>
     </div>
   </div>
 </template>
+
 <script>
 export default {
   name: "CSuccess",
@@ -19,11 +21,26 @@ export default {
 </script>
 <style>
 .CSuccess-bg {
-  background-color: #4dbd58;
-  color: #000000d0;
+  font-weight: bold;
+  font-size: 24px;
+  color: #258843;
 }
 .CSuccess-border {
-  border-color: #4dbd58;
-  background-color: white;
+  border-width: 3px;
+  border-radius: 8px;
+  border-style: dashed;
+  border-color: #258843;
+  background-color: #E8E7E7;
+}
+.img-success {
+  height: 28px;
+}
+.CSuccess-flex {
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+}
+.CSuccess-msg {
+  color: #258843;
 }
 </style>
