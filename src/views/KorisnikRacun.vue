@@ -82,7 +82,7 @@ import { getAuth, signOut } from "@/firebase";
 import { collection, getDocs } from "@/firebase";
 import { db } from "@/firebase";
 export default {
-  name: "KorisnikPodaci",
+  name: "KorisnikRacun",
   data() {
     return {
       imeprezime: "",
@@ -104,15 +104,12 @@ export default {
     async readData() {
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
-        //console.log("store", store.currentUser);
-        //console.log("email", `${doc.data().email}`);
         if (store.currentUser === `${doc.data().email}`) {
           this.imeprezime = `${doc.data().imePrezime}`;
           this.email = `${doc.data().email}`;
           this.oib = `${doc.data().oib}`;
           this.mob = `${doc.data().mob}`;
         }
-        //console.log(`${doc.id} => ${doc.data()}`);
       });
     },
     dummy() {},

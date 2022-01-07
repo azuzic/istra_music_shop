@@ -26,18 +26,28 @@ const routes = [
     component: () => import("../views/PasswordReset.vue"),
   },
   {
-    path: "/korisnik-podaci",
-    name: "KorisnikPodaci",
+    path: "/korisnik-racun",
+    name: "KorisnikRacun",
     meta: {
       needsUser: true,
     },
-    component: () => import("../views/KorisnikPodaci.vue"),
+    component: () => import("../views/KorisnikRacun.vue"),
+  },
+  {
+    path: "/djelatnik-racun",
+    name: "DjelatnikRacun",
+    meta: {
+      needsUser: true,
+      admin: true,
+    },
+    component: () => import("../views/DjelatnikRacun.vue"),
   },
   {
     path: "/djelatnik",
     name: "Djelatnik",
     meta: {
       needsUser: true,
+      admin: true,
     },
     component: () => import("../views/Djelatnik.vue"),
   },
@@ -46,6 +56,7 @@ const routes = [
     name: "PregledOtkupa",
     meta: {
       needsUser: true,
+      admin: true,
     },
     component: () => import("../views/PregledOtkupa.vue"),
   },

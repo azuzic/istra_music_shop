@@ -2,7 +2,7 @@
   <div id="app">
     <div class="CBg"></div>
     <div
-      v-if="currentRouteName == 'KorisnikPodaci'"
+      v-if="currentRouteName == 'KorisnikRacun'"
       class="menu top-0 grid grid-cols-3 mb-4"
     >
       <div class="menu-item">
@@ -10,6 +10,17 @@
       </div>
       <div class="menu-item">
         <p>Otkup opreme</p>
+      </div>
+      <div class="menu-item-active">
+        <p>Račun</p>
+      </div>
+    </div>
+    <div
+      v-if="currentRouteName == 'DjelatnikRacun'"
+      class="menu top-0 grid grid-cols-2 mb-4"
+    >
+      <div class="menu-item">
+        <p>Pregled otkupa</p>
       </div>
       <div class="menu-item-active">
         <p>Račun</p>
@@ -32,8 +43,8 @@ onAuthStateChanged(auth, (user) => {
     store.currentUser = user.email;
     if (!currentRoute.meta.needsUser) {
       store.currentUser === "djelatnik@gmail.com"
-        ? router.replace({ name: "Djelatnik" })
-        : router.replace({ name: "KorisnikPodaci" });
+        ? router.replace({ name: "DjelatnikRacun" })
+        : router.replace({ name: "KorisnikRacun" });
     }
   } else {
     console.log("NO USER");
@@ -168,7 +179,7 @@ input {
 .menu-bottom2 {
   width: 100%;
   height: 50px;
-  background-color: #3D3D3F;
+  background-color: #3d3d3f;
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
 }
 
