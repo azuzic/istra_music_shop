@@ -1,7 +1,7 @@
 <template>
   <div class="p-0 m-0">
     <div>
-      <img alt="Test logo" src="../assets/logo.svg" />
+      <router-link to="/"><img alt="Test logo" src="../assets/logo.svg" /></router-link>
     </div>
     <div class="grid auto-rows-auto gap-4">
       <br />

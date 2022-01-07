@@ -1,7 +1,7 @@
 <template>
   <div class="p-0 m-0">
     <div>
-      <img alt="Test logo" src="../assets/logo.svg" />
+      <router-link to="/"><img alt="Test logo" src="../assets/logo.svg" /></router-link>
     </div>
     <div class="grid grid-cols-1 grid-rows-3 gap-14 mt-10 mb-10">
       <div class="grid">

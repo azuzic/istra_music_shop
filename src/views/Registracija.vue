@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <img alt="Test logo" src="../assets/logo.svg" />
+      <router-link to="/"><img alt="Test logo" src="../assets/logo.svg" /></router-link>
     </div>
     <div class="grid auto-rows-auto gap-4">
       <!--===================TITLE=======================-->
@@ -179,11 +179,11 @@
           msg2="Upisani email je već registriran."
         /> 
         <CSuccess
-          
+          v-if="registered"
           msg1="Uspješna registracija!"
           msg2="Molimo potvrdite račun preko poveznice koju smo vam poslali na email."
         />
-        <!--================ALERT END=====v-if="registered"===============-->
+        <!--================ALERT END====================-->
         <!--===================REGISTRIRAJ SE BUTTON=======-->
         <div
           class="place-self-center"

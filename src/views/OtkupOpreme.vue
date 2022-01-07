@@ -1,34 +1,34 @@
 <template>
   <div class="p-0 m-0 pt-16">
     <div class="grid auto-rows-auto gap-4">
-      <div class="grid auto-rows-auto gap-4 pl-4 pr-4 mt-2">
+      <div class="grid auto-rows-auto gap-4 pl-4 pr-4 mt-2 mb-16">
         <!--===================VRSTA INSTRUMENTA===================-->
         <div>
-          <p class="text-left text-22px m-0 p-0">Vrsta instrumenta</p>
+          <p class="text-left text-18px m-0 p-0">Vrsta instrumenta</p>
           <CSelect :options="tempOptions" v-model="vrstaInstrumenta" />
         </div>
         <!--===================/VRSTA INSTRUMENTA===================-->
         <!--===================PROIZVOĐAČ===================-->
         <div>
-          <p class="text-left text-22px m-0 p-0">Proizvođač</p>
+          <p class="text-left text-18px m-0 p-0">Proizvođač</p>
           <CSelect :options="tempOptions" v-model="proizvodac" />
         </div>
         <!--===================/PROIZVOĐAČ===================-->
         <!--===================MODEL===================-->
         <div>
-          <p class="text-left text-22px m-0 p-0">Model</p>
+          <p class="text-left text-18px m-0 p-0">Model</p>
           <CSelect :options="tempOptions" v-model="model" />
         </div>
         <!--===================/MODEL===================-->
         <!--===================SERIJA===================-->
         <div>
-          <p class="text-left text-22px m-0 p-0">Serija</p>
+          <p class="text-left text-18px m-0 p-0">Serija</p>
           <CSelect :options="tempOptions" v-model="serija" />
         </div>
         <!--===================/SERIJA===================-->
         <!--===================GODINA PROIZVODNJE====================-->
         <div>
-          <p class="text-left text-22px m-0 p-0">Godina proizvodnje</p>
+          <p class="text-left text-18px m-0 p-0">Godina proizvodnje</p>
           <input
             type="number"
             class="border rounded"
@@ -43,13 +43,13 @@
         <!--================/GODINA PROIZVODNJE===================-->
         <!--===================VLASNIK===================-->
         <div>
-          <p class="text-left text-22px m-0 p-0">Vlasnik</p>
+          <p class="text-left text-18px m-0 p-0">Vlasnik</p>
           <CSelect :options="[1, 2, 3]" v-model="vlasnik" />
         </div>
         <!--===================/VLASNIK===================-->
         <!--===================STANJE===================-->
         <div>
-          <p class="text-left text-22px m-0 p-0">Stanje</p>
+          <p class="text-left text-18px m-0 p-0">Stanje</p>
           <CSelect
             :options="['Novo', 'Rabljeno', 'Neispravno']"
             v-model="stanje"
@@ -58,56 +58,68 @@
         <!--===================/STANJE===================-->
         <!--===================SLIKE===================-->
         <div>
-          <p class="text-left text-22px m-0 p-0">Slike</p>
-          <div class="grid grid-rows-2 grid-cols-3 gap-2 mt-2">
+          <p class="text-left text-18px m-0 p-0">Slike</p>
+          <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Gornja prednja</p>
-              <img
+              <div>
+                <img
                 class="CCard-img img-top-left mx-auto"
                 src="https://picsum.photos/500/500/"
-              />
+                />
+              </div>
             </div>
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Gornja stražnja</p>
-              <img
+              <div>
+                <img
                 class="CCard-img img-top mx-auto"
                 src="https://picsum.photos/500/500/"
               />
+              </div>
             </div>
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Bočna desna</p>
-              <img
+              <div>
+                <img
                 class="CCard-img img-top-right mx-auto"
                 src="https://picsum.photos/500/500/"
               />
+              </div>
             </div>
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Bočna lijeva</p>
-              <img
+              <div>
+                <img
                 class="CCard-img img-bottom-left mx-auto"
                 src="https://picsum.photos/500/500/"
-              />
+                />
+              </div>
             </div>
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Vrat gitare</p>
-              <img
+              <div>
+                <img
                 class="CCard-img img-bottom mx-auto"
                 src="https://picsum.photos/500/500/"
               />
+              </div>
             </div>
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Glava gitare</p>
-              <img
+              <div>
+                <img
                 class="CCard-img img-bottom-right mx-auto"
                 src="https://picsum.photos/500/500/"
               />
+              </div>
             </div>
           </div>
         </div>
         <!--===================/SLIKE===================-->
         <!--===================/NAPOMENA===================-->
         <div>
-          <p class="text-left text-22px m-0 p-0">Napomena</p>
+          <p class="text-left text-18px m-0 p-0">Napomena</p>
           <textarea
             v-model="napomena"
             class="resize-none rounded-md w-full h-32 mb-4 mt-4 otkup-textarea"
@@ -126,6 +138,17 @@
         </div>
         <!--===================/OTKUPI===================-->
       </div>
+      <!--==============FOOTER==================================-->
+        <div class="menu-bottom grid grid-cols-1 mt-4">
+          <div class="menu-item text-left mx-auto">
+            <img class="money" src="@/assets/money_icon.svg" />
+            <p class="pl-4 text-24px">
+              Predložena cijena:
+              <b class="price">2500 kn</b>
+            </p>
+          </div>
+        </div>
+        <!--==============FOOTER END==============================-->
     </div>
   </div>
 </template>
@@ -144,7 +167,7 @@ export default {
   name: "OtkupOpreme",
   data() {
     return {
-      tempOptions: ["option1", "option2", "option3", "option4"],
+      tempOptions: ["option1", "option2", "option3", "option4","option1", "option2", "option3", "option4","option1", "option2", "option3", "option4"],
       currentYear: 2022,
       vrstaInstrumenta: "",
       proizvodac: "",

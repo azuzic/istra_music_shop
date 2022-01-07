@@ -5,7 +5,7 @@
     </div>
     <img class="float-right" :class="open ? 'spin-pos' : 'spin-pos2'" src="@/assets/dropdown_icon.svg">
     
-    <div class="items" :class="!open ? 'selectHide' : 'selectShow'">
+    <div class="items" :class="!open ? 'selectHide' : options.length > 5 ? 'selectShow items-border' : 'selectShow'">
         <div
             transition="thing"
             v-for="(option, i) of options"
@@ -45,12 +45,11 @@ export default {
   outline: none;
   width: 100%;
   height: 40px;
-  background: #FFFFFF;
+  background: #E8E7E7;
   border: 2px solid #292E32 !important;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
   color: #3F2C28 !important;
-  font-weight: 600;
   display: flex;
   align-items: center;
   padding-left: 4px;
@@ -63,19 +62,24 @@ export default {
 }
 .items {
   position: absolute;
-  width: calc(100% - 1rem);
+  width: calc(100% - 2rem);
   z-index: 1;
   transform-origin: 50% 0%;
+  height: 170px;
+  overflow-y: scroll;
+}
+
+.items-border {
+  border-bottom: 2px solid #292E32;
 }
 
 .items div {
   outline: none;
-  width: inherit;
+  width: 100%;
   height: 40px !important;
-  background: #FFFFFF;
+  background: #E8E7E7;
   border: 2px solid #292E32 ;
   color: #3F2C28 ;
-  font-weight: 600;
   cursor: pointer;
   user-select: none;
   margin-top: -3px;
@@ -104,7 +108,7 @@ export default {
   margin-top: -28px;
   margin-right: 12px;
   position: relative;
-  z-index: 1;
+  z-index: 0;
   cursor: pointer;
   height: 18px;
 }
@@ -116,7 +120,7 @@ export default {
   margin-top: -26px;
   margin-right: 12px;
   position: relative;
-  z-index: 1;
+  z-index: 0;
   cursor: pointer;
   height: 18px;
 }

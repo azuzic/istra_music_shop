@@ -54,7 +54,7 @@
       </div>
       <div>
         <p><u class="text-20px">Slike:</u></p>
-        <div class="grid grid-rows-2 grid-cols-3 gap-2 mt-2">
+        <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">
           <div class="otkup-div-image flex-none">
             <p class="otkup-img-text">Gornja prednja</p>
             <img
@@ -231,72 +231,5 @@ export default {
   width: 26px;
   opacity: 0.75;
   transform: scaleX(-1);
-}
-.money {
-  width: 43px;
-  opacity: 0.75;
-}
-.price {
-  color: #ff5252;
-}
-
-.otkup-div-image {
-  width: 120px;
-  overflow: hidden;
-}
-
-.otkup-div-image img {
-  border-color: #3d3d3f;
-  height: 120px;
-  border-width: 2px;
-}
-
-.img-top-left {
-  border-top-left-radius: 9.5px;
-  border-bottom-left-radius: 2.5px;
-  border-top-right-radius: 2.5px;
-  border-bottom-right-radius: 2.5px;
-}
-.img-top {
-  border-radius: 2.5px;
-}
-.img-top-right {
-  border-top-left-radius: 2.5px;
-  border-bottom-left-radius: 2.5px;
-  border-top-right-radius: 9.5px;
-  border-bottom-right-radius: 2.5px;
-}
-.img-bottom-left {
-  border-top-left-radius: 2.5px;
-  border-bottom-left-radius: 9.5px;
-  border-top-right-radius: 2.5px;
-  border-bottom-right-radius: 2.5px;
-}
-.img-bottom {
-  border-radius: 2.5px;
-}
-.img-bottom-right {
-  border-top-left-radius: 2.5px;
-  border-bottom-left-radius: 2.5px;
-  border-top-right-radius: 2.5px;
-  border-bottom-right-radius: 9.5px;
-}
-.otkup-img-text {
-  text-align: center;
-  font-size: 16px;
-  color: #3f2c28;
-}
-.otkup-textarea {
-  padding: 8px;
-  color: #461717;
-  font-size: 18px;
-  width: 100%;
-  border-color: #3d3d3f;
-  height: 128px;
-  border-width: 2px;
-  border-top-left-radius: 9.5px;
-  border-bottom-left-radius: 2.5px;
-  border-top-right-radius: 9.5px;
-  border-bottom-right-radius: 2.5px;
 }
 </style>
