@@ -11,7 +11,7 @@
           currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'
         "
       >
-        <p>Pregled otkupa</p>
+        <router-link to="djelatnik"> Pregled otkupa </router-link>
       </div>
       <div
         :class="
@@ -20,7 +20,7 @@
             : 'menu-item'
         "
       >
-        <p>Račun</p>
+        <router-link to="DjelatnikRacun"> Račun </router-link>
       </div>
     </div>
     <div
@@ -215,6 +215,10 @@ input {
   background-color: #3d3d3f;
 }
 .menu-item p {
+  width: 100%;
+  color: #f5dada;
+}
+.menu-item p a {
   width: 100%;
   color: #f5dada;
 }
