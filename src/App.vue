@@ -11,7 +11,7 @@
           currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'
         "
       >
-        <router-link to="djelatnik"> Pregled otkupa </router-link>
+        <p><router-link to="djelatnik"> Pregled otkupa </router-link></p>
       </div>
       <div
         :class="
@@ -20,7 +20,7 @@
             : 'menu-item'
         "
       >
-        <router-link to="DjelatnikRacun"> Račun </router-link>
+        <p><router-link to="djelatnik-racun"> Račun </router-link></p>
       </div>
     </div>
     <div
