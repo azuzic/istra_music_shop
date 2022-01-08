@@ -86,6 +86,7 @@ export default {
             preporucenaCijena: (`${doc.data().preporucenaCijena}`),
             status: (`${doc.data().status}`),
             img: "https://picsum.photos/500/500/",
+            date: (`${doc.data().zahtjevPredan}`),
          });
          b++;
         for (let k=0; k<b; k++) {
