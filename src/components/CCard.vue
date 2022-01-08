@@ -1,37 +1,37 @@
 <template>
   <div class="CCard flex">
     <div class="CCard-image flex-none">
-        <img class="CCard-img mx-auto" :src="img">
+        <img class="CCard-img mx-auto" :src="zahtjev.img">
     </div>
     <div class="CCard-data">
       <div class="CCard-header">
         <p class="CCard-title pl-1 pt-1 pb-2 font-bold">
-          {{title}}
+          {{zahtjev.instrument[0]}}
           <b class="CCard-date float-right pr-1">
-            {{date}}
+            {{zahtjev.instrument[4]}}
           </b>
         </p>
         <p class="CCard-subtitle pl-1">
-          {{subtitle}}
+          {{zahtjev.instrument[1]}}
           <b class="CCard-price float-right pr-1">
-            {{price}} kn
+            {{zahtjev.preporucenaCijena}} kn
           </b>
         </p>
       </div>
-      <div class="CCard-footer grid" :class="value!=4 ? 'grid-cols-3':'grid-cols-1'">
-        <div v-if="value!=4" class="CCard-icon-1" :class="value!=1 ? 'tranparent-10':''">
+      <div class="CCard-footer grid" :class="zahtjev.status!='Riješeno' ? 'grid-cols-3':'grid-cols-1'">
+        <div v-if="zahtjev.status!='Riješeno'" class="CCard-icon-1" :class="zahtjev.status!='Odbijeno' ? 'tranparent-10':''">
           <img class="CCard-svg mx-auto mt-2" src="@/assets/deny_icon.svg">
           <p class="CCard-icontext">ODBIJENO</p>
         </div>
-        <div v-if="value!=4" class="CCard-icon-2" :class="value!=2 ? 'tranparent-10':''">
+        <div v-if="zahtjev.status!='Riješeno'" class="CCard-icon-2" :class="zahtjev.status!='U razradi' ? 'tranparent-10':''">
           <img class="CCard-svg mx-auto mt-2" src="@/assets/load_icon.svg">
           <p class="CCard-icontext">U RAZRADI</p>
         </div>
-        <div v-if="value!=4" class="CCard-icon-3" :class="value!=3 ? 'tranparent-10':''">
+        <div v-if="zahtjev.status!='Riješeno'" class="CCard-icon-3" :class="zahtjev.status!='Prihvaćeno' ? 'tranparent-10':''">
             <img class="CCard-svg mx-auto mt-2" src="@/assets/accept_icon.svg">
             <p class="CCard-icontext">PRIHVAĆENO</p>
         </div>
-        <div v-if="value==4" class="CCard-icon-3">
+        <div v-if="zahtjev.status=='Riješeno'" class="CCard-icon-3">
             <img class="CCard-svg2 mx-auto mt-1" src="@/assets/deal_icon.svg">
             <p class="CCard-icontext2">RIJEŠENO</p>
         </div>
@@ -43,30 +43,7 @@
 export default {
   name: "CCard",
   props: {
-    value: {
-      type: String,
-      default: "1",
-    },
-    title: {
-      type: String,
-      default: "Title",
-    },
-    subtitle: {
-      type: String,
-      default: "Subtitle",
-    },
-    date: {
-      type: String,
-      default: "Date",
-    },
-    price: {
-      type: String,
-      default: "Price",
-    },
-    img: {
-      type: String,
-      default: "https://picsum.photos/500/500/",
-    },
+    zahtjev: ""
   },
 };
 </script>

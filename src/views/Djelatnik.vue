@@ -2,65 +2,37 @@
   <div>
     <!--==============LIST ============================-->
     <div class="grid grid-rows-auto gap-5 pl-2 pr-2 pb-16 pt-16">
-      <CCard
-        value="2"
-        title="Gibson Les Paul"
-        subtitle="Traditional"
-        date="20.05.2022."
-        price="2500"
-        img="https://picsum.photos/500/500/"
+      <CCard  
+        v-for="(z, i) of zahtjevi"
+            :key="i"
+            :zahtjev = z
       />
-      <CCard
-        value="1"
-        title="Ibanez RG"
-        subtitle="RG Premium"
-        date="12.04.2022."
-        price="800"
-        img="https://picsum.photos/400/400/"
-      />
-      <CCard
-        value="1"
-        title="Fender Telecaster"
-        subtitle="American Standard"
-        date="29.08.2021."
-        price="1200"
-        img="https://picsum.photos/600/600/"
-      />
-      <CCard
-        value="3"
-        title="Fender Sratocaster"
-        subtitle="Player Plus Strat"
-        date="22.05.2022."
-        price="4500"
-        img="https://picsum.photos/300/300/"
-      />
-      <CCard
-        value="4"
-        title="Epiphone SG"
-        subtitle="Special"
-        date="01.03.2022."
-        price="5000"
-        img="https://picsum.photos/700/700/"
-      />
-      <CCard />
-      <CCard />
-      <CCard />
-      <CCard />
-      <CCard />
     </div>
     <!--==============LIST END=========================-->
     <!--==============FOOTER===========================-->
     <div class="menu-bottom grid grid-cols-4 mt-4">
-      <div class="menu-item">
+      <div 
+      class="menu-item" 
+      :class="state == 'U razradi' ? 'menu-item-selected menu-item-yellow' : ''"
+      @click="state = 'U razradi', readData()">
         <p>U razradi</p>
       </div>
-      <div class="menu-item">
+      <div 
+      class="menu-item" 
+      :class="state == 'Prihvaćeno' ? 'menu-item-selected menu-item-green' : ''"
+      @click="state = 'Prihvaćeno', readData()">
         <p>Prihvaćeno</p>
       </div>
-      <div class="menu-item">
+      <div 
+      class="menu-item" 
+      :class="state == 'Riješeno' ? 'menu-item-selected menu-item-green' : ''"
+      @click="state = 'Riješeno', readData()">
         <p>Riješeno</p>
       </div>
-      <div class="menu-item">
+      <div 
+      class="menu-item" 
+      :class="state == 'Odbijeno' ? 'menu-item-selected menu-item-red' : ''"
+      @click="state = 'Odbijeno', readData()">
         <p>Odbijeno</p>
       </div>
     </div>
@@ -72,15 +44,55 @@
 import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
 import CCard from "@/components/CCard.vue";
+import { collection, getDocs } from "@/firebase";
+import { db } from "@/firebase";
 
 export default {
   name: "Djelatnik",
+  data() {
+    return {
+      state: "U razradi",
+      zahtjevi: [],
+    };
+  },
   components: {
     CTitle,
     CButton,
     CCard,
   },
+  mounted() {
+    this.readData();
+  },
   methods: {
+    async readData() {
+      const querySnapshot = await getDocs(collection(db, "zahtjevi"));
+      let b = 0;
+      this.zahtjevi = [];
+      querySnapshot.forEach((doc) => {
+        if (`${doc.data().status}` == this.state)
+         this.$set(this.zahtjevi, b, {
+            instrument: 
+            [
+              (`${doc.data().instrument[0]}`),
+              (`${doc.data().instrument[1]}`),
+              (`${doc.data().instrument[2]}`),
+              (`${doc.data().instrument[3]}`),
+              (`${doc.data().instrument[4]}`),
+              (`${doc.data().instrument[5]}`),
+              (`${doc.data().instrument[6]}`),
+            ],
+            korisnik: (`${doc.data().korisnik}`),
+            napomena: (`${doc.data().napomena}`),
+            preporucenaCijena: (`${doc.data().preporucenaCijena}`),
+            status: (`${doc.data().status}`),
+            img: "https://picsum.photos/500/500/",
+         });
+         b++;
+        for (let k=0; k<b; k++) {
+          console.log(this.zahtjevi[k]);
+        };
+      });
+    },
     dummy() {},
   },
 };
