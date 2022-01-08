@@ -195,15 +195,6 @@ export default {
     CButtonSingle,
   },
   created() {},
-  watch: {
-    odabraniProizvodac: function () {
-      this.odabraniModel = "";
-      this.odabranaSerija = "";
-    },
-    odabraniModel: function () {
-      this.odabranaSerija = "";
-    },
-  },
   methods: {
     async otkupi() {
       try {
