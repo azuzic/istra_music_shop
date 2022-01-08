@@ -63,7 +63,9 @@ export default {
   },
   computed: {
     receivedFromNow() {
-      return moment(this.zahtjev.date.time).fromNow();
+      var timestamp = this.zahtjev.date;
+      console.log(this.zahtjev.date);
+      return moment(parseInt(timestamp)).fromNow();
     },
   },
 };
