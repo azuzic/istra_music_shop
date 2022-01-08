@@ -1,7 +1,10 @@
 <template>
   <div class="custom-select">
-    <div class="selected" @click="open = !open">
+    <div v-if="options.includes(selected)" class="selected" @click="open = !open">
       {{ selected }}
+    </div>
+    <div v-if="!options.includes(selected)" class="selected" @click="open = !open">
+      {{ options[0] }}
     </div>
     <img class="float-right" :class="open ? 'spin-pos' : 'spin-pos2'" src="@/assets/dropdown_icon.svg">
     
