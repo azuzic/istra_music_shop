@@ -11,13 +11,13 @@
         <!--===================PROIZVOĐAČ===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Proizvođač</p>
-          <CSelect :options="proizvodacSet" v-model="odabranProizvodac" />
+          <CSelect :options="proizvodacSet" v-model="odabraniProizvodac" />
         </div>
         <!--===================/PROIZVOĐAČ===================-->
         <!--===================MODEL===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Model</p>
-          <CSelect :options="modelSet" v-model="odabranModel" />
+          <CSelect :options="modelSet" v-model="odabraniModel" />
         </div>
         <!--===================/MODEL===================-->
         <!--===================SERIJA===================-->
@@ -175,10 +175,10 @@ export default {
       prikazaneSerije: [],
       currentYear: 2022,
 
-      odabranaVrsta: "",
-      odabranProizvodac: "",
-      odabranModel: "",
-      odabranaSerija: "",
+      odabranaVrsta: "Gitara",
+      odabraniProizvodac: "Gibson",
+      odabraniModel: "LesPaul",
+      odabranaSerija: "Standard",
       godinaProizvodnje: "",
       vlasnik: "",
       stanje: "",
@@ -196,11 +196,11 @@ export default {
   },
   created() {},
   watch: {
-    odabranProizvodac: function () {
-      this.odabranModel = "";
+    odabraniProizvodac: function () {
+      this.odabraniModel = "";
       this.odabranaSerija = "";
     },
-    odabranModel: function () {
+    odabraniModel: function () {
       this.odabranaSerija = "";
     },
   },
@@ -211,8 +211,8 @@ export default {
           korisnik: store.currentUser,
           instrument: [
             this.odabranaVrsta,
-            this.odabranProizvodac,
-            this.odabranModel,
+            this.odabraniProizvodac,
+            this.odabraniModel,
             this.odabranaSerija,
             this.godinaProizvodnje,
             this.vlasnik,
@@ -243,6 +243,7 @@ export default {
           }
         }
       } else this.prikazaniProizvodaci = [];
+      this.odabraniProizvodac = this.prikazaniProizvodaci[0];
       return this.prikazaniProizvodaci;
     },
     modelSet() {
@@ -250,12 +251,13 @@ export default {
       this.prikazaneSerije = [];
       for (const data in this.jsonData) {
         for (const data1 in this.jsonData[data]) {
-          if (data1 === this.odabranProizvodac)
+          if (data1 === this.odabraniProizvodac)
             for (const data2 in this.jsonData[data][data1]) {
               this.prikazaniModeli.push(`${data2}`);
             }
         }
       }
+      this.odabraniModel = this.prikazaniModeli[0];
       return this.prikazaniModeli;
     },
     serijaSet() {
@@ -263,7 +265,7 @@ export default {
       for (const data in this.jsonData) {
         for (const data1 in this.jsonData[data]) {
           for (const data2 in this.jsonData[data][data1]) {
-            if (data2 === this.odabranModel)
+            if (data2 === this.odabraniModel)
               for (const data3 in this.jsonData[data][data1][data2]) {
                 this.prikazaneSerije.push(
                   this.jsonData[data][data1][data2][data3]
@@ -272,13 +274,14 @@ export default {
           }
         }
       }
+      this.odabranaSerija = this.prikazaneSerije[0];
       return this.prikazaneSerije;
     },
 
     allFilled() {
       return this.odabranaVrsta &&
-        this.odabranProizvodac &&
-        this.odabranModel &&
+        this.odabraniProizvodac &&
+        this.odabraniModel &&
         this.odabranaSerija &&
         this.godinaProizvodnje &&
         this.vlasnik &&
