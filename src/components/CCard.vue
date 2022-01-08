@@ -1,49 +1,70 @@
 <template>
   <div class="CCard flex">
     <div class="CCard-image flex-none">
-        <img class="CCard-img mx-auto" :src="zahtjev.img">
+      <img class="CCard-img mx-auto" :src="zahtjev.img" />
     </div>
     <div class="CCard-data">
       <div class="CCard-header">
         <p class="CCard-title pl-1 pt-1 pb-2 font-bold">
-          {{zahtjev.instrument[1]}} {{zahtjev.instrument[2]}}
+          {{ zahtjev.instrument[1] }} {{ zahtjev.instrument[2] }}
           <b class="CCard-date float-right pr-1">
-            {{zahtjev.zahtjevPredan}}
+            {{ receivedFromNow }}
           </b>
         </p>
         <p class="CCard-subtitle pl-1">
-          {{zahtjev.instrument[3]}}
+          {{ zahtjev.instrument[3] }}
           <b class="CCard-price float-right pr-1">
-            {{zahtjev.preporucenaCijena}} kn
+            {{ zahtjev.preporucenaCijena }} kn
           </b>
         </p>
       </div>
-      <div class="CCard-footer grid" :class="zahtjev.status!='Riješeno' ? 'grid-cols-3':'grid-cols-1'">
-        <div v-if="zahtjev.status!='Riješeno'" class="CCard-icon-1" :class="zahtjev.status!='Odbijeno' ? 'tranparent-10':''">
-          <img class="CCard-svg mx-auto mt-2" src="@/assets/deny_icon.svg">
+      <div
+        class="CCard-footer grid"
+        :class="zahtjev.status != 'Riješeno' ? 'grid-cols-3' : 'grid-cols-1'"
+      >
+        <div
+          v-if="zahtjev.status != 'Riješeno'"
+          class="CCard-icon-1"
+          :class="zahtjev.status != 'Odbijeno' ? 'tranparent-10' : ''"
+        >
+          <img class="CCard-svg mx-auto mt-2" src="@/assets/deny_icon.svg" />
           <p class="CCard-icontext">ODBIJENO</p>
         </div>
-        <div v-if="zahtjev.status!='Riješeno'" class="CCard-icon-2" :class="zahtjev.status!='U razradi' ? 'tranparent-10':''">
-          <img class="CCard-svg mx-auto mt-2" src="@/assets/load_icon.svg">
+        <div
+          v-if="zahtjev.status != 'Riješeno'"
+          class="CCard-icon-2"
+          :class="zahtjev.status != 'U razradi' ? 'tranparent-10' : ''"
+        >
+          <img class="CCard-svg mx-auto mt-2" src="@/assets/load_icon.svg" />
           <p class="CCard-icontext">U RAZRADI</p>
         </div>
-        <div v-if="zahtjev.status!='Riješeno'" class="CCard-icon-3" :class="zahtjev.status!='Prihvaćeno' ? 'tranparent-10':''">
-            <img class="CCard-svg mx-auto mt-2" src="@/assets/accept_icon.svg">
-            <p class="CCard-icontext">PRIHVAĆENO</p>
+        <div
+          v-if="zahtjev.status != 'Riješeno'"
+          class="CCard-icon-3"
+          :class="zahtjev.status != 'Prihvaćeno' ? 'tranparent-10' : ''"
+        >
+          <img class="CCard-svg mx-auto mt-2" src="@/assets/accept_icon.svg" />
+          <p class="CCard-icontext">PRIHVAĆENO</p>
         </div>
-        <div v-if="zahtjev.status=='Riješeno'" class="CCard-icon-3">
-            <img class="CCard-svg2 mx-auto mt-1" src="@/assets/deal_icon.svg">
-            <p class="CCard-icontext2">RIJEŠENO</p>
+        <div v-if="zahtjev.status == 'Riješeno'" class="CCard-icon-3">
+          <img class="CCard-svg2 mx-auto mt-1" src="@/assets/deal_icon.svg" />
+          <p class="CCard-icontext2">RIJEŠENO</p>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import moment from "moment";
 export default {
   name: "CCard",
   props: {
-    zahtjev: ""
+    zahtjev: "",
+  },
+  computed: {
+    receivedFromNow() {
+      return moment(this.zahtjev.date.time).fromNow();
+    },
   },
 };
 </script>
@@ -51,14 +72,14 @@ export default {
 .CCard {
   width: 100%;
   height: 120px;
-  background: #3D3D3F;
+  background: #3d3d3f;
   box-shadow: 0px 0px 2.5px rgba(0, 0, 0, 0.75);
   border-radius: 8px;
 }
 .CCard-image {
   width: 120px;
   height: 120px;
-  background: #3D3D3F;
+  background: #3d3d3f;
   border-bottom-left-radius: 8px;
   border-top-left-radius: 8px;
   overflow: hidden;
@@ -83,20 +104,20 @@ export default {
 .CCard-footer {
   width: 100%;
   height: 72px;
-  background: #3D3D3F;
+  background: #3d3d3f;
   border-bottom-right-radius: 8px;
 }
 .CCard-icon-1 {
   height: 100%;
-  background: #FF8080;
+  background: #ff8080;
 }
 .CCard-icon-2 {
   height: 100%;
-  background: #FFF383;
+  background: #fff383;
 }
 .CCard-icon-3 {
   height: 100%;
-  background: #6DD277;
+  background: #6dd277;
   border-bottom-right-radius: 8px;
 }
 .CCard-icontext {
