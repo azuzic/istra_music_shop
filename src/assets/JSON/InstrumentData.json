@@ -1,356 +1,250 @@
 {
   "Gitara": {
     "Gibson": {
-      "LesPaul": {
-        "series": [
-          "Standard",
-          "Special",
-          "Deluxe",
-          "Junior",
-          "Modern",
-          "Classic",
-          "Studio",
-          "Tribute",
-          "Reissue",
-          "Artist"
-        ]
-      },
-      "SG": {
-        "series": [
-          "Standard",
-          "Special",
-          "Junior",
-          "Modern",
-          "Tribute",
-          "Reissue",
-          "Doubleneck",
-          "Artist"
-        ]
-      },
-      "ES": {
-        "series": ["335", "345", "339", "Reissue", "Artist"]
-      },
-      "Designer": {
-        "series": ["Firebird", "Flying V", "Explorer", "Artist"]
-      }
+      "LesPaul": [
+        "Standard",
+        "Special",
+        "Deluxe",
+        "Junior",
+        "Modern",
+        "Classic",
+        "Studio",
+        "Tribute",
+        "Reissue",
+        "Artist"
+      ],
+      "SG": [
+        "Standard",
+        "Special",
+        "Junior",
+        "Modern",
+        "Tribute",
+        "Reissue",
+        "Doubleneck",
+        "Artist"
+      ],
+      "ES": ["335", "345", "339", "Reissue", "Artist"],
+      "Designer": ["Firebird", "Flying V", "Explorer", "Artist"]
     },
     "Fender": {
-      "Stratocaster": {
-        "series": [
-          "American Original",
-          "Artist",
-          "American Acoustasonic",
-          "American Performer",
-          "American Professional II",
-          "American Ultra",
-          "Boxer",
-          "Contemporary",
-          "Noventa",
-          "Player",
-          "Player Plus",
-          "Vintera"
-        ]
-      },
-      "Telecaster": {
-        "series": [
-          "American Original",
-          "Artist",
-          "Special",
-          "American Acoustasonic",
-          "American Performer",
-          "American Professional II",
-          "American Ultra",
-          "Boxer",
-          "Contemporary",
-          "Noventa",
-          "Player",
-          "Player Plus",
-          "Vintera"
-        ]
-      },
-      "Jazzmaster": {
-        "series": [
-          "American Original",
-          "Artist",
-          "American Acoustasonic",
-          "American Performer",
-          "American Professional II",
-          "American Ultra",
-          "Contemporary",
-          "Noventa",
-          "Player",
-          "Vintera"
-        ]
-      },
-      "Jaguar": {
-        "series": [
-          "American Original",
-          "Artist",
-          "Contemporary",
-          "Player",
-          "Vintera"
-        ]
-      },
-      "Mustang": {
-        "series": ["Artist", "American Performer", "Player", "Vintera"]
-      },
-      "Lead": {
-        "series": ["Player"]
-      }
+      "Stratocaster": [
+        "American Original",
+        "Artist",
+        "American Acoustasonic",
+        "American Performer",
+        "American Professional II",
+        "American Ultra",
+        "Boxer",
+        "Contemporary",
+        "Noventa",
+        "Player",
+        "Player Plus",
+        "Vintera"
+      ],
+      "Telecaster": [
+        "American Original",
+        "Artist",
+        "Special",
+        "American Acoustasonic",
+        "American Performer",
+        "American Professional II",
+        "American Ultra",
+        "Boxer",
+        "Contemporary",
+        "Noventa",
+        "Player",
+        "Player Plus",
+        "Vintera"
+      ],
+      "Jazzmaster": [
+        "American Original",
+        "Artist",
+        "American Acoustasonic",
+        "American Performer",
+        "American Professional II",
+        "American Ultra",
+        "Contemporary",
+        "Noventa",
+        "Player",
+        "Vintera"
+      ],
+      "Jaguar": [
+        "American Original",
+        "Artist",
+        "Contemporary",
+        "Player",
+        "Vintera"
+      ],
+      "Mustang": ["Artist", "American Performer", "Player", "Vintera"],
+      "Lead": ["Player"]
     },
     "Ibanez": {
-      "AZ": {
-        "series": ["Prestige", "Premium"]
-      },
-      "AZES": {
-        "series": ["Standard"]
-      },
-      "AZS": {
-        "series": ["Prestige"]
-      },
-      "RG": {
-        "series": [
-          "j.custom",
-          "Prestige",
-          "Genesis Collection",
-          "Premium",
-          "Axion Label",
-          "IronLabel",
-          "Standard",
-          "Gio"
-        ]
-      },
-      "RGA": {
-        "series": ["Standard"]
-      },
-      "RGD": {
-        "series": ["Prestige", "Axion Label", "Standard"]
-      },
-      "Q": {
-        "series": ["Standard"]
-      },
-      "S": {
-        "series": ["Prestige", "Axion Label", "Standard"]
-      },
-      "SA": {
-        "series": ["Standard", "Gio"]
-      },
-      "X": {
-        "series": ["IronLabel"]
-      },
-      "Iceman": {
-        "series": ["IronLabel"]
-      },
-      "AX": {
-        "series": ["Gio"]
-      },
-      "AR": {
-        "series": ["Standard"]
-      },
-      "miKro": {
-        "series": ["miKro"]
-      },
-      "Jumpstart": {
-        "series": ["Jumpstart"]
-      }
+      "AZ": ["Prestige", "Premium"],
+      "AZES": ["Standard"],
+      "AZS": ["Prestige"],
+      "RG": [
+        "j.custom",
+        "Prestige",
+        "Genesis Collection",
+        "Premium",
+        "Axion Label",
+        "IronLabel",
+        "Standard",
+        "Gio"
+      ],
+      "RGA": ["Standard"],
+      "RGD": ["Prestige", "Axion Label", "Standard"],
+      "Q": ["Standard"],
+      "S": ["Prestige", "Axion Label", "Standard"],
+      "SA": ["Standard", "Gio"],
+      "X": ["IronLabel"],
+      "Iceman": ["IronLabel"],
+      "AX": ["Gio"],
+      "AR": ["Standard"],
+      "miKro": ["miKro"],
+      "Jumpstart": ["Jumpstart"]
     },
     "PRS": {
-      "Core": {
-        "series": ["Custom", "McCarty", "Hollowbody", "Specialty", "Artist"]
-      },
-      "Bolt-On": {
-        "series": ["CE", "Artist"]
-      },
-      "S2": {
-        "series": ["Custom", "Standard", "McCarty"]
-      },
-      "SE": {
-        "series": [
-          "Custom",
-          "Standard",
-          "Hollowbody",
-          "Extended Range",
-          "SE 245",
-          "Artist"
-        ]
-      }
+      "Core": ["Custom", "McCarty", "Hollowbody", "Specialty", "Artist"],
+      "Bolt-On": ["CE", "Artist"],
+      "S2": ["Custom", "Standard", "McCarty"],
+      "SE": [
+        "Custom",
+        "Standard",
+        "Hollowbody",
+        "Extended Range",
+        "SE 245",
+        "Artist"
+      ]
     },
     "G&L": {
-      "Tribute": {
-        "series": ["Classic", "Deluxe", "Special", "Legacy"]
-      }
+      "Tribute": ["Classic", "Deluxe", "Special", "Legacy"]
     },
     "Jackson": {
-      "JS": {
-        "series": [
-          "Dinky",
-          "Rhoads",
-          "Kelly",
-          "King VS",
-          "Monarkh",
-          "Warrior",
-          "Star"
-        ]
-      },
-      "X": {
-        "series": [
-          "Soloist",
-          "Dinky",
-          "Rhoads",
-          "Kelly",
-          "King V",
-          "Monarkh",
-          "Warrior",
-          "San Dimas",
-          "Dominion"
-        ]
-      },
-      "Pro": {
-        "series": [
-          "Soloist",
-          "Dinky",
-          "Rhoads",
-          "Juggernaut",
-          "Demmelition Fury",
-          "Dominion",
-          "Kelly",
-          "King V",
-          "Monarkh",
-          "Warrior",
-          "San Dimas",
-          "Shadowcaster"
-        ]
-      },
-      "MJ": {
-        "series": ["Dinky", "Rhoads", "So-Cal", "Soloist"]
-      },
-      "USA": {
-        "series": [
-          "Soloist",
-          "Rhoads",
-          "Juggernaut",
-          "Kelly",
-          "King V",
-          "Monarkh",
-          "San Dimas",
-          "San Dimas Style 1",
-          "Shadowcaster",
-          "PC1",
-          "Star"
-        ]
-      }
+      "JS": [
+        "Dinky",
+        "Rhoads",
+        "Kelly",
+        "King VS",
+        "Monarkh",
+        "Warrior",
+        "Star"
+      ],
+      "X": [
+        "Soloist",
+        "Dinky",
+        "Rhoads",
+        "Kelly",
+        "King V",
+        "Monarkh",
+        "Warrior",
+        "San Dimas",
+        "Dominion"
+      ],
+      "Pro": [
+        "Soloist",
+        "Dinky",
+        "Rhoads",
+        "Juggernaut",
+        "Demmelition Fury",
+        "Dominion",
+        "Kelly",
+        "King V",
+        "Monarkh",
+        "Warrior",
+        "San Dimas",
+        "Shadowcaster"
+      ],
+      "MJ": ["Dinky", "Rhoads", "So-Cal", "Soloist"],
+      "USA": [
+        "Soloist",
+        "Rhoads",
+        "Juggernaut",
+        "Kelly",
+        "King V",
+        "Monarkh",
+        "San Dimas",
+        "San Dimas Style 1",
+        "Shadowcaster",
+        "PC1",
+        "Star"
+      ]
     },
     "Epiphone": {
-      "Les Paul": {
-        "series": [
-          "Standard",
-          "Junior",
-          "Special",
-          "Custom",
-          "Express",
-          "Modern",
-          "Classic",
-          "Melody",
-          "Studio",
-          "Muse"
-        ]
-      },
-      "ES": {
-        "series": ["339", "335"]
-      },
-      "SG": {
-        "series": ["Standard", "Special", "Custom", "Modern", "Classic", "Muse"]
-      },
-      "Designer": {
-        "series": [
-          "Flying V",
-          "Firebird",
-          "Explorer",
-          "Prophecy Extura",
-          "Flying V Prophecy"
-        ]
-      }
+      "Les Paul": [
+        "Standard",
+        "Junior",
+        "Special",
+        "Custom",
+        "Express",
+        "Modern",
+        "Classic",
+        "Melody",
+        "Studio",
+        "Muse"
+      ],
+      "ES": ["339", "335"],
+      "SG": ["Standard", "Special", "Custom", "Modern", "Classic", "Muse"],
+      "Designer": [
+        "Flying V",
+        "Firebird",
+        "Explorer",
+        "Prophecy Extura",
+        "Flying V Prophecy"
+      ]
     },
     "Gretsch": {
-      "Broadkaster": {
-        "series": ["Players Edition"]
-      },
-      "Falcon": {
-        "series": [
-          "Players Edition",
-          "Limited edition",
-          "Custom Shop",
-          "Vintage Select Edition",
-          "Artist"
-        ]
-      },
-      "Country Gentleman": {
-        "series": ["Players Edition", "Vintage Select Edition"]
-      },
-      "Nashville": {
-        "series": [
-          "Players Edition",
-          "Limited edition",
-          "Vintage Select Edition",
-          "Artist"
-        ]
-      },
-      "Tennessee Rose": {
-        "series": [
-          "Players Edition",
-          "Limited edition",
-          "Vintage Select Edition"
-        ]
-      },
-      "Anniversary": {
-        "series": ["Players Edition", "Vintage Select Edition", "Artist"]
-      },
-      "Penguin": {
-        "series": ["Limited edition", "Vintage Select", "Artist"]
-      },
-      "Jet": {
-        "series": [
-          "Streamliner",
-          "Electromatic",
-          "Players Edition",
-          "Custom Shop",
-          "Vintage Select",
-          "Artist"
-        ]
-      },
-      "Country Club": {
-        "series": ["Vintage Select"]
-      }
+      "Broadkaster": ["Players Edition"],
+      "Falcon": [
+        "Players Edition",
+        "Limited edition",
+        "Custom Shop",
+        "Vintage Select Edition",
+        "Artist"
+      ],
+      "Country Gentleman": ["Players Edition", "Vintage Select Edition"],
+      "Nashville": [
+        "Players Edition",
+        "Limited edition",
+        "Vintage Select Edition",
+        "Artist"
+      ],
+      "Tennessee Rose": [
+        "Players Edition",
+        "Limited edition",
+        "Vintage Select Edition"
+      ],
+      "Anniversary": ["Players Edition", "Vintage Select Edition", "Artist"],
+      "Penguin": ["Limited edition", "Vintage Select", "Artist"],
+      "Jet": [
+        "Streamliner",
+        "Electromatic",
+        "Players Edition",
+        "Custom Shop",
+        "Vintage Select",
+        "Artist"
+      ],
+      "Country Club": ["Vintage Select"]
     },
     "Yamaha": {
-      "REVSTAR": {
-        "series": [
-          "RSP20CR",
-          "RS820CR",
-          "RS702B",
-          "RS720BX",
-          "RS720B",
-          "RS620",
-          "RS502TFMX",
-          "RS502TFM",
-          "RS502T",
-          "RS502",
-          "RS420",
-          "RS320"
-        ]
-      },
-      "SG": {
-        "series": ["SG1820", "SG1820A", "SG1802"]
-      },
-      "Pacifica": {
-        "series": ["PAC600", "PAC300", "PAC200", "PAC012/100"]
-      },
-      "RGX": {
-        "series": ["RGX121Z"]
-      },
-      "Hollow Body": {
-        "series": ["SA2200"]
-      }
+      "REVSTAR": [
+        "RSP20CR",
+        "RS820CR",
+        "RS702B",
+        "RS720BX",
+        "RS720B",
+        "RS620",
+        "RS502TFMX",
+        "RS502TFM",
+        "RS502T",
+        "RS502",
+        "RS420",
+        "RS320"
+      ],
+      "SG": ["SG1820", "SG1820A", "SG1802"],
+      "Pacifica": ["PAC600", "PAC300", "PAC200", "PAC012/100"],
+      "RGX": ["RGX121Z"],
+      "Hollow Body": ["SA2200"]
     }
   }
 }

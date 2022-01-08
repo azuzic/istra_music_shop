@@ -11,19 +11,19 @@
         <!--===================PROIZVOĐAČ===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Proizvođač</p>
-          <CSelect :options="tempOptions" v-model="odabranProizvodac" />
+          <CSelect :options="proizvodacSet" v-model="odabranProizvodac" />
         </div>
         <!--===================/PROIZVOĐAČ===================-->
         <!--===================MODEL===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Model</p>
-          <CSelect :options="tempOptions" v-model="odabranModel" />
+          <CSelect :options="modelSet" v-model="odabranModel" />
         </div>
         <!--===================/MODEL===================-->
         <!--===================SERIJA===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Serija</p>
-          <CSelect :options="tempOptions" v-model="odabranaSerija" />
+          <CSelect :options="serijaSet" v-model="odabranaSerija" />
         </div>
         <!--===================/SERIJA===================-->
         <!--===================GODINA PROIZVODNJE====================-->
@@ -144,7 +144,7 @@
           <img class="money" src="@/assets/money_icon.svg" />
           <p class="pl-4 text-24px">
             Predložena cijena:
-            <b class="price">2500 kn</b>
+            <b class="price">{{ preporucenaCijena }}</b>
           </p>
         </div>
       </div>
@@ -168,11 +168,13 @@ export default {
   name: "OtkupOpreme",
   data() {
     return {
-      instrumentData: data,
+      jsonData: data,
       vrste: ["Gitara", "Bubanj", "Bas gitara"],
-      modeli: [],
-      tempOptions: ["option1", "option2", "option3"],
+      prikazaniProizvodaci: [],
+      prikazaniModeli: [],
+      prikazaneSerije: [],
       currentYear: 2022,
+
       odabranaVrsta: "",
       odabranProizvodac: "",
       odabranModel: "",
@@ -192,9 +194,17 @@ export default {
     CSelect,
     CButtonSingle,
   },
-
+  created() {},
+  watch: {
+    odabranProizvodac: function () {
+      this.odabranModel = "";
+      this.odabranaSerija = "";
+    },
+    odabranModel: function () {
+      this.odabranaSerija = "";
+    },
+  },
   methods: {
-    dummy() {},
     async otkupi() {
       try {
         const docRef = await addDoc(collection(db, "zahtjevi"), {
@@ -208,18 +218,63 @@ export default {
             this.vlasnik,
             this.stanje,
           ],
+          zahtjevPredan: Date.now(),
           napomena: this.napomena,
           status: "U razradi",
           preporucenaCijena: 1500,
-          zahtjevPredan: Date.now(),
         });
         console.log("Predan zahtjev za otkup sa ID: ", docRef.id);
       } catch (e) {
         console.error("Error adding document: ", e);
       }
     },
+    dummy() {},
   },
   computed: {
+    proizvodacSet() {
+      this.prikazaniProizvodaci = [];
+      this.prikazaniModeli = [];
+      this.prikazaneSerije = [];
+
+      if (this.odabranaVrsta === "Gitara") {
+        for (const data in this.jsonData) {
+          for (const data1 in this.jsonData[data]) {
+            this.prikazaniProizvodaci.push(`${data1}`);
+          }
+        }
+      } else this.prikazaniProizvodaci = [];
+      return this.prikazaniProizvodaci;
+    },
+    modelSet() {
+      this.prikazaniModeli = [];
+      this.prikazaneSerije = [];
+      for (const data in this.jsonData) {
+        for (const data1 in this.jsonData[data]) {
+          if (data1 === this.odabranProizvodac)
+            for (const data2 in this.jsonData[data][data1]) {
+              this.prikazaniModeli.push(`${data2}`);
+            }
+        }
+      }
+      return this.prikazaniModeli;
+    },
+    serijaSet() {
+      this.prikazaneSerije = [];
+      for (const data in this.jsonData) {
+        for (const data1 in this.jsonData[data]) {
+          for (const data2 in this.jsonData[data][data1]) {
+            if (data2 === this.odabranModel)
+              for (const data3 in this.jsonData[data][data1][data2]) {
+                this.prikazaneSerije.push(
+                  this.jsonData[data][data1][data2][data3]
+                );
+              }
+          }
+        }
+      }
+      return this.prikazaneSerije;
+    },
+
     allFilled() {
       return this.odabranaVrsta &&
         this.odabranProizvodac &&
