@@ -6,13 +6,13 @@
     <div class="CCard-data">
       <div class="CCard-header">
         <p class="CCard-title pl-1 pt-1 pb-2 font-bold">
-          {{zahtjev.instrument[0]}}
+          {{zahtjev.instrument[1]}} {{zahtjev.instrument[2]}}
           <b class="CCard-date float-right pr-1">
             {{zahtjev.instrument[4]}}
           </b>
         </p>
         <p class="CCard-subtitle pl-1">
-          {{zahtjev.instrument[1]}}
+          {{zahtjev.instrument[3]}}
           <b class="CCard-price float-right pr-1">
             {{zahtjev.preporucenaCijena}} kn
           </b>
