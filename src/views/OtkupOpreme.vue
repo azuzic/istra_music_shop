@@ -5,25 +5,25 @@
         <!--===================VRSTA INSTRUMENTA===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Vrsta instrumenta</p>
-          <CSelect :options="tempOptions" v-model="vrstaInstrumenta" />
+          <CSelect :options="vrste" v-model="odabranaVrsta" />
         </div>
         <!--===================/VRSTA INSTRUMENTA===================-->
         <!--===================PROIZVOĐAČ===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Proizvođač</p>
-          <CSelect :options="tempOptions" v-model="proizvodac" />
+          <CSelect :options="tempOptions" v-model="odabranProizvodac" />
         </div>
         <!--===================/PROIZVOĐAČ===================-->
         <!--===================MODEL===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Model</p>
-          <CSelect :options="tempOptions" v-model="model" />
+          <CSelect :options="tempOptions" v-model="odabranModel" />
         </div>
         <!--===================/MODEL===================-->
         <!--===================SERIJA===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Serija</p>
-          <CSelect :options="tempOptions" v-model="serija" />
+          <CSelect :options="tempOptions" v-model="odabranaSerija" />
         </div>
         <!--===================/SERIJA===================-->
         <!--===================GODINA PROIZVODNJE====================-->
@@ -64,8 +64,8 @@
               <p class="otkup-img-text">Gornja prednja</p>
               <div>
                 <img
-                class="CCard-img img-top-left mx-auto"
-                src="https://picsum.photos/500/500/"
+                  class="CCard-img img-top-left mx-auto"
+                  src="https://picsum.photos/500/500/"
                 />
               </div>
             </div>
@@ -73,26 +73,26 @@
               <p class="otkup-img-text">Gornja stražnja</p>
               <div>
                 <img
-                class="CCard-img img-top mx-auto"
-                src="https://picsum.photos/500/500/"
-              />
+                  class="CCard-img img-top mx-auto"
+                  src="https://picsum.photos/500/500/"
+                />
               </div>
             </div>
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Bočna desna</p>
               <div>
                 <img
-                class="CCard-img img-top-right mx-auto"
-                src="https://picsum.photos/500/500/"
-              />
+                  class="CCard-img img-top-right mx-auto"
+                  src="https://picsum.photos/500/500/"
+                />
               </div>
             </div>
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Bočna lijeva</p>
               <div>
                 <img
-                class="CCard-img img-bottom-left mx-auto"
-                src="https://picsum.photos/500/500/"
+                  class="CCard-img img-bottom-left mx-auto"
+                  src="https://picsum.photos/500/500/"
                 />
               </div>
             </div>
@@ -100,18 +100,18 @@
               <p class="otkup-img-text">Vrat gitare</p>
               <div>
                 <img
-                class="CCard-img img-bottom mx-auto"
-                src="https://picsum.photos/500/500/"
-              />
+                  class="CCard-img img-bottom mx-auto"
+                  src="https://picsum.photos/500/500/"
+                />
               </div>
             </div>
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Glava gitare</p>
               <div>
                 <img
-                class="CCard-img img-bottom-right mx-auto"
-                src="https://picsum.photos/500/500/"
-              />
+                  class="CCard-img img-bottom-right mx-auto"
+                  src="https://picsum.photos/500/500/"
+                />
               </div>
             </div>
           </div>
@@ -139,20 +139,21 @@
         <!--===================/OTKUPI===================-->
       </div>
       <!--==============FOOTER==================================-->
-        <div class="menu-bottom grid grid-cols-1 mt-4">
-          <div class="menu-item text-left mx-auto">
-            <img class="money" src="@/assets/money_icon.svg" />
-            <p class="pl-4 text-24px">
-              Predložena cijena:
-              <b class="price">2500 kn</b>
-            </p>
-          </div>
+      <div class="menu-bottom grid grid-cols-1 mt-4">
+        <div class="menu-item text-left mx-auto">
+          <img class="money" src="@/assets/money_icon.svg" />
+          <p class="pl-4 text-24px">
+            Predložena cijena:
+            <b class="price">2500 kn</b>
+          </p>
         </div>
-        <!--==============FOOTER END==============================-->
+      </div>
+      <!--==============FOOTER END==============================-->
     </div>
   </div>
 </template>
 <script>
+import data from "../assets/JSON/InstrumentData.json";
 import CTitle from "@/components/CTitle.vue";
 import CWarning from "@/components/CWarning.vue";
 import CButtonAccept from "@/components/CButtonAccept.vue";
@@ -167,16 +168,20 @@ export default {
   name: "OtkupOpreme",
   data() {
     return {
-      tempOptions: ["option1", "option2", "option3", "option4","option1", "option2", "option3", "option4","option1", "option2", "option3", "option4"],
+      instrumentData: data,
+      vrste: ["Gitara", "Bubanj", "Bas gitara"],
+      modeli: [],
+      tempOptions: ["option1", "option2", "option3"],
       currentYear: 2022,
-      vrstaInstrumenta: "",
-      proizvodac: "",
-      model: "",
-      serija: "",
+      odabranaVrsta: "",
+      odabranProizvodac: "",
+      odabranModel: "",
+      odabranaSerija: "",
       godinaProizvodnje: "",
       vlasnik: "",
       stanje: "",
       napomena: "",
+      preporucenaCijena: 0,
     };
   },
   components: {
@@ -195,10 +200,10 @@ export default {
         const docRef = await addDoc(collection(db, "zahtjevi"), {
           korisnik: store.currentUser,
           instrument: [
-            this.vrstaInstrumenta,
-            this.proizvodac,
-            this.model,
-            this.serija,
+            this.odabranaVrsta,
+            this.odabranProizvodac,
+            this.odabranModel,
+            this.odabranaSerija,
             this.godinaProizvodnje,
             this.vlasnik,
             this.stanje,
@@ -206,6 +211,7 @@ export default {
           napomena: this.napomena,
           status: "U razradi",
           preporucenaCijena: 1500,
+          zahtjevPredan: Date.now(),
         });
         console.log("Predan zahtjev za otkup sa ID: ", docRef.id);
       } catch (e) {
@@ -215,10 +221,10 @@ export default {
   },
   computed: {
     allFilled() {
-      return this.vrstaInstrumenta &&
-        this.proizvodac &&
-        this.model &&
-        this.serija &&
+      return this.odabranaVrsta &&
+        this.odabranProizvodac &&
+        this.odabranModel &&
+        this.odabranaSerija &&
         this.godinaProizvodnje &&
         this.vlasnik &&
         this.stanje

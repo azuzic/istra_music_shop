@@ -97,7 +97,7 @@ export default {
     CButtonAccept,
     CButtonDecline,
   },
-  created() {
+  mounted() {
     this.readData();
   },
   methods: {

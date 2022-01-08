@@ -1,7 +1,9 @@
 <template>
   <div class="p-0 m-0">
     <div>
-      <router-link to="/"><img alt="Test logo" src="../assets/logo.svg" /></router-link>
+      <router-link to="/"
+        ><img alt="Test logo" src="../assets/logo.svg"
+      /></router-link>
     </div>
     <div class="grid auto-rows-auto gap-4">
       <br />
@@ -77,7 +79,7 @@ export default {
       return this.email.includes("@") && this.email.includes(".") ? 1 : 0;
     },
   },
-  created() {
+  mounted() {
     if (store.currentUser) this.signout();
   },
   methods: {
