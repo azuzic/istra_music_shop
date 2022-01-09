@@ -1,56 +1,53 @@
 <template>
   <div id="app">
     <div class="CBg"></div>
+    <!--==============DJELATNIK ============================-->
+    <div  v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-2 mb-4">
 
-    <div
-      v-if="store.currentUser == 'djelatnik@gmail.com'"
-      class="menu top-0 grid grid-cols-2 mb-4"
-    >
-      <div
-        :class="
-          currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'
-        "
-      >
+      <div :class=" currentRouteName == 'Djelatnik'       ? 'menu-item-active menu-item2 menu-top-item-grid0' : 
+                    currentRouteName == 'DjelatnikRacun'  ? 'menu-item-active menu-item2 menu-top-item-grid1' : ''" >
+      </div>
+
+    </div>
+    <!--===============================-->
+    <div  v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu top-0 grid grid-cols-2 mb-4">
+
+      <div :class="currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="djelatnik"> Pregled otkupa </router-link></p>
       </div>
-      <div
-        :class="
-          currentRouteName == 'DjelatnikRacun'
-            ? 'menu-item-active'
-            : 'menu-item'
-        "
-      >
+
+      <div :class="currentRouteName == 'DjelatnikRacun' ? 'menu-item-active' : 'menu-item'" >
         <p><router-link to="djelatnik-racun"> Račun </router-link></p>
       </div>
+
     </div>
-    <div
-      v-else-if="
-        store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'
-      "
-      class="menu top-0 grid grid-cols-3 mb-4"
-    >
-      <div
-        :class="
-          currentRouteName == 'Status otkupa' ? 'menu-item-active' : 'menu-item'
-        "
-      >
+    <!--==============DJELATNIK END=========================-->
+    <!--==============KORISNIK =============================-->
+    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-3 mb-4">
+
+      <div :class=" currentRouteName == 'Status otkupa' ? 'menu-item-active menu-item2 menu-top2-item-grid0' : 
+                    currentRouteName == 'OtkupOpreme'   ? 'menu-item-active menu-item2 menu-top2-item-grid1' : 
+                    currentRouteName == 'KorisnikRacun' ? 'menu-item-active menu-item2 menu-top2-item-grid2' : ''">
+      </div>
+    </div>
+    <!--==============KORISNIK END==========================-->
+    <!--==============KORISNIK =============================-->
+    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'" class="menu top-0 grid grid-cols-3 mb-4">
+
+      <div :class="currentRouteName == 'Status otkupa' ? 'menu-item-active' : 'menu-item'">
         <p>Status otkupa</p>
       </div>
-      <div
-        :class="
-          currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'
-        "
-      >
+
+      <div :class="currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="otkup-opreme"> Otkup opreme </router-link></p>
       </div>
-      <div
-        :class="
-          currentRouteName == 'KorisnikRacun' ? 'menu-item-active' : 'menu-item'
-        "
-      >
+
+      <div :class="currentRouteName == 'KorisnikRacun' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="korisnik-racun"> Račun </router-link></p>
       </div>
+
     </div>
+    <!--==============KORISNIK END==========================-->
     <router-view />
   </div>
 </template>
@@ -195,38 +192,79 @@ input:-webkit-autofill:active {
   width: 100%;
   height: 50px;
   z-index: 500;
+  background-color: transparent;
+}
+.menu-top-item-grid0 {
+  margin-left: 0%;
+  background-color: #ff5252;
+}
+.menu-top-item-grid1 {
+  margin-left: 100%;
+  background-color: #ff5252 ;
+}
+.menu-top2-item-grid0 {
+  margin-left: 0%;
+  background-color: #ff5252;
+}
+.menu-top2-item-grid1 {
+  margin-left: 100%;
+  background-color: #ff5252 ;
+}
+.menu-top2-item-grid2 {
+  margin-left: 200%;
+  background-color: #ff5252 ;
+}
+.menu2 {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 50px;
+  z-index: 500;
   background-color: #3d3d3f;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
+
 .menu-bottom {
   position: fixed;
   bottom: -1px;
   width: 100%;
   height: 50px;
-  background-color: #3d3d3f;
+  background-color: transparent;
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
 }
-
-.menu-bottom2 {
-  width: 100%;
-  height: 50px;
-  background-color: #3d3d3f;
-  filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
-}
-
 .menu-item {
   display: flex;
   align-items: center;
   text-align: center;
-  background-color: #3d3d3f;
+  background-color: transparent;
+}
+.menu-item2 {
+  position: absolute;
+  height: inherit;
+  width: inherit;
+  transition: all;
+  transition-timing-function: ease-in-out;
+  transition: 0.75s;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  z-index: 100;
 }
 .menu-item p {
   width: 100%;
-  color: #f5dada;
+  color: #f5dada;  
+  transition: all;
+  transition-timing-function: ease-in-out;
+  transition: 1s;
 }
 .menu-item p a {
   width: 100%;
   color: #f5dada;
+  transition: all;
+  transition-timing-function: ease-in-out;
+  transition: 1s;
 }
 .menu-item p b {
   width: 100%;
@@ -235,17 +273,25 @@ input:-webkit-autofill:active {
   display: flex;
   align-items: center;
   text-align: center;
-  background-color: #ff5252;
+  transition: all;
+  transition-timing-function: ease-in-out;
+  transition: 1s;
 }
 .menu-item-active p {
   width: 100%;
   font-weight: bold;
   color: #3f2c28;
+  transition: all;
+  transition-timing-function: ease-in-out;
+  transition: 1s;
 }
 .menu-item-active p a {
   width: 100%;
   font-weight: bold;
   color: #3f2c28;
+  transition: all;
+  transition-timing-function: ease-in-out;
+  transition: 1s;
 }
 .otkup-div-image {
   width: 100% !important;
@@ -312,5 +358,16 @@ input:-webkit-autofill:active {
 }
 .price {
   color: #ff5252;
+}
+.fade-enter-active, .fade-leave-active {
+  margin-left: 0%;
+  margin-top: 0%;
+  opacity: 100%;
+  transition:  .95s;
+}
+.fade-enter, .fade-leave-to {
+  margin-top: -50%;
+  opacity: 0%;
+  transition: .5s;
 }
 </style>

@@ -1,38 +1,48 @@
 <template>
   <div>
     <!--==============LIST ============================-->
-    <div class="grid grid-rows-auto gap-5 pl-2 pr-2 pb-16 pt-16">
-      <CCard  
-        v-for="(z, i) of zahtjevi"
-            :key="i"
-            :zahtjev = z
-      />
-    </div>
+    <transition-group class="grid grid-rows-auto gap-5 pl-2 pr-2 pb-16 pt-16" name="fade" tag="div">
+    <CCard  
+      v-for="(z, i) of zahtjevi"
+          :key="i"
+          :zahtjev = z
+    />
+    </transition-group>
     <!--==============LIST END=========================-->
     <!--==============FOOTER===========================-->
+    <div class="menu-bottom2 grid grid-cols-4 mt-4">
+      <div 
+      class="menu-item2" 
+      :class="state == 'U razradi'  ? 'menu-item-selected menu-item-grid0' : 
+              state == 'Prihvaćeno' ? 'menu-item-selected menu-item-grid1' : 
+              state == 'Riješeno'   ? 'menu-item-selected menu-item-grid2' :
+              state == 'Odbijeno'   ? 'menu-item-selected menu-item-grid3' : ''">
+      </div>
+    </div>
+    <!--=======================-->
     <div class="menu-bottom grid grid-cols-4 mt-4">
       <div 
       class="menu-item" 
-      :class="state == 'U razradi' ? 'menu-item-selected menu-item-yellow' : ''"
-      @click="state = 'U razradi', readData()">
+      :class="state == 'U razradi' ? 'menu-item-selected' : ''"
+      @click="readData('U razradi')">
         <p>U razradi</p>
       </div>
       <div 
       class="menu-item" 
-      :class="state == 'Prihvaćeno' ? 'menu-item-selected menu-item-green' : ''"
-      @click="state = 'Prihvaćeno', readData()">
+      :class="state == 'Prihvaćeno' ? 'menu-item-selected' : ''"
+      @click="readData('Prihvaćeno')">
         <p>Prihvaćeno</p>
       </div>
       <div 
       class="menu-item" 
-      :class="state == 'Riješeno' ? 'menu-item-selected menu-item-green' : ''"
-      @click="state = 'Riješeno', readData()">
+      :class="state == 'Riješeno' ? 'menu-item-selected' : ''"
+      @click="readData('Riješeno')">
         <p>Riješeno</p>
       </div>
       <div 
       class="menu-item" 
-      :class="state == 'Odbijeno' ? 'menu-item-selected menu-item-red' : ''"
-      @click="state = 'Odbijeno', readData()">
+      :class="state == 'Odbijeno' ? 'menu-item-selected' : ''"
+      @click="readData('Odbijeno')">
         <p>Odbijeno</p>
       </div>
     </div>
@@ -51,7 +61,7 @@ export default {
   name: "Djelatnik",
   data() {
     return {
-      state: "U razradi",
+      state: this.readData('U razradi'),
       zahtjevi: [],
     };
   },
@@ -64,35 +74,45 @@ export default {
     this.readData();
   },
   methods: {
-    async readData() {
-      const querySnapshot = await getDocs(collection(db, "zahtjevi"));
-      let b = 0;
-      this.zahtjevi = [];
-      querySnapshot.forEach((doc) => {
-        if (`${doc.data().status}` == this.state)
-         this.$set(this.zahtjevi, b, {
-            instrument: 
-            [
-              (`${doc.data().instrument[0]}`),
-              (`${doc.data().instrument[1]}`),
-              (`${doc.data().instrument[2]}`),
-              (`${doc.data().instrument[3]}`),
-              (`${doc.data().instrument[4]}`),
-              (`${doc.data().instrument[5]}`),
-              (`${doc.data().instrument[6]}`),
-            ],
-            korisnik: (`${doc.data().korisnik}`),
-            napomena: (`${doc.data().napomena}`),
-            preporucenaCijena: (`${doc.data().preporucenaCijena}`),
-            status: (`${doc.data().status}`),
-            img: "https://picsum.photos/500/500/",
-            date: (`${doc.data().zahtjevPredan}`),
-         });
-         b++;
-        for (let k=0; k<b; k++) {
-          console.log(this.zahtjevi[k]);
-        };
-      });
+    async readData(state2) {
+      if (this.state != state2 && state2) {
+        const querySnapshot = await getDocs(collection(db, "zahtjevi"));
+        var highestTimeoutId = setTimeout(";");
+        for (var i = 0 ; i < highestTimeoutId ; i++) {
+            clearTimeout(i); 
+        }
+        let b = 0;
+        let delay = 250; //ADJUST TIME DELAY BETWEEN CARDS
+        let time = 0-delay;
+        this.state = state2;
+        this.zahtjevi = [];
+        this.canLoad = false;
+        querySnapshot.forEach((doc) => {
+          if (`${doc.data().status}` == this.state) {
+            setTimeout(() => {
+              this.$set(this.zahtjevi, b, {
+                instrument: 
+                [
+                  (`${doc.data().instrument[0]}`),
+                  (`${doc.data().instrument[1]}`),
+                  (`${doc.data().instrument[2]}`),
+                  (`${doc.data().instrument[3]}`),
+                  (`${doc.data().instrument[4]}`),
+                  (`${doc.data().instrument[5]}`),
+                  (`${doc.data().instrument[6]}`),
+                ],
+                korisnik: (`${doc.data().korisnik}`),
+                napomena: (`${doc.data().napomena}`),
+                preporucenaCijena: (`${doc.data().preporucenaCijena}`),
+                status: (`${doc.data().status}`),
+                img: "https://picsum.photos/500/500/",
+                date: (`${doc.data().zahtjevPredan}`),
+            });
+            b++;
+            }, time += delay);
+          }
+        });
+      }
     },
     dummy() {},
   },
@@ -100,18 +120,36 @@ export default {
 </script>
 
 <style>
-.menu-item-red {
-  background-color: #ff7f7f;
-}
-.menu-item-yellow {
-  background-color: #fff383;
-}
-.menu-item-green {
-  background-color: #6dd277;
-}
-.menu-item-selected p {
+.menu-item-selected p {  
+  transition: all;
+  transition-timing-function: ease-in-out;
+  transition: 1s;
   width: 100%;
   font-weight: bold;
   color: #3f2c28;
+}
+.menu-bottom2 {
+  position: fixed;
+  bottom: -1px;
+  width: 100%;
+  height: 50px;
+  background-color: #3d3d3f;
+  filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
+}
+.menu-item-grid0 {
+  margin-left: 0%;
+  background-color: #fff383;
+}
+.menu-item-grid1 {
+  margin-left: 100%;
+  background-color: #6dd277 ;
+}
+.menu-item-grid2 {
+  margin-left: 200%;
+  background-color: #6dd277 ;
+}
+.menu-item-grid3 {
+  margin-left: 300%;
+  background-color: #ff7f7f;
 }
 </style>
