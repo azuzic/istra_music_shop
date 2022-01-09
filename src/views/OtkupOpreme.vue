@@ -2,28 +2,31 @@
   <div class="p-0 m-0 pt-16">
     <div class="grid auto-rows-auto gap-4">
       <div class="grid auto-rows-auto gap-4 pl-4 pr-4 mt-2 mb-16">
-        <!--===================VRSTA INSTRUMENTA===================-->
+        <!--===================VRSTA INSTRUMENTA=======
+        <CSelect :options="vrste" v-model="odabranaVrsta" />
+        ============-->
         <div>
           <p class="text-left text-18px m-0 p-0">Vrsta instrumenta</p>
-          <CSelect :options="vrste" v-model="odabranaVrsta" />
+          
+          <v-select class="VSelect" :options="vrste" v-model="odabranaVrsta"></v-select>
         </div>
         <!--===================/VRSTA INSTRUMENTA===================-->
         <!--===================PROIZVOĐAČ===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Proizvođač</p>
-          <CSelect :options="proizvodacSet" v-model="odabraniProizvodac" />
+          <v-select class="VSelect" :options="proizvodacSet" v-model="odabraniProizvodac"></v-select>
         </div>
         <!--===================/PROIZVOĐAČ===================-->
         <!--===================MODEL===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Model</p>
-          <CSelect :options="modelSet" v-model="odabraniModel" />
+          <v-select class="VSelect" :options="modelSet" v-model="odabraniModel"></v-select>
         </div>
         <!--===================/MODEL===================-->
         <!--===================SERIJA===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Serija</p>
-          <CSelect :options="serijaSet" v-model="odabranaSerija" />
+          <CSelect :options="serijaSet" v-model="odabranaSerija"/>
         </div>
         <!--===================/SERIJA===================-->
         <!--===================GODINA PROIZVODNJE====================-->
@@ -44,16 +47,16 @@
         <!--===================VLASNIK===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Vlasnik</p>
-          <CSelect :options="[1, 2, 3]" v-model="vlasnik" />
+          <v-select :options="[1, 2, 3]" v-model="vlasnik"></v-select>
         </div>
         <!--===================/VLASNIK===================-->
         <!--===================STANJE===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Stanje</p>
-          <CSelect
+          <v-select
             :options="['Novo', 'Rabljeno', 'Neispravno']"
             v-model="stanje"
-          />
+          ></v-select>
         </div>
         <!--===================/STANJE===================-->
         <!--===================SLIKE===================-->
@@ -139,7 +142,7 @@
         <!--===================/OTKUPI===================-->
       </div>
       <!--==============FOOTER==================================-->
-      <div class="menu-bottom grid grid-cols-1 mt-4">
+      <div class="menu-bottom3 grid grid-cols-1 mt-4">
         <div class="menu-item text-left mx-auto">
           <img class="money" src="@/assets/money_icon.svg" />
           <p class="pl-4 text-24px">
@@ -161,8 +164,10 @@ import CButtonDecline from "@/components/CButtonDecline.vue";
 import CSelect from "@/components/CSelect.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
 import store from "@/store";
+import vSelect from 'vue-select';
 import { collection, addDoc } from "@/firebase";
 import { db } from "@/firebase";
+import 'vue-select/dist/vue-select.css';
 
 export default {
   name: "OtkupOpreme",
@@ -193,6 +198,7 @@ export default {
     CButtonDecline,
     CSelect,
     CButtonSingle,
+    vSelect
   },
   created() {},
   methods: {
@@ -291,7 +297,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+
 .otkup-div-image {
   width: 120px;
   overflow: hidden;
