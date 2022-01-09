@@ -139,7 +139,7 @@
         <!--===================/OTKUPI===================-->
       </div>
       <!--==============FOOTER==================================-->
-      <div class="menu-bottom grid grid-cols-1 mt-4">
+      <div class="menu-bottom3 grid grid-cols-1 mt-4">
         <div class="menu-item text-left mx-auto">
           <img class="money" src="@/assets/money_icon.svg" />
           <p class="pl-4 text-24px">
