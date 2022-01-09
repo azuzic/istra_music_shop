@@ -4,7 +4,7 @@
     <transition-group class="grid grid-rows-auto gap-5 pl-2 pr-2 pb-16 pt-16" name="fade" tag="div">
     <CCard  
       v-for="(z, i) of zahtjevi"
-          :key="i"
+          :key="`key-${i}`"
           :zahtjev = z
     />
     </transition-group>

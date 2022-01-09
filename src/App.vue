@@ -142,7 +142,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #e8e7e7 inset !important;
+  box-shadow: 0 0 0 30px #e8e7e7 inset !important;
 }
 .CWarning {
   color: #e93a3a !important;

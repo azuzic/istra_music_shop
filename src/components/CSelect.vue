@@ -1,5 +1,6 @@
 <template>
   <div class="custom-select">
+    <div @click="open = !open" :class="open ? 'CSelect-max' : 'CSelect-min'"></div>
     <div v-if="options.includes(selected)" class="selected" @click="open = !open">
       {{ selected }}
     </div>
@@ -66,7 +67,7 @@ export default {
 .items {
   position: absolute;
   width: calc(100% - 2rem);
-  z-index: 1;
+  z-index: 1000;
   transform-origin: 50% 0%;
   height: 170px;
   overflow-y: scroll;
@@ -126,5 +127,24 @@ export default {
   z-index: 0;
   cursor: pointer;
   height: 18px;
+}
+.CSelect-max {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(128, 255, 0, 0.0);
+  z-index: 999;
+  height: 100%;
+  width: 100%;
+}
+.CSelect-min {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(128, 255, 0, 0.0);
+  z-index: 999;
+  height: 0%;
+  width: 0%;
+  pointer-events: none;
 }
 </style>
