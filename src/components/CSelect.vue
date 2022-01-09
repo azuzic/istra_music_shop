@@ -129,16 +129,16 @@ export default {
   height: 18px;
 }
 .CSelect-max {
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
-  background-color: rgba(128, 255, 0, 0.5);
+  background-color: rgba(128, 255, 0, 0.0);
   z-index: 999;
   height: 100%;
   width: 100%;
 }
 .CSelect-min {
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   background-color: rgba(128, 255, 0, 0.0);
