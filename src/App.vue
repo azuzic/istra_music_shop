@@ -142,7 +142,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  box-shadow: 0 0 0 30px #e8e7e7 inset !important;
+  -webkit-box-shadow: 0 0 0 30px #e8e7e7 inset !important;
 }
 .CWarning {
   color: #e93a3a !important;
@@ -230,14 +230,6 @@ input:-webkit-autofill:active {
   width: 100%;
   height: 50px;
   background-color: transparent;
-  filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
-}
-.menu-bottom3 {
-  position: fixed;
-  bottom: -1px;
-  width: 100%;
-  height: 50px;
-  background-color: #3d3d3f;
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
 }
 .menu-item {
@@ -378,58 +370,4 @@ input:-webkit-autofill:active {
   opacity: 0%;
   transition: .5s;
 }
-.VSelect .vs__dropdown-toggle {
-  outline: none;
-  width: 100%;
-  height: 40px;
-  background: #E8E7E7;
-  border: 2px solid #292E32 !important;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  color: #3F2C28 !important;
-  align-items: center;
-  padding-left: 4px;
-}
-.VSelect .vs__dropdown-menu {
-  background: #E8E7E7;
-  border-left: 2px solid #292E32 ;
-  border-right: 2px solid #292E32 ;
-  color: #3F2C28 ;
-  cursor: pointer;
-  user-select: none;
-  margin-top: 1px;
-  padding: 0px;
-}
-.VSelect .vs__dropdown-option--highlight {
-  background-color: #FF5252 !important;
-  color: #1a0505 !important;
-}
-.VSelect .vs__dropdown-option--deselect {
-  background-color: #FF5252 !important;
-  color: #1a0505 !important;
-}
-.VSelect .vs__dropdown-option--disabled {
-  background-color: #FF5252 !important;
-  color: #1a0505 !important;
-}
-.VSelect .vs__dropdown-option {
-  outline: none;
-  width: 100%;
-  height: 40px !important;
-  background: #E8E7E7;
-  border-top: 2px solid #292E32 ;
-  border-bottom: 2px solid #292E32 ;
-  color: #3F2C28 ;
-  cursor: pointer;
-  user-select: none;
-  margin-top: -3px;
-  display: flex;
-  align-items: center;
-  padding-left: 4px;
-}
-
-.VSelect .vs__open-indicator {
-  fill: black;
-}
-
 </style>
