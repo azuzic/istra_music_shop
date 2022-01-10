@@ -246,14 +246,29 @@ export default {
           this.preporucenaCijena += cijenaInstrumenta * 0.1;
           break;
         case "Rabljeno":
-          this.preporucenaCijena -= cijenaInstrumenta * 0.3;
+          this.preporucenaCijena -= cijenaInstrumenta * 0.4;
           break;
         case "Neispravno":
-          this.preporucenaCijena -= cijenaInstrumenta * 0.7;
+          this.preporucenaCijena -= cijenaInstrumenta * 0.8;
           break;
       }
+      var year = parseInt(this.godinaProizvodnje);
+      if (year >= 1960 && year < 1970)
+        this.preporucenaCijena += cijenaInstrumenta * 1.5;
+      else if (year >= 1970 && year < 1980)
+        this.preporucenaCijena += cijenaInstrumenta * 0.5;
+      else if (year >= 1980 && year < 2000)
+        this.preporucenaCijena += cijenaInstrumenta * 0.1;
+      else if (year >= 2000 && year < 2010)
+        this.preporucenaCijena += cijenaInstrumenta * 0.05;
+      this.preporucenaCijena;
 
-      if (this.preporucenaCijena <= 0) this.preporucenaCijena = "0";
+      if (
+        this.preporucenaCijena <= 0 ||
+        this.yearCheck ||
+        !this.godinaProizvodnje
+      )
+        this.preporucenaCijena = 0;
       return this.preporucenaCijena + " kn";
     },
     proizvodacSet() {
