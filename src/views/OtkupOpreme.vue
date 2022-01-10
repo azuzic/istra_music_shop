@@ -263,13 +263,9 @@ export default {
         this.preporucenaCijena += cijenaInstrumenta * 0.05;
       this.preporucenaCijena;
 
-      if (
-        this.preporucenaCijena <= 0 ||
-        this.yearCheck ||
-        !this.godinaProizvodnje
-      )
-        this.preporucenaCijena = 0;
-      return this.preporucenaCijena + " kn";
+      if (this.yearCheck || !this.godinaProizvodnje) return 0;
+      else if (this.preporucenaCijena <= 0) return "ne vrijedi";
+      else return this.preporucenaCijena + " kn";
     },
     proizvodacSet() {
       this.prikazaniProizvodaci = [];
@@ -329,7 +325,9 @@ export default {
         this.odabranaSerija &&
         this.godinaProizvodnje &&
         this.vlasnik &&
-        this.stanje
+        this.stanje &&
+        this.preporucenaCijena > 0 &&
+        this.preporucenaCijena !== "ne vrijedi"
         ? 1
         : 0;
     },
