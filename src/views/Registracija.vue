@@ -1,7 +1,8 @@
 <template>
   <div>
     <div>
-      <router-link to="/"><img alt="Test logo" src="../assets/logo.svg" /></router-link>
+      <router-link v-if="store.darkToggle" to="/"><img alt="Test logo" src="../assets/logo.svg" /></router-link>
+      <router-link v-if="!store.darkToggle" to="/"><img alt="Test logo" src="../assets/logo_dark.svg" /></router-link>
     </div>
     <div class="grid auto-rows-auto gap-4">
       <!--===================TITLE=======================-->
@@ -127,16 +128,32 @@
             <input type="password" name="pass1" id="pass1" v-model="password" />
             <hr />
             <img
+              v-if="store.darkToggle"
               id="eye1"
               @click="eye"
               class="eye"
               src="@/assets/eye_closed.png"
             />
             <img
+              v-if="store.darkToggle"
               id="eye2"
               @click="eye"
               class="eye invisible"
               src="@/assets/eye_open.png"
+            />
+            <img
+              v-if="!store.darkToggle"
+              id="eye1"
+              @click="eye"
+              class="eye"
+              src="@/assets/eye_closed_dark.png"
+            />
+            <img
+              v-if="!store.darkToggle"
+              id="eye2"
+              @click="eye"
+              class="eye invisible"
+              src="@/assets/eye_open_dark.png"
             />
           </div>
         </div>
@@ -153,16 +170,32 @@
           />
           <hr />
           <img
+            v-if="store.darkToggle"
             id="eye3"
             @click="eye2"
             class="eye"
             src="@/assets/eye_closed.png"
           />
           <img
+            v-if="store.darkToggle"
             id="eye4"
             @click="eye2"
             class="eye invisible"
             src="@/assets/eye_open.png"
+          />
+          <img
+            v-if="!store.darkToggle"
+            id="eye3"
+            @click="eye2"
+            class="eye"
+            src="@/assets/eye_closed_dark.png"
+          />
+          <img
+            v-if="!store.darkToggle"
+            id="eye4"
+            @click="eye2"
+            class="eye invisible"
+            src="@/assets/eye_open_dark.png"
           />
           <h2
             v-if="password != passwordRepeat && passwordRepeat"
@@ -208,6 +241,7 @@ import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
 import CSuccess from "@/components/CSuccess.vue";
 import CWarning from "@/components/CWarning.vue";
+import store from "@/store";
 
 import { getAuth, createUserWithEmailAndPassword } from "@/firebase";
 import { collection, addDoc } from "@/firebase";
@@ -228,6 +262,7 @@ export default {
       passwordRepeat: "",
       registered: false,
       greska: "0",
+      store,
     };
   },
   components: {
@@ -362,34 +397,34 @@ export default {
 .line {
   height: 8px;
   border-radius: 4px;
-  background-color: grey;
+  background-color: var(--grey);
+  border-color: transparent !important;
 }
 
 .line-red {
   height: 8px;
   border-radius: 4px;
-  background-color: red;
+  background-color: var(--red);
+  border-color: transparent !important;
 }
 
 .line-yellow {
   height: 8px;
   border-radius: 4px;
-  background-color: yellow;
+  background-color: var(--yellow);
+  border-color: transparent !important;
 }
 
 .line-green {
   height: 8px;
   border-radius: 4px;
-  background-color: green;
+  background-color: var(--green);
+  border-color: transparent !important;
 }
 
 .strength {
   width: 100%;
-}
-
-.strength-text {
-  font-size: 12px;
-  color: red !important;
+  background-color: transparent !important;
 }
 
 .mtc {

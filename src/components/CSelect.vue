@@ -7,7 +7,8 @@
     <div v-if="!options.includes(selected)" class="selected" @click="open = !open">
       {{ options[0] }}
     </div>
-    <img class="float-right" :class="open ? 'spin-pos' : 'spin-pos2'" src="@/assets/dropdown_icon.svg">
+    <img v-if="store.darkToggle" class="float-right" :class="open ? 'spin-pos' : 'spin-pos2'" src="@/assets/dropdown_icon.svg">
+    <img v-if="!store.darkToggle" class="float-right" :class="open ? 'spin-pos' : 'spin-pos2'" src="@/assets/dropdown_icon_dark.svg">
     
     <div class="items" :class="!open ? 'selectHide' : options.length > 5 ? 'selectShow items-border' : 'selectShow'">
         <div
@@ -24,6 +25,8 @@
 </template>
 
 <script>
+import store from "@/store";
+
 export default {
   name: "CSelect",
   props: {
@@ -36,6 +39,7 @@ export default {
       this.default            ? this.default    : 
       this.options.length > 0 ? this.options[0] : null,
       open: false,
+      store
     };
   },
   mounted() {
@@ -49,11 +53,11 @@ export default {
   outline: none;
   width: 100%;
   height: 40px;
-  background: #E8E7E7;
-  border: 2px solid #292E32 !important;
+  background: var(--lateo);
+  border: 2px solid var(--stretchLimo) !important;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  color: #3F2C28 !important;
+  color: var(--graniteBrown) !important;
   display: flex;
   align-items: center;
   padding-left: 4px;
@@ -74,16 +78,16 @@ export default {
 }
 
 .items-border {
-  border-bottom: 2px solid #292E32;
+  border-bottom: 2px solid var(--stretchLimo);
 }
 
 .items div {
   outline: none;
   width: 100%;
   height: 40px !important;
-  background: #E8E7E7;
-  border: 2px solid #292E32 ;
-  color: #3F2C28 ;
+  background: var(--lateo);
+  border: 2px solid var(--stretchLimo);
+  color: var(--graniteBrown);;
   cursor: pointer;
   user-select: none;
   margin-top: -3px;
@@ -93,8 +97,8 @@ export default {
 }
 
 .isSelected {
-  background-color: #FF5252 !important;
-  color: #1a0505 !important;
+  background-color: var(--fluorescentRed) !important;
+  color: var(--dwarfFortress) !important;
 }
 
 .selectHide {
@@ -117,7 +121,7 @@ export default {
   height: 18px;
 }
 .spin-pos2 {
-  fill: #FF5252;
+  fill: var(--fluorescentRed);
   transition: 0.25s;
   transform: scaleY(1);
   float: right;

@@ -2,7 +2,7 @@
   <div>
     <!--==============MENU====================================-->
     <div class="menu grid grid-cols-3 mb-4">
-      <div class="menu-item-active">
+      <div class="menu-item-active menu-highlight">
         <router-link to="djelatnik">
           <img class="arrow ml-2" src="@/assets/arrow_icon.svg" />
         </router-link>
@@ -53,52 +53,64 @@
         <hr class="dotted mt-2 mb-2" />
       </div>
       <div>
-        <p><u class="text-20px">Slike:</u></p>
-        <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">
-          <div class="otkup-div-image flex-none">
-            <p class="otkup-img-text">Gornja prednja</p>
-            <img
-              class="CCard-img img-top-left mx-auto"
-              src="https://picsum.photos/500/500/"
-            />
-          </div>
-          <div class="otkup-div-image flex-none">
-            <p class="otkup-img-text">Gornja stražnja</p>
-            <img
-              class="CCard-img img-top mx-auto"
-              src="https://picsum.photos/500/500/"
-            />
-          </div>
-          <div class="otkup-div-image flex-none">
-            <p class="otkup-img-text">Bočna desna</p>
-            <img
-              class="CCard-img img-top-right mx-auto"
-              src="https://picsum.photos/500/500/"
-            />
-          </div>
-          <div class="otkup-div-image flex-none">
-            <p class="otkup-img-text">Bočna lijeva</p>
-            <img
-              class="CCard-img img-bottom-left mx-auto"
-              src="https://picsum.photos/500/500/"
-            />
-          </div>
-          <div class="otkup-div-image flex-none">
-            <p class="otkup-img-text">Vrat gitare</p>
-            <img
-              class="CCard-img img-bottom mx-auto"
-              src="https://picsum.photos/500/500/"
-            />
-          </div>
-          <div class="otkup-div-image flex-none">
-            <p class="otkup-img-text">Glava gitare</p>
-            <img
-              class="CCard-img img-bottom-right mx-auto"
-              src="https://picsum.photos/500/500/"
-            />
+          <p class="text-left text-18px m-0 p-0">Slike</p>
+          <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">
+            <div class="otkup-div-image flex-none">
+              <p class="otkup-img-text">Gornja prednja</p>
+              <div>
+                <img
+                  class="CCard-img img-top-left mx-auto"
+                  src="https://picsum.photos/500/500/"
+                />
+              </div>
+            </div>
+            <div class="otkup-div-image flex-none">
+              <p class="otkup-img-text">Gornja stražnja</p>
+              <div>
+                <img
+                  class="CCard-img img-top mx-auto"
+                  src="https://picsum.photos/500/500/"
+                />
+              </div>
+            </div>
+            <div class="otkup-div-image flex-none">
+              <p class="otkup-img-text">Bočna desna</p>
+              <div>
+                <img
+                  class="CCard-img img-top-right mx-auto"
+                  src="https://picsum.photos/500/500/"
+                />
+              </div>
+            </div>
+            <div class="otkup-div-image flex-none">
+              <p class="otkup-img-text">Bočna lijeva</p>
+              <div>
+                <img
+                  class="CCard-img img-bottom-left mx-auto"
+                  src="https://picsum.photos/500/500/"
+                />
+              </div>
+            </div>
+            <div class="otkup-div-image flex-none">
+              <p class="otkup-img-text">Vrat gitare</p>
+              <div>
+                <img
+                  class="CCard-img img-bottom mx-auto"
+                  src="https://picsum.photos/500/500/"
+                />
+              </div>
+            </div>
+            <div class="otkup-div-image flex-none">
+              <p class="otkup-img-text">Glava gitare</p>
+              <div>
+                <img
+                  class="CCard-img img-bottom-right mx-auto"
+                  src="https://picsum.photos/500/500/"
+                />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
       <div>
         <p><u class="text-20px">Napomena:</u></p>
         <textarea class="resize-none otkup-textarea mt-2">
@@ -172,15 +184,16 @@
     </div>
     <!--==============LIST END================================-->
     <!--==============FOOTER==================================-->
-    <div class="menu-bottom2 grid grid-cols-1 mt-4">
-      <div class="menu-item text-left mx-auto">
-        <img class="money" src="@/assets/money_icon.svg" />
-        <p class="pl-4 text-24px">
-          Predložena cijena:
-          <b class="price">2500 kn</b>
-        </p>
+    <div class="menu-bottom3 grid grid-cols-1 mt-4">
+        <div class="menu-item text-left mx-auto">
+          <img v-if="store.darkToggle" class="money" src="@/assets/money_icon.svg" />
+          <img v-if="!store.darkToggle" class="money" src="@/assets/money_icon_dark.svg" />
+          <p class="pl-4 text-24px">
+            Predložena cijena:
+            <b class="price"> 1500 kn </b>
+          </p>
+        </div>
       </div>
-    </div>
     <!--==============FOOTER END==============================-->
   </div>
 </template>
@@ -191,6 +204,7 @@ import CButtonSingle from "@/components/CButtonSingle.vue";
 import CButtonAccept from "@/components/CButtonAccept.vue";
 import CButtonDecline from "@/components/CButtonDecline.vue";
 import CCard from "@/components/CCard.vue";
+import store from "@/store";
 
 export default {
   name: "Djelatnik",
@@ -204,6 +218,7 @@ export default {
   data() {
     return {
       cijena: "",
+      store
     };
   },
   methods: {
@@ -214,13 +229,13 @@ export default {
 
 <style>
 .menu-item-red {
-  background-color: #ff7f7f;
+  background-color: var(--forbiddenFruit);
 }
 .menu-item-yellow {
-  background-color: #fff383;
+  background-color: var(--lemonPeel);
 }
 .menu-item-green {
-  background-color: #6dd277;
+  background-color: var(--snowPea);
 }
 .menu-item-selected p {
   width: 100%;
@@ -231,5 +246,8 @@ export default {
   width: 26px;
   opacity: 0.75;
   transform: scaleX(-1);
+}
+.menu-highlight {
+  background-color: var(--fluorescentRed);
 }
 </style>

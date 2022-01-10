@@ -23,14 +23,14 @@ export default {
 .CSuccess-bg {
   font-weight: bold;
   font-size: 24px;
-  color: #258843;
+  color: var(--richGreen);
 }
 .CSuccess-border {
   border-width: 3px;
   border-radius: 8px;
   border-style: dashed;
-  border-color: #258843;
-  background-color: #E8E7E7;
+  border-color: var(--richGreen);
+  background-color: var(--lateo);
 }
 .img-success {
   height: 28px;
@@ -41,6 +41,6 @@ export default {
   justify-content: center;
 }
 .CSuccess-msg {
-  color: #258843;
+  color: var(--richGreen);
 }
 </style>

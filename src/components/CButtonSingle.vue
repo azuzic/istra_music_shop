@@ -21,7 +21,7 @@ export default {
 <style scoped lang="scss">
 .button-bg {
   min-width: 226px;
-  background: #3d3d3f;
+  background: var(--balticSea);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
 }
@@ -42,6 +42,6 @@ export default {
   width: 100%;
   align-items: center;
   text-align: center;
-  color: #f5dada;
+  color: var(--fresco);
 }
 </style>

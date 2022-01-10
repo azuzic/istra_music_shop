@@ -1,9 +1,8 @@
 <template>
   <div class="p-0 m-0">
     <div>
-      <router-link to="/"
-        ><img alt="Test logo" src="../assets/logo.svg"
-      /></router-link>
+      <router-link v-if="store.darkToggle" to="/"><img alt="Test logo" src="../assets/logo.svg" /></router-link>
+      <router-link v-if="!store.darkToggle" to="/"><img alt="Test logo" src="../assets/logo_dark.svg" /></router-link>
     </div>
     <div class="grid auto-rows-auto gap-4">
       <br />
