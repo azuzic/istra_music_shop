@@ -133,7 +133,7 @@ export default {
   top: 0px;
   left: 0px;
   background-color: rgba(128, 255, 0, 0.0);
-  z-index: 999;
+  z-index: 800;
   height: 100%;
   width: 100%;
 }
@@ -142,7 +142,7 @@ export default {
   top: 0px;
   left: 0px;
   background-color: rgba(128, 255, 0, 0.0);
-  z-index: 999;
+  z-index: 800;
   height: 0%;
   width: 0%;
   pointer-events: none;

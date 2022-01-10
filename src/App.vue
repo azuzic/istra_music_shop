@@ -232,7 +232,7 @@ input:-webkit-autofill:active {
   top: 0px;
   width: 100%;
   height: 50px;
-  z-index: 500;
+  z-index: 1200;
   background-color: transparent;
 }
 .menu-top-item-grid0 {
@@ -260,7 +260,7 @@ input:-webkit-autofill:active {
   top: 0px;
   width: 100%;
   height: 50px;
-  z-index: 500;
+  z-index: 1200;
   background-color: #3d3d3f;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
