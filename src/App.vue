@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <div class="darkModeToggle" @click="toggleDark()">
+      <img v-if="darkToggle" src="../src/assets/moon_empty_icon.svg">
+      <img v-if="!darkToggle" src="../src/assets/moon_full_icon.svg">
+    </div> 
     <div class="CBg"></div>
     <!--==============DJELATNIK ============================-->
     <div  v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-2 mb-4">
@@ -82,7 +86,16 @@ export default {
   data() {
     return {
       store,
+      darkToggle: true,
     };
+  },
+  methods: {
+    toggleDark(){
+      this.darkToggle = !this.darkToggle;
+      var r = document.querySelector(':root');
+      if (this.darkToggle) r.style.setProperty('--bg1', 'invert(0)');
+      else r.style.setProperty('--bg1', 'invert(1)');
+    }
   },
   computed: {
     currentRouteName() {
@@ -94,6 +107,11 @@ export default {
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Alike&display=swap");
+
+:root {
+  --bg1: invert(0);
+}
+
 * {
   font-family: "Lora", italic;
   font-style: normal;
@@ -111,6 +129,7 @@ html {
   right: 0;
   z-index: -9999;
   display: block;
+  filter: var(--bg1);
   background-image: url("assets/bg.png");
   background-size: 50%;
   background-repeat: repeat;
@@ -379,5 +398,14 @@ input:-webkit-autofill:active {
   margin-top: -50%;
   opacity: 0%;
   transition: .5s;
+}
+.darkModeToggle {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 42px;
+  height: 42px;
+  padding: 8px;
+  z-index: 2000;
 }
 </style>

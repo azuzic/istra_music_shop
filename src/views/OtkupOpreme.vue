@@ -320,4 +320,8 @@ export default {
   border-top-right-radius: 9.5px;
   border-bottom-right-radius: 2.5px;
 }
+.otkup-textarea:focus {
+  outline: none !important;
+  border-color: #ff5252;
+}
 </style>
