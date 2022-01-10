@@ -46,6 +46,9 @@
           <p class="text-left text-18px m-0 p-0">Vlasnik</p>
           <CSelect :options="[1, 2, 3]" v-model="vlasnik" />
         </div>
+        <h2 v-if="stanjeCheck" class="CWarning">
+          Molimo ispravno unesite podatke!
+        </h2>
         <!--===================/VLASNIK===================-->
         <!--===================STANJE===================-->
         <div>
@@ -169,7 +172,7 @@ export default {
   data() {
     return {
       jsonData: data,
-      vrste: ["Gitara", "Bubanj", "Bas gitara"],
+      vrste: ["Gitara"],
       prikazaniProizvodaci: [],
       prikazaniModeli: [],
       prikazaneSerije: [],
@@ -317,7 +320,9 @@ export default {
       this.odabranaSerija = this.prikazaneSerije[0];
       return this.prikazaneSerije;
     },
-
+    stanjeCheck() {
+      return this.vlasnik != 1 && this.stanje == "Novo" ? 1 : 0;
+    },
     allFilled() {
       return this.odabranaVrsta &&
         this.odabraniProizvodac &&
@@ -327,7 +332,8 @@ export default {
         this.vlasnik &&
         this.stanje &&
         this.preporucenaCijena > 0 &&
-        this.preporucenaCijena !== "ne vrijedi"
+        this.preporucenaCijena !== "ne vrijedi" &&
+        !this.stanjeCheck
         ? 1
         : 0;
     },
