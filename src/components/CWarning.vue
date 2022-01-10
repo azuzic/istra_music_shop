@@ -28,8 +28,8 @@ export default {
   border-width: 3px;
   border-radius: 8px;
   border-style: dashed;
-  border-color: #e93a3a;
-  background-color: #E8E7E7;
+  border-color: var(--vivaldiRed);
+  background-color: var(--lateo);
 }
 .img-warning {
   height: 25px;
@@ -40,6 +40,6 @@ export default {
   justify-content: center;
 }
 .CWarning-msg {
-  color: #e93a3a;
+  color: var(--vivaldiRed);
 }
 </style>

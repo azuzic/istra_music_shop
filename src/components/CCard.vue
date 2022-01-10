@@ -72,14 +72,14 @@ export default {
 .CCard {
   width: 100%;
   height: 120px;
-  background: #3d3d3f;
+  background: transparent !important;
   box-shadow: 0px 0px 2.5px rgba(0, 0, 0, 0.75);
   border-radius: 8px;
 }
 .CCard-image {
   width: 120px;
   height: 120px;
-  background: #3d3d3f;
+  background: var(--balticSea);
   border-bottom-left-radius: 8px;
   border-top-left-radius: 8px;
   overflow: hidden;
@@ -91,33 +91,34 @@ export default {
 .CCard-data {
   width: 100%;
   height: 120px;
-  background: rgb(150, 164, 165);
-  border-bottom-right-radius: 8px;
-  border-top-right-radius: 8px;
+  background: var(--dustySky);
+  background-color: transparent !important;
+  border-color: transparent !important;
+  border-radius: 0%;
 }
 .CCard-header {
   width: 100%;
   height: 48px;
-  background: rgb(255, 255, 255);
+  background: var(--white);
   border-top-right-radius: 8px;
 }
 .CCard-footer {
   width: 100%;
   height: 72px;
-  background: #3d3d3f;
+  background: var(--dwarfFortress);
   border-bottom-right-radius: 8px;
 }
 .CCard-icon-1 {
   height: 100%;
-  background: #ff8080;
+  background: var(--forbiddenFruit);
 }
 .CCard-icon-2 {
   height: 100%;
-  background: #fff383;
+  background: var(--lemonPeel);
 }
 .CCard-icon-3 {
   height: 100%;
-  background: #6dd277;
+  background: var(--snowPea);
   border-bottom-right-radius: 8px;
 }
 .CCard-icontext {
@@ -127,6 +128,7 @@ export default {
   top: 4px;
   font-weight: bold;
   letter-spacing: -1px;
+  color: var(--dwarfFortress);
 }
 .CCard-svg {
   height: 42px;
@@ -151,22 +153,25 @@ export default {
   letter-spacing: -1px;
   font-size: 18px;
   top: 2px;
+  color: var(--dwarfFortress);
 }
 .CCard-subtitle {
   position: relative;
   font-size: 11px;
   letter-spacing: -0.5px;
   bottom: 2px;
+  color: var(--dwarfFortress);
 }
 .CCard-date {
   position: relative;
   bottom: 4px;
   font-size: 12px;
+  color: var(--dwarfFortress);
 }
 .CCard-price {
   position: relative;
   bottom: 0px;
   font-size: 12px;
-  color: #e93a3a !important;
+  color: var(--vivaldiRed) !important;
 }
 </style>

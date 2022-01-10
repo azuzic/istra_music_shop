@@ -126,30 +126,30 @@ export default {
   transition: 1s;
   width: 100%;
   font-weight: bold;
-  color: #3f2c28;
+  color: var(--dwarfFortress);
 }
 .menu-bottom2 {
   position: fixed;
   bottom: -1px;
   width: 100%;
   height: 50px;
-  background-color: #3d3d3f;
+  background-color: var(--balticSea);
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
 }
 .menu-item-grid0 {
   margin-left: 0%;
-  background-color: #fff383;
+  background-color: var(--lemonPeel);
 }
 .menu-item-grid1 {
   margin-left: 100%;
-  background-color: #6dd277 ;
+  background-color: var(--snowPea);
 }
 .menu-item-grid2 {
   margin-left: 200%;
-  background-color: #6dd277 ;
+  background-color: var(--snowPea);
 }
 .menu-item-grid3 {
   margin-left: 300%;
-  background-color: #ff7f7f;
+  background-color: var(--forbiddenFruit);
 }
 </style>

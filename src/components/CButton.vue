@@ -8,8 +8,8 @@
     <div>
       <p class="link-text justify-center mt-2">
         {{ link_text }}
-        <router-link class="pl-1 href-link font-14px" v-bind:to="href_link">
-          <u>{{ link_href_text }}</u>
+        <router-link class="pl-1 font-14px" v-bind:to="href_link">
+          <u class="href-link">{{ link_href_text }}</u>
         </router-link>
       </p>
     </div>
@@ -33,7 +33,7 @@ export default {
 <style scoped lang="scss">
 .button-bg {
   min-width: 226px;
-  background: #3d3d3f;
+  background: var(--balticSea);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
 }
@@ -48,7 +48,7 @@ export default {
   display: flex;
   align-items: center;
   text-align: center;
-  color: #f5dada;
+  color: var(--fresco);
 }
 
 .button-text .p {
@@ -57,7 +57,7 @@ export default {
   width: 100%;
   align-items: center;
   text-align: center;
-  color: #f5dada;
+  color: var(--fresco);
 }
 
 .link-text {
@@ -69,6 +69,6 @@ export default {
   display: flex;
   align-items: center;
   text-align: center;
-  color: #635a5a;
+  color: var(--solidEmpire);
 }
 </style>

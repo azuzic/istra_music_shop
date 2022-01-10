@@ -1,10 +1,11 @@
 <template>
   <div id="app">
     <div class="darkModeToggle" @click="toggleDark()">
-      <img v-if="darkToggle" src="../src/assets/moon_empty_icon.svg">
-      <img v-if="!darkToggle" src="../src/assets/moon_full_icon.svg">
+      <img v-if="store.darkToggle" src="../src/assets/moon_empty_icon.svg">
+      <img v-if="!store.darkToggle" src="../src/assets/moon_full_icon.svg">
     </div> 
-    <div class="CBg"></div>
+    <div v-if="loadTheme()"></div>
+    <div class="CBg" :class="store.darkToggle ? 'CBg-light' : 'CBg-dark'"></div>
     <!--==============DJELATNIK ============================-->
     <div  v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-2 mb-4">
 
@@ -14,7 +15,7 @@
 
     </div>
     <!--===============================-->
-    <div  v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu top-0 grid grid-cols-2 mb-4">
+    <div  v-if="store.currentUser == 'djelatnik@gmail.com' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-2 mb-4">
 
       <div :class="currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="djelatnik"> Pregled otkupa </router-link></p>
@@ -86,16 +87,72 @@ export default {
   data() {
     return {
       store,
-      darkToggle: true,
     };
   },
   methods: {
     toggleDark(){
-      this.darkToggle = !this.darkToggle;
-      var r = document.querySelector(':root');
-      if (this.darkToggle) r.style.setProperty('--bg1', 'invert(0)');
-      else r.style.setProperty('--bg1', 'invert(1)');
-    }
+      store.darkToggle = !store.darkToggle;
+      if (store.darkToggle) this.loadLight()
+      else this.loadDark()
+    },
+    loadTheme(){
+      if (store.darkToggle) this.loadLight()
+      else this.loadDark()
+    },
+    loadDark() {
+        let r = document.querySelector(':root');
+        r.style.setProperty('--snow',               '#203d3f'); //Background
+        r.style.setProperty('--balticSea',          '#85b3b6'); //Default font dark, bg
+        r.style.setProperty('--fluorescentRed',     '#ac123e'); //Input highlight line
+        r.style.setProperty('--lateo',              '#091112'); //Input autofill
+        r.style.setProperty('--vivaldiRed',         '#e41a3c'); //CWarning font
+        r.style.setProperty('--poblano',            '#068020'); //CSuccess font
+        r.style.setProperty('--paleFlower',         '#bb2a53'); //Href link font
+        r.style.setProperty('--tin',                '#400F21'); //inactive button-bg
+        r.style.setProperty('--solidEmpire',        '#456f74'); //link font
+        r.style.setProperty('--fresco',             '#200F21'); //Default font light
+        r.style.setProperty('--graniteBrown',       '#9ecfd3'); //menu-item-active font
+        r.style.setProperty('--englishBreakfast',   '#bb2a53'); //textarea font
+        r.style.setProperty('--lemonPeel',          '#cec14c'); //u razradi bg
+        r.style.setProperty('--snowPea',            '#258843'); //prihvaćeno/riješeno bg
+        r.style.setProperty('--forbiddenFruit',     '#e41a3c'); //odbijeno bg
+        r.style.setProperty('--dustySky',           '#96a4a5'); //CCard-data bg
+        r.style.setProperty('--stretchLimo',        '#292e32'); //CSelect items-border
+        r.style.setProperty('--dwarfFortress',      '#1f0309'); //CSelect isSelected font
+        r.style.setProperty('--richGreen',          '#258843'); //CSuccess bg, font
+        r.style.setProperty('--white',              '#9ecfd3'); //line password
+        r.style.setProperty('--grey',               '#204c4e'); //line password
+        r.style.setProperty('--red',                '#8c1939'); //line password
+        r.style.setProperty('--yellow',             '#c9bc4b'); //line password
+        r.style.setProperty('--green',              '#258843'); //line password
+      },
+    loadLight() {
+        let r = document.querySelector(':root');
+        r.style.setProperty('--snow',               '#fff9f9'); //Background
+        r.style.setProperty('--balticSea',          '#3d3d3f'); //Default font dark, bg
+        r.style.setProperty('--fluorescentRed',     '#ff5252'); //Input highlight line
+        r.style.setProperty('--lateo',              '#e8e7e7'); //Input autofill
+        r.style.setProperty('--vivaldiRed',         '#e93a3a'); //CWarning font
+        r.style.setProperty('--poblano',            '#068020'); //CSuccess font
+        r.style.setProperty('--paleFlower',         '#668AAC'); //Href link font
+        r.style.setProperty('--tin',                '#919192'); //inactive button-bg
+        r.style.setProperty('--solidEmpire',        '#635a5a'); //link font
+        r.style.setProperty('--fresco',             '#f5dada'); //Default font light
+        r.style.setProperty('--graniteBrown',       '#3f2c28'); //menu-item-active font
+        r.style.setProperty('--englishBreakfast',   '#461717'); //textarea font
+        r.style.setProperty('--lemonPeel',          '#fff383'); //u razradi bg
+        r.style.setProperty('--snowPea',            '#6dd277'); //prihvaćeno/riješeno bg
+        r.style.setProperty('--forbiddenFruit',     '#ff8080'); //odbijeno bg
+        r.style.setProperty('--dustySky',           '#96a4a5'); //CCard-data bg
+        r.style.setProperty('--stretchLimo',        '#292e32'); //CSelect items-border
+        r.style.setProperty('--dwarfFortress',      '#1a0505'); //CSelect isSelected font
+        r.style.setProperty('--richGreen',          '#258843'); //CSuccess bg, font
+        r.style.setProperty('--white',              '#ffffff'); //line password
+        r.style.setProperty('--grey',               '#808080'); //line password
+        r.style.setProperty('--red',                '#ff5252'); //line password
+        r.style.setProperty('--yellow',             '#c9ba39'); //line password
+        r.style.setProperty('--green',              '#258843'); //line password
+      }
   },
   computed: {
     currentRouteName() {
@@ -109,7 +166,30 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Alike&display=swap");
 
 :root {
-  --bg1: invert(0);
+  --snow:               #fff9f9; //Background               var(--snow);
+  --balticSea:          #3d3d3f; //Default font dark, bg    var(--balticSea);
+  --fluorescentRed:     #ff5252; //Input highlight line     var(--fluorescentRed);
+  --lateo:              #e8e7e7; //Input autofill           var(--lateo);
+  --vivaldiRed:         #e93a3a; //CWarning font            var(--vivaldiRed);
+  --poblano:            #068020; //CSuccess font            var(--poblano);
+  --paleFlower:         #668AAC; //Href link font           var(--paleFlower);
+  --tin:                #919192; //inactive button-bg       var(--tin);
+  --solidEmpire:        #635a5a; //link font                var(--solidEmpire);
+  --fresco:             #f5dada; //Default font light       var(--fresco);
+  --graniteBrown:       #3f2c28; //menu-item-active font    var(--graniteBrown);
+  --englishBreakfast:   #461717; //textarea font            var(--englishBreakfast);
+  --lemonPeel:          #fff383; //u razradi bg             var(--lemonPeel);
+  --snowPea:            #6dd277; //prihvaćeno/riješeno bg   var(--snowPea);
+  --forbiddenFruit:     #ff8080; //odbijeno bg              var(--forbiddenFruit);
+  --dustySky:           #96a4a5; //CCard-data bg            var(--dustySky);
+  --stretchLimo:        #292e32; //CSelect items-border     var(--stretchLimo);
+  --dwarfFortress:      #1a0505; //CSelect isSelected font  var(--dwarfFortress);
+  --richGreen:          #258843; //CSuccess bg, font        var(--richGreen);
+  --white:              #ffffff; //line password            var(--white);
+  --grey:               #808080; //line password            var(--grey);
+  --red:                #ff0000; //line password            var(--red);
+  --yellow:             #ffff00; //line password            var(--yellow);
+  --green:              #008000; //line password            var(--green);
 }
 
 * {
@@ -118,10 +198,14 @@ export default {
   font-weight: normal;
   line-height: normal;
   letter-spacing: -0.25px;
-  color: #3d3d3f;
+  color: var(--balticSea);
+  transition: all;
+  transition-timing-function: ease-in-out;
+  transition: 1s;
 }
 html {
-  background-color: #fff9f9;
+  color: #85b3b6;
+  background-color: var(--snow);
 }
 .CBg {
   position: fixed;
@@ -129,30 +213,34 @@ html {
   right: 0;
   z-index: -9999;
   display: block;
-  filter: var(--bg1);
-  background-image: url("assets/bg.png");
   background-size: 50%;
   background-repeat: repeat;
   width: 100%;
   height: 100%;
 }
+.CBg-light {
+  background-image: url("assets/bg_light.png");
+}
+.CBg-dark {
+  background-image: url("assets/bg_dark.png");
+}
 div hr {
-  border: 2px solid #3d3d3f;
+  border: 2px solid var(--balticSea);
   border-radius: 16px;
 }
 .dotted {
   border-style: dashed;
 }
 input:focus + hr {
-  border: 2px solid #ff5252;
+  border: 2px solid var(--fluorescentRed);
   border-radius: 16px;
 }
 input:focus {
   outline: none;
-  caret-color: #ff5252;
+  caret-color: var(--fluorescentRed);
 }
 input {
-  background-color: #ff525200;
+  background-color: transparent;
   width: 100%;
   height: 24px;
   border: none;
@@ -161,13 +249,15 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  box-shadow: 0 0 0 30px #e8e7e7 inset !important;
+  box-shadow: 0 0 0 30px var(--lateo) inset !important;
+  -webkit-text-fill-color: var(--balticSea);
+  border-radius: 0% !important;
 }
 .CWarning {
-  color: #e93a3a !important;
+  color: var(--vivaldiRed) !important;
 }
 .CSuccess {
-  color: #068020 !important;
+  color: var(--poblano) !important;
 }
 .href-link {
   font-family: "Lora", serif;
@@ -178,7 +268,7 @@ input:-webkit-autofill:active {
   display: flex;
   align-items: center;
   text-align: center;
-  color: #275d8fab;
+  color: var(--paleFlower);
 }
 .tranparent-10 {
   opacity: 0.1;
@@ -199,12 +289,11 @@ input:-webkit-autofill:active {
   opacity: 0.75;
 }
 .active div .button-bg {
-  background: #3d3d3f !important;
+  opacity: 1;
 }
 .inactive div .button-bg {
-  background: #919192 !important;
+  opacity: 0.25;
 }
-
 .menu {
   position: fixed;
   top: 0px;
@@ -215,23 +304,23 @@ input:-webkit-autofill:active {
 }
 .menu-top-item-grid0 {
   margin-left: 0%;
-  background-color: #ff5252;
+  background-color: var(--fluorescentRed);
 }
 .menu-top-item-grid1 {
   margin-left: 100%;
-  background-color: #ff5252 ;
+  background-color: var(--fluorescentRed);
 }
 .menu-top2-item-grid0 {
   margin-left: 0%;
-  background-color: #ff5252;
+  background-color: var(--fluorescentRed);
 }
 .menu-top2-item-grid1 {
   margin-left: 100%;
-  background-color: #ff5252 ;
+  background-color: var(--fluorescentRed);
 }
 .menu-top2-item-grid2 {
   margin-left: 200%;
-  background-color: #ff5252 ;
+  background-color: var(--fluorescentRed);
 }
 .menu2 {
   position: fixed;
@@ -239,7 +328,7 @@ input:-webkit-autofill:active {
   width: 100%;
   height: 50px;
   z-index: 500;
-  background-color: #3d3d3f;
+  background-color: var(--balticSea);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
@@ -257,7 +346,7 @@ input:-webkit-autofill:active {
   bottom: -1px;
   width: 100%;
   height: 50px;
-  background-color: #3d3d3f;
+  background-color: var(--balticSea);
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
 }
 
@@ -283,14 +372,14 @@ input:-webkit-autofill:active {
 }
 .menu-item p {
   width: 100%;
-  color: #f5dada;  
+  color: var(--fresco);  
   transition: all;
   transition-timing-function: ease-in-out;
   transition: 1s;
 }
 .menu-item p a {
   width: 100%;
-  color: #f5dada;
+  color: var(--fresco);
   transition: all;
   transition-timing-function: ease-in-out;
   transition: 1s;
@@ -309,7 +398,7 @@ input:-webkit-autofill:active {
 .menu-item-active p {
   width: 100%;
   font-weight: bold;
-  color: #3f2c28;
+  color: var(--graniteBrown);
   transition: all;
   transition-timing-function: ease-in-out;
   transition: 1s;
@@ -317,7 +406,7 @@ input:-webkit-autofill:active {
 .menu-item-active p a {
   width: 100%;
   font-weight: bold;
-  color: #3f2c28;
+  color: var(--graniteBrown);
   transition: all;
   transition-timing-function: ease-in-out;
   transition: 1s;
@@ -328,7 +417,7 @@ input:-webkit-autofill:active {
 }
 
 .otkup-div-image img {
-  border-color: #3d3d3f;
+  border-color: var(--balticSea);
   height: 100% !important;
   border-width: 2px;
 }
@@ -366,14 +455,15 @@ input:-webkit-autofill:active {
 .otkup-img-text {
   text-align: center;
   font-size: 16px;
-  color: #3f2c28;
+  color: var(--graniteBrown);
 }
 .otkup-textarea {
   padding: 8px;
-  color: #461717;
+  background-color: var(--lateo);
+  color: var(--englishBreakfast);
   font-size: 18px;
   width: 100%;
-  border-color: #3d3d3f;
+  border-color: var(--balticSea);
   height: 128px;
   border-width: 2px;
   border-top-left-radius: 9.5px;
@@ -386,7 +476,7 @@ input:-webkit-autofill:active {
   opacity: 0.75;
 }
 .price {
-  color: #ff5252;
+  color: var(--fluorescentRed);
 }
 .fade-enter-active, .fade-leave-active {
   margin-left: 0%;

@@ -141,7 +141,8 @@
       <!--==============FOOTER==================================-->
       <div class="menu-bottom3 grid grid-cols-1 mt-4">
         <div class="menu-item text-left mx-auto">
-          <img class="money" src="@/assets/money_icon.svg" />
+          <img v-if="store.darkToggle" class="money" src="@/assets/money_icon.svg" />
+          <img v-if="!store.darkToggle" class="money" src="@/assets/money_icon_dark.svg" />
           <p class="pl-4 text-24px">
             Predložena cijena:
             <b class="price">{{ preporucenaCijena }}</b>
@@ -184,6 +185,7 @@ export default {
       stanje: "",
       napomena: "",
       preporucenaCijena: 0,
+      store
     };
   },
   components: {
@@ -298,21 +300,21 @@ export default {
 }
 
 .otkup-div-image img {
-  border-color: #3d3d3f;
+  border-color: var(--balticSea);
   height: 120px;
   border-width: 2px;
 }
 .otkup-img-text {
   text-align: center;
   font-size: 16px;
-  color: #3f2c28;
+  color: var(--graniteBrown);
 }
 .otkup-textarea {
   padding: 8px;
-  color: #461717;
+  color: var(--englishBreakfast);
   font-size: 18px;
   width: 100%;
-  border-color: #3d3d3f;
+  border-color: var(--balticSea);
   height: 128px;
   border-width: 2px;
   border-top-left-radius: 9.5px;
@@ -322,6 +324,6 @@ export default {
 }
 .otkup-textarea:focus {
   outline: none !important;
-  border-color: #ff5252;
+  border-color: var(--fluorescentRed);
 }
 </style>

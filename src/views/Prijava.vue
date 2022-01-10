@@ -1,8 +1,9 @@
 <template>
   <div class="p-0 m-0">
     <div>
-      <router-link to="/"><img alt="Test logo" src="../assets/logo.svg" /></router-link>
-    </div>
+      <router-link v-if="store.darkToggle" to="/"><img alt="Test logo" src="../assets/logo.svg" /></router-link>
+      <router-link v-if="!store.darkToggle" to="/"><img alt="Test logo" src="../assets/logo_dark.svg" /></router-link>
+    </div> 
     <div class="grid auto-rows-auto gap-4">
       <div>
         <h1 class="text-center text-22px">Prijavite se za nastavak</h1>
@@ -32,23 +33,39 @@
           />
           <hr />
           <img
-            id="eye1"
-            @click="eye"
-            class="eye"
-            src="@/assets/eye_closed.png"
-          />
-          <img
-            id="eye2"
-            @click="eye"
-            class="eye invisible"
-            src="@/assets/eye_open.png"
-          />
+              v-if="store.darkToggle"
+              id="eye1"
+              @click="eye"
+              class="eye"
+              src="@/assets/eye_closed.png"
+            />
+            <img
+              v-if="store.darkToggle"
+              id="eye2"
+              @click="eye"
+              class="eye invisible"
+              src="@/assets/eye_open.png"
+            />
+            <img
+              v-if="!store.darkToggle"
+              id="eye1"
+              @click="eye"
+              class="eye"
+              src="@/assets/eye_closed_dark.png"
+            />
+            <img
+              v-if="!store.darkToggle"
+              id="eye2"
+              @click="eye"
+              class="eye invisible"
+              src="@/assets/eye_open_dark.png"
+            />
 
           <router-link
-            class="href-link font-14px float-right"
+            class="font-14px float-right"
             to="/password-reset"
           >
-            <u>Zaboravili ste lozinku?</u>
+            <u class="href-link">Zaboravili ste lozinku?</u>
           </router-link>
         </div>
         <!--================PASSWORD END===================-->
@@ -89,6 +106,7 @@ import CTitle from "@/components/CTitle.vue";
 import CWarning from "@/components/CWarning.vue";
 import CButton from "@/components/CButton.vue";
 import CSelect from "@/components/CSelect.vue";
+import store from "@/store";
 
 import { getAuth, signInWithEmailAndPassword } from "@/firebase";
 
@@ -100,6 +118,7 @@ export default {
       password: "",
       osoba: "Korisnik",
       greska: "0",
+      store,
     };
   },
   components: {
