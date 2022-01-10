@@ -1,0 +1,121 @@
+<template>
+  <div>
+    <!--==============LIST ============================-->
+    <transition-group
+      class="grid grid-rows-auto gap-5 pl-2 pr-2 pb-16 pt-16"
+      name="fade"
+      tag="div"
+    >
+      <CCard v-for="(z, i) of zahtjevi" :key="`key-${i}`" :zahtjev="z" />
+    </transition-group>
+    <!--==============LIST END=========================-->
+  </div>
+</template>
+
+<script>
+import CTitle from "@/components/CTitle.vue";
+import CButton from "@/components/CButton.vue";
+import CCard from "@/components/CCard.vue";
+import { collection, getDocs } from "@/firebase";
+import { db } from "@/firebase";
+import store from "@/store";
+
+export default {
+  name: "Djelatnik",
+  data() {
+    return {
+      state: this.readData("U razradi"),
+      zahtjevi: [],
+      store,
+    };
+  },
+  components: {
+    CTitle,
+    CButton,
+    CCard,
+  },
+  mounted() {
+    this.readData();
+  },
+  methods: {
+    async readData(state2) {
+      if (this.state != state2 && state2) {
+        const querySnapshot = await getDocs(collection(db, "zahtjevi"));
+        var highestTimeoutId = setTimeout(";");
+        for (var i = 0; i < highestTimeoutId; i++) {
+          clearTimeout(i);
+        }
+        let b = 0;
+        let delay = 250; //ADJUST TIME DELAY BETWEEN CARDS
+        let time = 0 - delay;
+        this.state = state2;
+        this.zahtjevi = [];
+        this.canLoad = false;
+        querySnapshot.forEach((doc) => {
+          if (doc.data().korisnik === store.currentUser) {
+            if (`${doc.data().status}` == this.state) {
+              setTimeout(() => {
+                this.$set(this.zahtjevi, b, {
+                  instrument: [
+                    `${doc.data().instrument[0]}`,
+                    `${doc.data().instrument[1]}`,
+                    `${doc.data().instrument[2]}`,
+                    `${doc.data().instrument[3]}`,
+                    `${doc.data().instrument[4]}`,
+                    `${doc.data().instrument[5]}`,
+                    `${doc.data().instrument[6]}`,
+                  ],
+                  korisnik: `${doc.data().korisnik}`,
+                  napomena: `${doc.data().napomena}`,
+                  preporucenaCijena: `${doc.data().preporucenaCijena}`,
+                  status: `${doc.data().status}`,
+                  img: "https://picsum.photos/500/500/",
+                  date: `${doc.data().zahtjevPredan}`,
+                });
+
+                b++;
+              }, (time += delay));
+            }
+          }
+        });
+      }
+    },
+    dummy() {},
+  },
+};
+</script>
+
+<style>
+.menu-item-selected p {
+  transition: all;
+  transition-timing-function: ease-in-out;
+  transition: 1s;
+  width: 100%;
+  font-weight: bold;
+  color: #3f2c28;
+}
+.menu-bottom2 {
+  position: fixed;
+  bottom: -1px;
+  width: 100%;
+  height: 50px;
+  background-color: #3d3d3f;
+  filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
+}
+.menu-item-grid0 {
+  margin-left: 0%;
+  background-color: #fff383;
+}
+.menu-item-grid1 {
+  margin-left: 100%;
+  background-color: #6dd277;
+}
+.menu-item-grid2 {
+  margin-left: 200%;
+  background-color: #6dd277;
+}
+.menu-item-grid3 {
+  margin-left: 300%;
+  background-color: #ff7f7f;
+}
+</style>

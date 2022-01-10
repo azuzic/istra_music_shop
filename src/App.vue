@@ -2,50 +2,91 @@
   <div id="app">
     <div class="CBg"></div>
     <!--==============DJELATNIK ============================-->
-    <div  v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-2 mb-4">
-
-      <div :class=" currentRouteName == 'Djelatnik'       ? 'menu-item-active menu-item2 menu-top-item-grid0' : 
-                    currentRouteName == 'DjelatnikRacun'  ? 'menu-item-active menu-item2 menu-top-item-grid1' : ''" >
-      </div>
-
+    <div
+      v-if="store.currentUser == 'djelatnik@gmail.com'"
+      class="menu2 top-0 grid grid-cols-2 mb-4"
+    >
+      <div
+        :class="
+          currentRouteName == 'Djelatnik'
+            ? 'menu-item-active menu-item2 menu-top-item-grid0'
+            : currentRouteName == 'DjelatnikRacun'
+            ? 'menu-item-active menu-item2 menu-top-item-grid1'
+            : ''
+        "
+      ></div>
     </div>
-    <!--===============================-->
-    <div  v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu top-0 grid grid-cols-2 mb-4">
-
-      <div :class="currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'">
+    <div
+      v-if="store.currentUser == 'djelatnik@gmail.com'"
+      class="menu top-0 grid grid-cols-2 mb-4"
+    >
+      <div
+        :class="
+          currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'
+        "
+      >
         <p><router-link to="djelatnik"> Pregled otkupa </router-link></p>
       </div>
 
-      <div :class="currentRouteName == 'DjelatnikRacun' ? 'menu-item-active' : 'menu-item'" >
+      <div
+        :class="
+          currentRouteName == 'DjelatnikRacun'
+            ? 'menu-item-active'
+            : 'menu-item'
+        "
+      >
         <p><router-link to="djelatnik-racun"> Račun </router-link></p>
       </div>
-
     </div>
-    <!--==============DJELATNIK END=========================-->
-    <!--==============KORISNIK =============================-->
-    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-3 mb-4">
-
-      <div :class=" currentRouteName == 'Status otkupa' ? 'menu-item-active menu-item2 menu-top2-item-grid0' : 
-                    currentRouteName == 'OtkupOpreme'   ? 'menu-item-active menu-item2 menu-top2-item-grid1' : 
-                    currentRouteName == 'KorisnikRacun' ? 'menu-item-active menu-item2 menu-top2-item-grid2' : ''">
-      </div>
+    <div
+      v-if="
+        store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'
+      "
+      class="menu2 top-0 grid grid-cols-3 mb-4"
+    >
+      <div
+        :class="
+          currentRouteName == 'StatusOtkupa'
+            ? 'menu-item-active menu-item2 menu-top2-item-grid0'
+            : currentRouteName == 'OtkupOpreme'
+            ? 'menu-item-active menu-item2 menu-top2-item-grid1'
+            : currentRouteName == 'KorisnikRacun'
+            ? 'menu-item-active menu-item2 menu-top2-item-grid2'
+            : ''
+        "
+      ></div>
     </div>
-    <!--==============KORISNIK END==========================-->
+    <!--==============DJELATNIK END==========================-->
     <!--==============KORISNIK =============================-->
-    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'" class="menu top-0 grid grid-cols-3 mb-4">
-
-      <div :class="currentRouteName == 'Status otkupa' ? 'menu-item-active' : 'menu-item'">
-        <p>Status otkupa</p>
+    <div
+      v-if="
+        store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'
+      "
+      class="menu top-0 grid grid-cols-3 mb-4"
+    >
+      <div
+        :class="
+          currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'
+        "
+      >
+        <p><router-link to="status-otkupa"> Status Otkupa </router-link></p>
       </div>
 
-      <div :class="currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'">
+      <div
+        :class="
+          currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'
+        "
+      >
         <p><router-link to="otkup-opreme"> Otkup opreme </router-link></p>
       </div>
 
-      <div :class="currentRouteName == 'KorisnikRacun' ? 'menu-item-active' : 'menu-item'">
+      <div
+        :class="
+          currentRouteName == 'KorisnikRacun' ? 'menu-item-active' : 'menu-item'
+        "
+      >
         <p><router-link to="korisnik-racun"> Račun </router-link></p>
       </div>
-
     </div>
     <!--==============KORISNIK END==========================-->
     <router-view />
@@ -200,7 +241,7 @@ input:-webkit-autofill:active {
 }
 .menu-top-item-grid1 {
   margin-left: 100%;
-  background-color: #ff5252 ;
+  background-color: #ff5252;
 }
 .menu-top2-item-grid0 {
   margin-left: 0%;
@@ -208,11 +249,11 @@ input:-webkit-autofill:active {
 }
 .menu-top2-item-grid1 {
   margin-left: 100%;
-  background-color: #ff5252 ;
+  background-color: #ff5252;
 }
 .menu-top2-item-grid2 {
   margin-left: 200%;
-  background-color: #ff5252 ;
+  background-color: #ff5252;
 }
 .menu2 {
   position: fixed;
@@ -264,7 +305,7 @@ input:-webkit-autofill:active {
 }
 .menu-item p {
   width: 100%;
-  color: #f5dada;  
+  color: #f5dada;
   transition: all;
   transition-timing-function: ease-in-out;
   transition: 1s;
@@ -369,15 +410,17 @@ input:-webkit-autofill:active {
 .price {
   color: #ff5252;
 }
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   margin-left: 0%;
   margin-top: 0%;
   opacity: 100%;
-  transition:  .95s;
+  transition: 0.95s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   margin-top: -50%;
   opacity: 0%;
-  transition: .5s;
+  transition: 0.5s;
 }
 </style>

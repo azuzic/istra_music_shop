@@ -42,6 +42,14 @@ const routes = [
     component: () => import("../views/OtkupOpreme.vue"),
   },
   {
+    path: "/status-otkupa",
+    name: "StatusOtkupa",
+    meta: {
+      needsUser: true,
+    },
+    component: () => import("../views/StatusOtkupa.vue"),
+  },
+  {
     path: "/djelatnik-racun",
     name: "DjelatnikRacun",
     meta: {
@@ -94,7 +102,11 @@ router.beforeEach((to, from, next) => {
   if (noUser && to.meta.needsUser) {
     next("Prijava");
   } else {
-    if (from.name === "Registracija" && to.name !== "Prijava" && to.name !== "Home") {
+    if (
+      from.name === "Registracija" &&
+      to.name !== "Prijava" &&
+      to.name !== "Home"
+    ) {
       wait(3).then(() => {
         next();
       });
