@@ -213,7 +213,7 @@ export default {
           zahtjevPredan: Date.now(),
           napomena: this.napomena,
           status: "U razradi",
-          preporucenaCijena: 1500,
+          preporucenaCijena: this.preporucenaCijena,
         });
         console.log("Predan zahtjev za otkup sa ID: ", docRef.id);
       } catch (e) {
@@ -235,37 +235,37 @@ export default {
           this.preporucenaCijena = cijenaInstrumenta;
           break;
         case 2:
-          this.preporucenaCijena -= 0.15 * cijenaInstrumenta;
+          this.preporucenaCijena -= 0.1 * this.preporucenaCijena;
           break;
         case 3:
-          this.preporucenaCijena -= 0.22 * cijenaInstrumenta;
+          this.preporucenaCijena -= 0.17 * this.preporucenaCijena;
           break;
       }
       switch (this.stanje) {
         case "Novo":
-          this.preporucenaCijena += cijenaInstrumenta * 0.1;
+          this.preporucenaCijena += this.preporucenaCijena * 0.1;
           break;
         case "Rabljeno":
-          this.preporucenaCijena -= cijenaInstrumenta * 0.4;
+          this.preporucenaCijena -= this.preporucenaCijena * 0.32;
           break;
         case "Neispravno":
-          this.preporucenaCijena -= cijenaInstrumenta * 0.8;
+          this.preporucenaCijena -= this.preporucenaCijena * 0.6;
           break;
       }
       var year = parseInt(this.godinaProizvodnje);
       if (year >= 1960 && year < 1970)
-        this.preporucenaCijena += cijenaInstrumenta * 1.5;
+        this.preporucenaCijena += this.preporucenaCijena * 1.5;
       else if (year >= 1970 && year < 1980)
-        this.preporucenaCijena += cijenaInstrumenta * 0.5;
+        this.preporucenaCijena += this.preporucenaCijena * 0.5;
       else if (year >= 1980 && year < 2000)
-        this.preporucenaCijena += cijenaInstrumenta * 0.1;
+        this.preporucenaCijena += this.preporucenaCijena * 0.1;
       else if (year >= 2000 && year < 2010)
-        this.preporucenaCijena += cijenaInstrumenta * 0.05;
+        this.preporucenaCijena += this.preporucenaCijena * 0.05;
       this.preporucenaCijena;
 
       if (this.yearCheck || !this.godinaProizvodnje) return 0;
       else if (this.preporucenaCijena <= 0) return "ne vrijedi";
-      else return this.preporucenaCijena + " kn";
+      else return Math.round(this.preporucenaCijena) + " kn";
     },
     proizvodacSet() {
       this.prikazaniProizvodaci = [];

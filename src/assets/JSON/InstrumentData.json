@@ -106,8 +106,8 @@
         "Axion Label": 3500,
         "IronLabel": 3750,
         "Standard": 1250,
-        "Gio": 900,
-        "RGR": 850
+        "Gio": 100,
+        "RGR": 950
       },
       "RGA": { "Standard": 1500 },
       "RGD": { "Prestige": 4500, "Axion Label": 5500, "Standard": 3500 },
