@@ -144,7 +144,7 @@
           <img class="money" src="@/assets/money_icon.svg" />
           <p class="pl-4 text-24px">
             Predložena cijena:
-            <b class="price">{{ preporucenaCijena }}</b>
+            <b class="price">{{ izracunCijene }}</b>
           </p>
         </div>
       </div>
@@ -183,6 +183,7 @@ export default {
       vlasnik: "",
       stanje: "",
       napomena: "",
+      cijeneSerija: {},
       preporucenaCijena: 0,
     };
   },
@@ -222,10 +223,44 @@ export default {
     dummy() {},
   },
   computed: {
+    izracunCijene() {
+      for (var element in this.cijeneSerija) {
+        if (this.odabranaSerija === this.cijeneSerija[element].serija)
+          this.preporucenaCijena = this.cijeneSerija[element].cijena;
+      }
+      var cijenaInstrumenta = this.preporucenaCijena;
+
+      switch (this.vlasnik) {
+        case 1:
+          this.preporucenaCijena = cijenaInstrumenta;
+          break;
+        case 2:
+          this.preporucenaCijena -= 0.15 * cijenaInstrumenta;
+          break;
+        case 3:
+          this.preporucenaCijena -= 0.22 * cijenaInstrumenta;
+          break;
+      }
+      switch (this.stanje) {
+        case "Novo":
+          this.preporucenaCijena += cijenaInstrumenta * 0.1;
+          break;
+        case "Rabljeno":
+          this.preporucenaCijena -= cijenaInstrumenta * 0.3;
+          break;
+        case "Neispravno":
+          this.preporucenaCijena -= cijenaInstrumenta * 0.7;
+          break;
+      }
+
+      if (this.preporucenaCijena <= 0) this.preporucenaCijena = "0";
+      return this.preporucenaCijena + " kn";
+    },
     proizvodacSet() {
       this.prikazaniProizvodaci = [];
       this.prikazaniModeli = [];
       this.prikazaneSerije = [];
+      this.cijeneSerija = [];
 
       if (this.odabranaVrsta === "Gitara") {
         for (const data in this.jsonData) {
@@ -240,6 +275,7 @@ export default {
     modelSet() {
       this.prikazaniModeli = [];
       this.prikazaneSerije = [];
+      this.cijeneSerija = [];
       for (const data in this.jsonData) {
         for (const data1 in this.jsonData[data]) {
           if (data1 === this.odabraniProizvodac)
@@ -258,9 +294,11 @@ export default {
           for (const data2 in this.jsonData[data][data1]) {
             if (data2 === this.odabraniModel)
               for (const data3 in this.jsonData[data][data1][data2]) {
-                this.prikazaneSerije.push(
-                  this.jsonData[data][data1][data2][data3]
-                );
+                var element = {};
+                element.cijena = this.jsonData[data][data1][data2][data3];
+                element.serija = `${data3}`;
+                this.prikazaneSerije.push(element.serija);
+                this.cijeneSerija.push(element);
               }
           }
         }
