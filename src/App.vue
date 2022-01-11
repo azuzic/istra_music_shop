@@ -1,9 +1,5 @@
 <template>
   <div id="app">
-    <div class="darkModeToggle" @click="toggleDark()">
-      <img v-if="store.darkToggle" src="../src/assets/moon_empty_icon.svg">
-      <img v-if="!store.darkToggle" src="../src/assets/moon_full_icon.svg">
-    </div> 
     <div v-if="loadTheme()"></div>
     <div class="CBg" :class="store.darkToggle ? 'CBg-light' : 'CBg-dark'"></div>
     <!--==============DJELATNIK ============================-->
@@ -30,17 +26,16 @@
     <!--==============KORISNIK =============================-->
     <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-3 mb-4">
 
-      <div :class=" currentRouteName == 'Status otkupa' ? 'menu-item-active menu-item2 menu-top2-item-grid0' : 
+      <div :class=" currentRouteName == 'StatusOtkupa' ? 'menu-item-active menu-item2 menu-top2-item-grid0' : 
                     currentRouteName == 'OtkupOpreme'   ? 'menu-item-active menu-item2 menu-top2-item-grid1' : 
                     currentRouteName == 'KorisnikRacun' ? 'menu-item-active menu-item2 menu-top2-item-grid2' : ''">
       </div>
     </div>
-    <!--==============KORISNIK END==========================-->
-    <!--==============KORISNIK =============================-->
+    <!--========================================-->
     <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'" class="menu top-0 grid grid-cols-3 mb-4">
 
-      <div :class="currentRouteName == 'Status otkupa' ? 'menu-item-active' : 'menu-item'">
-        <p>Status otkupa</p>
+      <div :class="currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'">
+        <p><router-link to="status-otkupa"> Status otkupa </router-link></p>
       </div>
 
       <div :class="currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'">
@@ -52,6 +47,15 @@
       </div>
 
     </div>
+      <div :class="currentRouteName == 'KorisnikRacun' ? 'menu-item3 dark-top' : 'menu-item3'">
+        <div class="darkModeToggle" @click="toggleDark()">
+          <div class="logout2">
+            <!--===<p class="mr-4 text-24px" style="width:150px;">DARK MODE</p>=====-->
+            <img v-if="!store.darkToggle" height="30px" width="30px" src="../src/assets/moon_empty_icon.svg">
+            <img v-if="store.darkToggle"  height="30px" width="30px" src="../src/assets/moon_full_icon.svg">
+          </div>
+        </div>
+      </div>
     <!--==============KORISNIK END==========================-->
     <router-view />
   </div>
@@ -216,7 +220,8 @@ html {
   background-size: 50%;
   background-repeat: repeat;
   width: 100%;
-  height: 100%;
+  height: 200%;
+  bottom: -50px;
 }
 .CBg-light {
   background-image: url("assets/bg_light.png");
@@ -299,7 +304,7 @@ input:-webkit-autofill:active {
   top: 0px;
   width: 100%;
   height: 50px;
-  z-index: 500;
+  z-index: 3000;
   background-color: transparent;
 }
 .menu-top-item-grid0 {
@@ -327,7 +332,7 @@ input:-webkit-autofill:active {
   top: 0px;
   width: 100%;
   height: 50px;
-  z-index: 500;
+  z-index: 2000;
   background-color: var(--balticSea);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
@@ -491,11 +496,29 @@ input:-webkit-autofill:active {
 }
 .darkModeToggle {
   position: fixed;
-  top: 0px;
-  right: 0px;
-  width: 42px;
-  height: 42px;
-  padding: 8px;
-  z-index: 2000;
+  width: 100%;
+  z-index: 1000;
+}
+.dark-top {
+  margin-top: 80px !important;
+  margin-bottom: -40px !important;
+}
+.logout2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.menu-item3 {
+  height: inherit;
+  width: inherit;
+  transition: all;
+  transition-timing-function: ease-in-out;
+  transition: 0.75s;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  z-index: 100;
 }
 </style>

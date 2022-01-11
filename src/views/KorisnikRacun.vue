@@ -56,7 +56,7 @@
         </div>
         <!--==============/SPREMI============-->
         <!--===================RESETIRAJ LOZINKU====================-->
-        <div class="place-self-center mt-16">
+        <div class="place-self-center mt-16 mb-32">
           <router-link to="/password-reset">
             <CButtonDecline btn="RESETIRAJ LOZINKU" :btnClickHandler="dummy" />
           </router-link>
