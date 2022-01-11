@@ -65,6 +65,16 @@
           <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Gornja prednja</p>
+              <croppa
+                :width="120"
+                :height="120"
+                v-model="imageReference1"
+                placeholder="Učitaj sliku..."
+              ></croppa>
+            </div>
+            <!--
+            <div class="otkup-div-image flex-none">
+              <p class="otkup-img-text">Gornja prednja</p>
               <div>
                 <img
                   class="CCard-img img-top-left mx-auto"
@@ -72,6 +82,7 @@
                 />
               </div>
             </div>
+            -->
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Gornja stražnja</p>
               <div>
@@ -143,10 +154,17 @@
       </div>
       <!--==============FOOTER==================================-->
       <div class="menu-bottom3 grid grid-cols-1 mt-4">
-        <div class="bg-bottom"></div>
-        <div class="menu-item5 text-left mx-auto">
-          <img v-if="store.darkToggle" class="money" src="@/assets/money_icon.svg" />
-          <img v-if="!store.darkToggle" class="money" src="@/assets/money_icon_dark.svg" />
+        <div class="menu-item text-left mx-auto">
+          <img
+            v-if="store.darkToggle"
+            class="money"
+            src="@/assets/money_icon.svg"
+          />
+          <img
+            v-if="!store.darkToggle"
+            class="money"
+            src="@/assets/money_icon_dark.svg"
+          />
           <p class="pl-4 text-24px">
             Predložena cijena:
             <b class="price">{{ izracunCijene }}</b>
@@ -168,6 +186,7 @@ import CButtonSingle from "@/components/CButtonSingle.vue";
 import store from "@/store";
 import { collection, addDoc } from "@/firebase";
 import { db } from "@/firebase";
+import { storage, ref, uploadBytes, getDownloadURL } from "@/firebase";
 
 export default {
   name: "OtkupOpreme",
@@ -190,7 +209,9 @@ export default {
       napomena: "",
       cijeneSerija: {},
       preporucenaCijena: 0,
-      store
+      store,
+
+      imageReference1: null,
     };
   },
   components: {
@@ -205,6 +226,22 @@ export default {
   methods: {
     async otkupi() {
       try {
+        this.imageReference1.generateBlob((blobData) => {
+          let imageName =
+            "zahtjevi/" + store.currentUser + "/" + Date.now() + ".png";
+          const storageRef = ref(storage, imageName);
+          // 'file' comes from the Blob or File API
+          uploadBytes(storageRef, blobData)
+            .then((result) => {
+              console.log("Uploaded images!");
+              getDownloadURL(ref(storage, imageName)).then((url) => {
+                console.log(url);
+              });
+            })
+            .catch((e) => {
+              console.error(e);
+            });
+        });
         const docRef = await addDoc(collection(db, "zahtjevi"), {
           korisnik: store.currentUser,
           instrument: [
@@ -358,26 +395,30 @@ export default {
 }
 
 .otkup-div-image img {
-  border-color: var(--stretchLimo);
+  border-color: var(--balticSea);
   height: 120px;
   border-width: 2px;
 }
 .otkup-img-text {
   text-align: center;
   font-size: 16px;
-  color: var(--balticSea);
+  color: var(--graniteBrown);
+}
+.otkup-textarea {
+  padding: 8px;
+  color: var(--englishBreakfast);
+  font-size: 18px;
+  width: 100%;
+  border-color: var(--balticSea);
+  height: 128px;
+  border-width: 2px;
+  border-top-left-radius: 9.5px;
+  border-bottom-left-radius: 2.5px;
+  border-top-right-radius: 9.5px;
+  border-bottom-right-radius: 2.5px;
 }
 .otkup-textarea:focus {
   outline: none !important;
   border-color: var(--fluorescentRed);
-}
-.bg-bottom {
-  position: absolute;
-  width: 100%;
-  background-color: var(--balticSea4);
-  height: 50px;
-}
-.menu-item5 p{
-  color: var(--balticSea7) !important;
 }
 </style>
