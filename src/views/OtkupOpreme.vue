@@ -143,7 +143,8 @@
       </div>
       <!--==============FOOTER==================================-->
       <div class="menu-bottom3 grid grid-cols-1 mt-4">
-        <div class="menu-item text-left mx-auto">
+        <div class="bg-bottom"></div>
+        <div class="menu-item5 text-left mx-auto">
           <img v-if="store.darkToggle" class="money" src="@/assets/money_icon.svg" />
           <img v-if="!store.darkToggle" class="money" src="@/assets/money_icon_dark.svg" />
           <p class="pl-4 text-24px">
@@ -357,30 +358,26 @@ export default {
 }
 
 .otkup-div-image img {
-  border-color: var(--balticSea);
+  border-color: var(--stretchLimo);
   height: 120px;
   border-width: 2px;
 }
 .otkup-img-text {
   text-align: center;
   font-size: 16px;
-  color: var(--graniteBrown);
-}
-.otkup-textarea {
-  padding: 8px;
-  color: var(--englishBreakfast);
-  font-size: 18px;
-  width: 100%;
-  border-color: var(--balticSea);
-  height: 128px;
-  border-width: 2px;
-  border-top-left-radius: 9.5px;
-  border-bottom-left-radius: 2.5px;
-  border-top-right-radius: 9.5px;
-  border-bottom-right-radius: 2.5px;
+  color: var(--balticSea);
 }
 .otkup-textarea:focus {
   outline: none !important;
   border-color: var(--fluorescentRed);
+}
+.bg-bottom {
+  position: absolute;
+  width: 100%;
+  background-color: var(--balticSea4);
+  height: 50px;
+}
+.menu-item5 p{
+  color: var(--balticSea7) !important;
 }
 </style>

@@ -17,7 +17,9 @@
             :key="i"
             :class="option == selected ? 'isSelected' : ''"
             @click="selected = option; open = false; $emit('input', option);">
-            {{ option }}
+            <div>
+              {{ option }}
+            </div>
         </div>
     </div>
     
@@ -49,18 +51,24 @@ export default {
 </script>
 
 <style scoped>
-.custom-select .selected {
+.selected {
+  background: var(--lateo);
   outline: none;
   width: 100%;
   height: 40px;
-  background: var(--lateo);
   border: 2px solid var(--stretchLimo) !important;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  color: var(--graniteBrown) !important;
+  color: var(--dwarfFortress2) !important;
   display: flex;
   align-items: center;
   padding-left: 4px;
+}
+
+.custom-select {
+  background: var(--balticSea6);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 .custom-select {
@@ -82,12 +90,16 @@ export default {
 }
 
 .items div {
+  background: var(--balticSea6);
+}
+
+.items div div {
   outline: none;
   width: 100%;
   height: 40px !important;
   background: var(--lateo);
   border: 2px solid var(--stretchLimo);
-  color: var(--graniteBrown);;
+  color: var(--balticSea3);
   cursor: pointer;
   user-select: none;
   margin-top: -3px;
@@ -98,7 +110,10 @@ export default {
 
 .isSelected {
   background-color: var(--fluorescentRed) !important;
-  color: var(--dwarfFortress) !important;
+  color: var(--dwarfFortress2) !important;
+}
+.isSelected div {
+  color: var(--dwarfFortress2) !important;
 }
 
 .selectHide {

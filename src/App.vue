@@ -26,9 +26,9 @@
     <!--==============KORISNIK =============================-->
     <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-3 mb-4">
 
-      <div :class=" currentRouteName == 'StatusOtkupa' ? 'menu-item-active menu-item2 menu-top2-item-grid0' : 
-                    currentRouteName == 'OtkupOpreme'   ? 'menu-item-active menu-item2 menu-top2-item-grid1' : 
-                    currentRouteName == 'KorisnikRacun' ? 'menu-item-active menu-item2 menu-top2-item-grid2' : ''">
+      <div :class=" currentRouteName == 'StatusOtkupa' ? 'menu-item2 menu-top2-item-grid0' : 
+                    currentRouteName == 'OtkupOpreme'   ? 'menu-item2 menu-top2-item-grid1' : 
+                    currentRouteName == 'KorisnikRacun' ? 'menu-item2 menu-top2-item-grid2' : ''">
       </div>
     </div>
     <!--========================================-->
@@ -47,7 +47,8 @@
       </div>
 
     </div>
-      <div :class="currentRouteName == 'KorisnikRacun' ? 'menu-item3 dark-top' : 'menu-item3'">
+    <!--==============DARK MODE=============================-->
+      <div :class="currentRouteName == 'KorisnikRacun' ? 'menu-item3 dark-top' : 'menu-item3 dark-top2'">
         <div class="darkModeToggle" @click="toggleDark()">
           <div class="logout2">
             <!--===<p class="mr-4 text-24px" style="width:150px;">DARK MODE</p>=====-->
@@ -56,6 +57,7 @@
           </div>
         </div>
       </div>
+    <!--==============DARK MODE END=========================-->
     <!--==============KORISNIK END==========================-->
     <router-view />
   </div>
@@ -105,24 +107,31 @@ export default {
     },
     loadDark() {
         let r = document.querySelector(':root');
-        r.style.setProperty('--snow',               '#203d3f'); //Background
-        r.style.setProperty('--balticSea',          '#85b3b6'); //Default font dark, bg
-        r.style.setProperty('--fluorescentRed',     '#ac123e'); //Input highlight line
-        r.style.setProperty('--lateo',              '#091112'); //Input autofill
+        r.style.setProperty('--snow',               'hsl(0, 0%, 7%, 100%)');  //Background
+        r.style.setProperty('--balticSea',          'hsl(0, 0%, 100%, 87%)'); //Default font dark
+        r.style.setProperty('--balticSea3',         'hsl(0, 0%, 100%, 60%)'); //Default font lighter
+        r.style.setProperty('--balticSea2',         'hsl(0, 0%, 100%, 16%)'); //br
+        r.style.setProperty('--balticSea4',         'hsl(0, 0%, 100%, 5%)');  //bg menu
+        r.style.setProperty('--balticSea5',         'hsl(0, 0%, 7%, 100%)');  //bg menu2
+        r.style.setProperty('--balticSea6',         'hsl(0, 0%, 7%, 100%)');  //select
+        r.style.setProperty('--balticSea7',         'hsl(0, 0%, 100%, 87%)');  //select
+        r.style.setProperty('--fluorescentRed',     '#ad1f47'); //Input highlight line
+        r.style.setProperty('--lateo',              'hsl(0, 0%, 100%, 10%)'); //Input autofill
         r.style.setProperty('--vivaldiRed',         '#e41a3c'); //CWarning font
         r.style.setProperty('--poblano',            '#068020'); //CSuccess font
         r.style.setProperty('--paleFlower',         '#bb2a53'); //Href link font
         r.style.setProperty('--tin',                '#400F21'); //inactive button-bg
         r.style.setProperty('--solidEmpire',        '#456f74'); //link font
-        r.style.setProperty('--fresco',             '#200F21'); //Default font light
-        r.style.setProperty('--graniteBrown',       '#9ecfd3'); //menu-item-active font
+        r.style.setProperty('--fresco',             'hsl(0, 0%, 100%, 87%)'); //Default font light
+        r.style.setProperty('--graniteBrown',       'hsl(0, 0%, 0%, 87%)');   //menu-item-active font
         r.style.setProperty('--englishBreakfast',   '#bb2a53'); //textarea font
         r.style.setProperty('--lemonPeel',          '#cec14c'); //u razradi bg
         r.style.setProperty('--snowPea',            '#258843'); //prihvaćeno/riješeno bg
         r.style.setProperty('--forbiddenFruit',     '#e41a3c'); //odbijeno bg
         r.style.setProperty('--dustySky',           '#96a4a5'); //CCard-data bg
-        r.style.setProperty('--stretchLimo',        '#292e32'); //CSelect items-border
+        r.style.setProperty('--stretchLimo',        'hsl(0, 0%, 100%, 16%)'); //CSelect items-border
         r.style.setProperty('--dwarfFortress',      '#1f0309'); //CSelect isSelected font
+        r.style.setProperty('--dwarfFortress2',     'hsl(0, 0%, 100%, 87%)'); //CSelect isSelected font
         r.style.setProperty('--richGreen',          '#258843'); //CSuccess bg, font
         r.style.setProperty('--white',              '#9ecfd3'); //line password
         r.style.setProperty('--grey',               '#204c4e'); //line password
@@ -134,8 +143,14 @@ export default {
         let r = document.querySelector(':root');
         r.style.setProperty('--snow',               '#fff9f9'); //Background
         r.style.setProperty('--balticSea',          '#3d3d3f'); //Default font dark, bg
+        r.style.setProperty('--balticSea2',         '#3d3d3f'); //Default font dark, bg
+        r.style.setProperty('--balticSea3',         '#3d3d3f'); //Default font dark, bg
+        r.style.setProperty('--balticSea4',         '#3d3d3f00'); //Default font dark, bg
+        r.style.setProperty('--balticSea5',         '#3d3d3f'); //Default font dark, bg
+        r.style.setProperty('--balticSea6',         '#fff9f9'); //Default font dark, bg
+        r.style.setProperty('--balticSea7',         '#fff9f9'); //Default font dark, bg
         r.style.setProperty('--fluorescentRed',     '#ff5252'); //Input highlight line
-        r.style.setProperty('--lateo',              '#e8e7e7'); //Input autofill
+        r.style.setProperty('--lateo',              '#e8e7e700'); //Input autofill
         r.style.setProperty('--vivaldiRed',         '#e93a3a'); //CWarning font
         r.style.setProperty('--poblano',            '#068020'); //CSuccess font
         r.style.setProperty('--paleFlower',         '#668AAC'); //Href link font
@@ -150,6 +165,7 @@ export default {
         r.style.setProperty('--dustySky',           '#96a4a5'); //CCard-data bg
         r.style.setProperty('--stretchLimo',        '#292e32'); //CSelect items-border
         r.style.setProperty('--dwarfFortress',      '#1a0505'); //CSelect isSelected font
+        r.style.setProperty('--dwarfFortress2',      '#1a0505'); //CSelect isSelected font
         r.style.setProperty('--richGreen',          '#258843'); //CSuccess bg, font
         r.style.setProperty('--white',              '#ffffff'); //line password
         r.style.setProperty('--grey',               '#808080'); //line password
@@ -169,9 +185,19 @@ export default {
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Alike&display=swap");
 
+.ghj {
+  color: hsl(0, 0%, 7%);
+}
+
 :root {
   --snow:               #fff9f9; //Background               var(--snow);
   --balticSea:          #3d3d3f; //Default font dark, bg    var(--balticSea);
+  --balticSea2:         #3d3d3f; //bt                       var(--balticSea2);
+  --balticSea3:         #3d3d3f; //bt                       var(--balticSea3);
+  --balticSea4:         #3d3d3f; //bt                       var(--balticSea4);
+  --balticSea5:         #3d3d3f; //bt                       var(--balticSea5);
+  --balticSea6:         #3d3d3f; //bt                       var(--balticSea6);
+  --balticSea7:         #3d3d3f; //bt                       var(--balticSea7);
   --fluorescentRed:     #ff5252; //Input highlight line     var(--fluorescentRed);
   --lateo:              #e8e7e7; //Input autofill           var(--lateo);
   --vivaldiRed:         #e93a3a; //CWarning font            var(--vivaldiRed);
@@ -188,6 +214,7 @@ export default {
   --dustySky:           #96a4a5; //CCard-data bg            var(--dustySky);
   --stretchLimo:        #292e32; //CSelect items-border     var(--stretchLimo);
   --dwarfFortress:      #1a0505; //CSelect isSelected font  var(--dwarfFortress);
+  --dwarfFortress2:     #1a0505; //CSelect isSelected font  var(--dwarfFortress);
   --richGreen:          #258843; //CSuccess bg, font        var(--richGreen);
   --white:              #ffffff; //line password            var(--white);
   --grey:               #808080; //line password            var(--grey);
@@ -205,7 +232,7 @@ export default {
   color: var(--balticSea);
   transition: all;
   transition-timing-function: ease-in-out;
-  transition: 1s;
+  transition: 0.5s;
 }
 html {
   color: #85b3b6;
@@ -230,7 +257,7 @@ html {
   background-image: url("assets/bg_dark.png");
 }
 div hr {
-  border: 2px solid var(--balticSea);
+  border: 2px solid var(--balticSea2);
   border-radius: 16px;
 }
 .dotted {
@@ -246,6 +273,7 @@ input:focus {
 }
 input {
   background-color: transparent;
+  color: var(--balticSea3) !important;
   width: 100%;
   height: 24px;
   border: none;
@@ -255,7 +283,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   box-shadow: 0 0 0 30px var(--lateo) inset !important;
-  -webkit-text-fill-color: var(--balticSea);
+  -webkit-text-fill-color: var(--balticSea3);
   border-radius: 0% !important;
 }
 .CWarning {
@@ -333,10 +361,9 @@ input:-webkit-autofill:active {
   width: 100%;
   height: 50px;
   z-index: 2000;
-  background-color: var(--balticSea);
+  background-color: var(--balticSea5);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
-
 .menu-bottom {
   position: fixed;
   bottom: -1px;
@@ -345,22 +372,27 @@ input:-webkit-autofill:active {
   background-color: transparent;
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
 }
-
 .menu-bottom3 {
   position: fixed;
   bottom: -1px;
   width: 100%;
   height: 50px;
-  background-color: var(--balticSea);
+  background-color: var(--balticSea5);
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
 }
-
 .menu-item {
   display: flex;
   align-items: center;
   text-align: center;
-  background-color: transparent;
+  background-color: var(--balticSea4);
 }
+
+.menu-item5 {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
 .menu-item2 {
   position: absolute;
   height: inherit;
@@ -399,6 +431,7 @@ input:-webkit-autofill:active {
   transition: all;
   transition-timing-function: ease-in-out;
   transition: 1s;
+  background-color: var(--balticSea4);
 }
 .menu-item-active p {
   width: 100%;
@@ -420,13 +453,11 @@ input:-webkit-autofill:active {
   width: 100% !important;
   overflow: hidden;
 }
-
 .otkup-div-image img {
   border-color: var(--balticSea);
   height: 100% !important;
   border-width: 2px;
 }
-
 .img-top-left {
   border-top-left-radius: 9.5px;
   border-bottom-left-radius: 2.5px;
@@ -460,21 +491,20 @@ input:-webkit-autofill:active {
 .otkup-img-text {
   text-align: center;
   font-size: 16px;
-  color: var(--graniteBrown);
+  padding-bottom: 2px;
 }
 .otkup-textarea {
   padding: 8px;
-  background-color: var(--lateo);
-  color: var(--englishBreakfast);
+  background-color: var(--balticSea6);
+  color: var(--balticSea);
   font-size: 18px;
-  width: 100%;
-  border-color: var(--balticSea);
-  height: 128px;
+  border-color: var(--stretchLimo);
   border-width: 2px;
-  border-top-left-radius: 9.5px;
-  border-bottom-left-radius: 2.5px;
-  border-top-right-radius: 9.5px;
-  border-bottom-right-radius: 2.5px;
+  border-top-left-radius: 9.5px !important;
+  border-bottom-left-radius: 2.5px !important;
+  border-top-right-radius: 9.5px !important;
+  border-bottom-right-radius: 2.5px !important;
+  caret-color: var(--fluorescentRed);
 }
 .money {
   width: 43px;
@@ -499,9 +529,13 @@ input:-webkit-autofill:active {
   width: 100%;
   z-index: 1000;
 }
-.dark-top {
+.dark-top2 {
   margin-top: 80px !important;
   margin-bottom: -40px !important;
+}
+.dark-top {
+  margin-top: -20px !important;
+  margin-bottom: 20px !important;
 }
 .logout2 {
   display: flex;
