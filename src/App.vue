@@ -45,7 +45,7 @@
     </div>
     <!--==============DJELATNIK END=========================-->
     <!--==============KORISNIK =============================-->
-    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-3 mb-4">
+    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku'" class="menu2 top-0 grid grid-cols-3 mb-4">
 
       <div :class=" currentRouteName == 'StatusOtkupa' ? 'menu-item2 menu-top2-item-grid0' : 
                     currentRouteName == 'OtkupOpreme'   ? 'menu-item2 menu-top2-item-grid1' : 
@@ -53,7 +53,7 @@
       </div>
     </div>
     <!--========================================-->
-    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'" class="menu top-0 grid grid-cols-3 mb-4">
+    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku'" class="menu top-0 grid grid-cols-3 mb-4">
 
       <div :class="currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="status-otkupa"> Status otkupa </router-link></p>
@@ -546,11 +546,11 @@ input:-webkit-autofill:active {
   width: 100%;
   z-index: 1000;
 }
-.dark-top2 {
+.dark-top {
   margin-top: 80px !important;
   margin-bottom: -40px !important;
 }
-.dark-top {
+.dark-top2 {
   margin-top: -20px !important;
   margin-bottom: 20px !important;
 }

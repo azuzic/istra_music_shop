@@ -85,8 +85,8 @@ export default {
   overflow: hidden;
 }
 .CCard-img {
-  height: 100%;
-  width: auto;
+  height: 100% !important;
+  width: auto !important;
 }
 .CCard-data {
   width: 100%;

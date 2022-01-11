@@ -63,16 +63,17 @@
         <div>
           <p class="text-left text-18px m-0 p-0">Slike</p>
           <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">
-            <div class="otkup-div-image flex-none">
+            <!--<div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Gornja prednja</p>
-              <croppa
-                :width="120"
-                :height="120"
+              <div class="CCard-img img-top-left mx-auto">
+                <croppa
+                class="CCard-img2 img-top-left mx-auto"
                 v-model="imageReference1"
                 placeholder="Učitaj sliku..."
               ></croppa>
-            </div>
-            <!--
+              </div>
+            </div>-->
+            
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Gornja prednja</p>
               <div>
@@ -82,7 +83,6 @@
                 />
               </div>
             </div>
-            -->
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Gornja stražnja</p>
               <div>
@@ -409,5 +409,10 @@ export default {
 }
 .menu-item5 p{
   color: var(--balticSea7) !important;
+}
+.CCard-img2 {
+  width: auto;
+  height: 100%;
+  background-color: rgb(80, 59, 59);
 }
 </style>
