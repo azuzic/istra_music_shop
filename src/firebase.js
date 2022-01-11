@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { getDocs } from "firebase/firestore";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -24,6 +25,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
+const storage = getStorage(app);
 //Firebase
 export { getAuth };
 export { createUserWithEmailAndPassword };
@@ -38,3 +40,6 @@ export { db };
 export { collection };
 export { addDoc };
 export { getDocs };
+
+//FirebaseStorage
+export { storage, ref, uploadBytes, getDownloadURL };

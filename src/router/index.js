@@ -50,6 +50,14 @@ const routes = [
     component: () => import("../views/StatusOtkupa.vue"),
   },
   {
+    path: "/ucitaj-sliku",
+    name: "UcitajSliku",
+    meta: {
+      needsUser: true,
+    },
+    component: () => import("../views/UcitajSliku.vue"),
+  },
+  {
     path: "/djelatnik-racun",
     name: "DjelatnikRacun",
     meta: {
