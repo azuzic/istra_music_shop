@@ -3,59 +3,130 @@
     <div v-if="loadTheme()"></div>
     <div class="CBg" :class="store.darkToggle ? 'CBg-light' : 'CBg-dark'"></div>
     <!--==============DJELATNIK ============================-->
-    <div  v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-2 mb-4">
-
-      <div :class=" currentRouteName == 'Djelatnik'       ? 'menu-item-active menu-item2 menu-top-item-grid0' : 
-                    currentRouteName == 'DjelatnikRacun'  ? 'menu-item-active menu-item2 menu-top-item-grid1' : ''" >
-      </div>
-
+    <div
+      v-if="store.currentUser == 'djelatnik@gmail.com'"
+      class="menu2 top-0 grid grid-cols-2 mb-4"
+    >
+      <div
+        :class="
+          currentRouteName == 'Djelatnik'
+            ? 'menu-item-active menu-item2 menu-top-item-grid0'
+            : currentRouteName == 'DjelatnikRacun'
+            ? 'menu-item-active menu-item2 menu-top-item-grid1'
+            : ''
+        "
+      ></div>
     </div>
     <!--===============================-->
-    <div  v-if="store.currentUser == 'djelatnik@gmail.com' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-2 mb-4">
-
-      <div :class="currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'">
+    <div
+      v-if="
+        store.currentUser == 'djelatnik@gmail.com' &&
+        currentRouteName != 'PregledOtkupa'
+      "
+      class="menu top-0 grid grid-cols-2 mb-4"
+    >
+      <div
+        :class="
+          currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'
+        "
+      >
         <p><router-link to="djelatnik"> Pregled otkupa </router-link></p>
       </div>
 
-      <div :class="currentRouteName == 'DjelatnikRacun' ? 'menu-item-active' : 'menu-item'" >
+      <div
+        :class="
+          currentRouteName == 'DjelatnikRacun'
+            ? 'menu-item-active'
+            : 'menu-item'
+        "
+      >
         <p><router-link to="djelatnik-racun"> Račun </router-link></p>
       </div>
-
     </div>
     <!--==============DJELATNIK END=========================-->
     <!--==============KORISNIK =============================-->
-    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-3 mb-4">
-
-      <div :class=" currentRouteName == 'StatusOtkupa' ? 'menu-item-active menu-item2 menu-top2-item-grid0' : 
-                    currentRouteName == 'OtkupOpreme'   ? 'menu-item-active menu-item2 menu-top2-item-grid1' : 
-                    currentRouteName == 'KorisnikRacun' ? 'menu-item-active menu-item2 menu-top2-item-grid2' : ''">
-      </div>
+    <div
+      v-if="
+        store.currentUser != null &&
+        store.currentUser !== 'djelatnik@gmail.com' &&
+        currentRouteName != 'UcitajSliku'
+      "
+      class="menu2 top-0 grid grid-cols-3 mb-4"
+    >
+      <div
+        :class="
+          currentRouteName == 'StatusOtkupa'
+            ? 'menu-item-active menu-item2 menu-top2-item-grid0'
+            : currentRouteName == 'OtkupOpreme'
+            ? 'menu-item-active menu-item2 menu-top2-item-grid1'
+            : currentRouteName == 'KorisnikRacun'
+            ? 'menu-item-active menu-item2 menu-top2-item-grid2'
+            : ''
+        "
+      ></div>
     </div>
     <!--========================================-->
-    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com'" class="menu top-0 grid grid-cols-3 mb-4">
-
-      <div :class="currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'">
+    <div
+      v-if="
+        store.currentUser != null &&
+        store.currentUser !== 'djelatnik@gmail.com' &&
+        currentRouteName != 'UcitajSliku'
+      "
+      class="menu top-0 grid grid-cols-3 mb-4"
+    >
+      <div
+        :class="
+          currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'
+        "
+      >
         <p><router-link to="status-otkupa"> Status otkupa </router-link></p>
       </div>
 
-      <div :class="currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'">
+      <div
+        :class="
+          currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'
+        "
+      >
         <p><router-link to="otkup-opreme"> Otkup opreme </router-link></p>
       </div>
 
-      <div :class="currentRouteName == 'KorisnikRacun' ? 'menu-item-active' : 'menu-item'">
+      <div
+        :class="
+          currentRouteName == 'KorisnikRacun' ? 'menu-item-active' : 'menu-item'
+        "
+      >
         <p><router-link to="korisnik-racun"> Račun </router-link></p>
       </div>
-
     </div>
-      <div :class="currentRouteName == 'KorisnikRacun' ? 'menu-item3 dark-top' : 'menu-item3'">
-        <div class="darkModeToggle" @click="toggleDark()">
-          <div class="logout2">
-            <!--===<p class="mr-4 text-24px" style="width:150px;">DARK MODE</p>=====-->
-            <img v-if="!store.darkToggle" height="30px" width="30px" src="../src/assets/moon_empty_icon.svg">
-            <img v-if="store.darkToggle"  height="30px" width="30px" src="../src/assets/moon_full_icon.svg">
-          </div>
+    <div
+      :class="
+        currentRouteName == 'KorisnikRacun'
+          ? 'menu-item3 dark-top'
+          : 'menu-item3'
+      "
+    >
+      <div
+        class="darkModeToggle"
+        @click="toggleDark()"
+        :hidden="currentRouteName == 'UcitajSliku'"
+      >
+        <div class="logout2">
+          <!--===<p class="mr-4 text-24px" style="width:150px;">DARK MODE</p>=====-->
+          <img
+            v-if="!store.darkToggle"
+            height="35px"
+            width="30px"
+            src="../src/assets/moon_empty_icon.svg"
+          />
+          <img
+            v-if="store.darkToggle"
+            height="30px"
+            width="30px"
+            src="../src/assets/moon_full_icon.svg"
+          />
         </div>
       </div>
+    </div>
     <!--==============KORISNIK END==========================-->
     <router-view />
   </div>
@@ -94,69 +165,69 @@ export default {
     };
   },
   methods: {
-    toggleDark(){
+    toggleDark() {
       store.darkToggle = !store.darkToggle;
-      if (store.darkToggle) this.loadLight()
-      else this.loadDark()
+      if (store.darkToggle) this.loadLight();
+      else this.loadDark();
     },
-    loadTheme(){
-      if (store.darkToggle) this.loadLight()
-      else this.loadDark()
+    loadTheme() {
+      if (store.darkToggle) this.loadLight();
+      else this.loadDark();
     },
     loadDark() {
-        let r = document.querySelector(':root');
-        r.style.setProperty('--snow',               '#203d3f'); //Background
-        r.style.setProperty('--balticSea',          '#85b3b6'); //Default font dark, bg
-        r.style.setProperty('--fluorescentRed',     '#ac123e'); //Input highlight line
-        r.style.setProperty('--lateo',              '#091112'); //Input autofill
-        r.style.setProperty('--vivaldiRed',         '#e41a3c'); //CWarning font
-        r.style.setProperty('--poblano',            '#068020'); //CSuccess font
-        r.style.setProperty('--paleFlower',         '#bb2a53'); //Href link font
-        r.style.setProperty('--tin',                '#400F21'); //inactive button-bg
-        r.style.setProperty('--solidEmpire',        '#456f74'); //link font
-        r.style.setProperty('--fresco',             '#200F21'); //Default font light
-        r.style.setProperty('--graniteBrown',       '#9ecfd3'); //menu-item-active font
-        r.style.setProperty('--englishBreakfast',   '#bb2a53'); //textarea font
-        r.style.setProperty('--lemonPeel',          '#cec14c'); //u razradi bg
-        r.style.setProperty('--snowPea',            '#258843'); //prihvaćeno/riješeno bg
-        r.style.setProperty('--forbiddenFruit',     '#e41a3c'); //odbijeno bg
-        r.style.setProperty('--dustySky',           '#96a4a5'); //CCard-data bg
-        r.style.setProperty('--stretchLimo',        '#292e32'); //CSelect items-border
-        r.style.setProperty('--dwarfFortress',      '#1f0309'); //CSelect isSelected font
-        r.style.setProperty('--richGreen',          '#258843'); //CSuccess bg, font
-        r.style.setProperty('--white',              '#9ecfd3'); //line password
-        r.style.setProperty('--grey',               '#204c4e'); //line password
-        r.style.setProperty('--red',                '#8c1939'); //line password
-        r.style.setProperty('--yellow',             '#c9bc4b'); //line password
-        r.style.setProperty('--green',              '#258843'); //line password
-      },
+      let r = document.querySelector(":root");
+      r.style.setProperty("--snow", "#203d3f"); //Background
+      r.style.setProperty("--balticSea", "#85b3b6"); //Default font dark, bg
+      r.style.setProperty("--fluorescentRed", "#ac123e"); //Input highlight line
+      r.style.setProperty("--lateo", "#091112"); //Input autofill
+      r.style.setProperty("--vivaldiRed", "#e41a3c"); //CWarning font
+      r.style.setProperty("--poblano", "#068020"); //CSuccess font
+      r.style.setProperty("--paleFlower", "#bb2a53"); //Href link font
+      r.style.setProperty("--tin", "#400F21"); //inactive button-bg
+      r.style.setProperty("--solidEmpire", "#456f74"); //link font
+      r.style.setProperty("--fresco", "#200F21"); //Default font light
+      r.style.setProperty("--graniteBrown", "#9ecfd3"); //menu-item-active font
+      r.style.setProperty("--englishBreakfast", "#bb2a53"); //textarea font
+      r.style.setProperty("--lemonPeel", "#cec14c"); //u razradi bg
+      r.style.setProperty("--snowPea", "#258843"); //prihvaćeno/riješeno bg
+      r.style.setProperty("--forbiddenFruit", "#e41a3c"); //odbijeno bg
+      r.style.setProperty("--dustySky", "#96a4a5"); //CCard-data bg
+      r.style.setProperty("--stretchLimo", "#292e32"); //CSelect items-border
+      r.style.setProperty("--dwarfFortress", "#1f0309"); //CSelect isSelected font
+      r.style.setProperty("--richGreen", "#258843"); //CSuccess bg, font
+      r.style.setProperty("--white", "#9ecfd3"); //line password
+      r.style.setProperty("--grey", "#204c4e"); //line password
+      r.style.setProperty("--red", "#8c1939"); //line password
+      r.style.setProperty("--yellow", "#c9bc4b"); //line password
+      r.style.setProperty("--green", "#258843"); //line password
+    },
     loadLight() {
-        let r = document.querySelector(':root');
-        r.style.setProperty('--snow',               '#fff9f9'); //Background
-        r.style.setProperty('--balticSea',          '#3d3d3f'); //Default font dark, bg
-        r.style.setProperty('--fluorescentRed',     '#ff5252'); //Input highlight line
-        r.style.setProperty('--lateo',              '#e8e7e7'); //Input autofill
-        r.style.setProperty('--vivaldiRed',         '#e93a3a'); //CWarning font
-        r.style.setProperty('--poblano',            '#068020'); //CSuccess font
-        r.style.setProperty('--paleFlower',         '#668AAC'); //Href link font
-        r.style.setProperty('--tin',                '#919192'); //inactive button-bg
-        r.style.setProperty('--solidEmpire',        '#635a5a'); //link font
-        r.style.setProperty('--fresco',             '#f5dada'); //Default font light
-        r.style.setProperty('--graniteBrown',       '#3f2c28'); //menu-item-active font
-        r.style.setProperty('--englishBreakfast',   '#461717'); //textarea font
-        r.style.setProperty('--lemonPeel',          '#fff383'); //u razradi bg
-        r.style.setProperty('--snowPea',            '#6dd277'); //prihvaćeno/riješeno bg
-        r.style.setProperty('--forbiddenFruit',     '#ff8080'); //odbijeno bg
-        r.style.setProperty('--dustySky',           '#96a4a5'); //CCard-data bg
-        r.style.setProperty('--stretchLimo',        '#292e32'); //CSelect items-border
-        r.style.setProperty('--dwarfFortress',      '#1a0505'); //CSelect isSelected font
-        r.style.setProperty('--richGreen',          '#258843'); //CSuccess bg, font
-        r.style.setProperty('--white',              '#ffffff'); //line password
-        r.style.setProperty('--grey',               '#808080'); //line password
-        r.style.setProperty('--red',                '#ff5252'); //line password
-        r.style.setProperty('--yellow',             '#c9ba39'); //line password
-        r.style.setProperty('--green',              '#258843'); //line password
-      }
+      let r = document.querySelector(":root");
+      r.style.setProperty("--snow", "#fff9f9"); //Background
+      r.style.setProperty("--balticSea", "#3d3d3f"); //Default font dark, bg
+      r.style.setProperty("--fluorescentRed", "#ff5252"); //Input highlight line
+      r.style.setProperty("--lateo", "#e8e7e7"); //Input autofill
+      r.style.setProperty("--vivaldiRed", "#e93a3a"); //CWarning font
+      r.style.setProperty("--poblano", "#068020"); //CSuccess font
+      r.style.setProperty("--paleFlower", "#668AAC"); //Href link font
+      r.style.setProperty("--tin", "#919192"); //inactive button-bg
+      r.style.setProperty("--solidEmpire", "#635a5a"); //link font
+      r.style.setProperty("--fresco", "#f5dada"); //Default font light
+      r.style.setProperty("--graniteBrown", "#3f2c28"); //menu-item-active font
+      r.style.setProperty("--englishBreakfast", "#461717"); //textarea font
+      r.style.setProperty("--lemonPeel", "#fff383"); //u razradi bg
+      r.style.setProperty("--snowPea", "#6dd277"); //prihvaćeno/riješeno bg
+      r.style.setProperty("--forbiddenFruit", "#ff8080"); //odbijeno bg
+      r.style.setProperty("--dustySky", "#96a4a5"); //CCard-data bg
+      r.style.setProperty("--stretchLimo", "#292e32"); //CSelect items-border
+      r.style.setProperty("--dwarfFortress", "#1a0505"); //CSelect isSelected font
+      r.style.setProperty("--richGreen", "#258843"); //CSuccess bg, font
+      r.style.setProperty("--white", "#ffffff"); //line password
+      r.style.setProperty("--grey", "#808080"); //line password
+      r.style.setProperty("--red", "#ff5252"); //line password
+      r.style.setProperty("--yellow", "#c9ba39"); //line password
+      r.style.setProperty("--green", "#258843"); //line password
+    },
   },
   computed: {
     currentRouteName() {
@@ -170,30 +241,30 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Alike&display=swap");
 
 :root {
-  --snow:               #fff9f9; //Background               var(--snow);
-  --balticSea:          #3d3d3f; //Default font dark, bg    var(--balticSea);
-  --fluorescentRed:     #ff5252; //Input highlight line     var(--fluorescentRed);
-  --lateo:              #e8e7e7; //Input autofill           var(--lateo);
-  --vivaldiRed:         #e93a3a; //CWarning font            var(--vivaldiRed);
-  --poblano:            #068020; //CSuccess font            var(--poblano);
-  --paleFlower:         #668AAC; //Href link font           var(--paleFlower);
-  --tin:                #919192; //inactive button-bg       var(--tin);
-  --solidEmpire:        #635a5a; //link font                var(--solidEmpire);
-  --fresco:             #f5dada; //Default font light       var(--fresco);
-  --graniteBrown:       #3f2c28; //menu-item-active font    var(--graniteBrown);
-  --englishBreakfast:   #461717; //textarea font            var(--englishBreakfast);
-  --lemonPeel:          #fff383; //u razradi bg             var(--lemonPeel);
-  --snowPea:            #6dd277; //prihvaćeno/riješeno bg   var(--snowPea);
-  --forbiddenFruit:     #ff8080; //odbijeno bg              var(--forbiddenFruit);
-  --dustySky:           #96a4a5; //CCard-data bg            var(--dustySky);
-  --stretchLimo:        #292e32; //CSelect items-border     var(--stretchLimo);
-  --dwarfFortress:      #1a0505; //CSelect isSelected font  var(--dwarfFortress);
-  --richGreen:          #258843; //CSuccess bg, font        var(--richGreen);
-  --white:              #ffffff; //line password            var(--white);
-  --grey:               #808080; //line password            var(--grey);
-  --red:                #ff0000; //line password            var(--red);
-  --yellow:             #ffff00; //line password            var(--yellow);
-  --green:              #008000; //line password            var(--green);
+  --snow: #fff9f9; //Background               var(--snow);
+  --balticSea: #3d3d3f; //Default font dark, bg    var(--balticSea);
+  --fluorescentRed: #ff5252; //Input highlight line     var(--fluorescentRed);
+  --lateo: #e8e7e7; //Input autofill           var(--lateo);
+  --vivaldiRed: #e93a3a; //CWarning font            var(--vivaldiRed);
+  --poblano: #068020; //CSuccess font            var(--poblano);
+  --paleFlower: #668aac; //Href link font           var(--paleFlower);
+  --tin: #919192; //inactive button-bg       var(--tin);
+  --solidEmpire: #635a5a; //link font                var(--solidEmpire);
+  --fresco: #f5dada; //Default font light       var(--fresco);
+  --graniteBrown: #3f2c28; //menu-item-active font    var(--graniteBrown);
+  --englishBreakfast: #461717; //textarea font            var(--englishBreakfast);
+  --lemonPeel: #fff383; //u razradi bg             var(--lemonPeel);
+  --snowPea: #6dd277; //prihvaćeno/riješeno bg   var(--snowPea);
+  --forbiddenFruit: #ff8080; //odbijeno bg              var(--forbiddenFruit);
+  --dustySky: #96a4a5; //CCard-data bg            var(--dustySky);
+  --stretchLimo: #292e32; //CSelect items-border     var(--stretchLimo);
+  --dwarfFortress: #1a0505; //CSelect isSelected font  var(--dwarfFortress);
+  --richGreen: #258843; //CSuccess bg, font        var(--richGreen);
+  --white: #ffffff; //line password            var(--white);
+  --grey: #808080; //line password            var(--grey);
+  --red: #ff0000; //line password            var(--red);
+  --yellow: #ffff00; //line password            var(--yellow);
+  --green: #008000; //line password            var(--green);
 }
 
 * {
@@ -377,7 +448,7 @@ input:-webkit-autofill:active {
 }
 .menu-item p {
   width: 100%;
-  color: var(--fresco);  
+  color: var(--fresco);
   transition: all;
   transition-timing-function: ease-in-out;
   transition: 1s;
@@ -483,16 +554,18 @@ input:-webkit-autofill:active {
 .price {
   color: var(--fluorescentRed);
 }
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   margin-left: 0%;
   margin-top: 0%;
   opacity: 100%;
-  transition:  .95s;
+  transition: 0.95s;
 }
-.fade-enter, .fade-leave-to {
+.fade-enter,
+.fade-leave-to {
   margin-top: -50%;
   opacity: 0%;
-  transition: .5s;
+  transition: 0.5s;
 }
 .darkModeToggle {
   position: fixed;
