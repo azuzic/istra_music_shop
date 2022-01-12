@@ -113,7 +113,7 @@
         </div>
       <div>
         <p><u class="text-20px">Napomena:</u></p>
-        <textarea class="resize-none otkup-textarea mt-2">
+        <textarea disabled class="resize-none otkup-textarea mt-2">
               Malo oštećenje na stražnjoj strani.
             </textarea
         >
@@ -185,12 +185,21 @@
     <!--==============LIST END================================-->
     <!--==============FOOTER==================================-->
     <div class="menu-bottom3 grid grid-cols-1 mt-4">
-        <div class="menu-item text-left mx-auto">
-          <img v-if="store.darkToggle" class="money" src="@/assets/money_icon.svg" />
-          <img v-if="!store.darkToggle" class="money" src="@/assets/money_icon_dark.svg" />
+        <div class="bg-bottom"></div>
+        <div class="menu-item5 text-left mx-auto">
+          <img
+            v-if="store.darkToggle"
+            class="money"
+            src="@/assets/money_icon.svg"
+          />
+          <img
+            v-if="!store.darkToggle"
+            class="money"
+            src="@/assets/money_icon_dark.svg"
+          />
           <p class="pl-4 text-24px">
             Predložena cijena:
-            <b class="price"> 1500 kn </b>
+            <b class="price">1500kn</b>
           </p>
         </div>
       </div>
@@ -249,5 +258,18 @@ export default {
 }
 .menu-highlight {
   background-color: var(--fluorescentRed);
+}
+.bg-bottom {
+  position: absolute;
+  width: 100%;
+  background-color: var(--balticSea4);
+  height: 50px;
+}
+.menu-item5 p {
+  color: var(--balticSea7) !important;
+}
+.otkup-textarea:focus {
+  outline: none !important;
+  border-color: var(--fluorescentRed);
 }
 </style>

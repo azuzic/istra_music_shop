@@ -219,7 +219,7 @@
         <!--================ALERT END====================-->
         <!--===================REGISTRIRAJ SE BUTTON=======-->
         <div
-          class="place-self-center"
+          class="place-self-center mb-8"
           :class="IsAllFilled ? 'active' : 'inactive'"
         >
           <CButton

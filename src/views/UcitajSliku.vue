@@ -7,7 +7,8 @@
     </div>
     <div class="CDodavanje-top">
       <div class="menu-item6 mx-auto">
-        <img class="dodavanje-icon" src="@/assets/upload.svg" />
+        <img v-if="store.darkToggle" class="dodavanje-icon" src="@/assets/upload.svg" />
+        <img v-if="!store.darkToggle" class="dodavanje-icon" src="@/assets/upload_dark.svg" />
         <p>Molimo odaberite sliku za</p>
         <p>{{ store.pictureUpload }}</p>
         <p
@@ -74,7 +75,7 @@ export default {
   display: flex;
   align-items: center;
   text-align: center;
-  background-color: var(--stretchLimo);
+  background-color: var(--stretchLimo2);
   width: 100%;
   height: 72%;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));

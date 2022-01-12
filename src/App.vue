@@ -3,45 +3,23 @@
     <div v-if="loadTheme()"></div>
     <div class="CBg" :class="store.darkToggle ? 'CBg-light' : 'CBg-dark'"></div>
     <!--==============DJELATNIK ============================-->
-    <div
-      v-if="store.currentUser == 'djelatnik@gmail.com'"
-      class="menu2 top-0 grid grid-cols-2 mb-4"
-    >
-      <div
-        :class="
-          currentRouteName == 'Djelatnik'
-            ? 'menu-item-active menu-item2 menu-top-item-grid0'
-            : currentRouteName == 'DjelatnikRacun'
-            ? 'menu-item-active menu-item2 menu-top-item-grid1'
-            : ''
-        "
-      ></div>
+    <div v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-2 mb-4">
+  
+      <div :class=" currentRouteName == 'Djelatnik' ? 'menu-item2 menu-top-item-grid0' : 
+                    currentRouteName == 'DjelatnikRacun' ? 'menu-item2 menu-top-item-grid1' : ''"> 
+      </div>
     </div>
     <!--===============================-->
-    <div
-      v-if="
-        store.currentUser == 'djelatnik@gmail.com' &&
-        currentRouteName != 'PregledOtkupa'
-      "
-      class="menu top-0 grid grid-cols-2 mb-4"
-    >
-      <div
-        :class="
-          currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'
-        "
-      >
+    <div v-if="store.currentUser == 'djelatnik@gmail.com' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-2 mb-4">
+      
+      <div :class="currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="djelatnik"> Pregled otkupa </router-link></p>
       </div>
 
-      <div
-        :class="
-          currentRouteName == 'DjelatnikRacun'
-            ? 'menu-item-active'
-            : 'menu-item'
-        "
-      >
+      <div :class="currentRouteName == 'DjelatnikRacun' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="djelatnik-racun"> Račun </router-link></p>
       </div>
+
     </div>
     <!--==============DJELATNIK END=========================-->
     <!--==============KORISNIK =============================-->
@@ -69,15 +47,11 @@
 
     </div>
     <!--==============DARK MODE=============================-->
-      <div :class="currentRouteName == 'KorisnikRacun' ? 'menu-item3 dark-top' : 'menu-item3 dark-top2'">
-        <div class="darkModeToggle" @click="toggleDark()">
-          <div class="logout2">
-            <!--===<p class="mr-4 text-24px" style="width:150px;">DARK MODE</p>=====-->
-            <img v-if="!store.darkToggle" height="30px" width="30px" src="../src/assets/moon_empty_icon.svg">
-            <img v-if="store.darkToggle"  height="30px" width="30px" src="../src/assets/moon_full_icon.svg">
-          </div>
-        </div>
-      </div>
+    <div class="logout2" @click="toggleDark()">
+      <!--===<p class="mr-4 text-24px" style="width:150px;">DARK MODE</p>=====-->
+      <img v-if="!store.darkToggle" height="30px" width="30px" src="../src/assets/moon_empty_icon.svg">
+      <img v-if="store.darkToggle"  height="30px" width="30px" src="../src/assets/moon_full_icon.svg">
+    </div>
     <!--==============DARK MODE END=========================-->
     <!--==============KORISNIK END==========================-->
     <router-view />
@@ -131,34 +105,40 @@ export default {
         r.style.setProperty('--snow',               'hsl(0, 0%, 7%, 100%)');  //Background
         r.style.setProperty('--balticSea',          'hsl(0, 0%, 100%, 87%)'); //Default font dark
         r.style.setProperty('--balticSea3',         'hsl(0, 0%, 100%, 60%)'); //Default font lighter
+        r.style.setProperty('--balticSea8',         'hsl(0, 0%, 100%, 48%)'); //Default font lighter
         r.style.setProperty('--balticSea2',         'hsl(0, 0%, 100%, 16%)'); //br
         r.style.setProperty('--balticSea4',         'hsl(0, 0%, 100%, 5%)');  //bg menu
         r.style.setProperty('--balticSea5',         'hsl(0, 0%, 7%, 100%)');  //bg menu2
+        r.style.setProperty('--balticSea9',         'hsl(0, 0%, 11%, 100%)');  //bg menu2
         r.style.setProperty('--balticSea6',         'hsl(0, 0%, 7%, 100%)');  //select
         r.style.setProperty('--balticSea7',         'hsl(0, 0%, 100%, 87%)');  //select
         r.style.setProperty('--fluorescentRed',     '#ad1f47'); //Input highlight line
+        r.style.setProperty('--fluorescentRed2',    'hsl(0, 0%, 19%, 100%)'); //Input highlight line
         r.style.setProperty('--lateo',              'hsl(0, 0%, 100%, 10%)'); //Input autofill
-        r.style.setProperty('--vivaldiRed',         '#e41a3c'); //CWarning font
+        r.style.setProperty('--vivaldiRed',         '#ad1f47'); //CWarning font
+        r.style.setProperty('--vivaldiRed2',        '#cc4658'); //CWarning font
         r.style.setProperty('--poblano',            '#068020'); //CSuccess font
         r.style.setProperty('--paleFlower',         '#bb2a53'); //Href link font
         r.style.setProperty('--tin',                '#400F21'); //inactive button-bg
-        r.style.setProperty('--solidEmpire',        '#456f74'); //link font
+        r.style.setProperty('--solidEmpire',        'hsl(0, 0%, 100%, 36%)'); //link font
         r.style.setProperty('--fresco',             'hsl(0, 0%, 100%, 87%)'); //Default font light
         r.style.setProperty('--graniteBrown',       'hsl(0, 0%, 0%, 87%)');   //menu-item-active font
         r.style.setProperty('--englishBreakfast',   '#bb2a53'); //textarea font
         r.style.setProperty('--lemonPeel',          '#cec14c'); //u razradi bg
         r.style.setProperty('--snowPea',            '#258843'); //prihvaćeno/riješeno bg
         r.style.setProperty('--forbiddenFruit',     '#e41a3c'); //odbijeno bg
-        r.style.setProperty('--dustySky',           '#96a4a5'); //CCard-data bg
+        r.style.setProperty('--dustySky',           'hsl(0, 0%, 100%, 87%)'); //CCard-data bg
         r.style.setProperty('--stretchLimo',        'hsl(0, 0%, 100%, 16%)'); //CSelect items-border
+        r.style.setProperty('--stretchLimo2',       'hsl(0, 0%, 11%, 100%)'); //CSelect items-border
         r.style.setProperty('--dwarfFortress',      '#1f0309'); //CSelect isSelected font
         r.style.setProperty('--dwarfFortress2',     'hsl(0, 0%, 100%, 87%)'); //CSelect isSelected font
         r.style.setProperty('--richGreen',          '#258843'); //CSuccess bg, font
-        r.style.setProperty('--white',              '#9ecfd3'); //line password
-        r.style.setProperty('--grey',               '#204c4e'); //line password
+        r.style.setProperty('--white',              'hsl(0, 0%, 21%, 100%)'); //line password
+        r.style.setProperty('--grey',               'hsl(0, 0%, 4%, 100%)'); //line password
         r.style.setProperty('--red',                '#8c1939'); //line password
         r.style.setProperty('--yellow',             '#c9bc4b'); //line password
         r.style.setProperty('--green',              '#258843'); //line password
+        r.style.setProperty('--transparency',       '0.25');    //button transparency
     },
     loadLight() {
       let r = document.querySelector(':root');
@@ -170,9 +150,13 @@ export default {
         r.style.setProperty('--balticSea5',         '#3d3d3f'); //Default font dark, bg
         r.style.setProperty('--balticSea6',         '#fff9f9'); //Default font dark, bg
         r.style.setProperty('--balticSea7',         '#fff9f9'); //Default font dark, bg
+        r.style.setProperty('--balticSea8',         '#3d3d3f'); //Default font dark, bg
+        r.style.setProperty('--balticSea9',         '#3d3d3f'); //Default font dark, bg
         r.style.setProperty('--fluorescentRed',     '#ff5252'); //Input highlight line
+        r.style.setProperty('--fluorescentRed2',    '#ff5252'); //Input highlight line
         r.style.setProperty('--lateo',              '#e8e7e700'); //Input autofill
         r.style.setProperty('--vivaldiRed',         '#e93a3a'); //CWarning font
+        r.style.setProperty('--vivaldiRed2',        '#e45656'); //CWarning font
         r.style.setProperty('--poblano',            '#068020'); //CSuccess font
         r.style.setProperty('--paleFlower',         '#668AAC'); //Href link font
         r.style.setProperty('--tin',                '#919192'); //inactive button-bg
@@ -180,11 +164,12 @@ export default {
         r.style.setProperty('--fresco',             '#f5dada'); //Default font light
         r.style.setProperty('--graniteBrown',       '#3f2c28'); //menu-item-active font
         r.style.setProperty('--englishBreakfast',   '#461717'); //textarea font
-        r.style.setProperty('--lemonPeel',          '#fff383'); //u razradi bg
+        r.style.setProperty('--lemonPeel',          'hsl(54, 51%, 56%)'); //u razradi bg
         r.style.setProperty('--snowPea',            '#6dd277'); //prihvaćeno/riješeno bg
         r.style.setProperty('--forbiddenFruit',     '#ff8080'); //odbijeno bg
         r.style.setProperty('--dustySky',           '#96a4a5'); //CCard-data bg
         r.style.setProperty('--stretchLimo',        '#292e32'); //CSelect items-border
+        r.style.setProperty('--stretchLimo2',       '#292e32'); //CSelect items-border
         r.style.setProperty('--dwarfFortress',      '#1a0505'); //CSelect isSelected font
         r.style.setProperty('--dwarfFortress2',      '#1a0505'); //CSelect isSelected font
         r.style.setProperty('--richGreen',          '#258843'); //CSuccess bg, font
@@ -193,6 +178,7 @@ export default {
         r.style.setProperty('--red',                '#ff5252'); //line password
         r.style.setProperty('--yellow',             '#c9ba39'); //line password
         r.style.setProperty('--green',              '#258843'); //line password
+        r.style.setProperty('--transparency',       '0.50');    //button transparency
     },
   },
   computed: {
@@ -215,9 +201,13 @@ export default {
   --balticSea5:         #3d3d3f; //bt                       var(--balticSea5);
   --balticSea6:         #3d3d3f; //bt                       var(--balticSea6);
   --balticSea7:         #3d3d3f; //bt                       var(--balticSea7);
+  --balticSea8:         #3d3d3f; //bt                       var(--balticSea8);
+  --balticSea9:         #3d3d3f; //bt                       var(--balticSea9);
   --fluorescentRed:     #ff5252; //Input highlight line     var(--fluorescentRed);
+  --fluorescentRed2:    #ff5252; //Input highlight line     var(--fluorescentRed2);
   --lateo:              #e8e7e7; //Input autofill           var(--lateo);
   --vivaldiRed:         #e93a3a; //CWarning font            var(--vivaldiRed);
+  --vivaldiRed2:        #e93a3a; //CWarning font            var(--vivaldiRed2);
   --poblano:            #068020; //CSuccess font            var(--poblano);
   --paleFlower:         #668AAC; //Href link font           var(--paleFlower);
   --tin:                #919192; //inactive button-bg       var(--tin);
@@ -230,6 +220,7 @@ export default {
   --forbiddenFruit:     #ff8080; //odbijeno bg              var(--forbiddenFruit);
   --dustySky:           #96a4a5; //CCard-data bg            var(--dustySky);
   --stretchLimo:        #292e32; //CSelect items-border     var(--stretchLimo);
+  --stretchLimo2:       #292e32; //CSelect items-border     var(--stretchLimo2);
   --dwarfFortress:      #1a0505; //CSelect isSelected font  var(--dwarfFortress);
   --dwarfFortress2:     #1a0505; //CSelect isSelected font  var(--dwarfFortress);
   --richGreen:          #258843; //CSuccess bg, font        var(--richGreen);
@@ -238,6 +229,7 @@ export default {
   --red:                #ff0000; //line password            var(--red);
   --yellow:             #ffff00; //line password            var(--yellow);
   --green:              #008000; //line password            var(--green);
+  --transparency:       0.50;      //button transparency      var(--transparency);
 }
 
 * {
@@ -252,7 +244,6 @@ export default {
   transition: 0.5s;
 }
 html {
-  color: #85b3b6;
   background-color: var(--snow);
 }
 .CBg {
@@ -299,7 +290,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  box-shadow: 0 0 0 30px var(--lateo) inset !important;
+  box-shadow: 0 0 0 30px var(--balticSea6) inset !important;
   -webkit-text-fill-color: var(--balticSea3);
   border-radius: 0% !important;
 }
@@ -342,7 +333,7 @@ input:-webkit-autofill:active {
   opacity: 1;
 }
 .inactive div .button-bg {
-  opacity: 0.25;
+  opacity: var(--transparency);
 }
 .menu {
   position: fixed;
@@ -471,7 +462,7 @@ input:-webkit-autofill:active {
   overflow: hidden;
 }
 .otkup-div-image img {
-  border-color: var(--balticSea);
+  border-color: var(--stretchLimo);
   height: 100% !important;
   border-width: 2px;
 }
@@ -512,6 +503,8 @@ input:-webkit-autofill:active {
 }
 .otkup-textarea {
   padding: 8px;
+  height: 128px;
+  width: 100%;
   background-color: var(--balticSea6);
   color: var(--balticSea);
   font-size: 18px;
@@ -541,23 +534,11 @@ input:-webkit-autofill:active {
   opacity: 0%;
   transition: .5s;
 }
-.darkModeToggle {
-  position: fixed;
-  width: 100%;
-  z-index: 1000;
-}
-.dark-top {
-  margin-top: 80px !important;
-  margin-bottom: -40px !important;
-}
-.dark-top2 {
-  margin-top: -20px !important;
-  margin-bottom: 20px !important;
-}
 .logout2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: fixed;
+  z-index: 1000;
+  bottom: 0px;
+  padding: 10px;
 }
 .menu-item3 {
   height: inherit;

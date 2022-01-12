@@ -5,6 +5,8 @@
         <p>{{ btn }}</p>
       </button>
     </div>
+    <div class="button-bg2">
+    </div>
   </div>
 </template>
 
@@ -21,8 +23,19 @@ export default {
 <style scoped lang="scss">
 .button-bg {
   min-width: 226px;
-  background: var(--balticSea);
+  background: var(--balticSea9);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+}
+
+.button-bg2 {
+  position: relative;
+  min-width: 226px;
+  height: 51px;
+  margin-bottom: -51px;
+  z-index: -21;
+  bottom: 51px;
+  background: var(--snow);
   border-radius: 16px;
 }
 

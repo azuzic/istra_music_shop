@@ -105,12 +105,12 @@ export default {
 .CCard-footer {
   width: 100%;
   height: 72px;
-  background: var(--dwarfFortress);
+  background: var(--balticSea5);
   border-bottom-right-radius: 8px;
 }
 .CCard-icon-1 {
   height: 100%;
-  background: var(--forbiddenFruit);
+  background: var(--fluorescentRed);
 }
 .CCard-icon-2 {
   height: 100%;
@@ -153,25 +153,27 @@ export default {
   letter-spacing: -1px;
   font-size: 18px;
   top: 2px;
-  color: var(--dwarfFortress);
+  color: var(--balticSea);
 }
 .CCard-subtitle {
   position: relative;
   font-size: 11px;
   letter-spacing: -0.5px;
   bottom: 2px;
-  color: var(--dwarfFortress);
+  color: var(--balticSea3);
 }
 .CCard-date {
   position: relative;
   bottom: 4px;
   font-size: 12px;
-  color: var(--dwarfFortress);
+  font-weight: normal !important;
+  letter-spacing: 0.25px;
+  color: var(--balticSea8);
 }
 .CCard-price {
   position: relative;
   bottom: 0px;
-  font-size: 12px;
-  color: var(--vivaldiRed) !important;
+  font-size: 14px;
+  color: var(--vivaldiRed2) !important;
 }
 </style>

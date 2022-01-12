@@ -30,7 +30,7 @@ export default {
   border-radius: 8px;
   border-style: dashed;
   border-color: var(--richGreen);
-  background-color: var(--lateo);
+  background-color: var(--snow);
 }
 .img-success {
   height: 28px;

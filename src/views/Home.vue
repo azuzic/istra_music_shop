@@ -13,8 +13,8 @@
         />
       </div>
       <div class="place-self-center text-center pl-8 pr-8">
-        Ovdje možete otkupiti instrumente koje ne koristite pomoću
-        automatiziranog sustava otkupa glazbenih instrumenata.
+        <p class="text-home">Ovdje možete otkupiti instrumente koje ne koristite pomoću
+        automatiziranog sustava otkupa glazbenih instrumenata.</p>
       </div>
       <div class="place-self-center">
         <CButton
@@ -51,3 +51,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.text-home {
+  color: var(--balticSea3) !important;
+}
+</style>
