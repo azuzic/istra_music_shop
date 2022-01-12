@@ -1,28 +1,62 @@
 <template>
   <div class="custom-select">
-    <div @click="open = !open" :class="open ? 'CSelect-max' : 'CSelect-min'"></div>
-    <div v-if="options.includes(selected)" class="selected" @click="open = !open">
+    <div
+      @click="open = !open"
+      :class="open ? 'CSelect-max' : 'CSelect-min'"
+    ></div>
+    <div
+      v-if="options.includes(selected)"
+      class="selected"
+      @click="open = !open"
+    >
       {{ selected }}
     </div>
-    <div v-if="!options.includes(selected)" class="selected" @click="open = !open">
+    <div
+      v-if="!options.includes(selected)"
+      class="selected"
+      @click="open = !open"
+    >
       {{ options[0] }}
     </div>
-    <img v-if="store.darkToggle" class="float-right" :class="open ? 'spin-pos' : 'spin-pos2'" src="@/assets/dropdown_icon.svg">
-    <img v-if="!store.darkToggle" class="float-right" :class="open ? 'spin-pos' : 'spin-pos2'" src="@/assets/dropdown_icon_dark.svg">
-    
-    <div class="items" :class="!open ? 'selectHide' : options.length > 5 ? 'selectShow items-border' : 'selectShow'">
-        <div
-            transition="thing"
-            v-for="(option, i) of options"
-            :key="i"
-            :class="option == selected ? 'isSelected' : ''"
-            @click="selected = option; open = false; $emit('input', option);">
-            <div>
-              {{ option }}
-            </div>
+    <img
+      v-if="store.darkToggle"
+      class="float-right"
+      :class="open ? 'spin-pos' : 'spin-pos2'"
+      src="@/assets/dropdown_icon.svg"
+    />
+    <img
+      v-if="!store.darkToggle"
+      class="float-right"
+      :class="open ? 'spin-pos' : 'spin-pos2'"
+      src="@/assets/dropdown_icon_dark.svg"
+    />
+
+    <div
+      class="items"
+      :class="
+        !open
+          ? 'selectHide'
+          : options.length > 5
+          ? 'selectShow items-border'
+          : 'selectShow'
+      "
+    >
+      <div
+        transition="thing"
+        v-for="(option, i) of options"
+        :key="i"
+        :class="option == selected ? 'isSelected' : ''"
+        @click="
+          selected = option;
+          open = false;
+          $emit('input', option);
+        "
+      >
+        <div>
+          {{ option }}
         </div>
+      </div>
     </div>
-    
   </div>
 </template>
 
@@ -33,15 +67,17 @@ export default {
   name: "CSelect",
   props: {
     options: Array,
-    default: String
+    default: String,
   },
   data() {
     return {
-      selected: 
-      this.default            ? this.default    : 
-      this.options.length > 0 ? this.options[0] : null,
+      selected: this.default
+        ? this.default
+        : this.options.length > 0
+        ? this.options[0]
+        : null,
       open: false,
-      store
+      store,
     };
   },
   mounted() {
@@ -151,7 +187,7 @@ export default {
   position: fixed;
   top: 0px;
   left: 0px;
-  background-color: rgba(128, 255, 0, 0.0);
+  background-color: rgba(128, 255, 0, 0);
   z-index: 800;
   height: 100%;
   width: 100%;
@@ -160,7 +196,7 @@ export default {
   position: fixed;
   top: 0px;
   left: 0px;
-  background-color: rgba(128, 255, 0, 0.0);
+  background-color: rgba(128, 255, 0, 0);
   z-index: 800;
   height: 0%;
   width: 0%;
