@@ -133,7 +133,7 @@ export default {
   bottom: -1px;
   width: 100%;
   height: 50px;
-  background-color: var(--balticSea);
+  background-color: var(--balticSea9);
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
 }
 .menu-item-grid0 {
@@ -151,5 +151,11 @@ export default {
 .menu-item-grid3 {
   margin-left: 300%;
   background-color: var(--forbiddenFruit);
+}
+.menu-item-card {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background-color: var(--balticSea4);
 }
 </style>

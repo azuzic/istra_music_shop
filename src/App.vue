@@ -394,7 +394,6 @@ input:-webkit-autofill:active {
   text-align: center;
   background-color: var(--balticSea4);
 }
-
 .menu-item5 {
   display: flex;
   align-items: center;
