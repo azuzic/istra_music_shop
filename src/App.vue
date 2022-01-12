@@ -99,30 +99,10 @@
       </div>
     </div>
     <!--==============DARK MODE=============================-->
-    <div
-      :class="
-        currentRouteName == 'KorisnikRacun'
-          ? 'menu-item3 dark-top'
-          : 'menu-item3 dark-top2'
-      "
-    >
-      <div class="darkModeToggle" @click="toggleDark()">
-        <div class="logout2">
-          <!--===<p class="mr-4 text-24px" style="width:150px;">DARK MODE</p>=====-->
-          <img
-            v-if="!store.darkToggle"
-            height="30px"
-            width="30px"
-            src="../src/assets/moon_empty_icon.svg"
-          />
-          <img
-            v-if="store.darkToggle"
-            height="30px"
-            width="30px"
-            src="../src/assets/moon_full_icon.svg"
-          />
-        </div>
-      </div>
+    <div class="logout2" @click="toggleDark()">
+      <!--===<p class="mr-4 text-24px" style="width:150px;">DARK MODE</p>=====-->
+      <img v-if="!store.darkToggle" height="30px" width="30px" src="../src/assets/moon_empty_icon.svg">
+      <img v-if="store.darkToggle"  height="30px" width="30px" src="../src/assets/moon_full_icon.svg">
     </div>
     <!--==============DARK MODE END=========================-->
     <!--==============KORISNIK END==========================-->
@@ -253,37 +233,43 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Alike&display=swap");
 
 :root {
-  --snow: #fff9f9; //Background               var(--snow);
-  --balticSea: #3d3d3f; //Default font dark, bg    var(--balticSea);
-  --balticSea2: #3d3d3f; //bt                       var(--balticSea2);
-  --balticSea3: #3d3d3f; //bt                       var(--balticSea3);
-  --balticSea4: #3d3d3f; //bt                       var(--balticSea4);
-  --balticSea5: #3d3d3f; //bt                       var(--balticSea5);
-  --balticSea6: #3d3d3f; //bt                       var(--balticSea6);
-  --balticSea7: #3d3d3f; //bt                       var(--balticSea7);
-  --fluorescentRed: #ff5252; //Input highlight line     var(--fluorescentRed);
-  --lateo: #e8e7e7; //Input autofill           var(--lateo);
-  --vivaldiRed: #e93a3a; //CWarning font            var(--vivaldiRed);
-  --poblano: #068020; //CSuccess font            var(--poblano);
-  --paleFlower: #668aac; //Href link font           var(--paleFlower);
-  --tin: #919192; //inactive button-bg       var(--tin);
-  --solidEmpire: #635a5a; //link font                var(--solidEmpire);
-  --fresco: #f5dada; //Default font light       var(--fresco);
-  --graniteBrown: #3f2c28; //menu-item-active font    var(--graniteBrown);
-  --englishBreakfast: #461717; //textarea font            var(--englishBreakfast);
-  --lemonPeel: #fff383; //u razradi bg             var(--lemonPeel);
-  --snowPea: #6dd277; //prihvaćeno/riješeno bg   var(--snowPea);
-  --forbiddenFruit: #ff8080; //odbijeno bg              var(--forbiddenFruit);
-  --dustySky: #96a4a5; //CCard-data bg            var(--dustySky);
-  --stretchLimo: #292e32; //CSelect items-border     var(--stretchLimo);
-  --dwarfFortress: #1a0505; //CSelect isSelected font  var(--dwarfFortress);
-  --dwarfFortress2: #1a0505; //CSelect isSelected font  var(--dwarfFortress);
-  --richGreen: #258843; //CSuccess bg, font        var(--richGreen);
-  --white: #ffffff; //line password            var(--white);
-  --grey: #808080; //line password            var(--grey);
-  --red: #ff0000; //line password            var(--red);
-  --yellow: #ffff00; //line password            var(--yellow);
-  --green: #008000; //line password            var(--green);
+  --snow:               #fff9f9; //Background               var(--snow);
+  --balticSea:          #3d3d3f; //Default font dark, bg    var(--balticSea);
+  --balticSea2:         #3d3d3f; //bt                       var(--balticSea2);
+  --balticSea3:         #3d3d3f; //bt                       var(--balticSea3);
+  --balticSea4:         #3d3d3f; //bt                       var(--balticSea4);
+  --balticSea5:         #3d3d3f; //bt                       var(--balticSea5);
+  --balticSea6:         #3d3d3f; //bt                       var(--balticSea6);
+  --balticSea7:         #3d3d3f; //bt                       var(--balticSea7);
+  --balticSea8:         #3d3d3f; //bt                       var(--balticSea8);
+  --balticSea9:         #3d3d3f; //bt                       var(--balticSea9);
+  --fluorescentRed:     #ff5252; //Input highlight line     var(--fluorescentRed);
+  --fluorescentRed2:    #ff5252; //Input highlight line     var(--fluorescentRed2);
+  --lateo:              #e8e7e7; //Input autofill           var(--lateo);
+  --vivaldiRed:         #e93a3a; //CWarning font            var(--vivaldiRed);
+  --vivaldiRed2:        #e93a3a; //CWarning font            var(--vivaldiRed2);
+  --poblano:            #068020; //CSuccess font            var(--poblano);
+  --paleFlower:         #668AAC; //Href link font           var(--paleFlower);
+  --tin:                #919192; //inactive button-bg       var(--tin);
+  --solidEmpire:        #635a5a; //link font                var(--solidEmpire);
+  --fresco:             #f5dada; //Default font light       var(--fresco);
+  --graniteBrown:       #3f2c28; //menu-item-active font    var(--graniteBrown);
+  --englishBreakfast:   #461717; //textarea font            var(--englishBreakfast);
+  --lemonPeel:          #fff383; //u razradi bg             var(--lemonPeel);
+  --snowPea:            #6dd277; //prihvaćeno/riješeno bg   var(--snowPea);
+  --forbiddenFruit:     #ff8080; //odbijeno bg              var(--forbiddenFruit);
+  --dustySky:           #96a4a5; //CCard-data bg            var(--dustySky);
+  --stretchLimo:        #292e32; //CSelect items-border     var(--stretchLimo);
+  --stretchLimo2:       #292e32; //CSelect items-border     var(--stretchLimo2);
+  --dwarfFortress:      #1a0505; //CSelect isSelected font  var(--dwarfFortress);
+  --dwarfFortress2:     #1a0505; //CSelect isSelected font  var(--dwarfFortress);
+  --richGreen:          #258843; //CSuccess bg, font        var(--richGreen);
+  --white:              #ffffff; //line password            var(--white);
+  --grey:               #808080; //line password            var(--grey);
+  --red:                #ff0000; //line password            var(--red);
+  --yellow:             #ffff00; //line password            var(--yellow);
+  --green:              #008000; //line password            var(--green);
+  --transparency:       0.50;      //button transparency      var(--transparency);
 }
 
 * {
@@ -298,7 +284,6 @@ export default {
   transition: 0.5s;
 }
 html {
-  color: #85b3b6;
   background-color: var(--snow);
 }
 .CBg {
@@ -345,7 +330,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  box-shadow: 0 0 0 30px var(--lateo) inset !important;
+  box-shadow: 0 0 0 30px var(--balticSea6) inset !important;
   -webkit-text-fill-color: var(--balticSea3);
   border-radius: 0% !important;
 }
@@ -388,7 +373,7 @@ input:-webkit-autofill:active {
   opacity: 1;
 }
 .inactive div .button-bg {
-  opacity: 0.25;
+  opacity: var(--transparency);
 }
 .menu {
   position: fixed;
@@ -449,7 +434,6 @@ input:-webkit-autofill:active {
   text-align: center;
   background-color: var(--balticSea4);
 }
-
 .menu-item5 {
   display: flex;
   align-items: center;
@@ -472,7 +456,7 @@ input:-webkit-autofill:active {
 }
 .menu-item p {
   width: 100%;
-  color: var(--fresco);
+  color: var(--fresco);  
   transition: all;
   transition-timing-function: ease-in-out;
   transition: 1s;
@@ -517,7 +501,7 @@ input:-webkit-autofill:active {
   overflow: hidden;
 }
 .otkup-div-image img {
-  border-color: var(--balticSea);
+  border-color: var(--stretchLimo);
   height: 100% !important;
   border-width: 2px;
 }
@@ -558,6 +542,8 @@ input:-webkit-autofill:active {
 }
 .otkup-textarea {
   padding: 8px;
+  height: 128px;
+  width: 100%;
   background-color: var(--balticSea6);
   color: var(--balticSea);
   font-size: 18px;
@@ -576,36 +562,22 @@ input:-webkit-autofill:active {
 .price {
   color: var(--fluorescentRed);
 }
-.fade-enter-active,
-.fade-leave-active {
+.fade-enter-active, .fade-leave-active {
   margin-left: 0%;
   margin-top: 0%;
   opacity: 100%;
-  transition: 0.95s;
+  transition:  .95s;
 }
-.fade-enter,
-.fade-leave-to {
+.fade-enter, .fade-leave-to {
   margin-top: -50%;
   opacity: 0%;
-  transition: 0.5s;
-}
-.darkModeToggle {
-  position: fixed;
-  width: 100%;
-  z-index: 1000;
-}
-.dark-top {
-  margin-top: 80px !important;
-  margin-bottom: -40px !important;
-}
-.dark-top2 {
-  margin-top: -20px !important;
-  margin-bottom: 20px !important;
+  transition: .5s;
 }
 .logout2 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: fixed;
+  z-index: 1000;
+  bottom: 0px;
+  padding: 10px;
 }
 .menu-item3 {
   height: inherit;
