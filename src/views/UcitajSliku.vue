@@ -5,7 +5,7 @@
         <CButtonSingle btn="POTVRDI" :btnClickHandler="dummy" />
       </div>
     </div>
-    <button class="CDodavanje-top" @click="isPressed = true" v-if="!isPressed">
+    <div class="CDodavanje-top">
       <div class="menu-item6 mx-auto">
         <img class="dodavanje-icon" src="@/assets/upload.svg" />
         <p>Molimo odaberite sliku za</p>
@@ -25,32 +25,27 @@
           <p>Slikajte kamerom</p>
         </div>
       </div>
-    </button>
-    <croppa
-      v-model="image"
-      v-else
-      :width="415"
-      :height="650"
-      :canvas-color="'#292e32'"
-      :placeholder="'Dodirnite kako biste dodali sliku'"
-      :placeholder-font-size="20"
-      :placeholder-color="'default'"
-      :accept="'image/*'"
-      :file-size-limit="0"
-      :quality="2"
-      :zoom-speed="3"
-      :disabled="false"
-      :disable-drag-and-drop="false"
-      :disable-click-to-choose="false"
-      :disable-drag-to-move="false"
-      :disable-scroll-to-zoom="false"
-      :disable-rotation="false"
-      :prevent-white-space="true"
-      :reverse-scroll-to-zoom="false"
-      :show-remove-button="true"
-      :remove-button-color="'gray'"
-      :remove-button-size="60"
-    ></croppa>
+      <croppa
+        v-model="image"
+        auto-sizing
+        :placeholder="''"
+        :accept="'image/*'"
+        :file-size-limit="0"
+        :quality="2"
+        :zoom-speed="3"
+        :disabled="false"
+        :disable-drag-and-drop="false"
+        :disable-click-to-choose="false"
+        :disable-drag-to-move="false"
+        :disable-scroll-to-zoom="false"
+        :disable-rotation="false"
+        :prevent-white-space="true"
+        :reverse-scroll-to-zoom="false"
+        :show-remove-button="true"
+        :remove-button-color="'gray'"
+      ></croppa>
+      
+    </div>
   </div>
 </template>
 <script>
@@ -74,8 +69,6 @@ export default {
 };
 </script>
 <style>
-.croppa-container {
-}
 .CDodavanje-top {
   position: absolute;
   display: flex;
@@ -143,6 +136,7 @@ export default {
   margin-top: 24px;
   border-radius: 32px;
   background-color: var(--fluorescentRed);
+  z-index: 42069;
 }
 .menu-item7 p {
   color: #000000d0;
@@ -151,4 +145,21 @@ export default {
   margin-left: 6px;
   margin-top: 4px;
 }
+
+.croppa-container {
+   width: 100% !important;
+   height: 100% !important;
+   position: absolute;
+   color: transparent;
+   height: 100% !important;
+   background-color: transparent;
+ }
+
+ .croppa-container svg {
+   width: 35px !important;
+   height: 35px !important;
+   margin-top: 10px;
+   margin-right: 10px;
+   opacity: 50%;
+ }
 </style>
