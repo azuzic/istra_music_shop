@@ -1,8 +1,11 @@
 <template>
   <div>
     <div class="CDodavanje-bottom grid grid-cols-1">
-      <div class="place-self-center" :class="image ? '' : 'tranparent-75'">
-        <CButtonSingle btn="POTVRDI" :btnClickHandler="dummy" />
+      <div class="place-self-center" :class="canUpload ? '' : 'tranparent-75'">
+        <CButtonSingle
+          btn="PRENESI  "
+          :btnClickHandler="canUpload ? savePhoto : dummy"
+        />
       </div>
     </div>
     <div class="CDodavanje-top">
@@ -10,24 +13,19 @@
         <img v-if="store.darkToggle" class="dodavanje-icon" src="@/assets/upload.svg" />
         <img v-if="!store.darkToggle" class="dodavanje-icon" src="@/assets/upload_dark.svg" />
         <p>Molimo odaberite sliku za</p>
-        <p>{{ store.pictureUpload }}</p>
-        <p
-          v-if="
-            store.pictureUpload != 'Vrat gitare' &&
-            store.pictureUpload != 'Glavu gitare'
-          "
-        >
+        <p>{{ uploadText }}</p>
+        <p v-if="pictures.selected != 5 && pictures.selected != 6">
           stranu gitare
         </p>
       </div>
       <div class="menu-bottom-dodavanje grid grid-cols-1 mt-4">
         <div class="menu-item7 mx-auto">
           <img class="photo-icon" src="@/assets/photo_icon.png" />
-          <p>Slikajte kamerom</p>
+          <p>Dodajte fotografiju</p>
         </div>
       </div>
       <croppa
-        v-model="image"
+        v-model="imageReference"
         auto-sizing
         :placeholder="''"
         :accept="'image/*'"
@@ -44,28 +42,64 @@
         :reverse-scroll-to-zoom="false"
         :show-remove-button="true"
         :remove-button-color="'gray'"
+        @new-image="canUpload = true"
+        @image-remove="canUpload = false"
       ></croppa>
-      
     </div>
   </div>
 </template>
 <script>
 import CButtonSingle from "@/components/CButtonSingle.vue";
+import CWarning from "@/components/CWarning.vue";
+import pictures from "@/pictures";
 import store from "@/store";
+import router from "@/router";
+import { storage, ref, uploadBytes, getDownloadURL } from "@/firebase";
 export default {
   name: "UcitajSliku",
   data() {
     return {
-      image: null,
-      isPressed: false,
+      imageReference: null,
+      canUpload: false,
       store,
+      pictures,
+      uploadText: "",
+      currentPictureObj: null,
     };
   },
+  mounted() {
+    var picture = pictures.guitarPictures.find(
+      (picture) => picture.id === pictures.selected
+    );
+    this.currentPictureObj = picture;
+    this.uploadText = picture.text;
+  },
   methods: {
+    savePhoto() {
+      this.imageReference.generateBlob((blobData) => {
+        let imageName =
+          "zahtjevi/" + store.currentUser + "/" + Date.now() + ".png";
+        const storageRef = ref(storage, imageName);
+        // 'file' comes from the Blob or File API
+        uploadBytes(storageRef, blobData)
+          .then((result) => {
+            console.log("Image uploaded! ->", result);
+            router.go(-1);
+            this.currentPictureObj.uploaded = true;
+            getDownloadURL(ref(storage, imageName)).then((url) => {
+              this.currentPictureObj.url = url;
+            });
+          })
+          .catch((e) => {
+            console.error(e);
+          });
+      });
+    },
     dummy() {},
   },
   components: {
     CButtonSingle,
+    CWarning,
   },
 };
 </script>
@@ -148,19 +182,19 @@ export default {
 }
 
 .croppa-container {
-   width: 100% !important;
-   height: 100% !important;
-   position: absolute;
-   color: transparent;
-   height: 100% !important;
-   background-color: transparent;
- }
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  color: transparent;
+  height: 100% !important;
+  background-color: transparent;
+}
 
- .croppa-container svg {
-   width: 35px !important;
-   height: 35px !important;
-   margin-top: 10px;
-   margin-right: 10px;
-   opacity: 50%;
- }
+.croppa-container svg {
+  width: 35px !important;
+  height: 35px !important;
+  margin-top: 10px;
+  margin-right: 10px;
+  opacity: 50%;
+}
 </style>
