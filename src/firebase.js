@@ -8,8 +8,7 @@ import {
   signOut,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
-import { getDocs } from "firebase/firestore";
+import { collection, doc, addDoc, getDocs, updateDoc, where, query } from "firebase/firestore";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // Your web app's Firebase configuration
@@ -40,6 +39,10 @@ export { db };
 export { collection };
 export { addDoc };
 export { getDocs };
+export { updateDoc };
+export { doc };
+export { where };
+export { query };
 
 //FirebaseStorage
 export { storage, ref, uploadBytes, getDownloadURL };

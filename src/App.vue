@@ -69,7 +69,10 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log("LOGGED IN: " + user.email);
     store.currentUser = user.email;
-    if (!currentRoute.meta.needsUser) {
+    if (Object.keys(store.zahtjev).length == 0 || currentRoute.name == "PregledOtkupa") {
+      router.replace({ name: "Djelatnik" })
+    }
+    if (!currentRoute.meta.needsUser || (currentRoute=="" && store.zahtjev)) {
       store.currentUser === "djelatnik@gmail.com"
         ? router.replace({ name: "DjelatnikRacun" })
         : router.replace({ name: "KorisnikRacun" });
