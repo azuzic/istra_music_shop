@@ -1,16 +1,23 @@
 <template>
   <div>
     <div class="CDodavanje-bottom grid grid-cols-1">
-      <div class="place-self-center" :class="uploaded ? '' : 'tranparent-75'">
+      <div class="place-self-center" :class="image ? '' : 'tranparent-75'">
         <CButtonSingle btn="POTVRDI" :btnClickHandler="dummy" />
       </div>
     </div>
-    <div class="CDodavanje-top">
-     <div class="menu-item6 mx-auto">
+    <button class="CDodavanje-top" @click="isPressed = true" v-if="!isPressed">
+      <div class="menu-item6 mx-auto">
         <img class="dodavanje-icon" src="@/assets/upload.svg" />
         <p>Molimo odaberite sliku za</p>
-        <p>{{side}}</p>
-        <p>stranu gitare</p>
+        <p>{{ store.pictureUpload }}</p>
+        <p
+          v-if="
+            store.pictureUpload != 'Vrat gitare' &&
+            store.pictureUpload != 'Glavu gitare'
+          "
+        >
+          stranu gitare
+        </p>
       </div>
       <div class="menu-bottom-dodavanje grid grid-cols-1 mt-4">
         <div class="menu-item7 mx-auto">
@@ -18,28 +25,57 @@
           <p>Slikajte kamerom</p>
         </div>
       </div>
-    </div>
+    </button>
+    <croppa
+      v-model="image"
+      v-else
+      :width="415"
+      :height="650"
+      :canvas-color="'#292e32'"
+      :placeholder="'Dodirnite kako biste dodali sliku'"
+      :placeholder-font-size="20"
+      :placeholder-color="'default'"
+      :accept="'image/*'"
+      :file-size-limit="0"
+      :quality="2"
+      :zoom-speed="3"
+      :disabled="false"
+      :disable-drag-and-drop="false"
+      :disable-click-to-choose="false"
+      :disable-drag-to-move="false"
+      :disable-scroll-to-zoom="false"
+      :disable-rotation="false"
+      :prevent-white-space="true"
+      :reverse-scroll-to-zoom="false"
+      :show-remove-button="true"
+      :remove-button-color="'gray'"
+      :remove-button-size="60"
+    ></croppa>
   </div>
 </template>
 <script>
 import CButtonSingle from "@/components/CButtonSingle.vue";
+import store from "@/store";
 export default {
   name: "UcitajSliku",
   data() {
     return {
-      side: "Gornju Prednju",
-      uploaded: false
+      image: null,
+      isPressed: false,
+      store,
     };
   },
   methods: {
-    dummy(){},
+    dummy() {},
   },
   components: {
-    CButtonSingle
+    CButtonSingle,
   },
 };
 </script>
 <style>
+.croppa-container {
+}
 .CDodavanje-top {
   position: absolute;
   display: flex;

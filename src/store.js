@@ -1,4 +1,5 @@
 export default {
   currentUser: "",
-  darkToggle: true
+  darkToggle: true,
+  pictureUpload: "",
 };

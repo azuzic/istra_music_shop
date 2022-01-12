@@ -73,60 +73,54 @@
               ></croppa>
               </div>
             </div>-->
-            
+
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Gornja prednja</p>
-              <div>
-                <img
-                  class="CCard-img img-top-left mx-auto"
-                  src="https://picsum.photos/500/500/"
-                />
-              </div>
+              <router-link to="/ucitaj-sliku"
+                ><button @click="store.pictureUpload = 'Gornju prednju'">
+                  Učitaj sliku
+                </button></router-link
+              >
             </div>
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Gornja stražnja</p>
-              <div>
-                <img
-                  class="CCard-img img-top mx-auto"
-                  src="https://picsum.photos/500/500/"
-                />
-              </div>
+              <router-link to="/ucitaj-sliku"
+                ><button @click="store.pictureUpload = 'Gornju stražnju'">
+                  Učitaj sliku
+                </button></router-link
+              >
             </div>
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Bočna desna</p>
-              <div>
-                <img
-                  class="CCard-img img-top-right mx-auto"
-                  src="https://picsum.photos/500/500/"
-                />
-              </div>
+              <router-link to="/ucitaj-sliku"
+                ><button @click="store.pictureUpload = 'Bočnu desnu'">
+                  Učitaj sliku
+                </button></router-link
+              >
             </div>
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Bočna lijeva</p>
-              <div>
-                <img
-                  class="CCard-img img-bottom-left mx-auto"
-                  src="https://picsum.photos/500/500/"
-                />
-              </div>
+              <router-link to="/ucitaj-sliku"
+                ><button @click="store.pictureUpload = 'Bočnu lijevu'">
+                  Učitaj sliku
+                </button></router-link
+              >
             </div>
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Vrat gitare</p>
-              <div>
-                <img
-                  class="CCard-img img-bottom mx-auto"
-                  src="https://picsum.photos/500/500/"
-                />
-              </div>
+              <router-link to="/ucitaj-sliku"
+                ><button @click="store.pictureUpload = 'Vrat gitare'">
+                  Učitaj sliku
+                </button></router-link
+              >
             </div>
             <div class="otkup-div-image flex-none">
               <p class="otkup-img-text">Glava gitare</p>
-              <div>
-                <img
-                  class="CCard-img img-bottom-right mx-auto"
-                  src="https://picsum.photos/500/500/"
-                />
-              </div>
+              <router-link to="/ucitaj-sliku"
+                ><button @click="store.pictureUpload = 'Glavu gitare'">
+                  Učitaj sliku
+                </button></router-link
+              >
             </div>
           </div>
         </div>
@@ -156,8 +150,16 @@
       <div class="menu-bottom3 grid grid-cols-1 mt-4">
         <div class="bg-bottom"></div>
         <div class="menu-item5 text-left mx-auto">
-          <img v-if="store.darkToggle" class="money" src="@/assets/money_icon.svg" />
-          <img v-if="!store.darkToggle" class="money" src="@/assets/money_icon_dark.svg" />
+          <img
+            v-if="store.darkToggle"
+            class="money"
+            src="@/assets/money_icon.svg"
+          />
+          <img
+            v-if="!store.darkToggle"
+            class="money"
+            src="@/assets/money_icon_dark.svg"
+          />
           <p class="pl-4 text-24px">
             Predložena cijena:
             <b class="price">{{ izracunCijene }}</b>
@@ -204,7 +206,7 @@ export default {
       preporucenaCijena: 0,
       store,
 
-      imageReference1: null,
+      imageReferences: [],
     };
   },
   components: {
@@ -407,7 +409,7 @@ export default {
   background-color: var(--balticSea4);
   height: 50px;
 }
-.menu-item5 p{
+.menu-item5 p {
   color: var(--balticSea7) !important;
 }
 .CCard-img2 {
