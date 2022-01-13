@@ -116,24 +116,24 @@ export default {
         r.style.setProperty('--BalticSea__DarkToneInk',                     '#303030');  
         r.style.setProperty('--BalticSea__EerieBlack',                      '#1c1c1c');  
         r.style.setProperty('--Snow__Lead',                                 '#ffffffde');  
-        r.style.setProperty('--FluorescentRed__FrenchWine',                 '#ad1f47'); 
+        r.style.setProperty('--FluorescentRed__FrenchWine',                 '#10498b'); 
         r.style.setProperty('--FluorescentRed__OffBlack',                   '#303030'); 
         r.style.setProperty('--Transparent__ExtraordinaryAbundanceOfTinge', '#ffffff1a'); 
         r.style.setProperty('--VivaldiRed__FrenchWine',                     '#ad1f47'); 
-        r.style.setProperty('--Flushed__LingonberryRed',                    '#cc4658');
-        r.style.setProperty('--PaleFlower__RavensBanquet',                  '#bb2a53'); 
-        r.style.setProperty('--Tin__WhatWeDoInTheShadows',                  '#400F21'); 
+        r.style.setProperty('--Flushed__LingonberryRed',                    '#2f709c');
+        r.style.setProperty('--PaleFlower__RavensBanquet',                  '#1e5497'); 
+        r.style.setProperty('--Tin__WhatWeDoInTheShadows',                  '#00123d'); 
         r.style.setProperty('--SolidEmpire__DarkSouls',                     '#ffffff5c'); 
         r.style.setProperty('--Fresco__KinglyCloud',                        'ffffffde'); 
         r.style.setProperty('--GraniteBrown__Lead',                         '#000000de');   
-        r.style.setProperty('--EnglishBreakfast__RavensBanquet',            '#bb2a53'); 
+        r.style.setProperty('--EnglishBreakfast__RavensBanquet',            '#1e5497'); 
         r.style.setProperty('--LimonFresco__Anime',                         '#cec14c'); 
         r.style.setProperty('--SnowPea__RichGreen',                         '#258843'); 
-        r.style.setProperty('--ForbiddenFruit__RedPotion',                  '#e41a3c'); 
+        r.style.setProperty('--ForbiddenFruit__RedPotion',                  '#215b9e'); 
         r.style.setProperty('--DustySky__Lead',                             '#ffffffde'); 
         r.style.setProperty('--StretchLimo__ChromaphobicBlack',             '#ffffff29'); 
         r.style.setProperty('--StretchLimo__EerieBlack',                    '#1c1c1c'); 
-        r.style.setProperty('--DwarfFortress__Belladonna',                  '#1f0309'); 
+        r.style.setProperty('--DwarfFortress__Belladonna',                  '#09031f'); 
         r.style.setProperty('--DwarfFortress__Lead',                        '#ffffffde'); 
         r.style.setProperty('--White__DarkGrey',                            '#363636'); 
         r.style.setProperty('--Grey__ExistentialAngst',                     '#0a0a0a'); 
@@ -164,7 +164,7 @@ export default {
         r.style.setProperty('--Fresco__KinglyCloud',                        '#f5dada'); 
         r.style.setProperty('--GraniteBrown__Lead',                         '#3f2c28'); 
         r.style.setProperty('--EnglishBreakfast__RavensBanquet',            '#461717'); 
-        r.style.setProperty('--LimonFresco__Anime',                         '#c8bd56'); 
+        r.style.setProperty('--LimonFresco__Anime',                         '#cec14c'); 
         r.style.setProperty('--SnowPea__RichGreen',                         '#6dd277'); 
         r.style.setProperty('--ForbiddenFruit__RedPotion',                  '#ff8080'); 
         r.style.setProperty('--DustySky__Lead',                             '#96a4a5'); 
@@ -230,6 +230,10 @@ export default {
 }
 
 * {
+  color: rgb(16, 73, 139);
+  color: #215b9e;
+  color: rgb(173, 31, 71);
+  color: #8c1939;
   font-family: "Lora", italic;
   font-style: normal;
   font-weight: normal;
@@ -540,13 +544,31 @@ input:-webkit-autofill:active {
   text-align: center;
   z-index: 100;
 }
+.dg-main-content {
+  border-color: var(--White__DarkGrey) !important;
+  background-color: var(--White__DarkGrey) !important;
+}
+
 .dg-btn {
-  border-color: var(--FluorescentRed__FrenchWine);
-  background-color: var(--FluorescentRed__FrenchWine);
+  border-color: var(--FluorescentRed__FrenchWine) !important;
+  background-color: var(--FluorescentRed__FrenchWine) !important;
 }
 
 .dg-btn--cancel {
-  border-color: var(--FluorescentRed__FrenchWine);
-  background-color: var(--FluorescentRed__FrenchWine);
+  border-color: var(--Grey__ExistentialAngst) !important;
+  background-color: var(--Grey__ExistentialAngst) !important;
+}
+
+.dg-btn--ok {
+  border-color: var(--FluorescentRed__FrenchWine) !important;
+  background-color: var(--FluorescentRed__FrenchWine) !important;
+}
+
+.dg-btn--ok span {
+  color: var(--DwarfFortress__Belladonna) !important;
+}
+
+.dg-btn-cancel span {
+  color: var(--BalticSea__Lead) !important;
 }
 </style>

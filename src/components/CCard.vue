@@ -121,7 +121,7 @@ export default {
 }
 .CCard-icon-1 {
   height: 100%;
-  background: var(--FluorescentRed__FrenchWine);
+  background: var(--ForbiddenFruit__RedPotion);
 }
 .CCard-icon-2 {
   height: 100%;
