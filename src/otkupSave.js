@@ -1,8 +1,8 @@
 export default {
   vrstaInstrumenta: "Gitara",
-  odabraniProizvodac: "",
-  odabraniModel: "",
-  odabranaSerija: "",
+  odabraniProizvodac: "Gibson",
+  odabraniModel: "Les Paul",
+  odabranaSerija: "Standard",
   godinaProizvodnje: "",
   vlasnik: "",
   stanje: "",
