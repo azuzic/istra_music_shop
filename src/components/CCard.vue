@@ -1,65 +1,76 @@
 <template>
-  <div class="CCard flex">
-    <div class="CCard-image flex-none">
-      <img class="CCard-img mx-auto" :src="zahtjev.img" />
-    </div>
-    <div class="CCard-data">
-      <div class="CCard-header">
-        <p class="CCard-title pl-1 pt-1 pb-2 font-bold">
-          {{ zahtjev.instrument[1] }} {{ zahtjev.instrument[2] }}
-          <b class="CCard-date float-right pr-1">
-            {{ receivedFromNow }}
-          </b>
-        </p>
-        <p class="CCard-subtitle pl-1">
-          {{ zahtjev.instrument[3] }}
-          <b class="CCard-price float-right pr-1">
-            {{ zahtjev.preporucenaCijena }} kn
-          </b>
-        </p>
+  <div @click="store.zahtjev=zahtjev">
+    <router-link class="CCard flex" to="pregled-otkupa">
+      <div class="CCard-image flex-none">
+        <img class="CCard-img mx-auto" :src="zahtjev.img" />
       </div>
-      <div
-        class="CCard-footer grid"
-        :class="zahtjev.status != 'Riješeno' ? 'grid-cols-3' : 'grid-cols-1'"
-      >
-        <div
-          v-if="zahtjev.status != 'Riješeno'"
-          class="CCard-icon-1"
-          :class="zahtjev.status != 'Odbijeno' ? 'tranparent-10' : ''"
-        >
-          <img class="CCard-svg mx-auto mt-2" src="@/assets/deny_icon.svg" />
-          <p class="CCard-icontext">ODBIJENO</p>
+
+      <div class="CCard-data">
+
+        <div class="CCard-header">
+          <p class="CCard-title pl-1 pt-1 pb-2 font-bold">
+            {{ zahtjev.instrument[1] }} {{ zahtjev.instrument[2] }}
+            <b class="CCard-date float-right pr-1">
+              {{ receivedFromNow }}
+            </b>
+          </p>
+          <p class="CCard-subtitle pl-1">
+            {{ zahtjev.instrument[3] }}
+            <b class="CCard-price float-right pr-1">
+              {{ zahtjev.preporucenaCijena }} kn
+            </b>
+          </p>
         </div>
-        <div
-          v-if="zahtjev.status != 'Riješeno'"
-          class="CCard-icon-2"
-          :class="zahtjev.status != 'U razradi' ? 'tranparent-10' : ''"
-        >
-          <img class="CCard-svg mx-auto mt-2" src="@/assets/load_icon.svg" />
-          <p class="CCard-icontext">U RAZRADI</p>
+
+        <div class="CCard-footer grid" :class="zahtjev.status != 'Riješeno' ? 'grid-cols-3' : 'grid-cols-1'" >
+
+          <div
+            v-if="zahtjev.status != 'Riješeno'"
+            class="CCard-icon-1"
+            :class="zahtjev.status != 'Odbijeno' ? 'tranparent-10' : ''" >
+            <img class="CCard-svg mx-auto mt-2" src="@/assets/deny_icon.svg" />
+            <p class="CCard-icontext">ODBIJENO</p>
+          </div>
+
+          <div 
+            v-if="zahtjev.status != 'Riješeno'"
+            class="CCard-icon-2"
+            :class="zahtjev.status != 'U razradi' ? 'tranparent-10' : ''" >
+            <img class="CCard-svg mx-auto mt-2" src="@/assets/load_icon.svg" />
+            <p class="CCard-icontext">U RAZRADI</p>
+          </div>
+
+          <div 
+            v-if="zahtjev.status != 'Riješeno'"
+            class="CCard-icon-3"
+            :class="zahtjev.status != 'Prihvaćeno' ? 'tranparent-10' : ''">
+            <img class="CCard-svg mx-auto mt-2" src="@/assets/accept_icon.svg" />
+            <p class="CCard-icontext">PRIHVAĆENO</p>
+          </div>
+
+          <div v-if="zahtjev.status == 'Riješeno'" class="CCard-icon-3">
+            <img class="CCard-svg2 mx-auto mt-1" src="@/assets/deal_icon.svg" />
+            <p class="CCard-icontext2">RIJEŠENO</p>
+          </div>
+
         </div>
-        <div
-          v-if="zahtjev.status != 'Riješeno'"
-          class="CCard-icon-3"
-          :class="zahtjev.status != 'Prihvaćeno' ? 'tranparent-10' : ''"
-        >
-          <img class="CCard-svg mx-auto mt-2" src="@/assets/accept_icon.svg" />
-          <p class="CCard-icontext">PRIHVAĆENO</p>
-        </div>
-        <div v-if="zahtjev.status == 'Riješeno'" class="CCard-icon-3">
-          <img class="CCard-svg2 mx-auto mt-1" src="@/assets/deal_icon.svg" />
-          <p class="CCard-icontext2">RIJEŠENO</p>
-        </div>
+
       </div>
-    </div>
+    </router-link>
   </div>
 </template>
 <script>
 import moment from "moment";
+import store from "@/store";
 export default {
   name: "CCard",
   props: {
     zahtjev: "",
+  },
+  data() {
+    return {
+      store
+    };
   },
   computed: {
     receivedFromNow() {

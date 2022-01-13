@@ -107,6 +107,7 @@ export default {
                 status: (`${doc.data().status}`),
                 img: "https://picsum.photos/500/500/",
                 date: (`${doc.data().zahtjevPredan}`),
+                id: (`${doc.id}`),
             });
             b++;
             }, time += delay);

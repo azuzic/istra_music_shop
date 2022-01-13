@@ -10,9 +10,12 @@
           <router-link to="djelatnik"> Povratak </router-link>
         </p>
       </div>
-      <div class="menu-item"></div>
+      <div class="menu-item" :class="stanje=='U razradi' ? 'menu-item-yellow' :
+                                     stanje=='Odbijeno' ? 'menu-item-red' : 'menu-item-green'">
+        <p>{{stanje}}</p>  
+      </div>
       <div class="menu-item">
-        <p>20.05.2022.</p>
+        <p>{{ receivedFromNow }}</p>
       </div>
     </div>
     <!--==============MENU END================================-->
@@ -20,34 +23,34 @@
     <div class="grid grid-rows-auto gap-2 pl-2 pr-2 pb-16 pt-16">
       <div>
         <p><u class="text-20px">Vrsta instrumenta:</u></p>
-        <p class="mt-1 text-18px"><b>Gitara</b></p>
+        <p class="mt-1 text-18px"><b>{{store.zahtjev.instrument[0]}}</b></p>
       </div>
       <div>
         <p><u class="text-20px">Proizvođač:</u></p>
-        <p class="mt-1 text-18px"><b>Gibson</b></p>
+        <p class="mt-1 text-18px"><b>{{store.zahtjev.instrument[1]}}</b></p>
       </div>
       <div>
         <p><u class="text-20px">Model:</u></p>
-        <p class="mt-1 text-18px"><b>Les Paul</b></p>
+        <p class="mt-1 text-18px"><b>{{store.zahtjev.instrument[2]}}</b></p>
       </div>
       <div>
         <p><u class="text-20px">Podmodel:</u></p>
-        <p class="mt-1 text-18px"><b>Traditional</b></p>
+        <p class="mt-1 text-18px"><b>{{store.zahtjev.instrument[3]}}</b></p>
       </div>
       <div>
         <hr class="dotted mt-2 mb-2" />
       </div>
       <div>
         <p><u class="text-20px">Godina proizvodnje:</u></p>
-        <p class="mt-1 text-18px"><b>2002.</b></p>
+        <p class="mt-1 text-18px"><b>{{store.zahtjev.instrument[4]}}</b></p>
       </div>
       <div>
         <p><u class="text-20px">Vlasnik:</u></p>
-        <p class="mt-1 text-18px"><b>2.</b></p>
+        <p class="mt-1 text-18px"><b>{{store.zahtjev.instrument[5]}}.</b></p>
       </div>
       <div>
         <p><u class="text-20px">Stanje:</u></p>
-        <p class="mt-1 text-18px"><b>Rabljeno</b></p>
+        <p class="mt-1 text-18px"><b>{{store.zahtjev.instrument[6]}}</b></p>
       </div>
       <div>
         <hr class="dotted mt-2 mb-2" />
@@ -114,8 +117,7 @@
         </div>
       <div>
         <p><u class="text-20px">Napomena:</u></p>
-        <textarea disabled class="resize-none otkup-textarea mt-2">
-              Malo oštećenje na stražnjoj strani.
+        <textarea disabled class="resize-none otkup-textarea mt-2" v-model="opis">
             </textarea
         >
       </div>
@@ -129,19 +131,19 @@
       </div>
       <div>
         <p><u class="text-20px">Ime i prezime:</u></p>
-        <p class="mt-1 text-18px"><b>Ime Prezime</b></p>
+        <p class="mt-1 text-18px"><b>{{korisnik[0].imePrezime}}</b></p>
       </div>
       <div>
         <p><u class="text-20px">Email:</u></p>
-        <p class="mt-1 text-18px"><b>ime.prezime@gmail.com</b></p>
+        <p class="mt-1 text-18px"><b>{{korisnik[0].email}}</b></p>
       </div>
       <div>
         <p><u class="text-20px">OIB:</u></p>
-        <p class="mt-1 text-18px"><b>12345678910</b></p>
+        <p class="mt-1 text-18px"><b>{{korisnik[0].oib}}</b></p>
       </div>
       <div>
         <p><u class="text-20px">Broj telefona:</u></p>
-        <p class="mt-1 text-18px"><b>098-721-5555</b></p>
+        <p class="mt-1 text-18px"><b>{{mob}}</b></p>
       </div>
       <div>
         <hr class="dotted mt-2 mb-2" />
@@ -152,7 +154,7 @@
           type="text"
           name="oib"
           id="oib"
-          v-model="cijena"
+          v-model="novaCijena"
           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
         />
         <hr />
@@ -160,26 +162,29 @@
       <!--==============SPREMI==============================-->
       <div
         class="place-self-center mt-4"
-        :class="cijena ? 'active' : 'inactive'"
+        :class="novaCijena ? 'active' : 'inactive'"
       >
+      <div @click="updatePrice()">
         <CButtonSingle
           btn="PROMJENI"
-          :btnClickHandler="cijena ? dummy : dummy"
+          :btnClickHandler="0 ? dummy : dummy"
         />
+      </div>
+        
       </div>
       <!--==============/SPREMI=============================-->
       <!--===================ODBIJ OTKUP====================-->
       <div class="place-self-center mt-8">
-        <router-link to="/password-reset">
+        <div @click="updateStatus('Odbijeno')">
           <CButtonDecline btn="ODBIJ OTKUP" :btnClickHandler="dummy" />
-        </router-link>
+        </div>
       </div>
       <!--================/ODBIJ OTKUP======================-->
       <!--=================PRIHVATI OTKUP===================-->
       <div class="place-self-center mt-4">
-        <router-link to="/password-reset">
+        <div @click="updateStatus('Prihvaćeno')">
           <CButtonAccept btn="PRIHVATI OTKUP" :btnClickHandler="dummy" />
-        </router-link>
+        </div>
       </div>
       <!--================/PRIHVATI OTKUP===================-->
     </div>
@@ -198,9 +203,9 @@
             class="money"
             src="@/assets/money_icon_dark.svg"
           />
-          <p class="pl-4 text-24px">
+          <p class="pl-4 text-24px" >
             Predložena cijena:
-            <b class="price">1500kn</b>
+            <b class="price">{{predlozenaCijena}}</b>
           </p>
         </div>
       </div>
@@ -215,6 +220,8 @@ import CButtonAccept from "@/components/CButtonAccept.vue";
 import CButtonDecline from "@/components/CButtonDecline.vue";
 import CCard from "@/components/CCard.vue";
 import store from "@/store";
+import { db } from "@/firebase";
+import { doc, collection, getDocs, updateDoc, where, query} from "@/firebase";
 
 export default {
   name: "Djelatnik",
@@ -225,14 +232,71 @@ export default {
     CButtonDecline,
     CCard,
   },
+   beforeMount(){
+    this.readData()
+  },
   data() {
     return {
-      cijena: "",
-      store
+      novaCijena: "",
+      predlozenaCijena: "",
+      mob: "",
+      korisnik: [{
+            imePrezime: "",
+            email: "",
+            mob: "",
+            oib: ""
+      }],
+      opis: "",
+      stanje: "",
+      store,
     };
   },
   methods: {
+    async readData() {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+        if (`${doc.data().email}` == store.zahtjev.korisnik) {
+          this.$set(this.korisnik,0, {
+            imePrezime: (`${doc.data().imePrezime}`),
+            email: (`${doc.data().email}`),
+            mob: (`${doc.data().mob}`),
+            oib: (`${doc.data().oib}`)
+          });
+          this.opis = store.zahtjev.napomena;
+          this.stanje = store.zahtjev.status;
+          this.predlozenaCijena = store.zahtjev.preporucenaCijena;
+          let m = this.korisnik[0].mob;
+          this.mob = m.slice(0,3) + "-" + m.slice(3,6) + "-" + m.slice(6);
+        }
+      });
+    },
+    async updatePrice() {
+        const g = doc(db, "zahtjevi", store.zahtjev.id);
+        await updateDoc(g, {
+          preporucenaCijena: this.novaCijena
+        });
+        this.predlozenaCijena = this.novaCijena;
+    },
+    async updateStatus(status) {
+        const g = doc(db, "zahtjevi", store.zahtjev.id);
+        await updateDoc(g, {
+          status: status
+        });
+        this.stanje = status;
+    },
+    async updateStatus(status) {
+        const g = doc(db, "zahtjevi", store.zahtjev.id);
+        await updateDoc(g, {
+          status: status
+        });
+        this.stanje = status
+    },
     dummy() {},
+  },
+  computed: {
+    receivedFromNow() {
+      return new Date(parseInt(store.zahtjev.date)).toLocaleDateString();
+    },
   },
 };
 </script>
@@ -272,5 +336,14 @@ export default {
 .otkup-textarea:focus {
   outline: none !important;
   border-color: var(--fluorescentRed);
+}
+.menu-item-yellow {
+  background-color: var(--lemonPeel);
+}
+.menu-item-green {
+  background-color: var(--snowPea);
+}
+.menu-item-red {
+  background-color: var(--forbiddenFruit);
 }
 </style>
