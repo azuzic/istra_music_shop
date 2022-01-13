@@ -2,7 +2,7 @@
   <div @click="store.zahtjev=zahtjev">
     <router-link class="CCard flex" to="pregled-otkupa">
       <div class="CCard-image flex-none">
-        <img class="CCard-img mx-auto" :src="zahtjev.img" />
+        <img class="CCard-img mx-auto" :src="zahtjev.slike[0]" />
       </div>
 
       <div class="CCard-data">
