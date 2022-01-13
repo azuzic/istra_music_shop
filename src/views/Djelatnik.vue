@@ -135,7 +135,7 @@ export default {
   width: 100%;
   height: 50px;
   background-color: var(--BalticSea__EerieBlack);
-  filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 0px -4px 4px var(--Transparent25__Transparent75);
 }
 .menu-item-grid0 {
   margin-left: 0%;

@@ -24,7 +24,7 @@ export default {
 .button-bg {
   min-width: 226px;
   background: var(--BalticSea__EerieBlack);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px var(--Transparent25__Transparent75);
   border-radius: 16px;
 }
 
