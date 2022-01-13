@@ -496,15 +496,6 @@ input:-webkit-autofill:active {
   transition-timing-function: ease-in-out;
   transition: 1s;
 }
-.otkup-div-image {
-  width: 100% !important;
-  overflow: hidden;
-}
-.otkup-div-image img {
-  border-color: var(--stretchLimo);
-  height: 100% !important;
-  border-width: 2px;
-}
 .img-top-left {
   border-top-left-radius: 9.5px;
   border-bottom-left-radius: 2.5px;
@@ -538,7 +529,7 @@ input:-webkit-autofill:active {
 .otkup-img-text {
   text-align: center;
   font-size: 16px;
-  padding-bottom: 2px;
+  padding-bottom: 4px;
 }
 .otkup-textarea {
   padding: 8px;

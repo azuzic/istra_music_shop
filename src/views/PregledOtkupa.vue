@@ -52,6 +52,7 @@
       <div>
         <hr class="dotted mt-2 mb-2" />
       </div>
+      
       <div>
           <p class="text-left text-18px m-0 p-0">Slike</p>
           <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">

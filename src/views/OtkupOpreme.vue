@@ -84,102 +84,67 @@
         <div>
           <p class="text-left text-18px m-0 p-0">Slike</p>
           <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">
-            <div class="otkup-div-image flex-none">
+
+            <div>
               <p class="otkup-img-text">Gornja prednja</p>
-              <router-link
-                to="/ucitaj-sliku"
-                v-if="!pictures.guitarPictures[0].uploaded"
-                ><button @click="pictures.selected = 1">
-                  Učitaj sliku
-                </button></router-link
-              >
-              <div v-else>
-                <img
-                  class="CCard-img img-top mx-auto"
-                  :src="pictures.guitarPictures[0].url"
-                />
+              <div class="square img_1-1 img-top-left">
+                <router-link to="/ucitaj-sliku">
+                  <button class="square-img2" @click="pictures.selected = 1">Učitaj sliku</button> 
+                  <img class="square-img" :src="pictures.guitarPictures[0].url"/>
+                </router-link>
               </div>
-            </div>
-            <div class="otkup-div-image flex-none">
+            </div> 
+
+            <div>
               <p class="otkup-img-text">Gornja stražnja</p>
-              <router-link
-                to="/ucitaj-sliku"
-                v-if="!pictures.guitarPictures[1].uploaded"
-                ><button @click="pictures.selected = 2">
-                  Učitaj sliku
-                </button></router-link
-              >
-              <div v-else>
-                <img
-                  class="CCard-img img-top mx-auto"
-                  :src="pictures.guitarPictures[1].url"
-                />
+              <div class="square img_1-1 img-top">
+                <router-link to="/ucitaj-sliku">
+                  <button class="square-img2" @click="pictures.selected = 2">Učitaj sliku</button> 
+                  <img class="square-img" :src="pictures.guitarPictures[1].url"/>
+                </router-link>
               </div>
-            </div>
-            <div class="otkup-div-image flex-none">
+            </div> 
+
+            <div>
               <p class="otkup-img-text">Bočna desna</p>
-              <router-link
-                to="/ucitaj-sliku"
-                v-if="!pictures.guitarPictures[2].uploaded"
-                ><button @click="pictures.selected = 3">
-                  Učitaj sliku
-                </button></router-link
-              >
-              <div v-else>
-                <img
-                  class="CCard-img img-top mx-auto"
-                  :src="pictures.guitarPictures[2].url"
-                />
+              <div class="square img_1-1 img-top-right">
+                <router-link to="/ucitaj-sliku">
+                  <button class="square-img2" @click="pictures.selected = 3">Učitaj sliku</button> 
+                  <img class="square-img" :src="pictures.guitarPictures[2].url"/>
+                </router-link>
               </div>
-            </div>
-            <div class="otkup-div-image flex-none">
+            </div> 
+
+            <div>
               <p class="otkup-img-text">Bočna lijeva</p>
-              <router-link
-                to="/ucitaj-sliku"
-                v-if="!pictures.guitarPictures[3].uploaded"
-                ><button @click="pictures.selected = 4">
-                  Učitaj sliku
-                </button></router-link
-              >
-              <div v-else>
-                <img
-                  class="CCard-img img-top mx-auto"
-                  :src="pictures.guitarPictures[3].url"
-                />
+              <div class="square img_1-1 img-bottom-left">
+                <router-link to="/ucitaj-sliku">
+                  <button class="square-img2" @click="pictures.selected = 4">Učitaj sliku</button> 
+                  <img class="square-img" :src="pictures.guitarPictures[3].url"/>
+                </router-link>
               </div>
-            </div>
-            <div class="otkup-div-image flex-none">
-              <p class="otkup-img-text">Serijski broj</p>
-              <router-link
-                to="/ucitaj-sliku"
-                v-if="!pictures.guitarPictures[4].uploaded"
-                ><button @click="pictures.selected = 5">
-                  Učitaj sliku
-                </button></router-link
-              >
-              <div v-else>
-                <img
-                  class="CCard-img img-top mx-auto"
-                  :src="pictures.guitarPictures[4].url"
-                />
+            </div> 
+
+            <div>
+              <p class="otkup-img-text">Vrat gitare</p>
+              <div class="square img_1-1 img-bottom">
+                <router-link to="/ucitaj-sliku">
+                  <button class="square-img2" @click="pictures.selected = 5">Učitaj sliku</button> 
+                  <img class="square-img" :src="pictures.guitarPictures[4].url"/>
+                </router-link>
               </div>
-            </div>
-            <div class="otkup-div-image flex-none">
+            </div> 
+
+            <div>
               <p class="otkup-img-text">Glava gitare</p>
-              <router-link
-                to="/ucitaj-sliku"
-                v-if="!pictures.guitarPictures[5].uploaded"
-                ><button @click="pictures.selected = 6">
-                  Učitaj sliku
-                </button></router-link
-              >
-              <div v-else>
-                <img
-                  class="CCard-img img-top mx-auto"
-                  :src="pictures.guitarPictures[5].url"
-                />
+              <div class="square img_1-1 img-bottom-right">
+                <router-link to="/ucitaj-sliku">
+                  <button class="square-img2" @click="pictures.selected = 6">Učitaj sliku</button> 
+                  <img class="square-img" :src="pictures.guitarPictures[5].url"/>
+                </router-link>
               </div>
-            </div>
+            </div> 
+            
           </div>
         </div>
         <!--===================/SLIKE===================-->
@@ -507,5 +472,42 @@ export default {
   width: auto;
   height: 100%;
   background-color: rgb(80, 59, 59);
+}
+.img-upload {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.square {
+  background-color: var(--snow);
+    overflow: hidden;
+    float:left;
+    position: relative;
+    display: flex;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 100%;
+    border-color: var(--stretchLimo);
+    border-width: 2px;
+}
+
+.square-img {
+    position: absolute;
+    width: 100%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+.square-img2 {
+    position: absolute;
+    width: 100%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    color: var(--balticSea3);
+    font-size: 12px;
+    letter-spacing: 0.25px;
 }
 </style>
