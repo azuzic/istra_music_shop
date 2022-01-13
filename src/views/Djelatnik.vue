@@ -127,30 +127,36 @@ export default {
   transition: 1s;
   width: 100%;
   font-weight: bold;
-  color: var(--dwarfFortress);
+  color: var(--DwarfFortress__Belladonna);
 }
 .menu-bottom2 {
   position: fixed;
   bottom: -1px;
   width: 100%;
   height: 50px;
-  background-color: var(--balticSea);
+  background-color: var(--BalticSea__EerieBlack);
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
 }
 .menu-item-grid0 {
   margin-left: 0%;
-  background-color: var(--lemonPeel);
+  background-color: var(--LimonFresco__Anime);
 }
 .menu-item-grid1 {
   margin-left: 100%;
-  background-color: var(--snowPea);
+  background-color: var(--SnowPea__RichGreen);
 }
 .menu-item-grid2 {
   margin-left: 200%;
-  background-color: var(--snowPea);
+  background-color: var(--SnowPea__RichGreen);
 }
 .menu-item-grid3 {
   margin-left: 300%;
-  background-color: var(--forbiddenFruit);
+  background-color: var(--ForbiddenFruit__RedPotion);
+}
+.menu-item-card {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background-color: var(--Transparent__BleachedSilk);
 }
 </style>

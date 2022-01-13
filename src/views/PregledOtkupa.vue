@@ -303,13 +303,22 @@ export default {
 
 <style>
 .menu-item-red {
-  background-color: var(--forbiddenFruit);
+  background-color: var(--ForbiddenFruit__RedPotion);
 }
 .menu-item-yellow {
-  background-color: var(--lemonPeel);
+  background-color: var(--LimonFresco__Anime);
 }
 .menu-item-green {
-  background-color: var(--snowPea);
+  background-color: var(--SnowPea__RichGreen);
+}
+.menu-item-red p {
+  color: var(--GraniteBrown__Lead);
+}
+.menu-item-yellow p {
+  color: var(--GraniteBrown__Lead);
+}
+.menu-item-green p {
+  color: var(--GraniteBrown__Lead);
 }
 .menu-item-selected p {
   width: 100%;
@@ -322,28 +331,19 @@ export default {
   transform: scaleX(-1);
 }
 .menu-highlight {
-  background-color: var(--fluorescentRed);
+  background-color: var(--FluorescentRed__FrenchWine);
 }
 .bg-bottom {
   position: absolute;
   width: 100%;
-  background-color: var(--balticSea4);
+  background-color: var(--Transparent__BleachedSilk);
   height: 50px;
 }
 .menu-item5 p {
-  color: var(--balticSea7) !important;
+  color: var(--Snow__Lead) !important;
 }
 .otkup-textarea:focus {
   outline: none !important;
-  border-color: var(--fluorescentRed);
-}
-.menu-item-yellow {
-  background-color: var(--lemonPeel);
-}
-.menu-item-green {
-  background-color: var(--snowPea);
-}
-.menu-item-red {
-  background-color: var(--forbiddenFruit);
+  border-color: var(--FluorescentRed__FrenchWine);
 }
 </style>

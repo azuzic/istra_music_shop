@@ -3,101 +3,51 @@
     <div v-if="loadTheme()"></div>
     <div class="CBg" :class="store.darkToggle ? 'CBg-light' : 'CBg-dark'"></div>
     <!--==============DJELATNIK ============================-->
-    <div
-      v-if="store.currentUser == 'djelatnik@gmail.com'"
-      class="menu2 top-0 grid grid-cols-2 mb-4"
-    >
-      <div
-        :class="
-          currentRouteName == 'Djelatnik'
-            ? 'menu-item-active menu-item2 menu-top-item-grid0'
-            : currentRouteName == 'DjelatnikRacun'
-            ? 'menu-item-active menu-item2 menu-top-item-grid1'
-            : ''
-        "
-      ></div>
+    <div v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-2 mb-4">
+  
+      <div :class=" currentRouteName == 'Djelatnik' ? 'menu-item2 menu-top-item-grid0' : 
+                    currentRouteName == 'DjelatnikRacun' ? 'menu-item2 menu-top-item-grid1' : ''"> 
+      </div>
+
     </div>
     <!--===============================-->
-    <div
-      v-if="
-        store.currentUser == 'djelatnik@gmail.com' &&
-        currentRouteName != 'PregledOtkupa'
-      "
-      class="menu top-0 grid grid-cols-2 mb-4"
-    >
-      <div
-        :class="
-          currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'
-        "
-      >
+    <div v-if="store.currentUser == 'djelatnik@gmail.com' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-2 mb-4">
+      
+      <div :class="currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="djelatnik"> Pregled otkupa </router-link></p>
       </div>
 
-      <div
-        :class="
-          currentRouteName == 'DjelatnikRacun'
-            ? 'menu-item-active'
-            : 'menu-item'
-        "
-      >
+      <div :class="currentRouteName == 'DjelatnikRacun' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="djelatnik-racun"> Račun </router-link></p>
       </div>
+
     </div>
     <!--==============DJELATNIK END=========================-->
     <!--==============KORISNIK =============================-->
-    <div
-      v-if="
-        store.currentUser != null &&
-        store.currentUser !== 'djelatnik@gmail.com' &&
-        currentRouteName != 'UcitajSliku'
-      "
-      class="menu2 top-0 grid grid-cols-3 mb-4"
-    >
-      <div
-        :class="
-          currentRouteName == 'StatusOtkupa'
-            ? 'menu-item2 menu-top2-item-grid0'
-            : currentRouteName == 'OtkupOpreme'
-            ? 'menu-item2 menu-top2-item-grid1'
-            : currentRouteName == 'KorisnikRacun'
-            ? 'menu-item2 menu-top2-item-grid2'
-            : ''
-        "
-      ></div>
+    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku'" class="menu2 top-0 grid grid-cols-3 mb-4">
+
+      <div :class=" currentRouteName == 'StatusOtkupa' ? 'menu-item2 menu-top2-item-grid0' : 
+                    currentRouteName == 'OtkupOpreme'   ? 'menu-item2 menu-top2-item-grid1' : 
+                    currentRouteName == 'KorisnikRacun' ? 'menu-item2 menu-top2-item-grid2' : ''">
+      </div>
     </div>
     <!--========================================-->
-    <div
-      v-if="
-        store.currentUser != null &&
-        store.currentUser !== 'djelatnik@gmail.com' &&
-        currentRouteName != 'UcitajSliku'
-      "
-      class="menu top-0 grid grid-cols-3 mb-4"
-    >
-      <div
-        :class="
-          currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'
-        "
-      >
+    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku'" class="menu top-0 grid grid-cols-3 mb-4">
+
+      <div :class="currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="status-otkupa"> Status otkupa </router-link></p>
       </div>
 
-      <div
-        :class="
-          currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'
-        "
-      >
+      <div :class="currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="otkup-opreme"> Otkup opreme </router-link></p>
       </div>
 
-      <div
-        :class="
-          currentRouteName == 'KorisnikRacun' ? 'menu-item-active' : 'menu-item'
-        "
-      >
+      <div :class="currentRouteName == 'KorisnikRacun' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="korisnik-racun"> Račun </router-link></p>
       </div>
+
     </div>
+    <!--==============KORISNIK END==========================-->
     <!--==============DARK MODE=============================-->
     <div class="logout2" @click="toggleDark()">
       <!--===<p class="mr-4 text-24px" style="width:150px;">DARK MODE</p>=====-->
@@ -105,7 +55,6 @@
       <img v-if="store.darkToggle"  height="30px" width="30px" src="../src/assets/moon_full_icon.svg">
     </div>
     <!--==============DARK MODE END=========================-->
-    <!--==============KORISNIK END==========================-->
     <router-view />
   </div>
 </template>
@@ -156,72 +105,78 @@ export default {
       else this.loadDark();
     },
     loadDark() {
-      let r = document.querySelector(":root");
-      r.style.setProperty("--snow", "hsl(0, 0%, 7%, 100%)"); //Background
-      r.style.setProperty("--balticSea", "hsl(0, 0%, 100%, 87%)"); //Default font dark
-      r.style.setProperty("--balticSea3", "hsl(0, 0%, 100%, 60%)"); //Default font lighter
-      r.style.setProperty("--balticSea2", "hsl(0, 0%, 100%, 16%)"); //br
-      r.style.setProperty("--balticSea4", "hsl(0, 0%, 100%, 5%)"); //bg menu
-      r.style.setProperty("--balticSea5", "hsl(0, 0%, 7%, 100%)"); //bg menu2
-      r.style.setProperty("--balticSea6", "hsl(0, 0%, 7%, 100%)"); //select
-      r.style.setProperty("--balticSea7", "hsl(0, 0%, 100%, 87%)"); //select
-      r.style.setProperty("--fluorescentRed", "#ad1f47"); //Input highlight line
-      r.style.setProperty("--lateo", "hsl(0, 0%, 100%, 10%)"); //Input autofill
-      r.style.setProperty("--vivaldiRed", "#e41a3c"); //CWarning font
-      r.style.setProperty("--poblano", "#068020"); //CSuccess font
-      r.style.setProperty("--paleFlower", "#bb2a53"); //Href link font
-      r.style.setProperty("--tin", "#400F21"); //inactive button-bg
-      r.style.setProperty("--solidEmpire", "#456f74"); //link font
-      r.style.setProperty("--fresco", "hsl(0, 0%, 100%, 87%)"); //Default font light
-      r.style.setProperty("--graniteBrown", "hsl(0, 0%, 0%, 87%)"); //menu-item-active font
-      r.style.setProperty("--englishBreakfast", "#bb2a53"); //textarea font
-      r.style.setProperty("--lemonPeel", "#cec14c"); //u razradi bg
-      r.style.setProperty("--snowPea", "#258843"); //prihvaćeno/riješeno bg
-      r.style.setProperty("--forbiddenFruit", "#e41a3c"); //odbijeno bg
-      r.style.setProperty("--dustySky", "#96a4a5"); //CCard-data bg
-      r.style.setProperty("--stretchLimo", "hsl(0, 0%, 100%, 16%)"); //CSelect items-border
-      r.style.setProperty("--dwarfFortress", "#1f0309"); //CSelect isSelected font
-      r.style.setProperty("--dwarfFortress2", "hsl(0, 0%, 100%, 87%)"); //CSelect isSelected font
-      r.style.setProperty("--richGreen", "#258843"); //CSuccess bg, font
-      r.style.setProperty("--white", "#9ecfd3"); //line password
-      r.style.setProperty("--grey", "#204c4e"); //line password
-      r.style.setProperty("--red", "#8c1939"); //line password
-      r.style.setProperty("--yellow", "#c9bc4b"); //line password
-      r.style.setProperty("--green", "#258843"); //line password
+      let r = document.querySelector(':root');
+        r.style.setProperty('--Snow__DarkToneInk',                          '#121212');   
+        r.style.setProperty('--DustySky__Black',                            '#000000');   
+        r.style.setProperty('--BalticSea__Lead',                            '#ffffffde'); 
+        r.style.setProperty('--BalticSea__Squant',                          '#ffffff99'); 
+        r.style.setProperty('--BalticSea__BlackMana',                       '#ffffff7a'); 
+        r.style.setProperty('--BalticSea__SilverMedal',                     '#ffffff29'); 
+        r.style.setProperty('--Transparent__BleachedSilk',                  '#ffffff0d'); 
+        r.style.setProperty('--BalticSea__DarkToneInk',                     '#303030');  
+        r.style.setProperty('--BalticSea__EerieBlack',                      '#1c1c1c');  
+        r.style.setProperty('--Snow__Lead',                                 '#ffffffde');  
+        r.style.setProperty('--FluorescentRed__FrenchWine',                 '#ad1f47'); 
+        r.style.setProperty('--FluorescentRed__OffBlack',                   '#303030'); 
+        r.style.setProperty('--Transparent__ExtraordinaryAbundanceOfTinge', '#ffffff1a'); 
+        r.style.setProperty('--VivaldiRed__FrenchWine',                     '#ad1f47'); 
+        r.style.setProperty('--Flushed__LingonberryRed',                    '#cc4658');
+        r.style.setProperty('--PaleFlower__RavensBanquet',                  '#bb2a53'); 
+        r.style.setProperty('--Tin__WhatWeDoInTheShadows',                  '#400F21'); 
+        r.style.setProperty('--SolidEmpire__DarkSouls',                     '#ffffff5c'); 
+        r.style.setProperty('--Fresco__KinglyCloud',                        'ffffffde'); 
+        r.style.setProperty('--GraniteBrown__Lead',                         '#000000de');   
+        r.style.setProperty('--EnglishBreakfast__RavensBanquet',            '#bb2a53'); 
+        r.style.setProperty('--LimonFresco__Anime',                         '#cec14c'); 
+        r.style.setProperty('--SnowPea__RichGreen',                         '#258843'); 
+        r.style.setProperty('--ForbiddenFruit__RedPotion',                  '#e41a3c'); 
+        r.style.setProperty('--DustySky__Lead',                             '#ffffffde'); 
+        r.style.setProperty('--StretchLimo__ChromaphobicBlack',             '#ffffff29'); 
+        r.style.setProperty('--StretchLimo__EerieBlack',                    '#1c1c1c'); 
+        r.style.setProperty('--DwarfFortress__Belladonna',                  '#1f0309'); 
+        r.style.setProperty('--DwarfFortress__Lead',                        '#ffffffde'); 
+        r.style.setProperty('--White__DarkGrey',                            '#363636'); 
+        r.style.setProperty('--Grey__ExistentialAngst',                     '#0a0a0a'); 
+        r.style.setProperty('--FluorescentRed__RefinedChianti',             '#8c1939'); 
+        r.style.setProperty('--HumorousGreen__Anime',                       '#c9bc4b'); 
+        r.style.setProperty('--Transparent50__Transparent25',               '0.25');    
     },
     loadLight() {
-      let r = document.querySelector(":root");
-      r.style.setProperty("--snow", "#fff9f9"); //Background
-      r.style.setProperty("--balticSea", "#3d3d3f"); //Default font dark, bg
-      r.style.setProperty("--balticSea2", "#3d3d3f"); //Default font dark, bg
-      r.style.setProperty("--balticSea3", "#3d3d3f"); //Default font dark, bg
-      r.style.setProperty("--balticSea4", "#3d3d3f00"); //Default font dark, bg
-      r.style.setProperty("--balticSea5", "#3d3d3f"); //Default font dark, bg
-      r.style.setProperty("--balticSea6", "#fff9f9"); //Default font dark, bg
-      r.style.setProperty("--balticSea7", "#fff9f9"); //Default font dark, bg
-      r.style.setProperty("--fluorescentRed", "#ff5252"); //Input highlight line
-      r.style.setProperty("--lateo", "#e8e7e700"); //Input autofill
-      r.style.setProperty("--vivaldiRed", "#e93a3a"); //CWarning font
-      r.style.setProperty("--poblano", "#068020"); //CSuccess font
-      r.style.setProperty("--paleFlower", "#668AAC"); //Href link font
-      r.style.setProperty("--tin", "#919192"); //inactive button-bg
-      r.style.setProperty("--solidEmpire", "#635a5a"); //link font
-      r.style.setProperty("--fresco", "#f5dada"); //Default font light
-      r.style.setProperty("--graniteBrown", "#3f2c28"); //menu-item-active font
-      r.style.setProperty("--englishBreakfast", "#461717"); //textarea font
-      r.style.setProperty("--lemonPeel", "#fff383"); //u razradi bg
-      r.style.setProperty("--snowPea", "#6dd277"); //prihvaćeno/riješeno bg
-      r.style.setProperty("--forbiddenFruit", "#ff8080"); //odbijeno bg
-      r.style.setProperty("--dustySky", "#96a4a5"); //CCard-data bg
-      r.style.setProperty("--stretchLimo", "#292e32"); //CSelect items-border
-      r.style.setProperty("--dwarfFortress", "#1a0505"); //CSelect isSelected font
-      r.style.setProperty("--dwarfFortress2", "#1a0505"); //CSelect isSelected font
-      r.style.setProperty("--richGreen", "#258843"); //CSuccess bg, font
-      r.style.setProperty("--white", "#ffffff"); //line password
-      r.style.setProperty("--grey", "#808080"); //line password
-      r.style.setProperty("--red", "#ff5252"); //line password
-      r.style.setProperty("--yellow", "#c9ba39"); //line password
-      r.style.setProperty("--green", "#258843"); //line password
+      let r = document.querySelector(':root');
+        r.style.setProperty('--Snow__DarkToneInk',                          '#fff9f9'); 
+        r.style.setProperty('--DustySky__Black',                            '#96a4a5'); 
+        r.style.setProperty('--BalticSea__Lead',                            '#3d3d3f'); 
+        r.style.setProperty('--BalticSea__SilverMedal',                     '#3d3d3f'); 
+        r.style.setProperty('--BalticSea__Squant',                          '#3d3d3f'); 
+        r.style.setProperty('--Transparent__BleachedSilk',                  '#3d3d3f00'); 
+        r.style.setProperty('--BalticSea__DarkToneInk',                     '#3d3d3f'); 
+        r.style.setProperty('--Snow__Lead',                                 '#fff9f9'); 
+        r.style.setProperty('--BalticSea__BlackMana',                       '#3d3d3f'); 
+        r.style.setProperty('--BalticSea__EerieBlack',                      '#3d3d3f'); 
+        r.style.setProperty('--FluorescentRed__FrenchWine',                 '#ff5252'); 
+        r.style.setProperty('--FluorescentRed__OffBlack',                   '#ff5252'); 
+        r.style.setProperty('--Transparent__ExtraordinaryAbundanceOfTinge', '#e8e7e700'); 
+        r.style.setProperty('--VivaldiRed__FrenchWine',                     '#e93a3a'); 
+        r.style.setProperty('--Flushed__LingonberryRed',                    '#e45656'); 
+        r.style.setProperty('--PaleFlower__RavensBanquet',                  '#668AAC'); 
+        r.style.setProperty('--Tin__WhatWeDoInTheShadows',                  '#919192'); 
+        r.style.setProperty('--SolidEmpire__DarkSouls',                     '#635a5a'); 
+        r.style.setProperty('--Fresco__KinglyCloud',                        '#f5dada'); 
+        r.style.setProperty('--GraniteBrown__Lead',                         '#3f2c28'); 
+        r.style.setProperty('--EnglishBreakfast__RavensBanquet',            '#461717'); 
+        r.style.setProperty('--LimonFresco__Anime',                         '#c8bd56'); 
+        r.style.setProperty('--SnowPea__RichGreen',                         '#6dd277'); 
+        r.style.setProperty('--ForbiddenFruit__RedPotion',                  '#ff8080'); 
+        r.style.setProperty('--DustySky__Lead',                             '#96a4a5'); 
+        r.style.setProperty('--StretchLimo__ChromaphobicBlack',             '#292e32'); 
+        r.style.setProperty('--StretchLimo__EerieBlack',                    '#292e32'); 
+        r.style.setProperty('--DwarfFortress__Belladonna',                  '#1a0505'); 
+        r.style.setProperty('--DwarfFortress__Lead',                        '#1a0505'); 
+        r.style.setProperty('--White__DarkGrey',                            '#ffffff'); 
+        r.style.setProperty('--Grey__ExistentialAngst',                     '#808080'); 
+        r.style.setProperty('--FluorescentRed__RefinedChianti',             '#ff5252'); 
+        r.style.setProperty('--HumorousGreen__Anime',                       '#c9ba39'); 
+        r.style.setProperty('--Transparent50__Transparent25',               '0.50');    
     },
   },
   computed: {
@@ -236,43 +191,42 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Alike&display=swap");
 
 :root {
-  --snow:               #fff9f9; //Background               var(--snow);
-  --balticSea:          #3d3d3f; //Default font dark, bg    var(--balticSea);
-  --balticSea2:         #3d3d3f; //bt                       var(--balticSea2);
-  --balticSea3:         #3d3d3f; //bt                       var(--balticSea3);
-  --balticSea4:         #3d3d3f; //bt                       var(--balticSea4);
-  --balticSea5:         #3d3d3f; //bt                       var(--balticSea5);
-  --balticSea6:         #3d3d3f; //bt                       var(--balticSea6);
-  --balticSea7:         #3d3d3f; //bt                       var(--balticSea7);
-  --balticSea8:         #3d3d3f; //bt                       var(--balticSea8);
-  --balticSea9:         #3d3d3f; //bt                       var(--balticSea9);
-  --fluorescentRed:     #ff5252; //Input highlight line     var(--fluorescentRed);
-  --fluorescentRed2:    #ff5252; //Input highlight line     var(--fluorescentRed2);
-  --lateo:              #e8e7e7; //Input autofill           var(--lateo);
-  --vivaldiRed:         #e93a3a; //CWarning font            var(--vivaldiRed);
-  --vivaldiRed2:        #e93a3a; //CWarning font            var(--vivaldiRed2);
-  --poblano:            #068020; //CSuccess font            var(--poblano);
-  --paleFlower:         #668AAC; //Href link font           var(--paleFlower);
-  --tin:                #919192; //inactive button-bg       var(--tin);
-  --solidEmpire:        #635a5a; //link font                var(--solidEmpire);
-  --fresco:             #f5dada; //Default font light       var(--fresco);
-  --graniteBrown:       #3f2c28; //menu-item-active font    var(--graniteBrown);
-  --englishBreakfast:   #461717; //textarea font            var(--englishBreakfast);
-  --lemonPeel:          #fff383; //u razradi bg             var(--lemonPeel);
-  --snowPea:            #6dd277; //prihvaćeno/riješeno bg   var(--snowPea);
-  --forbiddenFruit:     #ff8080; //odbijeno bg              var(--forbiddenFruit);
-  --dustySky:           #96a4a5; //CCard-data bg            var(--dustySky);
-  --stretchLimo:        #292e32; //CSelect items-border     var(--stretchLimo);
-  --stretchLimo2:       #292e32; //CSelect items-border     var(--stretchLimo2);
-  --dwarfFortress:      #1a0505; //CSelect isSelected font  var(--dwarfFortress);
-  --dwarfFortress2:     #1a0505; //CSelect isSelected font  var(--dwarfFortress);
-  --richGreen:          #258843; //CSuccess bg, font        var(--richGreen);
-  --white:              #ffffff; //line password            var(--white);
-  --grey:               #808080; //line password            var(--grey);
-  --red:                #ff0000; //line password            var(--red);
-  --yellow:             #ffff00; //line password            var(--yellow);
-  --green:              #008000; //line password            var(--green);
-  --transparency:       0.50;      //button transparency      var(--transparency);
+    --BalticSea__BlackMana:                       #3d3d3f;    //var(--BalticSea__BlackMana);
+    --BalticSea__DarkToneInk:                     #3d3d3f;    //var(--BalticSea__DarkToneInk);
+    --BalticSea__EerieBlack:                      #3d3d3f;    //var(--BalticSea__EerieBlack);
+    --BalticSea__Lead:                            #3d3d3f;    //var(--BalticSea__Lead);
+    --BalticSea__SilverMedal:                     #3d3d3f;    //var(--BalticSea__SilverMedal);
+    --BalticSea__Squant:                          #3d3d3f;    //var(--BalticSea__Squant);
+    --DustySky__Lead:                             #96a4a5;    //var(--DustySky__Lead);
+    --DwarfFortress__Belladonna:                  #1a0505;    //var(--DwarfFortress__Belladonna);
+    --DwarfFortress__Lead:                        #1a0505;    //var(--DwarfFortress__Lead);
+    --EnglishBreakfast__RavensBanquet:            #461717;    //var(--EnglishBreakfast__RavensBanquet);
+    --FluorescentRed__FrenchWine:                 #ff5252;    //var(--FluorescentRed__FrenchWine);
+    --fluorescentRed__OffBlack:                   #ff5252;    //var(--fluorescentRed__OffBlack);
+    --FluorescentRed__RefinedChianti:             #ff5252;    //var(--FluorescentRed__RefinedChianti);
+    --Flushed__LingonberryRed:                    #e45656;    //var(--Flushed__LingonberryRed);
+    --ForbiddenFruit__RedPotion:                  #ff8080;    //var(--ForbiddenFruit__RedPotion);
+    --Fresco__KinglyCloud:                        #f5dada;    //var(--Fresco__KinglyCloud);
+    --GraniteBrown__Lead:                         #3f2c28;    //var(--GraniteBrown__Lead);
+    --Grey__ExistentialAngst:                     #808080;    //var(--Grey__ExistentialAngst);
+    --HumorousGreen__Anime:                       #c9ba39;    //var(--HumorousGreen__Anime);
+    --LimonFresco__Anime:                         #fff383;    //var(--LimonFresco__Anime);
+    --PaleFlower__RavensBanquet:                  #668AAC;    //var(--PaleFlower__RavensBanquet);
+    --Poblano__Poblano:                           #068020;    //var(--Poblano__Poblano);
+    --RichGreen__RichGreen:                       #258843;    //var(--RichGreen__RichGreen);
+    --Snow__DarkToneInk:                          #fff9f9;    //var(--Snow__DarkToneInk);
+    --Snow__EerieBlack:                           #fff9f9;    //var(--Snow__EerieBlack);
+    --Snow__Lead:                                 #fff9f9;    //var(--Snow__Lead);
+    --SnowPea__RichGreen:                         #6dd277;    //var(--SnowPea__RichGreen);
+    --SolidEmpire__DarkSouls:                     #635a5a;    //var(--SolidEmpire__DarkSouls);
+    --StretchLimo__ChromaphobicBlack:             #292e32;    //var(--StretchLimo__ChromaphobicBlack);
+    --StretchLimo__EerieBlack:                    #292e32;    //var(--StretchLimo__EerieBlack);
+    --Tin__WhatWeDoInTheShadows:                  #919192;    //var(--Tin__WhatWeDoInTheShadows);
+    --VivaldiRed__FrenchWine:                     #e93a3a;    //var(--VivaldiRed__FrenchWine);
+    --White__DarkGrey:                            #ffffff;    //var(--White__DarkGrey);
+    --Transparent__BleachedSilk:                  transparent;  //var(--Transparent__BleachedSilk);
+    --Transparent__ExtraordinaryAbundanceOfTinge: transparent;  //var(--Transparent__ExtraordinaryAbundanceOfTinge);
+    --Transparent50__Transparent25:               0.50;         //var(--Transparent50__Transparent25);
 }
 
 * {
@@ -281,13 +235,13 @@ export default {
   font-weight: normal;
   line-height: normal;
   letter-spacing: -0.25px;
-  color: var(--balticSea);
+  color: var(--BalticSea__Lead);
   transition: all;
   transition-timing-function: ease-in-out;
   transition: 0.5s;
 }
 html {
-  background-color: var(--snow);
+  background-color: var(--Snow__DarkToneInk);
 }
 .CBg {
   position: fixed;
@@ -308,19 +262,19 @@ html {
   background-image: url("assets/bg_dark.png");
 }
 div hr {
-  border: 2px solid var(--balticSea2);
+  border: 2px solid var(--BalticSea__SilverMedal);
   border-radius: 16px;
 }
 .dotted {
   border-style: dashed;
 }
 input:focus + hr {
-  border: 2px solid var(--fluorescentRed);
+  border: 2px solid var(--FluorescentRed__FrenchWine);
   border-radius: 16px;
 }
 input:focus {
   outline: none;
-  caret-color: var(--fluorescentRed);
+  caret-color: var(--FluorescentRed__FrenchWine);
 }
 input {
   background-color: transparent;
@@ -333,15 +287,15 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  box-shadow: 0 0 0 30px var(--balticSea6) inset !important;
-  -webkit-text-fill-color: var(--balticSea3);
+  box-shadow: 0 0 0 30px var(--Snow__DarkToneInk) inset !important;
+  -webkit-text-fill-color: var(--BalticSea__Squant);
   border-radius: 0% !important;
 }
 .CWarning {
-  color: var(--vivaldiRed) !important;
+  color: var(--VivaldiRed__FrenchWine) !important;
 }
 .CSuccess {
-  color: var(--poblano) !important;
+  color: var(--Poblano__Poblano) !important;
 }
 .href-link {
   font-family: "Lora", serif;
@@ -352,7 +306,7 @@ input:-webkit-autofill:active {
   display: flex;
   align-items: center;
   text-align: center;
-  color: var(--paleFlower);
+  color: var(--PaleFlower__RavensBanquet);
 }
 .tranparent-10 {
   opacity: 0.1;
@@ -376,7 +330,7 @@ input:-webkit-autofill:active {
   opacity: 1;
 }
 .inactive div .button-bg {
-  opacity: var(--transparency);
+  opacity: var(--Transparent50__Transparent25);
 }
 .menu {
   position: fixed;
@@ -388,23 +342,23 @@ input:-webkit-autofill:active {
 }
 .menu-top-item-grid0 {
   margin-left: 0%;
-  background-color: var(--fluorescentRed);
+  background-color: var(--FluorescentRed__FrenchWine);
 }
 .menu-top-item-grid1 {
   margin-left: 100%;
-  background-color: var(--fluorescentRed);
+  background-color: var(--FluorescentRed__FrenchWine);
 }
 .menu-top2-item-grid0 {
   margin-left: 0%;
-  background-color: var(--fluorescentRed);
+  background-color: var(--FluorescentRed__FrenchWine);
 }
 .menu-top2-item-grid1 {
   margin-left: 100%;
-  background-color: var(--fluorescentRed);
+  background-color: var(--FluorescentRed__FrenchWine);
 }
 .menu-top2-item-grid2 {
   margin-left: 200%;
-  background-color: var(--fluorescentRed);
+  background-color: var(--FluorescentRed__FrenchWine);
 }
 .menu2 {
   position: fixed;
@@ -412,7 +366,7 @@ input:-webkit-autofill:active {
   width: 100%;
   height: 50px;
   z-index: 2000;
-  background-color: var(--balticSea5);
+  background-color: var(--BalticSea__DarkToneInk);
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 .menu-bottom {
@@ -428,14 +382,14 @@ input:-webkit-autofill:active {
   bottom: -1px;
   width: 100%;
   height: 50px;
-  background-color: var(--balticSea5);
+  background-color: var(--BalticSea__DarkToneInk);
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
 }
 .menu-item {
   display: flex;
   align-items: center;
   text-align: center;
-  background-color: var(--balticSea4);
+  background-color: var(--Transparent__BleachedSilk);
 }
 .menu-item5 {
   display: flex;
@@ -459,14 +413,14 @@ input:-webkit-autofill:active {
 }
 .menu-item p {
   width: 100%;
-  color: var(--fresco);  
+  color: var(--Fresco__KinglyCloud);  
   transition: all;
   transition-timing-function: ease-in-out;
   transition: 1s;
 }
 .menu-item p a {
   width: 100%;
-  color: var(--fresco);
+  color: var(--Fresco__KinglyCloud);
   transition: all;
   transition-timing-function: ease-in-out;
   transition: 1s;
@@ -481,7 +435,7 @@ input:-webkit-autofill:active {
   transition: all;
   transition-timing-function: ease-in-out;
   transition: 1s;
-  background-color: var(--balticSea4);
+  background-color: var(--Transparent__BleachedSilk);
 }
 .menu-item-active p {
   width: 100%;
@@ -538,23 +492,23 @@ input:-webkit-autofill:active {
   padding: 8px;
   height: 128px;
   width: 100%;
-  background-color: var(--balticSea6);
+  background-color: var(--Snow__DarkToneInk);
   color: var(--balticSea);
   font-size: 18px;
-  border-color: var(--stretchLimo);
+  border-color: var(--StretchLimo__ChromaphobicBlack);
   border-width: 2px;
   border-top-left-radius: 9.5px !important;
   border-bottom-left-radius: 2.5px !important;
   border-top-right-radius: 9.5px !important;
   border-bottom-right-radius: 2.5px !important;
-  caret-color: var(--fluorescentRed);
+  caret-color: var(--FluorescentRed__FrenchWine);
 }
 .money {
   width: 43px;
   opacity: 0.75;
 }
 .price {
-  color: var(--fluorescentRed);
+  color: var(--FluorescentRed__FrenchWine);
 }
 .fade-enter-active, .fade-leave-active {
   margin-left: 0%;
@@ -570,7 +524,7 @@ input:-webkit-autofill:active {
 .logout2 {
   position: fixed;
   z-index: 1000;
-  bottom: 0px;
+  bottom: 5px;
   padding: 10px;
 }
 .menu-item3 {
@@ -587,12 +541,12 @@ input:-webkit-autofill:active {
   z-index: 100;
 }
 .dg-btn {
-  border-color: #ff5252 !important;
-  background-color: #ff5252 !important;
+  border-color: var(--FluorescentRed__FrenchWine);
+  background-color: var(--FluorescentRed__FrenchWine);
 }
 
 .dg-btn--cancel {
-  border-color: #ff5252 !important;
-  background-color: #ff5252 !important;
+  border-color: var(--FluorescentRed__FrenchWine);
+  background-color: var(--FluorescentRed__FrenchWine);
 }
 </style>

@@ -90,7 +90,7 @@ export default {
 .CCard-image {
   width: 120px;
   height: 120px;
-  background: var(--balticSea);
+  background: var(--BalticSea__Lead);
   border-bottom-left-radius: 8px;
   border-top-left-radius: 8px;
   overflow: hidden;
@@ -102,7 +102,7 @@ export default {
 .CCard-data {
   width: 100%;
   height: 120px;
-  background: var(--dustySky);
+  background: var(--DustySky__Lead);
   background-color: transparent !important;
   border-color: transparent !important;
   border-radius: 0%;
@@ -110,26 +110,26 @@ export default {
 .CCard-header {
   width: 100%;
   height: 48px;
-  background: var(--white);
+  background: var(--White__DarkGrey);
   border-top-right-radius: 8px;
 }
 .CCard-footer {
   width: 100%;
   height: 72px;
-  background: var(--balticSea5);
+  background: var(--BalticSea__DarkToneInk);
   border-bottom-right-radius: 8px;
 }
 .CCard-icon-1 {
   height: 100%;
-  background: var(--fluorescentRed);
+  background: var(--FluorescentRed__FrenchWine);
 }
 .CCard-icon-2 {
   height: 100%;
-  background: var(--lemonPeel);
+  background: var(--LimonFresco__Anime);
 }
 .CCard-icon-3 {
   height: 100%;
-  background: var(--snowPea);
+  background: var(--SnowPea__RichGreen);
   border-bottom-right-radius: 8px;
 }
 .CCard-icontext {
@@ -139,7 +139,7 @@ export default {
   top: 4px;
   font-weight: bold;
   letter-spacing: -1px;
-  color: var(--dwarfFortress);
+  color: var(--DwarfFortress__Belladonna);
 }
 .CCard-svg {
   height: 42px;
@@ -164,14 +164,14 @@ export default {
   letter-spacing: -1px;
   font-size: 18px;
   top: 2px;
-  color: var(--balticSea);
+  color: var(--BalticSea__Lead);
 }
 .CCard-subtitle {
   position: relative;
   font-size: 11px;
   letter-spacing: -0.5px;
   bottom: 2px;
-  color: var(--balticSea3);
+  color: var(--BalticSea__Squant);
 }
 .CCard-date {
   position: relative;
@@ -179,12 +179,12 @@ export default {
   font-size: 12px;
   font-weight: normal !important;
   letter-spacing: 0.25px;
-  color: var(--balticSea8);
+  color: var(--BalticSea__BlackMana);
 }
 .CCard-price {
   position: relative;
   bottom: 0px;
   font-size: 14px;
-  color: var(--vivaldiRed2) !important;
+  color: var(--Flushed__LingonberryRed) !important;
 }
 </style>

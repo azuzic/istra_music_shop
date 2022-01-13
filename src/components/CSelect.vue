@@ -88,21 +88,21 @@ export default {
 
 <style scoped>
 .selected {
-  background: var(--lateo);
+  background: var(--Transparent__ExtraordinaryAbundanceOfTinge);
   outline: none;
   width: 100%;
   height: 40px;
-  border: 2px solid var(--stretchLimo) !important;
+  border: 2px solid var(--StretchLimo__ChromaphobicBlack) !important;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  color: var(--dwarfFortress2) !important;
+  color: var(--DwarfFortress__Lead) !important;
   display: flex;
   align-items: center;
   padding-left: 4px;
 }
 
 .custom-select {
-  background: var(--balticSea6);
+  background: var(--Snow__DarkToneInk);
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 }
@@ -122,20 +122,20 @@ export default {
 }
 
 .items-border {
-  border-bottom: 2px solid var(--stretchLimo);
+  border-bottom: 2px solid var(--StretchLimo__ChromaphobicBlack);
 }
 
 .items div {
-  background: var(--balticSea6);
+  background: var(--DustySky__Black);
 }
 
 .items div div {
   outline: none;
   width: 100%;
   height: 40px !important;
-  background: var(--lateo);
-  border: 2px solid var(--stretchLimo);
-  color: var(--balticSea3);
+  background: var(--Transparent__ExtraordinaryAbundanceOfTinge);
+  border: 2px solid var(--StretchLimo__ChromaphobicBlack);
+  color: var(--BalticSea__Squant);
   cursor: pointer;
   user-select: none;
   margin-top: -3px;
@@ -145,11 +145,11 @@ export default {
 }
 
 .isSelected {
-  background-color: var(--fluorescentRed) !important;
-  color: var(--dwarfFortress2) !important;
+  background-color: var(--FluorescentRed__FrenchWine) !important;
+  color: var(--DwarfFortress__Lead) !important;
 }
 .isSelected div {
-  color: var(--dwarfFortress2) !important;
+  color: var(--DwarfFortress__Lead) !important;
 }
 
 .selectHide {
@@ -172,7 +172,7 @@ export default {
   height: 18px;
 }
 .spin-pos2 {
-  fill: var(--fluorescentRed);
+  fill: var(--FluorescentRed__FrenchWine);
   transition: 0.25s;
   transform: scaleY(1);
   float: right;

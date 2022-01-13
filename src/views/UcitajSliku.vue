@@ -109,7 +109,7 @@ export default {
   display: flex;
   align-items: center;
   text-align: center;
-  background-color: var(--stretchLimo2);
+  background-color: var(--StretchLimo__EerieBlack);
   width: 100%;
   height: 72%;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
@@ -118,7 +118,7 @@ export default {
   position: absolute;
   align-items: center;
   text-align: center;
-  background-color: var(--snow);
+  background-color: var(--Snow__DarkToneInk);
   bottom: 0px;
   width: 100%;
   height: 28%;
@@ -136,20 +136,20 @@ export default {
   text-align: center;
 }
 .menu-item6 p:nth-child(2) {
-  color: var(--fresco) !important;
+  color: var(--Fresco__KinglyCloud) !important;
   letter-spacing: 0.5px;
   margin-top: 8px;
   font-size: 14px;
 }
 .menu-item6 p:nth-child(3) {
-  color: var(--fresco) !important;
+  color: var(--Fresco__KinglyCloud) !important;
   margin-top: 4px;
   letter-spacing: -1.5px;
   font-size: 24px;
   font-weight: bold;
 }
 .menu-item6 p:nth-child(4) {
-  color: var(--fresco) !important;
+  color: var(--Fresco__KinglyCloud) !important;
   margin-top: 4px;
   letter-spacing: 0px;
   font-size: 22px;
@@ -170,7 +170,7 @@ export default {
   height: 50px;
   margin-top: 24px;
   border-radius: 32px;
-  background-color: var(--fluorescentRed);
+  background-color: var(--FluorescentRed__FrenchWine);
   z-index: 42069;
 }
 .menu-item7 p {

@@ -446,7 +446,7 @@ export default {
 }
 
 .otkup-div-image img {
-  border-color: var(--stretchLimo);
+  border-color: var(--StretchLimo__ChromaphobicBlack);
   height: 120px;
   border-width: 2px;
 }
@@ -457,16 +457,16 @@ export default {
 }
 .otkup-textarea:focus {
   outline: none !important;
-  border-color: var(--fluorescentRed);
+  border-color: var(--FluorescentRed__FrenchWine);
 }
 .bg-bottom {
   position: absolute;
   width: 100%;
-  background-color: var(--balticSea4);
+  background-color: var(--Transparent__BleachedSilk);
   height: 50px;
 }
 .menu-item5 p {
-  color: var(--balticSea7) !important;
+  color: var(--Snow__Lead) !important;
 }
 .CCard-img2 {
   width: auto;
@@ -479,7 +479,7 @@ export default {
   overflow: hidden;
 }
 .square {
-  background-color: var(--snow);
+  background-color: var(--Snow__DarkToneInk);
     overflow: hidden;
     float:left;
     position: relative;
@@ -489,7 +489,7 @@ export default {
     text-align: center;
     width: 100%;
     padding-bottom: 100%;
-    border-color: var(--stretchLimo);
+    border-color: var(--StretchLimo__ChromaphobicBlack);
     border-width: 2px;
 }
 
@@ -506,7 +506,7 @@ export default {
     left:50%;
     top:50%;
     transform:translate(-50%,-50%);
-    color: var(--balticSea3);
+    color: var(--BalticSea__Squant);
     font-size: 12px;
     letter-spacing: 0.25px;
 }

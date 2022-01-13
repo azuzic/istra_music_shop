@@ -104,18 +104,18 @@ export default {
 }
 .menu-item-grid0 {
   margin-left: 0%;
-  background-color: #fff383;
+  background-color: var(--LimonFresco__Anime);
 }
 .menu-item-grid1 {
   margin-left: 100%;
-  background-color: #6dd277;
+  background-color: var(--SnowPea__RichGreen);
 }
 .menu-item-grid2 {
   margin-left: 200%;
-  background-color: #6dd277;
+  background-color: var(--SnowPea__RichGreen);
 }
 .menu-item-grid3 {
   margin-left: 300%;
-  background-color: #ff7f7f;
+  background-color: var(--ForbiddenFruit__RedPotion);
 }
 </style>

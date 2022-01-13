@@ -23,7 +23,7 @@ export default {
 <style scoped lang="scss">
 .button-bg {
   min-width: 226px;
-  background: var(--balticSea9);
+  background: var(--BalticSea__EerieBlack);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
 }
@@ -35,7 +35,7 @@ export default {
   margin-bottom: -51px;
   z-index: -21;
   bottom: 51px;
-  background: var(--snow);
+  background: var(--Snow__DarkToneInk);
   border-radius: 16px;
 }
 
@@ -55,6 +55,6 @@ export default {
   width: 100%;
   align-items: center;
   text-align: center;
-  color: var(--fresco);
+  color: var(--Fresco__KinglyCloud);
 }
 </style>

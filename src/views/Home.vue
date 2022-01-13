@@ -54,6 +54,6 @@ export default {
 
 <style>
 .text-home {
-  color: var(--balticSea3) !important;
+  color: var(--BalticSea__Squant) !important;
 }
 </style>

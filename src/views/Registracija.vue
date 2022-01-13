@@ -397,28 +397,28 @@ export default {
 .line {
   height: 8px;
   border-radius: 4px;
-  background-color: var(--grey);
+  background-color: var(--Grey__ExistentialAngst);
   border-color: transparent !important;
 }
 
 .line-red {
   height: 8px;
   border-radius: 4px;
-  background-color: var(--red);
+  background-color: var(--FluorescentRed__RefinedChianti);
   border-color: transparent !important;
 }
 
 .line-yellow {
   height: 8px;
   border-radius: 4px;
-  background-color: var(--yellow);
+  background-color: var(--HumorousGreen__Anime);
   border-color: transparent !important;
 }
 
 .line-green {
   height: 8px;
   border-radius: 4px;
-  background-color: var(--green);
+  background-color: var(--RichGreen__RichGreen);
   border-color: transparent !important;
 }
 

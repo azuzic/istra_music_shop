@@ -140,7 +140,7 @@ export default {
   align-items: center;
   justify-content: center;
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
-  background: var(--fluorescentRed);
+  background: var(--FluorescentRed__FrenchWine);
 }
 
 .logout p {

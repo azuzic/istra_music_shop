@@ -35,8 +35,8 @@ export default {
   border-width: 3px;
   border-radius: 8px;
   border-style: dashed;
-  border-color: var(--vivaldiRed);
-  background-color: var(--snow);
+  border-color: var(--VivaldiRed__FrenchWine);
+  background-color: var(--Snow__DarkToneInk);
 }
 .img-warning {
   height: 25px;
@@ -47,6 +47,6 @@ export default {
   justify-content: center;
 }
 .CWarning-msg {
-  color: var(--vivaldiRed);
+  color: var(--VivaldiRed__FrenchWine);
 }
 </style>
