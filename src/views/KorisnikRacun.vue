@@ -67,7 +67,7 @@
           <p class="text-left text-18px m-0 p-0">Izgled aplikacije</p>
           <CSelect
             :options="['Svijetla', 'Tamna Plava', 'Tamna Crvena']"
-            :default="'Light'"
+            :default="theme"
             v-model="theme"
           />
         </div>
@@ -100,7 +100,7 @@ export default {
       email: "",
       oib: "",
       mob: "",
-      theme: "",
+      theme: store.theme,
     };
   },
   components: {
@@ -128,6 +128,7 @@ export default {
     },
     dummy() {},
     signout() {
+      store.theme="Svijetla";
       const auth = getAuth();
       signOut(auth)
         .then(() => {
