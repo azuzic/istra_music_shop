@@ -56,16 +56,26 @@
         </div>
         <!--==============/SPREMI============-->
         <!--===================RESETIRAJ LOZINKU====================-->
-        <div class="place-self-center mt-16 mb-32">
+        <div class="place-self-center mt-16 mb-8">
           <router-link to="/password-reset">
             <CButtonDecline btn="RESETIRAJ LOZINKU" :btnClickHandler="dummy" />
           </router-link>
         </div>
         <!--================/RESETIRAJ LOZINKU LOZINKU===================-->
+        <!--===================THEME===================-->
+        <div class="mb-48" @click="updateTheme()">
+          <p class="text-left text-18px m-0 p-0">Izgled aplikacije</p>
+          <CSelect
+            :options="['Svijetla', 'Tamna Plava', 'Tamna Crvena']"
+            :default="'Light'"
+            v-model="theme"
+          />
+        </div>
+        <!--===================/THEME===================-->
       </div>
     </div>
     <!--==============LOGUT - TEMPORARY================-->
-    <button class="logout" @click="signout">
+    <button class="logout" @click="signout()">
       <p class="pr-2 pb-1">Odjava</p>
       <img class="exit-icon" src="@/assets/exit_icon.svg" />
     </button>
@@ -75,6 +85,7 @@
 <script>
 import CTitle from "@/components/CTitle.vue";
 import CWarning from "@/components/CWarning.vue";
+import CSelect from "@/components/CSelect.vue";
 import CButtonAccept from "@/components/CButtonAccept.vue";
 import CButtonDecline from "@/components/CButtonDecline.vue";
 import store from "@/store";
@@ -89,6 +100,7 @@ export default {
       email: "",
       oib: "",
       mob: "",
+      theme: "",
     };
   },
   components: {
@@ -96,6 +108,7 @@ export default {
     CWarning,
     CButtonAccept,
     CButtonDecline,
+    CSelect,
   },
   mounted() {
     this.readData();
@@ -111,6 +124,7 @@ export default {
           this.mob = `${doc.data().mob}`;
         }
       });
+      store.theme=this.theme;
     },
     dummy() {},
     signout() {
@@ -123,6 +137,9 @@ export default {
           console.error("Signed out error!");
         });
     },
+    updateTheme() {
+      store.theme=this.theme;
+    }
   },
 };
 </script>
@@ -136,6 +153,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1500;
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
   background: var(--FluorescentRed__FrenchWine);
 }

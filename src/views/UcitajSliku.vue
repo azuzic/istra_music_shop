@@ -10,8 +10,9 @@
     </div>
     <div class="CDodavanje-top">
       <div class="menu-item6 mx-auto">
-        <img v-if="store.darkToggle" class="dodavanje-icon" src="@/assets/upload.svg" />
-        <img v-if="!store.darkToggle" class="dodavanje-icon" src="@/assets/upload_dark.svg" />
+        <img v-if="store.theme=='Svijetla'" class="dodavanje-icon" src="@/assets/upload.svg" />
+        <img v-if="store.theme=='Tamna Plava'" class="dodavanje-icon" src="@/assets/upload_dark_blue.svg" />
+        <img v-if="store.theme=='Tamna Crvena'" class="dodavanje-icon" src="@/assets/upload_dark_red.svg" />
         <p>Molimo odaberite sliku za</p>
         <p>{{ uploadText }}</p>
         <p v-if="pictures.selected != 5 && pictures.selected != 6">
@@ -112,7 +113,7 @@ export default {
   background-color: var(--StretchLimo__EerieBlack);
   width: 100%;
   height: 72%;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.5));
+  box-shadow: 0px 4px 4px var(--Transparent25__Transparent75);
 }
 .CDodavanje-bottom {
   position: absolute;

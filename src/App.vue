@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div v-if="loadTheme()"></div>
+    <div v-if="store.theme ? loadTheme() : loadTheme()"></div>
     <div class="CBg" :class="store.darkToggle ? 'CBg-light' : 'CBg-dark'"></div>
     <!--==============DJELATNIK ============================-->
     <div v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-2 mb-4">
@@ -48,13 +48,6 @@
 
     </div>
     <!--==============KORISNIK END==========================-->
-    <!--==============DARK MODE=============================-->
-    <div class="logout2" @click="toggleDark()">
-      <!--===<p class="mr-4 text-24px" style="width:150px;">DARK MODE</p>=====-->
-      <img v-if="!store.darkToggle" height="30px" width="30px" src="../src/assets/moon_empty_icon.svg">
-      <img v-if="store.darkToggle"  height="30px" width="30px" src="../src/assets/moon_full_icon.svg">
-    </div>
-    <!--==============DARK MODE END=========================-->
     <router-view />
   </div>
 </template>
@@ -95,19 +88,26 @@ export default {
     };
   },
   methods: {
-    toggleDark() {
-      store.darkToggle = !store.darkToggle;
-      if (store.darkToggle) this.loadLight();
-      else this.loadDark();
-    },
     loadTheme() {
-      if (store.darkToggle) this.loadLight();
-      else this.loadDark();
+      console.log(store.theme);
+      if (store.theme == "Svijetla") {
+        store.darkToggle = true;
+        this.loadLight();
+      }
+      else if (store.theme == "Tamna Plava") {
+        store.darkToggle = false;
+        this.loadDarkBlue();
+      }
+      else if (store.theme == "Tamna Crvena") {
+        store.darkToggle = false;
+        this.loadDarkRed();
+      }
     },
-    loadDark() {
+    loadDarkBlue() {
       let r = document.querySelector(':root');
         r.style.setProperty('--Snow__DarkToneInk',                          '#121212');   
-        r.style.setProperty('--DustySky__Black',                            '#000000');   
+        r.style.setProperty('--DustySky__Black',                            '#000000');  
+        r.style.setProperty('--DustySky__Grey',                             '#2a2a2a');    
         r.style.setProperty('--BalticSea__Lead',                            '#ffffffde'); 
         r.style.setProperty('--BalticSea__Squant',                          '#ffffff99'); 
         r.style.setProperty('--BalticSea__BlackMana',                       '#ffffff7a'); 
@@ -131,7 +131,7 @@ export default {
         r.style.setProperty('--SnowPea__RichGreen',                         '#258843'); 
         r.style.setProperty('--ForbiddenFruit__RedPotion',                  '#215b9e'); 
         r.style.setProperty('--DustySky__Lead',                             '#ffffffde'); 
-        r.style.setProperty('--StretchLimo__ChromaphobicBlack',             '#ffffff29'); 
+        r.style.setProperty('--StretchLimo__ChromaphobicBlack',             'transparent'); 
         r.style.setProperty('--StretchLimo__EerieBlack',                    '#1c1c1c'); 
         r.style.setProperty('--DwarfFortress__Belladonna',                  '#09031f'); 
         r.style.setProperty('--DwarfFortress__Lead',                        '#ffffffde'); 
@@ -140,11 +140,52 @@ export default {
         r.style.setProperty('--FluorescentRed__RefinedChianti',             '#8c1939'); 
         r.style.setProperty('--HumorousGreen__Anime',                       '#c9bc4b'); 
         r.style.setProperty('--Transparent50__Transparent25',               '0.25');    
+        r.style.setProperty('--Transparent25__Transparent75',               '#000000bf');    
+    },
+    loadDarkRed() {
+      let r = document.querySelector(':root');
+        r.style.setProperty('--Snow__DarkToneInk',                          '#121212');   
+        r.style.setProperty('--DustySky__Black',                            '#000000');  
+        r.style.setProperty('--DustySky__Grey',                             '#2a2a2a');    
+        r.style.setProperty('--BalticSea__Lead',                            '#ffffffde'); 
+        r.style.setProperty('--BalticSea__Squant',                          '#ffffff99'); 
+        r.style.setProperty('--BalticSea__BlackMana',                       '#ffffff7a'); 
+        r.style.setProperty('--BalticSea__SilverMedal',                     '#ffffff29'); 
+        r.style.setProperty('--Transparent__BleachedSilk',                  '#ffffff0d'); 
+        r.style.setProperty('--BalticSea__DarkToneInk',                     '#303030');  
+        r.style.setProperty('--BalticSea__EerieBlack',                      '#1c1c1c');  
+        r.style.setProperty('--Snow__Lead',                                 '#ffffffde');  
+        r.style.setProperty('--FluorescentRed__FrenchWine',                 '#ad1f47'); 
+        r.style.setProperty('--FluorescentRed__OffBlack',                   '#303030'); 
+        r.style.setProperty('--Transparent__ExtraordinaryAbundanceOfTinge', '#ffffff1a'); 
+        r.style.setProperty('--VivaldiRed__FrenchWine',                     '#ad1f47'); 
+        r.style.setProperty('--Flushed__LingonberryRed',                    '#cc4658');
+        r.style.setProperty('--PaleFlower__RavensBanquet',                  '#bb2a53'); 
+        r.style.setProperty('--Tin__WhatWeDoInTheShadows',                  '#400F21'); 
+        r.style.setProperty('--SolidEmpire__DarkSouls',                     '#ffffff5c'); 
+        r.style.setProperty('--Fresco__KinglyCloud',                        'ffffffde'); 
+        r.style.setProperty('--GraniteBrown__Lead',                         '#000000de');   
+        r.style.setProperty('--EnglishBreakfast__RavensBanquet',            '#bb2a53'); 
+        r.style.setProperty('--LimonFresco__Anime',                         '#cec14c'); 
+        r.style.setProperty('--SnowPea__RichGreen',                         '#258843'); 
+        r.style.setProperty('--ForbiddenFruit__RedPotion',                  '#e41a3c'); 
+        r.style.setProperty('--DustySky__Lead',                             '#ffffffde'); 
+        r.style.setProperty('--StretchLimo__ChromaphobicBlack',             'transparent'); 
+        r.style.setProperty('--StretchLimo__EerieBlack',                    '#1c1c1c'); 
+        r.style.setProperty('--DwarfFortress__Belladonna',                  '#1f0309'); 
+        r.style.setProperty('--DwarfFortress__Lead',                        '#ffffffde'); 
+        r.style.setProperty('--White__DarkGrey',                            '#363636'); 
+        r.style.setProperty('--Grey__ExistentialAngst',                     '#0a0a0a'); 
+        r.style.setProperty('--FluorescentRed__RefinedChianti',             '#8c1939'); 
+        r.style.setProperty('--HumorousGreen__Anime',                       '#c9bc4b'); 
+        r.style.setProperty('--Transparent50__Transparent25',               '0.25');    
+        r.style.setProperty('--Transparent25__Transparent75',               '#000000bf');    
     },
     loadLight() {
       let r = document.querySelector(':root');
         r.style.setProperty('--Snow__DarkToneInk',                          '#fff9f9'); 
-        r.style.setProperty('--DustySky__Black',                            '#96a4a5'); 
+        r.style.setProperty('--DustySky__Black',                            '#e6dcdc'); 
+        r.style.setProperty('--DustySky__Grey',                             '#fff9f9');  
         r.style.setProperty('--BalticSea__Lead',                            '#3d3d3f'); 
         r.style.setProperty('--BalticSea__SilverMedal',                     '#3d3d3f'); 
         r.style.setProperty('--BalticSea__Squant',                          '#3d3d3f'); 
@@ -168,7 +209,7 @@ export default {
         r.style.setProperty('--SnowPea__RichGreen',                         '#6dd277'); 
         r.style.setProperty('--ForbiddenFruit__RedPotion',                  '#ff8080'); 
         r.style.setProperty('--DustySky__Lead',                             '#96a4a5'); 
-        r.style.setProperty('--StretchLimo__ChromaphobicBlack',             '#292e32'); 
+        r.style.setProperty('--StretchLimo__ChromaphobicBlack',             'transparent'); 
         r.style.setProperty('--StretchLimo__EerieBlack',                    '#292e32'); 
         r.style.setProperty('--DwarfFortress__Belladonna',                  '#1a0505'); 
         r.style.setProperty('--DwarfFortress__Lead',                        '#1a0505'); 
@@ -176,7 +217,8 @@ export default {
         r.style.setProperty('--Grey__ExistentialAngst',                     '#808080'); 
         r.style.setProperty('--FluorescentRed__RefinedChianti',             '#ff5252'); 
         r.style.setProperty('--HumorousGreen__Anime',                       '#c9ba39'); 
-        r.style.setProperty('--Transparent50__Transparent25',               '0.50');    
+        r.style.setProperty('--Transparent50__Transparent25',               '0.50');  
+        r.style.setProperty('--Transparent25__Transparent75',               '#00000040');    
     },
   },
   computed: {
@@ -231,7 +273,7 @@ export default {
 
 * {
   color: rgb(16, 73, 139);
-  color: #215b9e;
+  color: #00000040;
   color: rgb(173, 31, 71);
   color: #8c1939;
   font-family: "Lora", italic;
@@ -371,7 +413,7 @@ input:-webkit-autofill:active {
   height: 50px;
   z-index: 2000;
   background-color: var(--BalticSea__DarkToneInk);
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 0px 4px 4px var(--Transparent25__Transparent75);
 }
 .menu-bottom {
   position: fixed;
@@ -379,7 +421,7 @@ input:-webkit-autofill:active {
   width: 100%;
   height: 50px;
   background-color: transparent;
-  filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 0px -4px 4px var(--Transparent25__Transparent75);
 }
 .menu-bottom3 {
   position: fixed;
@@ -387,7 +429,7 @@ input:-webkit-autofill:active {
   width: 100%;
   height: 50px;
   background-color: var(--BalticSea__DarkToneInk);
-  filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 0px -4px 4px var(--Transparent25__Transparent75);
 }
 .menu-item {
   display: flex;
@@ -496,10 +538,11 @@ input:-webkit-autofill:active {
   padding: 8px;
   height: 128px;
   width: 100%;
-  background-color: var(--Snow__DarkToneInk);
+  background-color: var(--DustySky__Grey);
   color: var(--balticSea);
   font-size: 18px;
   border-color: var(--StretchLimo__ChromaphobicBlack);
+  box-shadow: 0px 0px 4px var(--Transparent25__Transparent75);
   border-width: 2px;
   border-top-left-radius: 9.5px !important;
   border-bottom-left-radius: 2.5px !important;
@@ -527,7 +570,7 @@ input:-webkit-autofill:active {
 }
 .logout2 {
   position: fixed;
-  z-index: 1000;
+  z-index: 2000;
   bottom: 5px;
   padding: 10px;
 }

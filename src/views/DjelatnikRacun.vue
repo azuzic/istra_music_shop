@@ -139,7 +139,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
+  box-shadow: 0px -4px 4px var(--Transparent25__Transparent75);
   background: var(--FluorescentRed__FrenchWine);
 }
 

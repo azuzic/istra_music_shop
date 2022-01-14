@@ -1,8 +1,9 @@
 <template>
   <div class="p-0 m-0">
     <div>
-      <router-link v-if="store.darkToggle" to="/"><img alt="Test logo" src="../assets/logo.svg" /></router-link>
-      <router-link v-if="!store.darkToggle" to="/"><img alt="Test logo" src="../assets/logo_dark.svg" /></router-link>
+      <router-link v-if="store.theme=='Svijetla'" to="/"><img alt="Test logo" src="../assets/logo.svg" /></router-link>
+      <router-link v-if="store.theme=='Tamna Plava'" to="/"><img alt="Test logo" src="../assets/logo_dark_blue.svg" /></router-link>
+      <router-link v-if="store.theme=='Tamna Crvena'" to="/"><img alt="Test logo" src="../assets/logo_dark_red.svg" /></router-link>
     </div>
     <div class="grid auto-rows-auto gap-4">
       <br />

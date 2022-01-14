@@ -36,8 +36,6 @@
       :class="
         !open
           ? 'selectHide'
-          : options.length > 5
-          ? 'selectShow items-border'
           : 'selectShow'
       "
     >
@@ -103,26 +101,22 @@ export default {
 
 .custom-select {
   background: var(--Snow__DarkToneInk);
+  box-shadow: 0px 0px 4px var(--Transparent25__Transparent75);
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-}
-
-.custom-select {
   overflow: hidden;
   width: 100%;
   z-index: 1;
 }
+
 .items {
   position: absolute;
   width: calc(100% - 2rem);
   z-index: 1000;
   transform-origin: 50% 0%;
-  height: 170px;
+  max-height: 170px;
   overflow-y: scroll;
-}
-
-.items-border {
-  border-bottom: 2px solid var(--StretchLimo__ChromaphobicBlack);
+  box-shadow: 0px 0px 4px var(--Transparent25__Transparent75);
 }
 
 .items div {
