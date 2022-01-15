@@ -133,15 +133,15 @@ export default {
 
   methods: {
     
-async getUserData() {
-      const querySnapshot = await getDocs(collection(db, "users"));
-      querySnapshot.forEach((doc) => {
-        if (store.currentUser === `${doc.data().email}`) {
-          store.theme = `${doc.data().theme}`;
-          store.userID = `${doc.id}`;
-        }
-      });
-    },
+  async getUserData() {
+        const querySnapshot = await getDocs(collection(db, "users"));
+        querySnapshot.forEach((doc) => {
+          if (store.currentUser === `${doc.data().email}`) {
+            store.theme = `${doc.data().theme}`;
+            store.userID = `${doc.id}`;
+          }
+        });
+      },
     login() {
       console.log("login..." + this.email);
       

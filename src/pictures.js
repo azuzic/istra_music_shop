@@ -38,4 +38,11 @@ export default {
       url: "",
     },
   ],
+  checkIfUploaded(){
+    return this.guitarPictures.every(picture => !picture.uploaded);
+  },
+  resetData: function (){
+    this.guitarPictures.forEach(picture => picture.uploaded = false);
+    this.guitarPictures.forEach(picture => picture.url = "");
+  }
 };
