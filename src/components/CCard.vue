@@ -86,7 +86,7 @@ export default {
   width: 100%;
   height: 120px;
   background: transparent !important;
-  box-shadow: 0px 0px 4px var(--Transparent25__Transparent75);
+  box-shadow: 0px 4px 4px var(--Transparent25__Transparent75);
   border-radius: 8px;
 }
 .CCard-image {

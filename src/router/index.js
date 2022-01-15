@@ -84,11 +84,6 @@ const routes = [
     },
     component: () => import("../views/PregledOtkupa.vue"),
   },
-  {
-    path: "/predan-zahtjev",
-    name: "PredanZahtjev",
-    component: () => import("../views/PredanZahtjev.vue"),
-  },
 ];
 
 const router = new VueRouter({

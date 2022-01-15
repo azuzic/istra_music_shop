@@ -111,31 +111,31 @@
         <textarea disabled class="resize-none otkup-textarea mt-2" v-model="opis">
         </textarea >
       </div>
-      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
+      <div>
         <hr class="dotted mt-2 mb-2" />
       </div>
-      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
+      <div>
         <p class="text-center mb-2">
           <b class="text-24px">PODACI O KLIJENTU</b>
         </p>
       </div>
-      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
+      <div>
         <p><u class="text-20px">Ime i prezime:</u></p>
         <p class="mt-1 text-18px"><b>{{korisnik[0].imePrezime}}</b></p>
       </div>
-      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
+      <div>
         <p><u class="text-20px">Email:</u></p>
         <p class="mt-1 text-18px"><b>{{korisnik[0].email}}</b></p>
       </div>
-      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
+      <div>
         <p><u class="text-20px">OIB:</u></p>
         <p class="mt-1 text-18px"><b>{{korisnik[0].oib}}</b></p>
       </div>
-      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
+      <div>
         <p><u class="text-20px">Broj telefona:</u></p>
         <p class="mt-1 text-18px"><b>{{mob}}</b></p>
       </div>
-      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
+      <div>
         <hr class="dotted mt-2 mb-2" />
       </div>
       <!--==============NOVA CIJENA==============================-->
@@ -156,7 +156,7 @@
       <div
         v-if="store.currentUser == 'djelatnik@gmail.com'"
         class="place-self-center mt-4"
-        :class="novaCijena && stanje=='U razradi' ? 'active' : 'inactive'"
+        :class="novaCijena || stanje=='U razradi' ? 'active' : 'inactive'"
       >
       <div @click="novaCijena && stanje=='U razradi' ? updatePrice() : dummy()">
         <CButtonSingle
@@ -268,40 +268,26 @@ export default {
         }
       });
     },
-    updatePrice() {
-      this.$dialog
-        .confirm(
-          "Jeste li sigurni da želite promijeniti cijenu? Nakon promjene nije više moguće mijenjati cijenu."
-        )
-        .then(() =>{
-          const g = doc(db, "zahtjevi", store.zahtjev.id);
-          updateDoc(g, {
-            preporucenaCijena: this.novaCijena
-          });
-          this.predlozenaCijena = this.novaCijena;
-        })
-        .catch(() =>{
-        });
-    },
-    updateStatus(status) {
-      let msg = "";
-      if (status=="Odbijeno")
-        msg = "Jeste li sigurni da želite odbiti otkup. Kada odbijete otkup nije ga više moguće prihvatiti."
-      else 
-        msg = "Jeste li sigurni da želite prihvatiti otkup. Kada prihvatite otkup nije ga više moguće odbiti."
-      this.$dialog
-      .confirm(
-        msg
-      )
-      .then(() => {
+    async updatePrice() {
         const g = doc(db, "zahtjevi", store.zahtjev.id);
-        updateDoc(g, {
+        await updateDoc(g, {
+          preporucenaCijena: this.novaCijena
+        });
+        this.predlozenaCijena = this.novaCijena;
+    },
+    async updateStatus(status) {
+        const g = doc(db, "zahtjevi", store.zahtjev.id);
+        await updateDoc(g, {
           status: status
         });
         this.stanje = status;
-      })
-      .catch(() => {
-      });
+    },
+    async updateStatus(status) {
+        const g = doc(db, "zahtjevi", store.zahtjev.id);
+        await updateDoc(g, {
+          status: status
+        });
+        this.stanje = status
     },
     dummy() {},
   },
