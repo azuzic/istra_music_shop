@@ -288,6 +288,7 @@ export default {
                 email: this.email,
                 oib: this.oib,
                 mob: this.mob,
+                theme: "Svijetla",
               });
               console.log("Document written with ID: ", docRef.id);
             } catch (e) {

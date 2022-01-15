@@ -110,6 +110,8 @@ import CSelect from "@/components/CSelect.vue";
 import store from "@/store";
 
 import { getAuth, signInWithEmailAndPassword } from "@/firebase";
+import { collection, getDocs } from "@/firebase";
+import { db } from "@/firebase";
 
 export default {
   name: "login",
@@ -130,14 +132,26 @@ export default {
   },
 
   methods: {
+    
+async getUserData() {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+        if (store.currentUser === `${doc.data().email}`) {
+          store.theme = `${doc.data().theme}`;
+          store.userID = `${doc.id}`;
+        }
+      });
+    },
     login() {
       console.log("login..." + this.email);
-
+      
       signInWithEmailAndPassword(getAuth(), this.email, this.password)
         //Koristi lambda/arrow funkcije u kombinaciji sa .then kako bi se sacuvao this iz parent konteksta
         .then((result) => {
           console.log("Uspješna prijava", result);
           this.greska == "0";
+           this.getUserData();
+          
         })
         .catch((e) => {
           let error = e.message.slice(22, -2).replace(/-/g, " ");

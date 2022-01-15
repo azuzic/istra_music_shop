@@ -219,7 +219,7 @@ import CButtonDecline from "@/components/CButtonDecline.vue";
 import CCard from "@/components/CCard.vue";
 import store from "@/store";
 import { db } from "@/firebase";
-import { doc, collection, getDocs, updateDoc, where, query} from "@/firebase";
+import { doc, collection, getDocs, updateDoc} from "@/firebase";
 
 export default {
   name: "Djelatnik",

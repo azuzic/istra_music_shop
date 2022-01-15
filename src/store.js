@@ -1,7 +1,8 @@
 export default {
   currentUser: "",
-  darkToggle: true,
+  userID: "",
   theme: "Svijetla",
+  darkToggle: true,
   pictureUpload: "",
   zahtjev: {
     instrument: ["","","","","","",""],

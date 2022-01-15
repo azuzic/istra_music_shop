@@ -53,8 +53,10 @@
 </template>
 <script>
 import store from "@/store";
-import { getAuth, onAuthStateChanged } from "@/firebase";
 import router from "@/router";
+
+import { getAuth, onAuthStateChanged } from "@/firebase";
+
 
 const auth = getAuth();
 
@@ -88,6 +90,7 @@ export default {
     };
   },
   methods: {
+    
     loadTheme() {
       if (store.theme == "Svijetla") {
         store.darkToggle = true;

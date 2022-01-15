@@ -9,7 +9,7 @@
             type="text"
             class="border rounded"
             id="nameInput"
-            v-model="imeprezime"
+            v-model="imePrezime"
           />
           <hr />
         </div>
@@ -50,20 +50,8 @@
           <hr />
         </div>
         <!--================/BROJ MOBITELA===================-->
-        <!--==============SPREMI================-->
-        <div class="place-self-center mt-4">
-          <CButtonAccept btn="SPREMI" :btnClickHandler="dummy" />
-        </div>
-        <!--==============/SPREMI============-->
-        <!--===================RESETIRAJ LOZINKU====================-->
-        <div class="place-self-center mt-16 mb-8">
-          <router-link to="/password-reset">
-            <CButtonDecline btn="RESETIRAJ LOZINKU" :btnClickHandler="dummy" />
-          </router-link>
-        </div>
-        <!--================/RESETIRAJ LOZINKU LOZINKU===================-->
         <!--===================THEME===================-->
-        <div class="mb-48" @click="updateTheme()">
+        <div @click="updateTheme()">
           <p class="text-left text-18px m-0 p-0">Izgled aplikacije</p>
           <CSelect
             :options="['Svijetla', 'Tamna Plava', 'Tamna Crvena']"
@@ -72,6 +60,19 @@
           />
         </div>
         <!--===================/THEME===================-->
+        <!--==============SPREMI================-->
+        <div class="place-self-center mt-12">
+          <CButtonAccept btn="SPREMI" :btnClickHandler="updateKorisnik" />
+        </div>
+        <!--==============/SPREMI============-->
+        <!--===================RESETIRAJ LOZINKU====================-->
+        <div class="place-self-center mt-6 mb-8">
+          <router-link to="/password-reset">
+            <CButtonDecline btn="RESETIRAJ LOZINKU" :btnClickHandler="dummy" />
+          </router-link>
+        </div>
+        <!--================/RESETIRAJ LOZINKU LOZINKU===================-->
+        
       </div>
     </div>
     <!--==============LOGUT - TEMPORARY================-->
@@ -92,11 +93,12 @@ import store from "@/store";
 import { getAuth, signOut } from "@/firebase";
 import { collection, getDocs } from "@/firebase";
 import { db } from "@/firebase";
+import {doc, updateDoc} from "@/firebase";
 export default {
   name: "KorisnikRacun",
   data() {
     return {
-      imeprezime: "",
+      imePrezime: "",
       email: "",
       oib: "",
       mob: "",
@@ -118,13 +120,27 @@ export default {
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
         if (store.currentUser === `${doc.data().email}`) {
-          this.imeprezime = `${doc.data().imePrezime}`;
+          this.imePrezime = `${doc.data().imePrezime}`;
           this.email = `${doc.data().email}`;
           this.oib = `${doc.data().oib}`;
           this.mob = `${doc.data().mob}`;
         }
       });
-      store.theme=this.theme;
+
+    },
+    async updateKorisnik(){
+      const g = doc(db, "users", store.userID);
+      await updateDoc(g, {
+        email: this.email,
+        imePrezime: this.imePrezime,
+        mob: this.mob,
+        oib: this.oib,
+        theme: this.theme,
+      }).then(() => {
+        console.log("Spremljeno!");
+      }).catch((error) =>{
+        console.log("Nije spremljeno!");
+      });
     },
     dummy() {},
     signout() {

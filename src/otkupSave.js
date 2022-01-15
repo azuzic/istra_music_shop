@@ -4,8 +4,8 @@ export default {
   odabraniModel: "Les Paul",
   odabranaSerija: "Standard",
   godinaProizvodnje: "",
-  vlasnik: "",
-  stanje: "",
+  vlasnik: "1",
+  stanje: "Novo",
   napomena: "",
   resetData: function () {
     this.vrstaInstrumenta = "Gitara";

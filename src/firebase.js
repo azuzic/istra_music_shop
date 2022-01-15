@@ -41,8 +41,6 @@ export { addDoc };
 export { getDocs };
 export { updateDoc };
 export { doc };
-export { where };
-export { query };
 
 //FirebaseStorage
 export { storage, ref, uploadBytes, getDownloadURL };

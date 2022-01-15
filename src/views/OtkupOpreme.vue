@@ -222,8 +222,8 @@ export default {
       odabraniModel: "LesPaul",
       odabranaSerija: "Standard",
       godinaProizvodnje: "",
-      vlasnik: "",
-      stanje: "",
+      vlasnik: "1",
+      stanje: "Novo",
       napomena: "",
 
       cijeneSerija: {},
@@ -233,6 +233,9 @@ export default {
       pictures,
       otkupSave,
     };
+  },
+  watch :{
+    
   },
   components: {
     CWarning,
@@ -255,17 +258,20 @@ export default {
       next();
       return;
     }
-    this.$dialog
-      .confirm(
-        "Jeste li sigurni da želite napustiti stranicu? Promjene neće biti spremljene."
-      )
-      .then(function () {
-        otkupSave.resetData();
-        next();
-      })
-      .catch(function () {
-        next(false);
-      });
+
+    else {
+      this.$dialog
+        .confirm(
+          "Jeste li sigurni da želite napustiti stranicu? Promjene neće biti spremljene."
+        )
+        .then(function () {
+          otkupSave.resetData();
+          next();
+        })
+        .catch(function () {
+          next(false);
+        });
+    }
   },
 
   mounted() {
@@ -413,10 +419,7 @@ export default {
       return this.prikazaneSerije;
     },
     picturesCheck() {
-      function checkUpload(uploaded) {
-        return (uploaded = true);
-      }
-      return pictures.guitarPictures.every(checkUpload);
+      return pictures.guitarPictures.every(picture => picture.uploaded);
     },
     stanjeCheck() {
       return this.vlasnik != 1 && this.stanje == "Novo" ? 1 : 0;
