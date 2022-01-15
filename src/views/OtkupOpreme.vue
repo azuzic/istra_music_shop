@@ -126,7 +126,7 @@
             </div> 
 
             <div>
-              <p class="otkup-img-text">Vrat gitare</p>
+              <p class="otkup-img-text">Serijski broj</p>
               <div class="square img_1-1 img-bottom">
                 <router-link to="/ucitaj-sliku">
                   <button class="square-img2" @click="pictures.selected = 5">Učitaj sliku</button> 
@@ -205,6 +205,7 @@ import { collection, addDoc } from "@/firebase";
 import { db } from "@/firebase";
 import pictures from "@/pictures";
 import otkupSave from "@/otkupSave";
+import router from "@/router";
 
 export default {
   name: "OtkupOpreme",
@@ -217,25 +218,22 @@ export default {
       prikazaneSerije: [],
       currentYear: 2022,
 
-      odabranaVrsta: "Gitara",
-      odabraniProizvodac: "Gibson",
-      odabraniModel: "LesPaul",
-      odabranaSerija: "Standard",
+      odabranaVrsta: "",
+      odabraniProizvodac: "",
+      odabraniModel: "",
+      odabranaSerija: "",
       godinaProizvodnje: "",
-      vlasnik: "1",
-      stanje: "Novo",
+      vlasnik: "",
+      stanje: "",
       napomena: "",
 
       cijeneSerija: {},
       preporucenaCijena: 0,
-
+      zahtjevPredan: false,
       store,
       pictures,
       otkupSave,
     };
-  },
-  watch :{
-    
   },
   components: {
     CWarning,
@@ -245,6 +243,7 @@ export default {
     CButtonSingle,
   },
   beforeRouteLeave(to, from, next) {
+
     if (to.name === "UcitajSliku") {
       otkupSave.vrstaInstrumenta = this.vrstaInstrumenta;
       otkupSave.odabraniProizvodac = this.odabraniProizvodac;
@@ -260,21 +259,46 @@ export default {
     }
 
     else {
-      this.$dialog
-        .confirm(
-          "Jeste li sigurni da želite napustiti stranicu? Promjene neće biti spremljene."
-        )
-        .then(function () {
-          otkupSave.resetData();
+
+      if (
+        this.odabraniProizvodac === "Gibson" &&
+        this.odabranaVrsta === "Gitara" &&
+        this.odabraniModel === "Les Paul" &&
+        this.odabranaSerija === "Standard" &&
+        this.vlasnik === "1" &&
+        this.stanje === "Novo" &&
+        this.napomena === "" &&
+        this.godinaProizvodnje === "" &&
+        pictures.checkIfUploaded()) {
+          pictures.resetData();
           next();
-        })
-        .catch(function () {
-          next(false);
-        });
+          return; 
+          }
+
+      else if(this.zahtjevPredan){
+          otkupSave.resetData();
+          pictures.resetData();
+          next();
+          return; 
+        }
+
+      else {
+        this.$dialog
+          .confirm ("Jeste li sigurni da želite napustiti stranicu? Promjene neće biti spremljene.")
+          .then(function () {
+            otkupSave.resetData();
+            pictures.resetData();
+            next();
+          })
+          .catch(function () {
+            next(false);
+          });
+      }
     }
   },
 
   mounted() {
+    // Load and set otkupSave variables
     this.vrstaInstrumenta = otkupSave.vrstaInstrumenta;
     this.odabraniProizvodac = otkupSave.odabraniProizvodac;
     this.odabraniModel = otkupSave.odabraniModel;
@@ -287,6 +311,7 @@ export default {
   },
 
   methods: {
+
     loadSelectedData(data) {
       return data;
     },
@@ -317,6 +342,8 @@ export default {
           preporucenaCijena: this.preporucenaCijena,
         });
         console.log("Predan zahtjev za otkup sa ID: ", docRef.id);
+        this.zahtjevPredan = true;
+        router.replace('StatusOtkupa');
       } catch (e) {
         console.error("Error adding document: ", e);
       }
@@ -429,6 +456,7 @@ export default {
         this.odabraniProizvodac &&
         this.odabraniModel &&
         this.odabranaSerija &&
+        !this.yearCheck &&
         this.godinaProizvodnje &&
         this.vlasnik &&
         this.stanje &&

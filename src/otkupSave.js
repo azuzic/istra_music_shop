@@ -14,7 +14,7 @@ export default {
     this.odabranaSerija = "Standard";
     this.napomena = "";
     this.godinaProizvodnje = "";
-    this.vlasnik = "";
-    this.stanje = "";
+    this.vlasnik = "1";
+    this.stanje = "Novo";
   },
 };
