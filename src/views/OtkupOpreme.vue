@@ -343,7 +343,7 @@ export default {
         });
         console.log("Predan zahtjev za otkup sa ID: ", docRef.id);
         this.zahtjevPredan = true;
-        router.replace('StatusOtkupa');
+        router.push('status-otkupa');
       } catch (e) {
         console.error("Error adding document: ", e);
       }
