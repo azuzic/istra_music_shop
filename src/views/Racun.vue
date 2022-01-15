@@ -122,7 +122,7 @@ import { collection, getDocs } from "@/firebase";
 import { db } from "@/firebase";
 import {doc, updateDoc} from "@/firebase";
 export default {
-  name: "KorisnikRacun",
+  name: "Racun",
   data() {
     return {
       imePrezime: "",

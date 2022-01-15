@@ -26,12 +26,12 @@ const routes = [
     component: () => import("../views/PasswordReset.vue"),
   },
   {
-    path: "/korisnik-racun",
-    name: "KorisnikRacun",
+    path: "/racun",
+    name: "Racun",
     meta: {
       needsUser: true,
     },
-    component: () => import("../views/KorisnikRacun.vue"),
+    component: () => import("../views/Racun.vue"),
   },
   {
     path: "/otkup-opreme",
@@ -50,15 +50,6 @@ const routes = [
     component: () => import("../views/StatusOtkupa.vue"),
   },
   {
-    path: "/djelatnik-racun",
-    name: "DjelatnikRacun",
-    meta: {
-      needsUser: true,
-      admin: true,
-    },
-    component: () => import("../views/DjelatnikRacun.vue"),
-  },
-  {
     path: "/djelatnik",
     name: "Djelatnik",
     meta: {
@@ -72,7 +63,6 @@ const routes = [
     name: "PregledOtkupa",
     meta: {
       needsUser: true,
-      admin: true,
     },
     component: () => import("../views/PregledOtkupa.vue"),
   },
@@ -95,7 +85,10 @@ router.beforeEach((to, from, next) => {
   if (noUser && to.meta.needsUser) {
     next("Prijava");
   } else {
-    if (
+    if(to.meta.admin){
+      next("Racun");
+    }
+    else if(
       from.name === "Registracija" &&
       to.name !== "Prijava" &&
       to.name !== "Home"

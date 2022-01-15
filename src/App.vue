@@ -6,7 +6,7 @@
     <div v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-2 mb-4">
   
       <div :class=" currentRouteName == 'Djelatnik' ? 'menu-item2 menu-top-item-grid0' : 
-                    currentRouteName == 'DjelatnikRacun' ? 'menu-item2 menu-top-item-grid1' : ''"> 
+                    currentRouteName == 'Racun' ? 'menu-item2 menu-top-item-grid1' : ''"> 
       </div>
 
     </div>
@@ -17,22 +17,22 @@
         <p><router-link to="djelatnik"> Pregled otkupa </router-link></p>
       </div>
 
-      <div :class="currentRouteName == 'DjelatnikRacun' ? 'menu-item-active' : 'menu-item'">
-        <p><router-link to="djelatnik-racun"> Račun </router-link></p>
+      <div :class="currentRouteName == 'Racun' ? 'menu-item-active' : 'menu-item'">
+        <p><router-link to="racun"> Račun </router-link></p>
       </div>
 
     </div>
     <!--==============DJELATNIK END=========================-->
     <!--==============KORISNIK =============================-->
-    <div v-if="!pictures.mode && store.currentUser != null && store.currentUser != 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku'" class="menu2 top-0 grid grid-cols-3 mb-4">
+    <div v-if="!pictures.mode && store.currentUser != null && store.currentUser != 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-3 mb-4">
 
       <div :class=" currentRouteName == 'StatusOtkupa' ? 'menu-item2 menu-top2-item-grid0' : 
                     currentRouteName == 'OtkupOpreme'   ? 'menu-item2 menu-top2-item-grid1' : 
-                    currentRouteName == 'KorisnikRacun' ? 'menu-item2 menu-top2-item-grid2' : ''">
+                    currentRouteName == 'Racun' ? 'menu-item2 menu-top2-item-grid2' : ''">
       </div>
     </div>
     <!--========================================-->
-    <div v-if="!pictures.mode && store.currentUser != null && store.currentUser != 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-3 mb-4">
+    <div v-if="!pictures.mode && store.currentUser != null && store.currentUser != 'djelatnik@gmail.com' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-3 mb-4">
 
       <div :class="currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="status-otkupa"> Status otkupa </router-link></p>
@@ -42,8 +42,8 @@
         <p><router-link to="otkup-opreme"> Otkup opreme </router-link></p>
       </div>
 
-      <div :class="currentRouteName == 'KorisnikRacun' ? 'menu-item-active' : 'menu-item'">
-        <p><router-link to="korisnik-racun"> Račun </router-link></p>
+      <div :class="currentRouteName == 'Racun' ? 'menu-item-active' : 'menu-item'">
+        <p><router-link to="racun"> Račun </router-link></p>
       </div>
 
     </div>
