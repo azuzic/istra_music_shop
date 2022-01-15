@@ -55,6 +55,8 @@
 import store from "@/store";
 import pictures from "@/pictures";
 import router from "@/router";
+import { collection, getDocs } from "@/firebase";
+import { db } from "@/firebase";
 
 import { getAuth, onAuthStateChanged } from "@/firebase";
 
@@ -92,8 +94,19 @@ export default {
       pictures,
     };
   },
+  mounted() {
+    this.setTheme();
+  },
   methods: {
-    
+    async setTheme() {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+        if (store.currentUser === `${doc.data().email}`) {
+          store.theme = `${doc.data().theme}`;
+          store.userID = `${doc.id}`;
+        }
+      });
+    },
     loadTheme() {
       if (store.theme == "Svijetla") {
         store.darkToggle = true;

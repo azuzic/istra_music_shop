@@ -156,7 +156,7 @@
       <div
         v-if="store.currentUser == 'djelatnik@gmail.com'"
         class="place-self-center mt-4"
-        :class="novaCijena || stanje=='U razradi' ? 'active' : 'inactive'"
+        :class="novaCijena && stanje=='U razradi' ? 'active' : 'inactive'"
       >
       <div @click="novaCijena && stanje=='U razradi' ? updatePrice() : dummy()">
         <CButtonSingle

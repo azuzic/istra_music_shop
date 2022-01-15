@@ -156,11 +156,8 @@ export default {
           this.mobTemp = `${doc.data().mob}`;
           this.mobLoad();
           store.userID = `${doc.id}`;
-          store.theme = `${doc.data().theme}`;
-          this.theme = store.theme;
         }
       });
-
     },
     async updateKorisnik(){
       this.canSave = false;
