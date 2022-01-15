@@ -156,7 +156,7 @@
       <div
         v-if="store.currentUser == 'djelatnik@gmail.com'"
         class="place-self-center mt-4"
-        :class="novaCijena || stanje=='U razradi' ? 'active' : 'inactive'"
+        :class="novaCijena && stanje=='U razradi' ? 'active' : 'inactive'"
       >
       <div @click="novaCijena && stanje=='U razradi' ? updatePrice() : dummy()">
         <CButtonSingle
@@ -268,26 +268,40 @@ export default {
         }
       });
     },
-    async updatePrice() {
-        const g = doc(db, "zahtjevi", store.zahtjev.id);
-        await updateDoc(g, {
-          preporucenaCijena: this.novaCijena
+    updatePrice() {
+      this.$dialog
+        .confirm(
+          "Jeste li sigurni da želite promijeniti cijenu? Nakon promjene nije više moguće mijenjati cijenu."
+        )
+        .then(() =>{
+          const g = doc(db, "zahtjevi", store.zahtjev.id);
+          updateDoc(g, {
+            preporucenaCijena: this.novaCijena
+          });
+          this.predlozenaCijena = this.novaCijena;
+        })
+        .catch(() =>{
         });
-        this.predlozenaCijena = this.novaCijena;
     },
-    async updateStatus(status) {
+    updateStatus(status) {
+      let msg = "";
+      if (status=="Odbijeno")
+        msg = "Jeste li sigurni da želite odbiti otkup. Kada odbijete otkup nije ga više moguće prihvatiti."
+      else 
+        msg = "Jeste li sigurni da želite prihvatiti otkup. Kada prihvatite otkup nije ga više moguće odbiti."
+      this.$dialog
+      .confirm(
+        msg
+      )
+      .then(() => {
         const g = doc(db, "zahtjevi", store.zahtjev.id);
-        await updateDoc(g, {
+        updateDoc(g, {
           status: status
         });
         this.stanje = status;
-    },
-    async updateStatus(status) {
-        const g = doc(db, "zahtjevi", store.zahtjev.id);
-        await updateDoc(g, {
-          status: status
-        });
-        this.stanje = status
+      })
+      .catch(() => {
+      });
     },
     dummy() {},
   },
