@@ -1,13 +1,13 @@
 <template>
-  <div class="p-0 m-0" :class="false ? 'pt-16' : ''">
-    <div v-if="false" class="grid auto-rows-auto gap-4">
+  <div class="p-0 m-0" :class="!mode ? 'pt-16' : ''">
+    <div v-if="!mode" class="grid auto-rows-auto gap-4">
       <div class="grid auto-rows-auto gap-4 pl-4 pr-4 mt-2 mb-16">
         <!--===================VRSTA INSTRUMENTA===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Vrsta instrumenta</p>
           <CSelect
             :options="vrste"
-            :default="otkupSave.odabranaVrsta"
+            :default="odabranaVrsta"
             v-model="odabranaVrsta"
           />
         </div>
@@ -17,7 +17,7 @@
           <p class="text-left text-18px m-0 p-0">Proizvođač</p>
           <CSelect
             :options="proizvodacSet"
-            :default="otkupSave.odabraniProizvodac"
+            :default="odabraniProizvodac"
             v-model="odabraniProizvodac"
           />
         </div>
@@ -27,7 +27,7 @@
           <p class="text-left text-18px m-0 p-0">Model</p>
           <CSelect
             :options="modelSet"
-            :default="otkupSave.odabraniModel"
+            :default="odabraniModel"
             v-model="odabraniModel"
           />
         </div>
@@ -37,7 +37,7 @@
           <p class="text-left text-18px m-0 p-0">Serija</p>
           <CSelect
             :options="serijaSet"
-            :default="otkupSave.odabranaSerija"
+            :default="odabranaSerija"
             v-model="odabranaSerija"
           />
         </div>
@@ -62,7 +62,7 @@
           <p class="text-left text-18px m-0 p-0">Vlasnik</p>
           <CSelect
             :options="['1', '2', '3']"
-            :default="otkupSave.vlasnik"
+            :default="vlasnik"
             v-model="vlasnik"
           />
         </div>
@@ -75,7 +75,7 @@
           <p class="text-left text-18px m-0 p-0">Stanje</p>
           <CSelect
             :options="['Novo', 'Rabljeno', 'Neispravno']"
-            :default="otkupSave.stanje"
+            :default="stanje"
             v-model="stanje"
           />
         </div>
@@ -88,60 +88,48 @@
             <div>
               <p class="otkup-img-text">Gornja prednja</p>
               <div class="square img_1-1 img-top-left">
-                <router-link to="/ucitaj-sliku">
-                  <button class="square-img2" @click="pictures.selected = 1">Učitaj sliku</button> 
+                  <button class="square-img2" @click="imageUpload(0)">Učitaj sliku</button> 
                   <img class="square-img" :src="pictures.guitarPictures[0].url"/>
-                </router-link>
               </div>
             </div> 
 
             <div>
               <p class="otkup-img-text">Gornja stražnja</p>
               <div class="square img_1-1 img-top">
-                <router-link to="/ucitaj-sliku">
-                  <button class="square-img2" @click="pictures.selected = 2">Učitaj sliku</button> 
+                  <button class="square-img2" @click="imageUpload(1)">Učitaj sliku</button> 
                   <img class="square-img" :src="pictures.guitarPictures[1].url"/>
-                </router-link>
               </div>
             </div> 
 
             <div>
               <p class="otkup-img-text">Bočna desna</p>
               <div class="square img_1-1 img-top-right">
-                <router-link to="/ucitaj-sliku">
-                  <button class="square-img2" @click="pictures.selected = 3">Učitaj sliku</button> 
+                  <button class="square-img2" @click="imageUpload(2)">Učitaj sliku</button> 
                   <img class="square-img" :src="pictures.guitarPictures[2].url"/>
-                </router-link>
               </div>
             </div> 
 
             <div>
               <p class="otkup-img-text">Bočna lijeva</p>
               <div class="square img_1-1 img-bottom-left">
-                <router-link to="/ucitaj-sliku">
-                  <button class="square-img2" @click="pictures.selected = 4">Učitaj sliku</button> 
+                  <button class="square-img2" @click="imageUpload(3)">Učitaj sliku</button> 
                   <img class="square-img" :src="pictures.guitarPictures[3].url"/>
-                </router-link>
               </div>
             </div> 
 
             <div>
               <p class="otkup-img-text">Serijski broj</p>
               <div class="square img_1-1 img-bottom">
-                <router-link to="/ucitaj-sliku">
-                  <button class="square-img2" @click="pictures.selected = 5">Učitaj sliku</button> 
+                  <button class="square-img2" @click="imageUpload(4)">Učitaj sliku</button> 
                   <img class="square-img" :src="pictures.guitarPictures[4].url"/>
-                </router-link>
               </div>
             </div> 
 
             <div>
               <p class="otkup-img-text">Glava gitare</p>
               <div class="square img_1-1 img-bottom-right">
-                <router-link to="/ucitaj-sliku">
-                  <button class="square-img2" @click="pictures.selected = 6">Učitaj sliku</button> 
+                  <button class="square-img2" @click="imageUpload(5)">Učitaj sliku</button> 
                   <img class="square-img" :src="pictures.guitarPictures[5].url"/>
-                </router-link>
               </div>
             </div> 
             
@@ -211,7 +199,7 @@
         <img v-if="store.theme=='Tamna Crvena'" class="dodavanje-icon" src="@/assets/upload_dark_red.svg" />
         <p>Molimo odaberite sliku za</p>
         <p>{{ uploadText }}</p>
-        <p v-if="pictures.selected != 5 && pictures.selected != 6">
+        <p v-if="currentPictureObj.id != 4 && currentPictureObj.id != 5">
           stranu gitare
         </p>
       </div>
@@ -257,43 +245,49 @@ import CButtonAccept from "@/components/CButtonAccept.vue";
 import CButtonDecline from "@/components/CButtonDecline.vue";
 import CSelect from "@/components/CSelect.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
+
 import store from "@/store";
+import pictures from "@/pictures";
+
 import { collection, addDoc } from "@/firebase";
 import { db } from "@/firebase";
-import otkupSave from "@/otkupSave";
+//Picture upload
+import { storage, ref, uploadBytes, getDownloadURL } from "@/firebase";
+
 import router from "@/router";
-import pictures from "@/pictures";
 
 export default {
   name: "OtkupOpreme",
   data() {
     return {
+
+      mode: false,
+
       jsonData: data,
       vrste: ["Gitara"],
       prikazaniProizvodaci: [],
       prikazaniModeli: [],
       prikazaneSerije: [],
-      currentYear: 2022,
 
-      odabranaVrsta: "",
-      odabraniProizvodac: "",
-      odabraniModel: "",
-      odabranaSerija: "",
+      odabranaVrsta: "Gitara",
+      odabraniProizvodac: "Gibson",
+      odabraniModel: "Les Paul",
+      odabranaSerija: "Standard",
       godinaProizvodnje: "",
-      vlasnik: "",
-      stanje: "",
+      vlasnik: "1",
+      stanje: "Novo",
       napomena: "",
 
       cijeneSerija: {},
       preporucenaCijena: 0,
       zahtjevPredan: false,
+
       store,
       pictures,
-      otkupSave,
       
+      //UcitajSliku
       imageReference: null,
       canUpload: false,
-      pictures,
       uploadText: "",
       currentPictureObj: null,
     };
@@ -306,77 +300,75 @@ export default {
     CButtonSingle,
   },
   beforeRouteLeave(to, from, next) {
-
-    if (to.name === "UcitajSliku") {
-      otkupSave.vrstaInstrumenta = this.vrstaInstrumenta;
-      otkupSave.odabraniProizvodac = this.odabraniProizvodac;
-      otkupSave.odabraniModel = this.odabraniModel;
-      otkupSave.odabranaSerija = this.odabranaSerija;
-
-      otkupSave.godinaProizvodnje = this.godinaProizvodnje;
-      otkupSave.vlasnik = this.vlasnik;
-      otkupSave.stanje = this.stanje;
-      otkupSave.napomena = this.napomena;
-      next();
-      return;
-    }
-
-    else {
-
-      if (
-        this.odabraniProizvodac === "Gibson" &&
-        this.odabranaVrsta === "Gitara" &&
-        this.odabraniModel === "Les Paul" &&
-        this.odabranaSerija === "Standard" &&
-        this.vlasnik === "1" &&
-        this.stanje === "Novo" &&
-        this.napomena === "" &&
-        this.godinaProizvodnje === "" &&
-        pictures.checkIfUploaded()) {
-          pictures.resetData();
-          next();
-          return; 
-          }
-
-      else if(this.zahtjevPredan){
-          otkupSave.resetData();
-          pictures.resetData();
-          next();
-          return; 
+    //Provjeri je li doslo do promjene kod promjene rute
+    if(
+      !this.mode &&
+      this.odabraniProizvodac === "Gibson" &&
+      this.odabranaVrsta === "Gitara" &&
+      this.odabraniModel === "Les Paul" &&
+      this.odabranaSerija === "Standard" &&
+      this.vlasnik === "1" &&
+      this.stanje === "Novo" &&
+      this.napomena === "" &&
+      this.godinaProizvodnje === "" &&
+      pictures.checkIfUploaded()) {
+        pictures.resetData();
+        next();
+        return; 
         }
-
-      else {
-        this.$dialog
-          .confirm ("Jeste li sigurni da želite napustiti stranicu? Promjene neće biti spremljene.")
-          .then(function () {
-            otkupSave.resetData();
-            pictures.resetData();
-            next();
-          })
-          .catch(function () {
-            next(false);
-          });
+    //Ako je zahtjev predan, resetiraj slike i prebaci 
+    else if(this.zahtjevPredan){
+        pictures.resetData();
+        next();
+        return; 
       }
+    //Ako je doslo do promjene a zahtjev nije predan, upozori korisnika na gubitak podataka
+    else{
+      this.$dialog
+        .confirm ("Jeste li sigurni da želite napustiti stranicu? Promjene neće biti spremljene.")
+        .then(function () {
+          pictures.resetData();
+          next();
+        })
+        .catch(function () {
+          next(false);
+        });
     }
-  },
-
-  mounted() {
-    // Load and set otkupSave variables
-    this.vrstaInstrumenta = otkupSave.vrstaInstrumenta;
-    this.odabraniProizvodac = otkupSave.odabraniProizvodac;
-    this.odabraniModel = otkupSave.odabraniModel;
-    this.odabranaSerija = otkupSave.odabranaSerija;
-    this.godinaProizvodnje = otkupSave.godinaProizvodnje;
-    this.vlasnik = otkupSave.vlasnik;
-    this.stanje = otkupSave.stanje;
-    this.napomena = otkupSave.napomena;
-    this.preporucenaCijena = this.izracunCijene;
   },
 
   methods: {
+    //Ucitaj sliku
+    savePhoto() {
+      this.imageReference.generateBlob((blobData) => {
+        let imageName =
+          "zahtjevi/" + store.currentUser + "/" + Date.now() + ".png";
+        const storageRef = ref(storage, imageName);
+        // 'file' comes from the Blob or File API
+        uploadBytes(storageRef, blobData)
+          .then((result) => {
+            console.log("Image uploaded! ->", result);
+            this.currentPictureObj.uploaded = true;
+            this.mode = false;
+            pictures.mode = false;
+            getDownloadURL(ref(storage, imageName)).then((url) => {
+              this.currentPictureObj.url = url;
+            });
+          })
+          .catch((e) => {
+            console.error(e);
+          });
+      });
+    },
+    //Otkup opreme
+    imageUpload(image){
+      pictures.mode = true;
+      this.mode = true;
 
-    loadSelectedData(data) {
-      return data;
+      var picture = pictures.guitarPictures.find(
+      (picture) => picture.id === image
+       );
+      this.currentPictureObj = picture;
+      this.uploadText = picture.text;
     },
     async otkupi() {
       try {
@@ -532,7 +524,7 @@ export default {
     },
     yearCheck() {
       return (this.godinaProizvodnje < 1935 ||
-        this.godinaProizvodnje > this.currentYear) &&
+        this.godinaProizvodnje > new Date().getFullYear()) &&
         this.godinaProizvodnje
         ? 1
         : 0;

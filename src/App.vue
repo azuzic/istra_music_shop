@@ -24,7 +24,7 @@
     </div>
     <!--==============DJELATNIK END=========================-->
     <!--==============KORISNIK =============================-->
-    <div v-if="false && store.currentUser != null && store.currentUser != 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku'" class="menu2 top-0 grid grid-cols-3 mb-4">
+    <div v-if="!pictures.mode && store.currentUser != null && store.currentUser != 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku'" class="menu2 top-0 grid grid-cols-3 mb-4">
 
       <div :class=" currentRouteName == 'StatusOtkupa' ? 'menu-item2 menu-top2-item-grid0' : 
                     currentRouteName == 'OtkupOpreme'   ? 'menu-item2 menu-top2-item-grid1' : 
@@ -32,7 +32,7 @@
       </div>
     </div>
     <!--========================================-->
-    <div v-if="false && store.currentUser != null && store.currentUser != 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-3 mb-4">
+    <div v-if="!pictures.mode && store.currentUser != null && store.currentUser != 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-3 mb-4">
 
       <div :class="currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="status-otkupa"> Status otkupa </router-link></p>
@@ -53,6 +53,7 @@
 </template>
 <script>
 import store from "@/store";
+import pictures from "@/pictures";
 import router from "@/router";
 
 import { getAuth, onAuthStateChanged } from "@/firebase";
@@ -88,6 +89,7 @@ export default {
   data() {
     return {
       store,
+      pictures,
     };
   },
   methods: {

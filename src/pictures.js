@@ -1,38 +1,38 @@
 export default {
-  selected: 0,
+  mode: false,
   guitarPictures: [
     {
-      id: 1,
+      id: 0,
       text: "Gornju prednju",
       uploaded: false,
       url: "",
     },
     {
-      id: 2,
+      id: 1,
       text: "Gornju stražnju",
       uploaded: false,
       url: "",
     },
     {
-      id: 3,
+      id: 2,
       text: "Bočnu desnu",
       uploaded: false,
       url: "",
     },
     {
-      id: 4,
+      id: 3,
       text: "Bočnu lijevu",
       uploaded: false,
       url: "",
     },
     {
-      id: 5,
+      id: 4,
       text: "Serijski broj",
       uploaded: false,
       url: "",
     },
     {
-      id: 6,
+      id: 5,
       text: "Glavu gitare",
       uploaded: false,
       url: "",
@@ -44,5 +44,6 @@ export default {
   resetData: function (){
     this.guitarPictures.forEach(picture => picture.uploaded = false);
     this.guitarPictures.forEach(picture => picture.url = "");
+    this.mode = false;
   }
 };
