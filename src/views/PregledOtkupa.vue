@@ -111,31 +111,31 @@
         <textarea disabled class="resize-none otkup-textarea mt-2" v-model="opis">
         </textarea >
       </div>
-      <div>
+      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
         <hr class="dotted mt-2 mb-2" />
       </div>
-      <div>
+      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
         <p class="text-center mb-2">
           <b class="text-24px">PODACI O KLIJENTU</b>
         </p>
       </div>
-      <div>
+      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
         <p><u class="text-20px">Ime i prezime:</u></p>
         <p class="mt-1 text-18px"><b>{{korisnik[0].imePrezime}}</b></p>
       </div>
-      <div>
+      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
         <p><u class="text-20px">Email:</u></p>
         <p class="mt-1 text-18px"><b>{{korisnik[0].email}}</b></p>
       </div>
-      <div>
+      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
         <p><u class="text-20px">OIB:</u></p>
         <p class="mt-1 text-18px"><b>{{korisnik[0].oib}}</b></p>
       </div>
-      <div>
+      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
         <p><u class="text-20px">Broj telefona:</u></p>
         <p class="mt-1 text-18px"><b>{{mob}}</b></p>
       </div>
-      <div>
+      <div v-if="store.currentUser == 'djelatnik@gmail.com'">
         <hr class="dotted mt-2 mb-2" />
       </div>
       <!--==============NOVA CIJENA==============================-->
