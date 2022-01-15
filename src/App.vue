@@ -68,8 +68,8 @@ onAuthStateChanged(auth, (user) => {
     }
     if (!currentRoute.meta.needsUser || (currentRoute=="" && store.zahtjev)) {
       store.currentUser === "djelatnik@gmail.com"
-        ? router.replace({ name: "DjelatnikRacun" })
-        : router.replace({ name: "KorisnikRacun" });
+        ? router.replace({ name: "Djelatnik" })
+        : router.replace({ name: "OtkupOpreme" });
     }
   } else {
     console.log("NO USER");
