@@ -14,46 +14,67 @@
           <hr />
         </div>
         <!--===================/IME I PREZIME===================-->
-        <!--===================EMAIL====================-->
+        <!--===================EMAIL=======================-->
         <div>
-          <p class="text-left text-18px m-0 p-0">Email:</p>
-          <input
-            type="email"
-            class="border rounded"
-            id="emailInput"
-            v-model="email"
-          />
+          <p class="text-left text-18px m-0 p-0">Email</p>
+          <input type="email" id="emailInput" v-model="email" />
           <hr />
+          <h2
+            v-if="!checkEmail(email) && email"
+            class="CWarning"
+            id="resultEmail"
+          >
+            Email nije točno napisan!
+          </h2>
         </div>
-        <!--================/EMAIL===================-->
-        <!--===================OIB====================-->
+        <!--===================EMAIL END===================-->
+        <!--===================OIB=========================-->
         <div>
-          <p class="text-left text-18px m-0 p-0">OIB:</p>
+          <p class="text-left text-18px m-0 p-0">OIB</p>
           <input
             type="text"
-            class="border rounded"
             id="oibInput"
             v-model="oib"
+            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+            maxlength="11"
           />
           <hr />
+          <h2 v-if="oib.length != 11 && oib" class="CWarning" id="resultOIB">
+            OIB mora sadržavati 11 brojeva!
+          </h2>
         </div>
-        <!--================/OIB===================-->
-        <!--===================BROJ MOBITELA====================-->
+        <!--===================OIB END=====================-->
+        <!--===================BROJ MOBITELA===============-->
         <div>
-          <p class="text-left text-18px m-0 p-0">Broj mobitela:</p>
-          <input
-            type="text"
-            class="border rounded"
-            id="mobInput"
-            v-model="mob"
-          />
-          <hr />
+          <p class="text-left text-18px m-0 p-0">Broj mobitela</p>
+          <div class="flex">
+            <div class="mtc2" style="color: grey !important">09</div>
+            <div class="w-full">
+              <input
+                type="text"
+                name="mob"
+                id="mobInput"
+                v-model="UpdateMob"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                maxlength="10"
+              />
+              <hr />
+            </div>
+          </div>
+          <h2
+            v-if="UpdateMob.length != 9 && UpdateMob.length != 10 && UpdateMob"
+            class="CWarning"
+            id="resultMob"
+          >
+            Broj mobitela mora sadržavati 10 ili 11 brojeva!
+          </h2>
         </div>
-        <!--================/BROJ MOBITELA===================-->
+        <!--===================BROJ MOBITELA END===========-->
         <!--===================THEME===================-->
         <div @click="updateTheme()">
           <p class="text-left text-18px m-0 p-0">Izgled aplikacije</p>
           <CSelect
+            id="$THEME"
             :options="['Svijetla', 'Tamna Plava', 'Tamna Crvena']"
             :default="theme"
             v-model="theme"
@@ -61,12 +82,17 @@
         </div>
         <!--===================/THEME===================-->
         <!--==============SPREMI================-->
-        <div class="place-self-center mt-12">
-          <CButtonAccept btn="SPREMI" :btnClickHandler="updateKorisnik" />
+        <div class="place-self-center mt-12" :class="IsAllFilled ? 'active' : 'inactive'">
+          <CButtonAccept btn="SPREMI" :btnClickHandler="IsAllFilled ? updateKorisnik : dummy" />
         </div>
         <!--==============/SPREMI============-->
+        <CSuccess
+          :class="!canSave ? 'hide2' : 'hide'"
+           msg1="Spremljeno!"
+          msg2="Uneseni podaci su spremljeni. Nakon nestanka ove obavijesti možete ponovno spremiti podatke."
+        />
         <!--===================RESETIRAJ LOZINKU====================-->
-        <div class="place-self-center mt-6 mb-8">
+        <div class="place-self-center mt-6 mb-32"> 
           <router-link to="/password-reset">
             <CButtonDecline btn="RESETIRAJ LOZINKU" :btnClickHandler="dummy" />
           </router-link>
@@ -89,6 +115,7 @@ import CWarning from "@/components/CWarning.vue";
 import CSelect from "@/components/CSelect.vue";
 import CButtonAccept from "@/components/CButtonAccept.vue";
 import CButtonDecline from "@/components/CButtonDecline.vue";
+import CSuccess from "@/components/CSuccess.vue";
 import store from "@/store";
 import { getAuth, signOut } from "@/firebase";
 import { collection, getDocs } from "@/firebase";
@@ -101,8 +128,10 @@ export default {
       imePrezime: "",
       email: "",
       oib: "",
+      mobTemp: "",
       mob: "",
       theme: store.theme,
+      canSave: true,
     };
   },
   components: {
@@ -111,6 +140,7 @@ export default {
     CButtonAccept,
     CButtonDecline,
     CSelect,
+    CSuccess,
   },
   mounted() {
     this.readData();
@@ -123,12 +153,17 @@ export default {
           this.imePrezime = `${doc.data().imePrezime}`;
           this.email = `${doc.data().email}`;
           this.oib = `${doc.data().oib}`;
-          this.mob = `${doc.data().mob}`;
+          this.mobTemp = `${doc.data().mob}`;
+          this.mobLoad();
+          store.userID = `${doc.id}`;
+          store.theme = `${doc.data().theme}`;
+          this.theme = store.theme;
         }
       });
 
     },
     async updateKorisnik(){
+      this.canSave = false;
       const g = doc(db, "users", store.userID);
       await updateDoc(g, {
         email: this.email,
@@ -138,6 +173,9 @@ export default {
         theme: this.theme,
       }).then(() => {
         console.log("Spremljeno!");
+        setTimeout(() => {
+          this.canSave = true;
+        }, 5000);
       }).catch((error) =>{
         console.log("Nije spremljeno!");
       });
@@ -154,9 +192,56 @@ export default {
           console.error("Signed out error!");
         });
     },
+    checkEmail(email) {
+      let re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    },
     updateTheme() {
       store.theme=this.theme;
+    },
+    mobLoad() {
+          let br = this.mobTemp.slice(2);
+          this.mob = this.mobTemp;
+          let l = br.length;
+          if (l >= 1 && l < 5 && br)
+            this.mobTemp = br.slice(0, 1) + "-" + br.slice(1);
+          else if (l >= 5)
+            this.mobTemp =
+              br.slice(0, 1) + "-" + br.slice(1, 4) + "-" + br.slice(4);
     }
+  },
+  computed: {
+    IsAllFilled() {
+      return this.imePrezime &&
+        this.checkEmail(this.email) &&
+        this.email &&
+        this.oib &&
+        this.oib.length == 11 &&
+        this.UpdateMob.length > 8 &&
+        this.UpdateMob &&
+        this.canSave
+        ? true
+        : false;
+    },
+    UpdateMob: {
+      get() {
+        return `${this.mobTemp}`;
+      },
+      set() {
+        let br = document.getElementById("mobInput").value.replace(/-/g, "");
+        if (br == "") {
+          this.mob = "";
+          this.mobTemp = "";
+        }
+        this.mob = "09" + br;
+        let l = br.length;
+        if (l >= 1 && l < 5 && br)
+          this.mobTemp = br.slice(0, 1) + "-" + br.slice(1);
+        else if (l >= 5)
+          this.mobTemp =
+            br.slice(0, 1) + "-" + br.slice(1, 4) + "-" + br.slice(4);
+      },
+    },
   },
 };
 </script>
@@ -191,5 +276,19 @@ export default {
   width: 32px;
   height: 32px;
   opacity: 0.75;
+}
+
+.mtc2 {
+  margin-top: 3px;
+}
+
+.hide {
+  overflow: hidden;
+  height: 0px;
+}
+
+.hide2 {
+  overflow: hidden;
+  height: 106px;
 }
 </style>
