@@ -24,7 +24,7 @@
     </div>
     <!--==============DJELATNIK END=========================-->
     <!--==============KORISNIK =============================-->
-    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku'" class="menu2 top-0 grid grid-cols-3 mb-4">
+    <div v-if="store.currentUser != null && store.currentUser != 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku'" class="menu2 top-0 grid grid-cols-3 mb-4">
 
       <div :class=" currentRouteName == 'StatusOtkupa' ? 'menu-item2 menu-top2-item-grid0' : 
                     currentRouteName == 'OtkupOpreme'   ? 'menu-item2 menu-top2-item-grid1' : 
@@ -32,7 +32,7 @@
       </div>
     </div>
     <!--========================================-->
-    <div v-if="store.currentUser != null && store.currentUser !== 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku'" class="menu top-0 grid grid-cols-3 mb-4">
+    <div v-if="store.currentUser != null && store.currentUser != 'djelatnik@gmail.com' && currentRouteName != 'UcitajSliku' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-3 mb-4">
 
       <div :class="currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="status-otkupa"> Status otkupa </router-link></p>
@@ -89,7 +89,6 @@ export default {
   },
   methods: {
     loadTheme() {
-      console.log(store.theme);
       if (store.theme == "Svijetla") {
         store.darkToggle = true;
         this.loadLight();
@@ -106,6 +105,7 @@ export default {
     loadDarkBlue() {
       let r = document.querySelector(':root');
         r.style.setProperty('--Snow__DarkToneInk',                          '#121212');   
+        r.style.setProperty('--Lateo__DarkToneInk',                         '#121212'); 
         r.style.setProperty('--DustySky__Black',                            '#000000');  
         r.style.setProperty('--DustySky__Grey',                             '#2a2a2a');    
         r.style.setProperty('--BalticSea__Lead',                            '#ffffffde'); 
@@ -145,6 +145,7 @@ export default {
     loadDarkRed() {
       let r = document.querySelector(':root');
         r.style.setProperty('--Snow__DarkToneInk',                          '#121212');   
+        r.style.setProperty('--Lateo__DarkToneInk',                         '#121212');  
         r.style.setProperty('--DustySky__Black',                            '#000000');  
         r.style.setProperty('--DustySky__Grey',                             '#2a2a2a');    
         r.style.setProperty('--BalticSea__Lead',                            '#ffffffde'); 
@@ -184,6 +185,7 @@ export default {
     loadLight() {
       let r = document.querySelector(':root');
         r.style.setProperty('--Snow__DarkToneInk',                          '#fff9f9'); 
+        r.style.setProperty('--Lateo__DarkToneInk',                         '#e8e7e7');  
         r.style.setProperty('--DustySky__Black',                            '#e6dcdc'); 
         r.style.setProperty('--DustySky__Grey',                             '#fff9f9');  
         r.style.setProperty('--BalticSea__Lead',                            '#3d3d3f'); 
@@ -333,7 +335,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  box-shadow: 0 0 0 30px var(--Snow__DarkToneInk) inset !important;
+  box-shadow: 0 0 0 30px var(--Lateo__DarkToneInk) inset !important;
   -webkit-text-fill-color: var(--BalticSea__Squant);
   border-radius: 0% !important;
 }

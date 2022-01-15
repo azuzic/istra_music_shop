@@ -7,7 +7,7 @@
           <img class="arrow ml-2" src="@/assets/arrow_icon.svg" />
         </router-link>
         <p>
-          <router-link to="djelatnik"> Povratak </router-link>
+          <router-link :to="store.currentUser == 'djelatnik@gmail.com' ? 'djelatnik' : 'status-otkupa'"> Povratak </router-link>
         </p>
       </div>
       <div class="menu-item" :class="stanje=='U razradi' ? 'menu-item-yellow' :
@@ -58,68 +58,58 @@
       
       <div>
           <p class="text-left text-18px m-0 p-0">Slike</p>
-          <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">
-            <div class="otkup-div-image flex-none">
-              <p class="otkup-img-text">Gornja prednja</p>
+          <div>
+            <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">
+
               <div>
-                <img
-                  class="CCard-img img-top-left mx-auto"
-                  src="https://picsum.photos/500/500/"
-                />
-              </div>
-            </div>
-            <div class="otkup-div-image flex-none">
-              <p class="otkup-img-text">Gornja stražnja</p>
+                <p class="otkup-img-text">Gornja prednja</p>
+                <div class="square img_1-1 img-top-left">
+                    <img class="square-img" :src="store.zahtjev.slike[0]"/>
+                </div>
+              </div> 
+
               <div>
-                <img
-                  class="CCard-img img-top mx-auto"
-                  src="https://picsum.photos/500/500/"
-                />
-              </div>
-            </div>
-            <div class="otkup-div-image flex-none">
-              <p class="otkup-img-text">Bočna desna</p>
+                <p class="otkup-img-text">Gornja stražnja</p>
+                <div class="square img_1-1 img-top">
+                    <img class="square-img" :src="store.zahtjev.slike[1]"/>
+                </div>
+              </div> 
+
               <div>
-                <img
-                  class="CCard-img img-top-right mx-auto"
-                  src="https://picsum.photos/500/500/"
-                />
-              </div>
-            </div>
-            <div class="otkup-div-image flex-none">
-              <p class="otkup-img-text">Bočna lijeva</p>
+                <p class="otkup-img-text">Bočna desna</p>
+                <div class="square img_1-1 img-top-right">
+                    <img class="square-img" :src="store.zahtjev.slike[2]"/>
+                </div>
+              </div> 
+
               <div>
-                <img
-                  class="CCard-img img-bottom-left mx-auto"
-                  src="https://picsum.photos/500/500/"
-                />
-              </div>
-            </div>
-            <div class="otkup-div-image flex-none">
-              <p class="otkup-img-text">Vrat gitare</p>
+                <p class="otkup-img-text">Bočna lijeva</p>
+                <div class="square img_1-1 img-bottom-left">
+                    <img class="square-img" :src="store.zahtjev.slike[3]"/>
+                </div>
+              </div> 
+
               <div>
-                <img
-                  class="CCard-img img-bottom mx-auto"
-                  src="https://picsum.photos/500/500/"
-                />
-              </div>
-            </div>
-            <div class="otkup-div-image flex-none">
-              <p class="otkup-img-text">Glava gitare</p>
+                <p class="otkup-img-text">Vrat gitare</p>
+                <div class="square img_1-1 img-bottom">
+                    <img class="square-img" :src="store.zahtjev.slike[4]"/>
+                </div>
+              </div> 
+
               <div>
-                <img
-                  class="CCard-img img-bottom-right mx-auto"
-                  src="https://picsum.photos/500/500/"
-                />
-              </div>
+                <p class="otkup-img-text">Glava gitare</p>
+                <div class="square img_1-1 img-bottom-right">
+                    <img class="square-img" :src="store.zahtjev.slike[5]"/>
+                </div>
+              </div> 
+              
             </div>
           </div>
         </div>
       <div>
         <p><u class="text-20px">Napomena:</u></p>
         <textarea disabled class="resize-none otkup-textarea mt-2" v-model="opis">
-            </textarea
-        >
+        </textarea >
       </div>
       <div>
         <hr class="dotted mt-2 mb-2" />
@@ -148,9 +138,11 @@
       <div>
         <hr class="dotted mt-2 mb-2" />
       </div>
-      <div>
+      <!--==============NOVA CIJENA==============================-->
+      <div v-if="store.currentUser == 'djelatnik@gmail.com'" :class="stanje=='U razradi' ? '' : 'tranparent'">
         <p class="text-left text-18px m-0 p-0 mt-6">Nova predložena cijena:</p>
         <input
+          :disabled="stanje!='U razradi'"
           type="text"
           name="oib"
           id="oib"
@@ -159,12 +151,14 @@
         />
         <hr />
       </div>
+      <!--==============/NOVA CIJENA==============================-->
       <!--==============SPREMI==============================-->
       <div
+        v-if="store.currentUser == 'djelatnik@gmail.com'"
         class="place-self-center mt-4"
-        :class="novaCijena ? 'active' : 'inactive'"
+        :class="novaCijena || stanje=='U razradi' ? 'active' : 'inactive'"
       >
-      <div @click="updatePrice()">
+      <div @click="novaCijena && stanje=='U razradi' ? updatePrice() : dummy()">
         <CButtonSingle
           btn="PROMJENI"
           :btnClickHandler="0 ? dummy : dummy"
@@ -174,15 +168,19 @@
       </div>
       <!--==============/SPREMI=============================-->
       <!--===================ODBIJ OTKUP====================-->
-      <div class="place-self-center mt-8">
-        <div @click="updateStatus('Odbijeno')">
+      <div  v-if="store.currentUser == 'djelatnik@gmail.com'"
+            class="place-self-center mt-8" 
+            :class="stanje=='U razradi' ? 'active' : 'inactive'">
+        <div @click="stanje=='U razradi' ? updateStatus('Odbijeno') : dummy()">
           <CButtonDecline btn="ODBIJ OTKUP" :btnClickHandler="dummy" />
         </div>
       </div>
       <!--================/ODBIJ OTKUP======================-->
       <!--=================PRIHVATI OTKUP===================-->
-      <div class="place-self-center mt-4">
-        <div @click="updateStatus('Prihvaćeno')">
+      <div  v-if="store.currentUser == 'djelatnik@gmail.com'"
+            class="place-self-center mt-4" 
+            :class="stanje=='U razradi' ? 'active' : 'inactive'">
+        <div @click="stanje=='U razradi' ? updateStatus('Prihvaćeno') : dummy()">
           <CButtonAccept btn="PRIHVATI OTKUP" :btnClickHandler="dummy" />
         </div>
       </div>
@@ -345,5 +343,38 @@ export default {
 .otkup-textarea:focus {
   outline: none !important;
   border-color: var(--FluorescentRed__FrenchWine);
+}
+
+.square {
+  background-color: var(--DustySky__Grey);
+    overflow: hidden;
+    float:left;
+    position: relative;
+    display: flex;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding-bottom: 100%;
+    border-color: var(--StretchLimo__ChromaphobicBlack);
+    box-shadow: 0px 0px 4px var(--Transparent25__Transparent75);
+}
+
+.square-img {
+    position: absolute;
+    width: 100%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+.square-img2 {
+    position: absolute;
+    width: 100%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    color: var(--BalticSea__Squant);
+    font-size: 12px;
+    letter-spacing: 0.25px;
 }
 </style>

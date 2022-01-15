@@ -2,7 +2,9 @@
   <div @click="store.zahtjev=zahtjev">
     <router-link class="CCard flex" to="pregled-otkupa">
       <div class="CCard-image flex-none">
-        <img class="CCard-img mx-auto" :src="zahtjev.slike[0]" />
+        <div class="square img_1-1">
+          <img class="square-img" :src="zahtjev.slike[0]"/>
+        </div>
       </div>
 
       <div class="CCard-data">
@@ -162,7 +164,7 @@ export default {
 .CCard-title {
   position: relative;
   letter-spacing: -1px;
-  font-size: 18px;
+  font-size: 16px;
   top: 2px;
   color: var(--BalticSea__Lead);
 }
@@ -176,7 +178,7 @@ export default {
 .CCard-date {
   position: relative;
   bottom: 4px;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: normal !important;
   letter-spacing: 0.25px;
   color: var(--BalticSea__BlackMana);

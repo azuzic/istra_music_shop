@@ -53,7 +53,6 @@ export default {
         this.canLoad = false;
         querySnapshot.forEach((doc) => {
           if (doc.data().korisnik === store.currentUser) {
-            if (`${doc.data().status}` == this.state) {
               setTimeout(() => {
                 this.$set(this.zahtjevi, b, {
                   instrument: [
@@ -83,7 +82,6 @@ export default {
 
                 b++;
               }, (time += delay));
-            }
           }
         });
       }

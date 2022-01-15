@@ -498,7 +498,6 @@ export default {
     width: 100%;
     padding-bottom: 100%;
     border-color: var(--StretchLimo__ChromaphobicBlack);
-    border-width: 2px;
     box-shadow: 0px 0px 4px var(--Transparent25__Transparent75);
 }
 

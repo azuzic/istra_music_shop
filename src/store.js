@@ -12,5 +12,6 @@ export default {
     img: "",
     date: "",
     id: "",
+    slike: ["","","","","",""],
   }
 };
