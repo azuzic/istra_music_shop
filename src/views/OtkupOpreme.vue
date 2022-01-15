@@ -339,7 +339,7 @@ export default {
           zahtjevPredan: Date.now(),
           napomena: this.napomena,
           status: "U razradi",
-          preporucenaCijena: this.preporucenaCijena,
+          preporucenaCijena: Math.round(this.preporucenaCijena),
         });
         console.log("Predan zahtjev za otkup sa ID: ", docRef.id);
         this.zahtjevPredan = true;
