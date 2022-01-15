@@ -85,7 +85,7 @@ router.beforeEach((to, from, next) => {
   if (noUser && to.meta.needsUser) {
     next("Prijava");
   } else {
-    if(to.meta.admin){
+    if(to.meta.admin && store.currentUser!== "djelatnik@gmail.com"){
       next("Racun");
     }
     else if(
