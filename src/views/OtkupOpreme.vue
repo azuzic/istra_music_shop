@@ -231,7 +231,7 @@
           isUploadingPicture[3] = false,
           isUploadingPicture[4] = false,
           isUploadingPicture[5] = false) : ''" 
-          :class="!isUploading ? 'tranparent-75' : 'tranparent-25'"
+          :class="!isUploading ? '' : 'tranparent-25'"
           class="arrow2" src="@/assets/arrow_icon.svg" />
         </a>
         <div class="loading flex mt-4" :class="!isUploading ? 'hide-loading' : 'show-loading'">
@@ -769,7 +769,6 @@ export default {
   height: 35px !important;
   margin-top: 10px;
   margin-right: 10px;
-  opacity: 50% !important;
 }
 
 .hide-x svg {
