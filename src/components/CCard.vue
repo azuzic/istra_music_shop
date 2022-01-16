@@ -146,7 +146,6 @@ export default {
 .CCard-svg {
   height: 42px;
   width: 42px;
-  opacity: 75%;
 }
 .CCard-icontext2 {
   position: relative;
