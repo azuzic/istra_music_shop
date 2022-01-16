@@ -78,6 +78,8 @@ export default {
                   status: `${doc.data().status}`,
                   date: `${doc.data().zahtjevPredan}`,
                   novaCijena: `${doc.data().novaCijena}`,
+                  novaPreporucenaCijena: `${doc.data().novaPreporucenaCijena}`,
+                  id: (`${doc.id}`),
                 });
 
                 b++;
