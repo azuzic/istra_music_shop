@@ -22,7 +22,7 @@ export default {
 
 <style scoped lang="scss">
 .button-bg {
-  min-width: 226px;
+  width: 90vw;
   background: var(--BalticSea__EerieBlack);
   box-shadow: 0px 4px 4px var(--Transparent25__Transparent75);
   border-radius: 16px;
@@ -30,7 +30,7 @@ export default {
 
 .button-bg2 {
   position: relative;
-  min-width: 226px;
+  width: 90vw;
   height: 51px;
   margin-bottom: -51px;
   z-index: -21;
@@ -44,7 +44,7 @@ export default {
   font-family: "Lora", serif;
   font-style: normal;
   font-weight: normal;
-  font-size: 24px;
+  font-size: 6.5vw;
   line-height: 30px;
   display: flex;
   align-items: center;
