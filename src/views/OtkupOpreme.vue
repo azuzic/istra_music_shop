@@ -703,7 +703,6 @@ export default {
 }
 .icon-remove {
   height: 28px;
-  opacity: 10% !important;
 }
 .menu-item6 {
   align-items: center;
