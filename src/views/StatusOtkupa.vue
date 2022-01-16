@@ -21,7 +21,7 @@ import { db } from "@/firebase";
 import store from "@/store";
 
 export default {
-  name: "Djelatnik",
+  name: "StatusOtkupa",
   data() {
     return {
       state: this.readData("U razradi"),
@@ -76,8 +76,8 @@ export default {
                   napomena: `${doc.data().napomena}`,
                   preporucenaCijena: `${doc.data().preporucenaCijena}`,
                   status: `${doc.data().status}`,
-                  img: "https://picsum.photos/500/500/",
                   date: `${doc.data().zahtjevPredan}`,
+                  novaCijena: `${doc.data().novaCijena}`,
                 });
 
                 b++;
