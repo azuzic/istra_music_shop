@@ -1,6 +1,7 @@
 # "IstraMusicShop"
 
 Web aplikacija za otkup glazbenih instrumenata.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/fa19300f-afea-4012-9b9c-d39664dc09e7/deploy-status)](https://app.netlify.com/sites/istra-music-shop/deploys)
 
 ### Autori i zaduženja
 
