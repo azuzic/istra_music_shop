@@ -700,7 +700,6 @@ export default {
 }
 .photo-icon {
   height: 28px;
-  opacity: 90%;
 }
 .icon-remove {
   height: 28px;
