@@ -160,7 +160,7 @@
       >
       <div @click="novaCijena && stanje=='U razradi' ? updatePrice() : dummy()">
         <CButtonSingle
-          btn="PROMJENI"
+          btn="PROMIJENI"
           :btnClickHandler="0 ? dummy : dummy"
         />
       </div>
