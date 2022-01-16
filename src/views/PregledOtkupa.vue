@@ -356,6 +356,8 @@ export default {
   width: 100%;
   font-weight: bold;
   color: #3f2c28;
+  font-size: 4.5vw;
+  transition: 0.5s;
 }
 .arrow {
   width: 26px;

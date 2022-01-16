@@ -133,9 +133,10 @@ export default {
 .menu-item-selected p {  
   transition: all;
   transition-timing-function: ease-in-out;
-  transition: 1s;
+  transition: 0.5s;
   width: 100%;
   font-weight: bold;
+  font-size: 4.5vw;
   color: var(--DwarfFortress__Belladonna);
 }
 .menu-bottom2 {
