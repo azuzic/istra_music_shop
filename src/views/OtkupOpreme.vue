@@ -328,7 +328,7 @@ export default {
         .confirm ("Jeste li sigurni da želite napustiti stranicu? Promjene neće biti spremljene.")
         .then(function () {
           pictures.resetData();
-          next();
+          next("Racun");
         })
         .catch(function () {
           next(false);
