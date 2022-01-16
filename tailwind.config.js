@@ -4,14 +4,14 @@ module.exports = {
   theme: {
     extend: {},
     fontSize: {
-      "10px": "10px",
-      "12px": "12px",
-      "14px": "14px",
-      "16px": "16px",
-      "18px": "18px",
-      "20px": "20px",
-      "22px": "22px",
-      "24px": "24px",
+      "10px": "2.7vw",
+      "12px": "3.2vw",
+      "14px": "3.7vw",
+      "16px": "4.2vw",
+      "18px": "4.8vw",
+      "20px": "5.4vw",
+      "22px": "5.9vw",
+      "24px": "6.4vw",
     },
   },
   variants: {
