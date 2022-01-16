@@ -14,5 +14,6 @@ export default {
     date: "",
     id: "",
     slike: ["","","","","",""],
+    novaCijena: false,
   }
 };

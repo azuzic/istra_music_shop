@@ -3,7 +3,7 @@
     <!--==============MENU====================================-->
     <div class="menu grid grid-cols-3 mb-4">
       <div class="menu-item-active menu-highlight">
-        <router-link to="djelatnik">
+        <router-link :to="store.currentUser == 'djelatnik@gmail.com' ? 'djelatnik' : 'status-otkupa'">
           <img class="arrow ml-2" src="@/assets/arrow_icon.svg" />
         </router-link>
         <p>
@@ -111,6 +111,21 @@
         <textarea disabled class="resize-none otkup-textarea mt-2" v-model="opis">
         </textarea >
       </div>
+
+      <div v-if="store.currentUser !== 'djelatnik@gmail.com' && store.zahtjev.novaCijena == 'true'">
+        <p class="text-20px">Nova ponuđena cijena: <b>{{predlozenaCijena}} kn</b></p>
+        <CButtonSingle
+          class="ml-16 mr-16 mb-4"
+          btn="Prihvati"
+          :btnClickHandler="0 ? dummy : dummy"
+        />
+        <CButtonSingle
+          class="ml-16 mr-16"
+          btn="Odbij"
+          :btnClickHandler="0 ? dummy : dummy"
+        />
+      </div>
+
       <div v-if="store.currentUser == 'djelatnik@gmail.com'">
         <hr class="dotted mt-2 mb-2" />
       </div>
@@ -160,7 +175,7 @@
       >
       <div @click="novaCijena && stanje=='U razradi' ? updatePrice() : dummy()">
         <CButtonSingle
-          btn="PROMJENI"
+          btn="PREDLOŽI"
           :btnClickHandler="0 ? dummy : dummy"
         />
       </div>
@@ -179,8 +194,8 @@
       <!--=================PRIHVATI OTKUP===================-->
       <div  v-if="store.currentUser == 'djelatnik@gmail.com'"
             class="place-self-center mt-4" 
-            :class="stanje=='U razradi' ? 'active' : 'inactive'">
-        <div @click="stanje=='U razradi' ? updateStatus('Prihvaćeno') : dummy()">
+            :class="stanje=='U razradi' && !novaCijenaBool ? 'active' : 'inactive'">
+        <div @click="stanje=='U razradi' && !novaCijenaBool ? updateStatus('Prihvaćeno') : dummy()">
           <CButtonAccept btn="PRIHVATI OTKUP" :btnClickHandler="dummy" />
         </div>
       </div>
@@ -222,7 +237,7 @@ import { db } from "@/firebase";
 import { doc, collection, getDocs, updateDoc} from "@/firebase";
 
 export default {
-  name: "Djelatnik",
+  name: "PregledOtkupa",
   components: {
     CTitle,
     CButtonSingle,
@@ -247,6 +262,7 @@ export default {
       opis: "",
       stanje: "",
       store,
+      novaCijenaBool: false,
     };
   },
   methods: {
@@ -264,6 +280,7 @@ export default {
           this.stanje = store.zahtjev.status;
           this.predlozenaCijena = store.zahtjev.preporucenaCijena;
           let m = this.korisnik[0].mob;
+          this.novaCijenaBool = store.zahtjev.novaCijena;
           this.mob = m.slice(0,3) + "-" + m.slice(3,6) + "-" + m.slice(6);
         }
       });
@@ -271,8 +288,10 @@ export default {
     async updatePrice() {
         const g = doc(db, "zahtjevi", store.zahtjev.id);
         await updateDoc(g, {
-          preporucenaCijena: this.novaCijena
+          preporucenaCijena: this.novaCijena,
+          novaCijena: true,
         });
+        this.novaCijenaBool = true;
         this.predlozenaCijena = this.novaCijena;
     },
     async updateStatus(status) {
