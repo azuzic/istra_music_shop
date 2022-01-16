@@ -231,7 +231,7 @@
           isUploadingPicture[3] = false,
           isUploadingPicture[4] = false,
           isUploadingPicture[5] = false) : ''" 
-          :class="!isUploading ? '' : 'tranparent-25'"
+          :class="!isUploading ? '' : 'hide-loading'"
           class="arrow2" src="@/assets/arrow_icon.svg" />
         </a>
         <div class="loading flex mt-4" :class="!isUploading ? 'hide-loading' : 'show-loading'">
@@ -839,7 +839,7 @@ export default {
 .hide-ucitaj {
   position: fixed;
   top: 0px;
-  right: 100%;
+  right: 200%;
   width: 100%;
   height: 100%;
   z-index: 999999;
