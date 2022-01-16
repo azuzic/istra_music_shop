@@ -232,7 +232,7 @@
           isUploadingPicture[4] = false,
           isUploadingPicture[5] = false) : ''" 
           :class="!isUploading ? '' : 'hide-loading'"
-          class="arrow2" src="@/assets/arrow_icon.svg" />
+          class="arrow2" src="@/assets/arrow_icon.png" />
         </a>
         <div class="loading flex mt-4" :class="!isUploading ? 'hide-loading' : 'show-loading'">
           <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6 mr-2"></div>

@@ -4,7 +4,7 @@
     <div class="menu grid grid-cols-3 mb-4">
       <div class="menu-item-active menu-highlight">
         <router-link :to="store.currentUser == 'djelatnik@gmail.com' ? 'djelatnik' : 'status-otkupa'">
-          <img class="arrow ml-2" src="@/assets/arrow_icon.svg" />
+          <img class="arrow ml-2" src="@/assets/arrow_icon.png" />
         </router-link>
         <p>
           <router-link :to="store.currentUser == 'djelatnik@gmail.com' ? 'djelatnik' : 'status-otkupa'"> Povratak </router-link>
