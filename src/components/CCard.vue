@@ -30,7 +30,7 @@
             v-if="zahtjev.status != 'Riješeno'"
             class="CCard-icon-1"
             :class="zahtjev.status != 'Odbijeno' ? 'tranparent-10' : ''" >
-            <img class="CCard-svg mx-auto mt-2" src="@/assets/deny_icon.svg" />
+            <img class="CCard-svg mx-auto mt-2" src="@/assets/deny_icon.png" />
             <p class="CCard-icontext">ODBIJENO</p>
           </div>
 
@@ -38,7 +38,7 @@
             v-if="zahtjev.status != 'Riješeno'"
             class="CCard-icon-2"
             :class="zahtjev.status != 'U razradi' ? 'tranparent-10' : ''" >
-            <img class="CCard-svg mx-auto mt-2" src="@/assets/load_icon.svg" />
+            <img class="CCard-svg mx-auto mt-2" src="@/assets/load_icon.png" />
             <p class="CCard-icontext">U RAZRADI</p>
           </div>
 
@@ -46,7 +46,7 @@
             v-if="zahtjev.status != 'Riješeno'"
             class="CCard-icon-3"
             :class="zahtjev.status != 'Prihvaćeno' ? 'tranparent-10' : ''">
-            <img class="CCard-svg mx-auto mt-2" src="@/assets/accept_icon.svg" />
+            <img class="CCard-svg mx-auto mt-2" src="@/assets/accept_icon.png" />
             <p class="CCard-icontext">PRIHVAĆENO</p>
           </div>
 
