@@ -606,16 +606,10 @@ export default {
   width: 120px;
   overflow: hidden;
 }
-
 .otkup-div-image img {
   border-color: var(--StretchLimo__ChromaphobicBlack);
   height: 120px;
   border-width: 2px;
-}
-.otkup-img-text {
-  text-align: center;
-  font-size: 16px;
-  color: var(--balticSea);
 }
 .otkup-textarea:focus {
   outline: none !important;
@@ -672,7 +666,7 @@ export default {
     top:50%;
     transform:translate(-50%,-50%);
     color: var(--BalticSea__Squant);
-    font-size: 12px;
+    font-size: 3.2vw; 
     letter-spacing: 0.25px;
 }
 

@@ -521,8 +521,9 @@ input:-webkit-autofill:active {
 }
 .otkup-img-text {
   text-align: center;
-  font-size: 16px;
+  font-size: 4.2vw; //16px
   padding-bottom: 4px;
+  color: var(--balticSea);
 }
 .otkup-textarea {
   padding: 8px;
@@ -530,7 +531,7 @@ input:-webkit-autofill:active {
   width: 100%;
   background-color: var(--DustySky__Grey);
   color: var(--balticSea);
-  font-size: 18px;
+  font-size: 4.8vw; //18px
   border-color: var(--StretchLimo__ChromaphobicBlack);
   box-shadow: 0px 0px 4px var(--Transparent25__Transparent75);
   border-width: 2px;
