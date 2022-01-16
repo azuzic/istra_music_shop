@@ -260,6 +260,7 @@
         </div>
       </div>
       <croppa
+        :class="isUploading ? 'hide-x' : 'show-x'"
         v-if="refresh"
         id="checkForUpload"
         v-model="imageReference"
@@ -707,6 +708,10 @@ export default {
   height: 28px;
   opacity: 90%;
 }
+.icon-remove {
+  height: 28px;
+  opacity: 10% !important;
+}
 .menu-item6 {
   align-items: center;
   text-align: center;
@@ -766,12 +771,20 @@ export default {
   background-color: transparent;
 }
 
-.croppa-container svg {
+.show-x svg {
   width: 35px !important;
   height: 35px !important;
   margin-top: 10px;
   margin-right: 10px;
-  opacity: 50%;
+  opacity: 50% !important;
+}
+
+.hide-x svg {
+  width: 0px !important;
+  height: 0px !important;
+  margin-top: 25px;
+  margin-right: 25px;
+  opacity: 0% !important;
 }
 
 .arrow2 {
