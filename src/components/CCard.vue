@@ -2,8 +2,8 @@
   <div @click="store.zahtjev=zahtjev">
     <router-link class="CCard flex" to="pregled-otkupa">
       <div class="CCard-image flex-none">
-        <div class="square img_1-1">
-          <img class="square-img" :src="zahtjev.slike[0]"/>
+        <div class="square-card img_1-1">
+          <img class="square-img-card" :src="zahtjev.slike[0]"/>
         </div>
       </div>
 
@@ -30,7 +30,7 @@
             v-if="zahtjev.status != 'Riješeno'"
             class="CCard-icon-1"
             :class="zahtjev.status != 'Odbijeno' ? 'tranparent-10' : ''" >
-            <img class="CCard-svg mx-auto mt-2" src="@/assets/deny_icon.png" />
+            <img class="CCard-svg mx-auto mt-2" src="@/assets/deny_icon.svg" />
             <p class="CCard-icontext">ODBIJENO</p>
           </div>
 
@@ -38,7 +38,7 @@
             v-if="zahtjev.status != 'Riješeno'"
             class="CCard-icon-2"
             :class="zahtjev.status != 'U razradi' ? 'tranparent-10' : ''" >
-            <img class="CCard-svg mx-auto mt-2" src="@/assets/load_icon.png" />
+            <img class="CCard-svg mx-auto mt-2" src="@/assets/load_icon.svg" />
             <p class="CCard-icontext">U RAZRADI</p>
           </div>
 
@@ -46,7 +46,7 @@
             v-if="zahtjev.status != 'Riješeno'"
             class="CCard-icon-3"
             :class="zahtjev.status != 'Prihvaćeno' ? 'tranparent-10' : ''">
-            <img class="CCard-svg mx-auto mt-2" src="@/assets/accept_icon.png" />
+            <img class="CCard-svg mx-auto mt-2" src="@/assets/accept_icon.svg" />
             <p class="CCard-icontext">PRIHVAĆENO</p>
           </div>
 
@@ -84,14 +84,13 @@ export default {
 <style>
 .CCard {
   width: 100%;
-  height: 120px;
+  height: 30vw;
   background: transparent !important;
   box-shadow: 0px 4px 4px var(--Transparent25__Transparent75);
   border-radius: 8px;
 }
 .CCard-image {
-  width: 120px;
-  height: 120px;
+  width: 30%;
   background: var(--BalticSea__Lead);
   border-bottom-left-radius: 8px;
   border-top-left-radius: 8px;
@@ -102,8 +101,8 @@ export default {
   width: auto !important;
 }
 .CCard-data {
-  width: 100%;
-  height: 120px;
+  width: 70%;
+  height: 100%;
   background: var(--DustySky__Lead);
   background-color: transparent !important;
   border-color: transparent !important;
@@ -111,15 +110,17 @@ export default {
 }
 .CCard-header {
   width: 100%;
-  height: 48px;
+  height: 40%;
   background: var(--White__DarkGrey);
   border-top-right-radius: 8px;
+  overflow: scroll;
 }
 .CCard-footer {
   width: 100%;
-  height: 72px;
+  height: 60%;
   background: var(--BalticSea__DarkToneInk);
   border-bottom-right-radius: 8px;
+  overflow: scroll;
 }
 .CCard-icon-1 {
   height: 100%;
@@ -137,47 +138,46 @@ export default {
 .CCard-icontext {
   position: relative;
   text-align: center;
-  font-size: 12px;
-  top: 4px;
+  font-size: 3.2vw;
+  margin-top: 1.5vw;
   font-weight: bold;
   letter-spacing: -1px;
   color: var(--DwarfFortress__Belladonna);
 }
 .CCard-svg {
-  height: 42px;
-  width: 42px;
+  position: relative;
+  height: 10vw;
 }
 .CCard-icontext2 {
   position: relative;
   text-align: center;
-  font-size: 18px;
-  top: 3px;
+  font-size: 3.2vw;
+  margin-top: 4px;
   font-weight: bold;
   letter-spacing: -1px;
+  color: var(--DwarfFortress__Belladonna);
 }
 .CCard-svg2 {
-  height: 42px;
-  width: 42px;
-  opacity: 75%;
+  position: relative;
+  height: 10vw;
 }
 .CCard-title {
   position: relative;
   letter-spacing: -1px;
-  font-size: 16px;
+  font-size: 4.2vw;
   top: 2px;
   color: var(--BalticSea__Lead);
 }
 .CCard-subtitle {
   position: relative;
-  font-size: 11px;
+  font-size: 3.2vw;
   letter-spacing: -0.5px;
-  bottom: 2px;
   color: var(--BalticSea__Squant);
 }
 .CCard-date {
   position: relative;
   bottom: 4px;
-  font-size: 10px;
+  font-size: 3vw;
   font-weight: normal !important;
   letter-spacing: 0.25px;
   color: var(--BalticSea__BlackMana);
@@ -185,7 +185,33 @@ export default {
 .CCard-price {
   position: relative;
   bottom: 0px;
-  font-size: 14px;
+  font-size: 3vw;
   color: var(--Flushed__LingonberryRed) !important;
+}
+
+.square-card {
+    background-color: var(--DustySky__Grey);
+    overflow: hidden;
+    float:left;
+    position: relative;
+    display: flex;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 100%;
+    border-color: var(--StretchLimo__ChromaphobicBlack);
+    box-shadow: 0px 0px 4px var(--Transparent25__Transparent75);
+}
+
+.square-img-card {
+    position: absolute;
+    background-color: var(--DustySky__Grey);
+    width: 100%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    pointer-events: none;
 }
 </style>
