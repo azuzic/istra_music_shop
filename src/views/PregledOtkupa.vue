@@ -220,7 +220,7 @@
             class="money"
             src="@/assets/money_icon_dark.svg"
           />
-          <p class="pl-4 text-24px" >
+          <p class="pl-4 price-size" >
             Predložena cijena:
             <b class="price">{{preporucenaCijena}}</b>
           </p>
@@ -410,7 +410,7 @@ export default {
     top:50%;
     transform:translate(-50%,-50%);
     color: var(--BalticSea__Squant);
-    font-size: 12px;
+    font-size: 3.2vw; 
     letter-spacing: 0.25px;
 }
 </style>

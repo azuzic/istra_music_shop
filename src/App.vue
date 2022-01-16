@@ -545,6 +545,10 @@ input:-webkit-autofill:active {
   width: 43px;
   opacity: 0.75;
 }
+.price-size {
+  font-size: 6.4vw;
+}
+
 .price {
   color: var(--FluorescentRed__FrenchWine);
 }
