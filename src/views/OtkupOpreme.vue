@@ -81,7 +81,7 @@
         </div>
         <!--===================/STANJE===================-->
         <!--===================SLIKE===================-->
-        <div>
+        <div id="scroll-slike">
           <p class="text-left text-18px m-0 p-0">Slike</p>
           <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">
 
@@ -185,12 +185,22 @@
 <!--======================================================================================-->
 <div v-else>
     <div class="CDodavanje-bottom grid grid-cols-1">
-      <div class="place-self-center" :class="canUpload ? '' : 'tranparent-75'">
+      <div class="place-self-center">
         <CButtonSingle
+          :class="canUpload ? '' : 'tranparent-25'"
           btn="PRENESI  "
           :btnClickHandler="canUpload ? savePhoto : dummy"
         />
+        <a href="#scroll-slike">
+          <img @click="mode=!mode" class="arrow2" src="@/assets/arrow_icon.svg" />
+        </a>
+        <div class="loading grid grid-cols-2">
+          <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
+          LOADING ...
+        </div>
+        
       </div>
+
     </div>
     <div class="CDodavanje-top">
       <div class="menu-item6 mx-auto">
@@ -210,6 +220,7 @@
         </div>
       </div>
       <croppa
+        id="checkForUpload"
         v-model="imageReference"
         auto-sizing
         :placeholder="''"
@@ -339,6 +350,7 @@ export default {
   methods: {
     //Ucitaj sliku
     savePhoto() {
+      this.canUpload = false;
       this.imageReference.generateBlob((blobData) => {
         let imageName =
           "zahtjevi/" + store.currentUser + "/" + Date.now() + ".png";
@@ -703,5 +715,23 @@ export default {
   margin-top: 10px;
   margin-right: 10px;
   opacity: 50%;
+}
+
+.arrow2 {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  margin: 8px;
+  width: 42px;
+  transform: scaleX(-1);
+}
+
+.loader {
+  border-color: var(--BalticSea__SilverMedal);
+  border-top-color: var(--FluorescentRed__FrenchWine);
+}
+
+.loading {
+  
 }
 </style>
