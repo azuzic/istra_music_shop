@@ -256,7 +256,6 @@ export default {
 :root {
     --Poblano__Poblano:                           #068020;    //var(--Poblano__Poblano);
     --RichGreen__RichGreen:                       #258843;    //var(--RichGreen__RichGreen);
-    --Snow__EerieBlack:                           #fff9f9;    //var(--Snow__EerieBlack);
 }
 
 * {
@@ -446,14 +445,12 @@ input:-webkit-autofill:active {
   color: var(--Fresco__KinglyCloud);  
   transition: all;
   transition-timing-function: ease-in-out;
-  transition: 1s;
 }
 .menu-item p a {
   width: 100%;
   color: var(--Fresco__KinglyCloud);
   transition: all;
   transition-timing-function: ease-in-out;
-  transition: 1s;
 }
 .menu-item p b {
   width: 100%;
@@ -473,7 +470,6 @@ input:-webkit-autofill:active {
   color: var(--graniteBrown);
   transition: all;
   transition-timing-function: ease-in-out;
-  transition: 1s;
 }
 .menu-item-active p a {
   width: 100%;
@@ -481,7 +477,6 @@ input:-webkit-autofill:active {
   color: var(--graniteBrown);
   transition: all;
   transition-timing-function: ease-in-out;
-  transition: 1s;
 }
 .img-top-left {
   border-top-left-radius: 9.5px;
