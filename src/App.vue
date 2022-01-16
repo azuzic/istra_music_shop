@@ -24,7 +24,7 @@
     </div>
     <!--==============DJELATNIK END=========================-->
     <!--==============KORISNIK =============================-->
-    <div v-if="!pictures.mode && store.currentUser != null && store.currentUser != 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-3 mb-4">
+    <div v-if="store.currentUser != null && store.currentUser != 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-3 mb-4">
 
       <div :class=" currentRouteName == 'StatusOtkupa' ? 'menu-item2 menu-top2-item-grid0' : 
                     currentRouteName == 'OtkupOpreme'   ? 'menu-item2 menu-top2-item-grid1' : 
@@ -32,7 +32,7 @@
       </div>
     </div>
     <!--========================================-->
-    <div v-if="!pictures.mode && store.currentUser != null && store.currentUser != 'djelatnik@gmail.com' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-3 mb-4">
+    <div v-if="store.currentUser != null && store.currentUser != 'djelatnik@gmail.com' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-3 mb-4">
 
       <div :class="currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="status-otkupa"> Status otkupa </router-link></p>
@@ -254,49 +254,12 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Alike&display=swap");
 
 :root {
-    --BalticSea__BlackMana:                       #3d3d3f;    //var(--BalticSea__BlackMana);
-    --BalticSea__DarkToneInk:                     #3d3d3f;    //var(--BalticSea__DarkToneInk);
-    --BalticSea__EerieBlack:                      #3d3d3f;    //var(--BalticSea__EerieBlack);
-    --BalticSea__Lead:                            #3d3d3f;    //var(--BalticSea__Lead);
-    --BalticSea__SilverMedal:                     #3d3d3f;    //var(--BalticSea__SilverMedal);
-    --BalticSea__Squant:                          #3d3d3f;    //var(--BalticSea__Squant);
-    --DustySky__Lead:                             #96a4a5;    //var(--DustySky__Lead);
-    --DwarfFortress__Belladonna:                  #1a0505;    //var(--DwarfFortress__Belladonna);
-    --DwarfFortress__Lead:                        #1a0505;    //var(--DwarfFortress__Lead);
-    --EnglishBreakfast__RavensBanquet:            #461717;    //var(--EnglishBreakfast__RavensBanquet);
-    --FluorescentRed__FrenchWine:                 #ff5252;    //var(--FluorescentRed__FrenchWine);
-    --fluorescentRed__OffBlack:                   #ff5252;    //var(--fluorescentRed__OffBlack);
-    --FluorescentRed__RefinedChianti:             #ff5252;    //var(--FluorescentRed__RefinedChianti);
-    --Flushed__LingonberryRed:                    #e45656;    //var(--Flushed__LingonberryRed);
-    --ForbiddenFruit__RedPotion:                  #ff8080;    //var(--ForbiddenFruit__RedPotion);
-    --Fresco__KinglyCloud:                        #f5dada;    //var(--Fresco__KinglyCloud);
-    --GraniteBrown__Lead:                         #3f2c28;    //var(--GraniteBrown__Lead);
-    --Grey__ExistentialAngst:                     #808080;    //var(--Grey__ExistentialAngst);
-    --HumorousGreen__Anime:                       #c9ba39;    //var(--HumorousGreen__Anime);
-    --LimonFresco__Anime:                         #fff383;    //var(--LimonFresco__Anime);
-    --PaleFlower__RavensBanquet:                  #668AAC;    //var(--PaleFlower__RavensBanquet);
     --Poblano__Poblano:                           #068020;    //var(--Poblano__Poblano);
     --RichGreen__RichGreen:                       #258843;    //var(--RichGreen__RichGreen);
-    --Snow__DarkToneInk:                          #fff9f9;    //var(--Snow__DarkToneInk);
     --Snow__EerieBlack:                           #fff9f9;    //var(--Snow__EerieBlack);
-    --Snow__Lead:                                 #fff9f9;    //var(--Snow__Lead);
-    --SnowPea__RichGreen:                         #6dd277;    //var(--SnowPea__RichGreen);
-    --SolidEmpire__DarkSouls:                     #635a5a;    //var(--SolidEmpire__DarkSouls);
-    --StretchLimo__ChromaphobicBlack:             #292e32;    //var(--StretchLimo__ChromaphobicBlack);
-    --StretchLimo__EerieBlack:                    #292e32;    //var(--StretchLimo__EerieBlack);
-    --Tin__WhatWeDoInTheShadows:                  #919192;    //var(--Tin__WhatWeDoInTheShadows);
-    --VivaldiRed__FrenchWine:                     #e93a3a;    //var(--VivaldiRed__FrenchWine);
-    --White__DarkGrey:                            #ffffff;    //var(--White__DarkGrey);
-    --Transparent__BleachedSilk:                  transparent;  //var(--Transparent__BleachedSilk);
-    --Transparent__ExtraordinaryAbundanceOfTinge: transparent;  //var(--Transparent__ExtraordinaryAbundanceOfTinge);
-    --Transparent50__Transparent25:               0.50;         //var(--Transparent50__Transparent25);
 }
 
 * {
-  color: rgb(16, 73, 139);
-  color: #00000040;
-  color: rgb(173, 31, 71);
-  color: #8c1939;
   font-family: "Lora", italic;
   font-style: normal;
   font-weight: normal;

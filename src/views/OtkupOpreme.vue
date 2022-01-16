@@ -1,6 +1,6 @@
 <template>
-  <div class="p-0 m-0" :class="!mode ? 'pt-16' : ''">
-    <div v-if="!mode" class="grid auto-rows-auto gap-4">
+  <div class="p-0 m-0" :class="!mode ? 'pt-16' : 'below-ucitaj pt-16'">
+    <div class="grid auto-rows-auto gap-4">
       <div class="grid auto-rows-auto gap-4 pl-4 pr-4 mt-2 mb-16">
         <!--===================VRSTA INSTRUMENTA===================-->
         <div>
@@ -88,7 +88,12 @@
             <div>
               <p class="otkup-img-text">Gornja prednja</p>
               <div class="square img_1-1 img-top-left">
-                  <button class="square-img2" @click="imageUpload(0)">Učitaj sliku</button> 
+                  <div :class="!isUploadingPicture[0] ? 'hide-loading' : 'show-loading'" 
+                        class="loader-squre-img">
+                    <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
+                  </div>
+                  <button :class="isUploadingPicture[0] ? 'hide-text' : 'show-text'" 
+                          class="square-img2" @click="imageUpload(0)">Učitaj sliku</button> 
                   <img class="square-img" :src="pictures.guitarPictures[0].url"/>
               </div>
             </div> 
@@ -96,7 +101,12 @@
             <div>
               <p class="otkup-img-text">Gornja stražnja</p>
               <div class="square img_1-1 img-top">
-                  <button class="square-img2" @click="imageUpload(1)">Učitaj sliku</button> 
+                  <div :class="!isUploadingPicture[1] ? 'hide-loading' : 'show-loading'" 
+                        class="loader-squre-img">
+                    <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
+                  </div>
+                  <button :class="isUploadingPicture[1] ? 'hide-text' : 'show-text'" 
+                          class="square-img2" @click="imageUpload(1)">Učitaj sliku</button> 
                   <img class="square-img" :src="pictures.guitarPictures[1].url"/>
               </div>
             </div> 
@@ -104,7 +114,12 @@
             <div>
               <p class="otkup-img-text">Bočna desna</p>
               <div class="square img_1-1 img-top-right">
-                  <button class="square-img2" @click="imageUpload(2)">Učitaj sliku</button> 
+                  <div :class="!isUploadingPicture[2] ? 'hide-loading' : 'show-loading'" 
+                        class="loader-squre-img">
+                    <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
+                  </div>
+                  <button :class="isUploadingPicture[2] ? 'hide-text' : 'show-text'" 
+                          class="square-img2" @click="imageUpload(2)">Učitaj sliku</button> 
                   <img class="square-img" :src="pictures.guitarPictures[2].url"/>
               </div>
             </div> 
@@ -112,7 +127,12 @@
             <div>
               <p class="otkup-img-text">Bočna lijeva</p>
               <div class="square img_1-1 img-bottom-left">
-                  <button class="square-img2" @click="imageUpload(3)">Učitaj sliku</button> 
+                  <div :class="!isUploadingPicture[3] ? 'hide-loading' : 'show-loading'" 
+                        class="loader-squre-img">
+                    <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
+                  </div>
+                  <button :class="isUploadingPicture[3] ? 'hide-text' : 'show-text'" 
+                          class="square-img2" @click="imageUpload(3)">Učitaj sliku</button> 
                   <img class="square-img" :src="pictures.guitarPictures[3].url"/>
               </div>
             </div> 
@@ -120,7 +140,12 @@
             <div>
               <p class="otkup-img-text">Serijski broj</p>
               <div class="square img_1-1 img-bottom">
-                  <button class="square-img2" @click="imageUpload(4)">Učitaj sliku</button> 
+                  <div :class="!isUploadingPicture[4] ? 'hide-loading' : 'show-loading'" 
+                        class="loader-squre-img">
+                    <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
+                  </div>
+                  <button :class="isUploadingPicture[4] ? 'hide-text' : 'show-text'" 
+                          class="square-img2" @click="imageUpload(4)">Učitaj sliku</button> 
                   <img class="square-img" :src="pictures.guitarPictures[4].url"/>
               </div>
             </div> 
@@ -128,7 +153,12 @@
             <div>
               <p class="otkup-img-text">Glava gitare</p>
               <div class="square img_1-1 img-bottom-right">
-                  <button class="square-img2" @click="imageUpload(5)">Učitaj sliku</button> 
+                  <div :class="!isUploadingPicture[5] ? 'hide-loading' : 'show-loading'" 
+                        class="loader-squre-img">
+                    <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
+                  </div>
+                  <button :class="isUploadingPicture[5] ? 'hide-text' : 'show-text'" 
+                          class="square-img2" @click="imageUpload(5)">Učitaj sliku</button> 
                   <img class="square-img" :src="pictures.guitarPictures[5].url"/>
               </div>
             </div> 
@@ -183,20 +213,30 @@
 
 <!--=================================IMAGE UPLOAD=========================================-->
 <!--======================================================================================-->
-<div v-else>
+<div :class="mode ? 'show-ucitaj' : 'hide-ucitaj'">
     <div class="CDodavanje-bottom grid grid-cols-1">
       <div class="place-self-center">
-        <CButtonSingle
-          :class="canUpload ? '' : 'tranparent-25'"
-          btn="PRENESI  "
-          :btnClickHandler="canUpload ? savePhoto : dummy"
-        />
+          <CButtonSingle
+            :class="canUpload ? '' : 'tranparent-25'"
+            btn="PRENESI  "
+            :btnClickHandler="canUpload ? savePhoto : dummy"
+          />
         <a href="#scroll-slike">
-          <img @click="mode=!mode" class="arrow2" src="@/assets/arrow_icon.svg" />
+          <img @click="!isUploading ? (
+          mode = !mode, 
+          pictures.mode = !pictures.mode,
+          isUploadingPicture[0] = false,
+          isUploadingPicture[1] = false,
+          isUploadingPicture[2] = false,
+          isUploadingPicture[3] = false,
+          isUploadingPicture[4] = false,
+          isUploadingPicture[5] = false) : ''" 
+          :class="!isUploading ? 'tranparent-75' : 'tranparent-25'"
+          class="arrow2" src="@/assets/arrow_icon.svg" />
         </a>
-        <div class="loading grid grid-cols-2">
-          <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
-          LOADING ...
+        <div class="loading flex mt-4" :class="!isUploading ? 'hide-loading' : 'show-loading'">
+          <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6 mr-2"></div>
+          Učitavanje slike
         </div>
         
       </div>
@@ -220,6 +260,7 @@
         </div>
       </div>
       <croppa
+        v-if="refresh"
         id="checkForUpload"
         v-model="imageReference"
         auto-sizing
@@ -300,7 +341,10 @@ export default {
       imageReference: null,
       canUpload: false,
       uploadText: "",
-      currentPictureObj: null,
+      currentPictureObj: [null,null,null,null,null,null],
+      isUploading: false,
+      isUploadingPicture: [false,false,false,false,false,false],
+      refresh: true,
     };
   },
   components: {
@@ -351,6 +395,7 @@ export default {
     //Ucitaj sliku
     savePhoto() {
       this.canUpload = false;
+      this.isUploading = true;
       this.imageReference.generateBlob((blobData) => {
         let imageName =
           "zahtjevi/" + store.currentUser + "/" + Date.now() + ".png";
@@ -361,9 +406,11 @@ export default {
             console.log("Image uploaded! ->", result);
             this.currentPictureObj.uploaded = true;
             this.mode = false;
+            this.isUploading = false;
             pictures.mode = false;
             getDownloadURL(ref(storage, imageName)).then((url) => {
               this.currentPictureObj.url = url;
+              document.getElementById('scroll-slike').scrollIntoView(true);
             });
           })
           .catch((e) => {
@@ -373,6 +420,12 @@ export default {
     },
     //Otkup opreme
     imageUpload(image){
+      this.refresh = false;
+      setTimeout(() => { 
+        this.isUploadingPicture[image] = true;
+        this.refresh = true;
+      }, 275)
+      document.getElementById('scroll-slike').scrollIntoView(true);
       pictures.mode = true;
       this.mode = true;
 
@@ -380,6 +433,7 @@ export default {
       (picture) => picture.id === image
        );
       this.currentPictureObj = picture;
+      this.currentPictureObj.url = '';
       this.uploadText = picture.text;
     },
     async otkupi() {
@@ -586,7 +640,7 @@ export default {
   overflow: hidden;
 }
 .square {
-  background-color: var(--DustySky__Grey);
+    background-color: var(--DustySky__Grey);
     overflow: hidden;
     float:left;
     position: relative;
@@ -602,14 +656,17 @@ export default {
 
 .square-img {
     position: absolute;
+    background-color: var(--DustySky__Grey);
     width: 100%;
     left:50%;
     top:50%;
     transform:translate(-50%,-50%);
+    pointer-events: none;
 }
 .square-img2 {
     position: absolute;
     width: 100%;
+    height: 100% !important;
     left:50%;
     top:50%;
     transform:translate(-50%,-50%);
@@ -731,7 +788,56 @@ export default {
   border-top-color: var(--FluorescentRed__FrenchWine);
 }
 
+.loader-squre-img {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+}
+
 .loading {
-  
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  color: var(--BalticSea__BlackMana);
+}
+
+.hide-loading {
+  overflow: hidden;
+  height: 0px;
+}
+
+.show-loading {
+  overflow: visible;
+  height: auto;
+}
+
+.hide-text {
+  opacity: 0;
+}
+
+.show-text {
+  opacity: 1;
+}
+
+.show-ucitaj {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+}
+
+.hide-ucitaj {
+  position: fixed;
+  top: 0px;
+  right: 100%;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
 }
 </style>
