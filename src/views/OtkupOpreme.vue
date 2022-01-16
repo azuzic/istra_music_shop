@@ -442,9 +442,9 @@ export default {
       else if (year >= 1970 && year < 1980)
         this.preporucenaCijena += this.preporucenaCijena * 0.5;
       else if (year >= 1980 && year < 2000)
-        this.preporucenaCijena += this.preporucenaCijena * 0.1;
+        this.preporucenaCijena += this.preporucenaCijena * 0.2;
       else if (year >= 2000 && year < 2010)
-        this.preporucenaCijena += this.preporucenaCijena * 0.05;
+        this.preporucenaCijena += this.preporucenaCijena * 0.1;
       this.preporucenaCijena;
 
       if (this.yearCheck || !this.godinaProizvodnje) return 0;

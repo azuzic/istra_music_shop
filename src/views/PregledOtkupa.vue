@@ -113,17 +113,21 @@
       </div>
 
       <div v-if="store.currentUser !== 'djelatnik@gmail.com' && store.zahtjev.novaCijena == 'true'">
-        <p class="text-20px">Nova ponuđena cijena: <b>{{predlozenaCijena}} kn</b></p>
+        <p class="text-20px mb-6">Nova ponuđena cijena: <b>{{novaPreporucenaCijena}} kn</b></p>
+        <div @click="promijeniCijenu(1)">
         <CButtonSingle
           class="ml-16 mr-16 mb-4"
           btn="Prihvati"
-          :btnClickHandler="0 ? dummy : dummy"
+          :btnClickHandler="dummy"
         />
+        </div>
+        <div @click="promijeniCijenu(0)">
         <CButtonSingle
           class="ml-16 mr-16"
           btn="Odbij"
-          :btnClickHandler="0 ? dummy : dummy"
+          :btnClickHandler="dummy"
         />
+         </div>
       </div>
 
       <div v-if="store.currentUser == 'djelatnik@gmail.com'">
@@ -194,8 +198,8 @@
       <!--=================PRIHVATI OTKUP===================-->
       <div  v-if="store.currentUser == 'djelatnik@gmail.com'"
             class="place-self-center mt-4" 
-            :class="stanje=='U razradi' && !novaCijenaBool ? 'active' : 'inactive'">
-        <div @click="stanje=='U razradi' && !novaCijenaBool ? updateStatus('Prihvaćeno') : dummy()">
+            :class="stanje=='U razradi' && novaCijenaBool === 'false' ? 'active' : 'inactive'">
+        <div @click="stanje=='U razradi' && novaCijenaBool === 'false' ? updateStatus('Prihvaćeno') : dummy()">
           <CButtonAccept btn="PRIHVATI OTKUP" :btnClickHandler="dummy" />
         </div>
       </div>
@@ -218,7 +222,7 @@
           />
           <p class="pl-4 text-24px" >
             Predložena cijena:
-            <b class="price">{{predlozenaCijena}}</b>
+            <b class="price">{{preporucenaCijena}}</b>
           </p>
         </div>
       </div>
@@ -234,7 +238,7 @@ import CButtonDecline from "@/components/CButtonDecline.vue";
 import CCard from "@/components/CCard.vue";
 import store from "@/store";
 import { db } from "@/firebase";
-import { doc, collection, getDocs, updateDoc} from "@/firebase";
+import { doc, collection, getDocs, updateDoc, addDoc} from "@/firebase";
 
 export default {
   name: "PregledOtkupa",
@@ -246,12 +250,14 @@ export default {
     CCard,
   },
    beforeMount(){
-    this.readData()
+    this.readData();
   },
   data() {
     return {
       novaCijena: "",
-      predlozenaCijena: "",
+      preporucenaCijena: "",
+      novaPreporucenaCijena: "0",
+      novaCijenaBool: false,
       mob: "",
       korisnik: [{
             imePrezime: "",
@@ -262,7 +268,6 @@ export default {
       opis: "",
       stanje: "",
       store,
-      novaCijenaBool: false,
     };
   },
   methods: {
@@ -278,29 +283,39 @@ export default {
           });
           this.opis = store.zahtjev.napomena;
           this.stanje = store.zahtjev.status;
-          this.predlozenaCijena = store.zahtjev.preporucenaCijena;
+          this.preporucenaCijena = store.zahtjev.preporucenaCijena;
+          if(store.zahtjev.novaPreporucenaCijena !== 0) {
+          this.novaPreporucenaCijena = store.zahtjev.novaPreporucenaCijena;
+          }
           let m = this.korisnik[0].mob;
           this.novaCijenaBool = store.zahtjev.novaCijena;
           this.mob = m.slice(0,3) + "-" + m.slice(3,6) + "-" + m.slice(6);
         }
       });
     },
+    async promijeniCijenu(rezultat) {
+        const g = doc(db, "zahtjevi", store.zahtjev.id);
+        if(rezultat){
+          
+        await updateDoc(g, {
+          preporucenaCijena: this.novaPreporucenaCijena,
+          novaPreporucenaCijena: 0,
+          novaCijena: false,
+        });
+        this.novaCijenaBool = false;
+        this.updateStatus('Prihvaćeno');
+        }
+        else this.updateStatus('Odbijeno');
+    },
     async updatePrice() {
         const g = doc(db, "zahtjevi", store.zahtjev.id);
         await updateDoc(g, {
-          preporucenaCijena: this.novaCijena,
+          novaPreporucenaCijena: this.novaCijena,
           novaCijena: true,
         });
         this.novaCijenaBool = true;
-        this.predlozenaCijena = this.novaCijena;
     },
-    async updateStatus(status) {
-        const g = doc(db, "zahtjevi", store.zahtjev.id);
-        await updateDoc(g, {
-          status: status
-        });
-        this.stanje = status;
-    },
+
     async updateStatus(status) {
         const g = doc(db, "zahtjevi", store.zahtjev.id);
         await updateDoc(g, {

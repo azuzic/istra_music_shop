@@ -112,10 +112,11 @@ export default {
                 korisnik: (`${doc.data().korisnik}`),
                 napomena: (`${doc.data().napomena}`),
                 preporucenaCijena: (`${doc.data().preporucenaCijena}`),
+                novaPreporucenaCijena: `${doc.data().novaPreporucenaCijena}`,
                 status: (`${doc.data().status}`),
-                img: "https://picsum.photos/500/500/",
                 date: (`${doc.data().zahtjevPredan}`),
                 id: (`${doc.id}`),
+                novaCijena: `${doc.data().novaCijena}`,
             });
             b++;
             }, time += delay);

@@ -9,6 +9,7 @@ export default {
     korisnik: "",
     napomena: "",
     preporucenaCijena: "",
+    novaPreporucenaCijena: "",
     status: "",
     img: "",
     date: "",
