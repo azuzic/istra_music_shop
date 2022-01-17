@@ -21,6 +21,13 @@
             aria-describedby="emailHelp"
           />
           <hr />
+          <h2
+            v-if="!checkEmail(email) && email"
+            class="CWarning"
+            id="resultEmail"
+          >
+            Email nije točno napisan!
+          </h2>
         </div>
         <!--===================EMAIL END===================-->
         <!--===================PASSWORD====================-->
@@ -72,14 +79,9 @@
         <!--================PASSWORD END===================-->
         <!--================WARNING========================-->
         <CWarning
-          v-if="greska != '0'"
+          v-if="greska"
           msg1="Upozorenje!"
-          :msg2="
-            greska == '1'
-              ? 'Unijeli ste krivu lozinku.'
-              : greska == '2'
-              ? 'Upisana email adresa ne postoji.'
-              : 'Krivo ste napisali email adresu.'
+          :msg2="'Unijeli ste krivu lozinku/email.'
           "
         />
         <!--================WARNING END====================-->
@@ -120,7 +122,7 @@ export default {
       email: "",
       password: "",
       osoba: "Korisnik",
-      greska: "0",
+      greska: false,
       store,
     };
   },
@@ -149,20 +151,20 @@ export default {
         //Koristi lambda/arrow funkcije u kombinaciji sa .then kako bi se sacuvao this iz parent konteksta
         .then((result) => {
           console.log("Uspješna prijava", result);
-          this.greska == "0";
-           this.getUserData();
-          
+          this.greska = false;
+          this.getUserData();
         })
         .catch((e) => {
           let error = e.message.slice(22, -2).replace(/-/g, " ");
           error = error.charAt(0).toUpperCase() + error.slice(1) + "!";
-          console.error(error);
-          if (error == "Wrong password!") this.greska = "1";
-          else if (error == "User not found!") this.greska = "2";
-          else if (error == "Invalid email!") this.greska = "3";
+          this.greska = true;
         });
     },
     dummy() {},
+    checkEmail(email) {
+      let re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    },
     eye() {
       let x = document.getElementById("passInput");
       let y = document.getElementById("eye1");

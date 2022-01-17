@@ -1,6 +1,9 @@
 <template>
   <div>
     <!--==============MENU====================================-->
+    <div :class="darken ? 'darken-bg' : 'undarken-bg'">
+
+    </div>
     <div class="menu grid grid-cols-3 mb-4">
       <div class="menu-item-active menu-highlight">
         <router-link :to="store.currentUser == 'djelatnik@gmail.com' ? 'djelatnik' : 'status-otkupa'">
@@ -64,42 +67,42 @@
               <div>
                 <p class="otkup-img-text">Gornja prednja</p>
                 <div class="square img_1-1 img-top-left">
-                    <img class="square-img" :src="store.zahtjev.slike[0]"/>
+                    <img @click="enlarge('0')" :class="img[0] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[0]"/>
                 </div>
               </div> 
 
               <div>
                 <p class="otkup-img-text">Gornja stražnja</p>
                 <div class="square img_1-1 img-top">
-                    <img class="square-img" :src="store.zahtjev.slike[1]"/>
+                    <img @click="enlarge('1')" :class="img[1] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[1]"/>
                 </div>
               </div> 
 
               <div>
                 <p class="otkup-img-text">Bočna desna</p>
                 <div class="square img_1-1 img-top-right">
-                    <img class="square-img" :src="store.zahtjev.slike[2]"/>
+                    <img @click="enlarge('2')" :class="img[2] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[2]"/>
                 </div>
               </div> 
 
               <div>
                 <p class="otkup-img-text">Bočna lijeva</p>
                 <div class="square img_1-1 img-bottom-left">
-                    <img class="square-img" :src="store.zahtjev.slike[3]"/>
+                    <img @click="enlarge('3')" :class="img[3] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[3]"/>
                 </div>
               </div> 
 
               <div>
                 <p class="otkup-img-text">Vrat gitare</p>
                 <div class="square img_1-1 img-bottom">
-                    <img class="square-img" :src="store.zahtjev.slike[4]"/>
+                    <img @click="enlarge('4')" :class="img[4] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[4]"/>
                 </div>
               </div> 
 
               <div>
                 <p class="otkup-img-text">Glava gitare</p>
                 <div class="square img_1-1 img-bottom-right">
-                    <img class="square-img" :src="store.zahtjev.slike[5]"/>
+                    <img @click="enlarge('5')" :class="img[5] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[5]"/>
                 </div>
               </div> 
               
@@ -271,6 +274,8 @@ export default {
       opis: "",
       stanje: "",
       store,
+      darken: false,
+      img: [true,true,true,true,true,true],
     };
   },
   methods: {
@@ -300,9 +305,9 @@ export default {
     promijeniCijenu(rezultat) {
       let msg = "";
       if(rezultat == 1)
-        msg = "Jeste li sigurni da želite odbiti promjenu cjene? Jednom kad se odbije ne može se prihvatiti.";
+        msg = "Jeste li sigurni da želite odbiti promjenu cijene? Jednom kad se odbije ne može se prihvatiti.";
       else 
-        msg = "Jeste li sigurni da želite prihvatiti promjenu cjene? Jednom kad se prihvati ne može se odbiti.";
+        msg = "Jeste li sigurni da želite prihvatiti promjenu cijene? Jednom kad se prihvati ne može se odbiti.";
       this.$dialog
       .confirm(
         msg
@@ -322,6 +327,7 @@ export default {
             novaCijena: false,
             status: "Prihvaćeno"
           });
+          this.stanje = "Prihvaćeno";
         }
       })
       .catch(() => {
@@ -330,7 +336,7 @@ export default {
     updatePrice() {
       this.$dialog
       .confirm(
-        "Jeste li sigurni da želite predložiti novu cijenu? Viže nećete moći predložiti novu cijenu."
+        "Jeste li sigurni da želite predložiti novu cijenu? Više nećete moći predložiti novu cijenu."
       )
       .then(() => {
         const g = doc(db, "zahtjevi", store.zahtjev.id);
@@ -367,6 +373,10 @@ export default {
       .catch(function () {
        // NO
       });
+    },
+    enlarge(id) {
+      this.darken = !this.darken;
+      this.img[id] = !this.img[id];
     },
     dummy() {},
   },
@@ -457,5 +467,34 @@ export default {
     color: var(--BalticSea__Squant);
     font-size: 3.2vw; 
     letter-spacing: 0.25px;
+}
+.undarken-bg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -100;
+  background-color: hsl(0, 0%, 0%, 0%);
+  backdrop-filter: blur(0px);
+}
+
+.darken-bg {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 40000000;
+  background-color: hsl(0, 0%, 0%, 50%);
+  backdrop-filter: blur(4px);
+}
+
+.fullscreen-img {
+  position: absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  position: fixed !important;
+  z-index: 50000000;
+  width: 90% !important;
+  border-radius: 16px;
+  box-shadow: 0px 0px 8px hsl(0, 0%, 0%, 75%);
 }
 </style>
