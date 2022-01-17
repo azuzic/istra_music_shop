@@ -42,7 +42,7 @@
       </div>
       <div>
         <p><u class="text-20px">Godina proizvodnje:</u></p>
-        <p class="mt-1 text-18px"><b>{{store.zahtjev.instrument[4]}}</b></p>
+        <p class="mt-1 text-18px"><b>{{store.zahtjev.instrument[4]}}.</b></p>
       </div>
       <div>
         <p><u class="text-20px">Vlasnik:</u></p>

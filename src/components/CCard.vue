@@ -164,28 +164,27 @@ export default {
 .CCard-title {
   position: relative;
   letter-spacing: -1px;
-  font-size: 4.2vw;
-  top: 2px;
+  font-size: 4.4vw;
   color: var(--BalticSea__Lead);
 }
 .CCard-subtitle {
   position: relative;
-  font-size: 3.2vw;
-  letter-spacing: -0.5px;
+  font-size: 3.6vw;
+  bottom: 4px;
+  letter-spacing: 0.25px;
   color: var(--BalticSea__Squant);
 }
 .CCard-date {
   position: relative;
-  bottom: 4px;
-  font-size: 3vw;
+  bottom: 2px;
+  font-size: 3.2vw;
   font-weight: normal !important;
   letter-spacing: 0.25px;
   color: var(--BalticSea__BlackMana);
 }
 .CCard-price {
   position: relative;
-  bottom: 0px;
-  font-size: 3vw;
+  font-size: 3.6vw;
   color: var(--Flushed__LingonberryRed) !important;
 }
 

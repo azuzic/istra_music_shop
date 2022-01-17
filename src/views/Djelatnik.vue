@@ -25,25 +25,25 @@
       class="menu-item" 
       :class="state == 'U razradi' ? 'menu-item-selected' : ''"
       @click="readData('U razradi')">
-        <p>U razradi</p>
+        <p><a><p>U razradi</p></a></p>
       </div>
       <div 
       class="menu-item" 
       :class="state == 'Prihvaćeno' ? 'menu-item-selected' : ''"
       @click="readData('Prihvaćeno')">
-        <p>Prihvaćeno</p>
+        <p><a><p>Prihvaćeno</p></a></p>
       </div>
       <div 
       class="menu-item" 
       :class="state == 'Riješeno' ? 'menu-item-selected' : ''"
       @click="readData('Riješeno')">
-        <p>Riješeno</p>
+        <p><a><p>Riješeno</p></a></p>
       </div>
       <div 
       class="menu-item" 
       :class="state == 'Odbijeno' ? 'menu-item-selected' : ''"
       @click="readData('Odbijeno')">
-        <p>Odbijeno</p>
+        <p><a><p>Odbijeno</p></a></p>
       </div>
     </div>
     <!--==============FOOTER END========================-->

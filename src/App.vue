@@ -14,11 +14,11 @@
     <div v-if="store.currentUser == 'djelatnik@gmail.com' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-2 mb-4">
       
       <div :class="currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'">
-        <p><router-link to="djelatnik"> Pregled otkupa </router-link></p>
+        <p><router-link to="djelatnik"> <p>Pregled otkupa</p> </router-link></p>
       </div>
 
       <div :class="currentRouteName == 'Racun' ? 'menu-item-active' : 'menu-item'">
-        <p><router-link to="racun"> Račun </router-link></p>
+        <p><router-link to="racun"> <p>Račun</p> </router-link></p>
       </div>
 
     </div>
@@ -35,15 +35,15 @@
     <div v-if="store.currentUser != null && store.currentUser != 'djelatnik@gmail.com' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-3 mb-4">
 
       <div :class="currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'">
-        <p><router-link to="status-otkupa"> Status otkupa </router-link></p>
+        <p><router-link to="status-otkupa"><p> Status otkupa </p></router-link></p>
       </div>
 
       <div :class="currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'">
-        <p><router-link to="otkup-opreme"> Otkup opreme </router-link></p>
+        <p><router-link to="otkup-opreme"><p> Otkup opreme </p></router-link></p>
       </div>
 
       <div :class="currentRouteName == 'Racun' ? 'menu-item-active' : 'menu-item'">
-        <p><router-link to="racun"> Račun </router-link></p>
+        <p><router-link to="racun"><p> Račun </p></router-link></p>
       </div>
 
     </div>
@@ -268,6 +268,7 @@ export default {
   transition: all;
   transition-timing-function: ease-in-out;
   transition: 0.5s;
+  -webkit-tap-highlight-color: hsl(0, 0%, 100%, 10%);
 }
 html {
   background-color: var(--Snow__DarkToneInk);
@@ -445,6 +446,7 @@ input:-webkit-autofill:active {
 }
 .menu-item p {
   width: 100%;
+  height: 100%;
   color: var(--Fresco__KinglyCloud);  
   transition: all;
   transition-timing-function: ease-in-out;
@@ -461,13 +463,20 @@ input:-webkit-autofill:active {
   width: 100%;
   font-size: 4.5vw;
 }
+.menu-item p a p {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: 100%;
+}
 .menu-item-active {
   display: flex;
   align-items: center;
   text-align: center;
   transition: all;
   transition-timing-function: ease-in-out;
-  transition: 0.5s;
+  transition: 0.25s;
   background-color: var(--Transparent__BleachedSilk);
   font-size: 4.5vw;
 }
@@ -476,8 +485,8 @@ input:-webkit-autofill:active {
   font-weight: bold;
   color: var(--graniteBrown);
   transition: all;
-  transition: 0.5s;
   transition-timing-function: ease-in-out;
+  transition: 0.1s !important;
   font-size: 4.5vw;
 }
 .menu-item-active p a {
@@ -485,7 +494,7 @@ input:-webkit-autofill:active {
   font-weight: bold;
   color: var(--graniteBrown);
   transition: all;
-  transition: 0.5s;
+  transition: 0.25s;
   transition-timing-function: ease-in-out;
   font-size: 4.5vw;
 }

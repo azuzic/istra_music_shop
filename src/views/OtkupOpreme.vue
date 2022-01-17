@@ -46,10 +46,12 @@
         <div>
           <p class="text-left text-18px m-0 p-0">Godina proizvodnje</p>
           <input
-            type="number"
+            type="text"
             class="border rounded"
             id="emailInput"
             v-model="godinaProizvodnje"
+            placeholder="1935..."
+            maxlength="4"
           />
           <hr />
         </div>
@@ -66,15 +68,12 @@
             v-model="vlasnik"
           />
         </div>
-        <h2 v-if="stanjeCheck" class="CWarning">
-          Molimo ispravno unesite podatke!
-        </h2>
         <!--===================/VLASNIK===================-->
         <!--===================STANJE===================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Stanje</p>
           <CSelect
-            :options="['Novo', 'Rabljeno', 'Neispravno']"
+            :options="stanjaSet"
             :default="stanje"
             v-model="stanje"
           />
@@ -253,12 +252,6 @@
           stranu gitare
         </p>
       </div>
-      <div class="menu-bottom-dodavanje grid grid-cols-1 mt-4">
-        <div class="menu-item7 mx-auto">
-          <img class="photo-icon" src="@/assets/photo_icon.png" />
-          <p>Dodajte fotografiju</p>
-        </div>
-      </div>
       <croppa
         :class="isUploading ? 'hide-x' : 'show-x'"
         v-if="refresh"
@@ -321,6 +314,7 @@ export default {
       prikazaniProizvodaci: [],
       prikazaniModeli: [],
       prikazaneSerije: [],
+      prikazanaStanja: [],
 
       odabranaVrsta: "Gitara",
       odabraniProizvodac: "Gibson",
@@ -474,6 +468,18 @@ export default {
     dummy() {},
   },
   computed: {
+    stanjaSet() {
+      if (this.vlasnik == "1") {
+        this.prikazanaStanja =  ['Novo', 'Rabljeno', 'Neispravno'];
+      }
+      else {
+        if (this.stanje != 'Neispravno')
+          this.stanje = 'Rabljeno';
+        this.prikazanaStanja =  ['Rabljeno', 'Neispravno'];
+      }
+
+      return this.prikazanaStanja;
+    },
     izracunCijene() {
       for (var element in this.cijeneSerija) {
         if (this.odabranaSerija === this.cijeneSerija[element].serija)
@@ -570,9 +576,6 @@ export default {
     },
     picturesCheck() {
       return pictures.guitarPictures.every(picture => picture.uploaded);
-    },
-    stanjeCheck() {
-      return this.vlasnik != 1 && this.stanje == "Novo" ? 1 : 0;
     },
     allFilled() {
       return this.odabranaVrsta &&
@@ -698,9 +701,6 @@ export default {
   width: 100%;
   height: 123px;
 }
-.photo-icon {
-  height: 28px;
-}
 .icon-remove {
   height: 28px;
 }
@@ -726,32 +726,6 @@ export default {
   margin-top: 4px;
   letter-spacing: 0px;
   font-size: 22px;
-}
-.menu-bottom-dodavanje {
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  height: 50px;
-  background-color: transparent;
-}
-.menu-item7 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 200px;
-  height: 50px;
-  margin-top: 24px;
-  border-radius: 32px;
-  background-color: var(--FluorescentRed__FrenchWine);
-  z-index: 42069;
-}
-.menu-item7 p {
-  color: #000000d0;
-  font-size: 18px;
-  letter-spacing: -0.5px;
-  margin-left: 6px;
-  margin-top: 4px;
 }
 
 .croppa-container {
