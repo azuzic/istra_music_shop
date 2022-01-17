@@ -180,7 +180,7 @@
           :class="allFilled ? 'active' : 'inactive'"
         >
           <CButtonSingle
-            btn="OTKUPI"
+            btn="POŠALJI"
             :btnClickHandler="allFilled ? otkupi : dummy"
           />
         </div>
@@ -296,19 +296,30 @@ import store from "@/store";
 import pictures from "@/pictures";
 
 import { collection, addDoc } from "@/firebase";
+import { getDocs } from "@/firebase";
 import { db } from "@/firebase";
 //Picture upload
 import { storage, ref, uploadBytes, getDownloadURL } from "@/firebase";
 
 import router from "@/router";
 
+import emailjs from "@emailjs/browser";
+
 export default {
   name: "OtkupOpreme",
   data() {
     return {
 
+      //User
+      imePrezime: "",
+      email: "",
+      oib: "",
+      mob: "",
+
+      //Page switch
       mode: false,
 
+      //Instrument data
       jsonData: data,
       vrste: ["Gitara"],
       prikazaniProizvodaci: [],
@@ -385,8 +396,21 @@ export default {
         });
     }
   },
-
+ mounted() {
+    this.fetchUserData();
+  },
   methods: {
+    async fetchUserData() {
+      const querySnapshot = await getDocs(collection(db, "users"));
+      querySnapshot.forEach((doc) => {
+        if (store.currentUser === `${doc.data().email}`) {
+          this.imePrezime = `${doc.data().imePrezime}`;
+          this.email = `${doc.data().email}`;
+          this.oib = `${doc.data().oib}`;
+          this.mob = `${doc.data().mob}`;
+        }
+      });
+    },
     //Ucitaj sliku
     savePhoto() {
       this.canUpload = false;
@@ -460,12 +484,39 @@ export default {
         });
         console.log("Predan zahtjev za otkup sa ID: ", docRef.id);
         this.zahtjevPredan = true;
+        this.sendEmail();
         router.push('status-otkupa');
       } catch (e) {
         console.error("Error adding document: ", e);
       }
     },
     dummy() {},
+    sendEmail(){
+      this.fetchUserData;
+      var params = {
+        ime: this.imePrezime,
+        email: this.email,
+        oib: this.oib,
+        mob: this.mob,
+        vrsta: this.odabranaVrsta,
+        proizvodac: this.odabraniProizvodac,
+        model : this.odabraniModel,
+        serija: this.odabranaSerija,
+        godina_proizvodnje: this.godinaProizvodnje,
+        vlasnik: this.vlasnik,
+        stanje: this.stanje,
+        cijena: this.preporucenaCijena
+      };
+      emailjs.send("service_ox0wdn1", "noviZahtjev", params).then(
+        (result) => {
+          console.log("SUCCESS! ", result.text);
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+          this.codeIsSent = false;
+        }
+      );
+    },
   },
   computed: {
     stanjaSet() {

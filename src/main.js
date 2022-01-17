@@ -7,8 +7,7 @@ import "./assets/tailwind.css";
 import "vue-croppa/dist/vue-croppa.css";
 import "vuejs-dialog/dist/vuejs-dialog.min.css";
 import { init } from "@emailjs/browser";
-init("user_s3PvQJakdM1y9xnn80F4d");
-
+init("user_y34vpB1P8iKzvceSWI3kI");
 
 Vue.config.productionTip = false;
 Vue.use(Croppa);

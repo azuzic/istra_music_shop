@@ -147,6 +147,7 @@ export default {
   },
   methods: {
     async readData() {
+      console.log("asd");
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
         if (store.currentUser === `${doc.data().email}`) {
