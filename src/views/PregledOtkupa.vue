@@ -12,10 +12,10 @@
       </div>
       <div class="menu-item" :class="stanje=='U razradi' ? 'menu-item-yellow' :
                                      stanje=='Odbijeno' ? 'menu-item-red' : 'menu-item-green'">
-        <p>{{stanje}}</p>  
+        <p><a><p>{{stanje}}</p></a></p>  
       </div>
       <div class="menu-item">
-        <p>{{ receivedFromNow }}</p>
+        <p><a><p>{{ receivedFromNow }}</p></a></p>
       </div>
     </div>
     <!--==============MENU END================================-->
@@ -111,24 +111,27 @@
         <textarea disabled class="resize-none otkup-textarea mt-2" v-model="opis">
         </textarea >
       </div>
-
-      <div v-if="store.currentUser !== 'djelatnik@gmail.com' && store.zahtjev.novaCijena == 'true'">
-        <p class="text-20px mb-6">Nova ponuđena cijena: <b>{{novaPreporucenaCijena}} kn</b></p>
-        <div @click="promijeniCijenu(1)">
-        <CButtonSingle
-          class="ml-16 mr-16 mb-4"
-          btn="Prihvati"
-          :btnClickHandler="dummy"
-        />
+      <hr class="dotted mt-2 mb-2" />
+      <p v-if="store.currentUser != 'djelatnik@gmail.com' && cijenaUpdated"
+      class="text-20px text-center">Nova ponuđena cijena: <b class="price">{{novaPreporucenaCijena}} kn</b></p>
+      <!--===================ODBIJ OTKUP====================-->
+      <div v-if="store.currentUser != 'djelatnik@gmail.com' && cijenaUpdated"
+            class="place-self-center mt-4" 
+            :class="stanje=='U razradi' ? 'active' : 'inactive'">
+        <div @click="stanje=='U razradi' ? promijeniCijenu(1) : dummy()">
+          <CButtonDecline btn="ODBIJ" :btnClickHandler="dummy" />
         </div>
-        <div @click="promijeniCijenu(0)">
-        <CButtonSingle
-          class="ml-16 mr-16"
-          btn="Odbij"
-          :btnClickHandler="dummy"
-        />
-         </div>
       </div>
+      <!--================/ODBIJ OTKUP======================-->
+      <!--=================PRIHVATI OTKUP===================-->
+      <div v-if="store.currentUser != 'djelatnik@gmail.com' && cijenaUpdated"
+            class="place-self-center mt-4 mb-4" 
+            :class="stanje=='U razradi' ? 'active' : 'inactive'">
+        <div @click="stanje=='U razradi' ? promijeniCijenu(0) : dummy()">
+          <CButtonAccept btn="PRIHVATI" :btnClickHandler="dummy" />
+        </div>
+      </div>
+      <!--================/PRIHVATI OTKUP===================-->      
 
       <div v-if="store.currentUser == 'djelatnik@gmail.com'">
         <hr class="dotted mt-2 mb-2" />
@@ -158,10 +161,10 @@
         <hr class="dotted mt-2 mb-2" />
       </div>
       <!--==============NOVA CIJENA==============================-->
-      <div v-if="store.currentUser == 'djelatnik@gmail.com'" :class="stanje=='U razradi' ? '' : 'tranparent'">
+      <div v-if="store.currentUser == 'djelatnik@gmail.com'" :class="stanje=='U razradi' && !cijenaUpdated ? '' : 'tranparent'">
         <p class="text-left text-18px m-0 p-0 mt-6">Nova predložena cijena:</p>
         <input
-          :disabled="stanje!='U razradi'"
+          :disabled="stanje!='U razradi' || cijenaUpdated"
           type="text"
           name="oib"
           id="oib"
@@ -171,7 +174,7 @@
         <hr />
       </div>
       <!--==============/NOVA CIJENA==============================-->
-      <!--==============SPREMI==============================-->
+      <!--==============PREDLOŽI==============================-->
       <div
         v-if="store.currentUser == 'djelatnik@gmail.com'"
         class="place-self-center mt-4"
@@ -185,12 +188,12 @@
       </div>
         
       </div>
-      <!--==============/SPREMI=============================-->
+      <!--==============/PREDLOŽI=============================-->
       <!--===================ODBIJ OTKUP====================-->
       <div  v-if="store.currentUser == 'djelatnik@gmail.com'"
             class="place-self-center mt-8" 
-            :class="stanje=='U razradi' ? 'active' : 'inactive'">
-        <div @click="stanje=='U razradi' ? updateStatus('Odbijeno') : dummy()">
+            :class="stanje=='U razradi' && !cijenaUpdated ? 'active' : 'inactive'">
+        <div @click="stanje=='U razradi' && !cijenaUpdated ? updateStatus('Odbijeno') : dummy()">
           <CButtonDecline btn="ODBIJ OTKUP" :btnClickHandler="dummy" />
         </div>
       </div>
@@ -198,8 +201,8 @@
       <!--=================PRIHVATI OTKUP===================-->
       <div  v-if="store.currentUser == 'djelatnik@gmail.com'"
             class="place-self-center mt-4" 
-            :class="stanje=='U razradi' && novaCijenaBool === 'false' ? 'active' : 'inactive'">
-        <div @click="stanje=='U razradi' && novaCijenaBool === 'false' ? updateStatus('Prihvaćeno') : dummy()">
+            :class="stanje=='U razradi' && !cijenaUpdated ? 'active' : 'inactive'">
+        <div @click="stanje=='U razradi' && !cijenaUpdated ? updateStatus('Prihvaćeno') : dummy()">
           <CButtonAccept btn="PRIHVATI OTKUP" :btnClickHandler="dummy" />
         </div>
       </div>
@@ -257,7 +260,7 @@ export default {
       novaCijena: "",
       preporucenaCijena: "",
       novaPreporucenaCijena: "0",
-      novaCijenaBool: false,
+      cijenaUpdated: "false",
       mob: "",
       korisnik: [{
             imePrezime: "",
@@ -284,44 +287,86 @@ export default {
           this.opis = store.zahtjev.napomena;
           this.stanje = store.zahtjev.status;
           this.preporucenaCijena = store.zahtjev.preporucenaCijena;
-          if(store.zahtjev.novaPreporucenaCijena !== 0) {
-          this.novaPreporucenaCijena = store.zahtjev.novaPreporucenaCijena;
+          if(store.zahtjev.novaPreporucenaCijena > 0) {
+            this.novaPreporucenaCijena = store.zahtjev.novaPreporucenaCijena;
+            this.cijenaUpdated = true;
           }
+          else this.cijenaUpdated = false;
           let m = this.korisnik[0].mob;
-          this.novaCijenaBool = store.zahtjev.novaCijena;
           this.mob = m.slice(0,3) + "-" + m.slice(3,6) + "-" + m.slice(6);
         }
       });
     },
-    async promijeniCijenu(rezultat) {
+    promijeniCijenu(rezultat) {
+      let msg = "";
+      if(rezultat == 1)
+        msg = "Jeste li sigurni da želite odbiti promjenu cjene? Jednom kad se odbije ne može se prihvatiti.";
+      else 
+        msg = "Jeste li sigurni da želite prihvatiti promjenu cjene? Jednom kad se prihvati ne može se odbiti.";
+      this.$dialog
+      .confirm(
+        msg
+      )
+      .then(() => {
         const g = doc(db, "zahtjevi", store.zahtjev.id);
         if(rezultat){
-          
-        await updateDoc(g, {
-          preporucenaCijena: this.novaPreporucenaCijena,
-          novaPreporucenaCijena: 0,
-          novaCijena: false,
-        });
-        this.novaCijenaBool = false;
-        this.updateStatus('Prihvaćeno');
+          updateDoc(g, {
+            status: "Odbijeno"
+          });
+          this.stanje = "Odbijeno";
         }
-        else this.updateStatus('Odbijeno');
+        else {
+          updateDoc(g, {
+            preporucenaCijena: this.novaPreporucenaCijena,
+            novaPreporucenaCijena: 0,
+            novaCijena: false,
+            status: "Prihvaćeno"
+          });
+        }
+      })
+      .catch(() => {
+      });
     },
-    async updatePrice() {
+    updatePrice() {
+      this.$dialog
+      .confirm(
+        "Jeste li sigurni da želite predložiti novu cijenu? Viže nećete moći predložiti novu cijenu."
+      )
+      .then(() => {
         const g = doc(db, "zahtjevi", store.zahtjev.id);
-        await updateDoc(g, {
+        updateDoc(g, {
           novaPreporucenaCijena: this.novaCijena,
           novaCijena: true,
         });
-        this.novaCijenaBool = true;
+        this.novaPreporucenaCijena = this.novaCijena;
+        this.preporucenaCijena = this.novaCijena;
+        this.cijenaUpdated = true;
+        this.novaCijena = '';
+      })
+      .catch(() => {
+      });
     },
 
-    async updateStatus(status) {
+    updateStatus(status) {
+      let msg = "";
+      if(status == "Odbijeno")
+        msg = "Jeste li sigurni da želite odbiti otkup? Jednom kad se odbije ne može se prihvatiti.";
+      else 
+        msg = "Jeste li sigurni da želite prihvatiti otkup? Jednom kad se prihvati ne može se odbiti.";
+      this.$dialog
+      .confirm(
+        msg
+      )
+      .then(function () {
         const g = doc(db, "zahtjevi", store.zahtjev.id);
-        await updateDoc(g, {
+        updateDoc(g, {
           status: status
         });
         this.stanje = status
+      })
+      .catch(function () {
+       // NO
+      });
     },
     dummy() {},
   },
