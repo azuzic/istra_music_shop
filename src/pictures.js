@@ -4,14 +4,14 @@ export default {
     {
       id: 0,
       name: "",
-      text: "Gornju prednju",
+      text: "Prednju",
       uploaded: false,
       url: "",
     },
     {
       id: 1,
       name: "",
-      text: "Gornju stražnju",
+      text: "Stražnju",
       uploaded: false,
       url: "",
     },

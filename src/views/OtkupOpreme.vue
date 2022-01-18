@@ -50,7 +50,7 @@
             class="border rounded"
             id="emailInput"
             v-model="godinaProizvodnje"
-            placeholder="1935..."
+            placeholder="1950..."
             maxlength="4"
           />
           <hr />
@@ -85,7 +85,7 @@
           <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">
 
             <div>
-              <p class="otkup-img-text">Gornja prednja</p>
+              <p class="otkup-img-text">Prednja</p>
               <div class="square img_1-1 img-top-left">
                   <div :class="!isUploadingPicture[0] ? 'hide-loading' : 'show-loading'" 
                         class="loader-squre-img">
@@ -98,7 +98,7 @@
             </div> 
 
             <div>
-              <p class="otkup-img-text">Gornja stražnja</p>
+              <p class="otkup-img-text">Stražnja</p>
               <div class="square img_1-1 img-top">
                   <div :class="!isUploadingPicture[1] ? 'hide-loading' : 'show-loading'" 
                         class="loader-squre-img">
@@ -212,7 +212,7 @@
 
 <!--=================================IMAGE UPLOAD=========================================-->
 <!--======================================================================================-->
-<div :class="!mode ? 'show-ucitaj' : 'hide-ucitaj'">
+<div :class="mode ? 'show-ucitaj' : 'hide-ucitaj'">
     <div class="CDodavanje-bottom grid grid-cols-1">
       <div class="place-self-center">
           <CButtonSingle
@@ -582,7 +582,9 @@ export default {
           break;
       }
       var year = parseInt(this.godinaProizvodnje);
-      if (year >= 1960 && year < 1970)
+      if (year >= 1950 && year < 1960)
+        this.preporucenaCijena += this.preporucenaCijena * 2.00;
+      else if (year >= 1960 && year < 1970)
         this.preporucenaCijena += this.preporucenaCijena * 1.5;
       else if (year >= 1970 && year < 1980)
         this.preporucenaCijena += this.preporucenaCijena * 0.5;
@@ -666,7 +668,7 @@ export default {
         : 0;
     },
     yearCheck() {
-      return (this.godinaProizvodnje < 1935 ||
+      return (this.godinaProizvodnje < 1950 ||
         this.godinaProizvodnje > new Date().getFullYear()) &&
         this.godinaProizvodnje
         ? 1
