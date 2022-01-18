@@ -9,6 +9,11 @@
 
       <div class="CCard-data">
 
+        <div v-if="zahtjev.novaPreporucenaCijena > 0 && zahtjev.status == 'U razradi' && store.currentUser != 'djelatnik@gmail.com'">
+          <div class="ping animate-ping"></div>
+          <div class="ping"> </div>
+        </div>
+
         <div class="CCard-header">
           <p class="CCard-title pl-1 pt-1 pb-2 font-bold">
             {{ zahtjev.instrument[1] }} {{ zahtjev.instrument[2] }}
@@ -38,7 +43,9 @@
             v-if="zahtjev.status != 'Riješeno'"
             class="CCard-icon-2"
             :class="zahtjev.status != 'U razradi' ? 'tranparent-10' : ''" >
-            <img class="CCard-svg mx-auto mt-2" src="@/assets/load_icon.png" />
+            <img v-if="zahtjev.novaPreporucenaCijena > 0 && zahtjev.status == 'U razradi' && store.currentUser == 'djelatnik@gmail.com'"
+            class="CCard-svg mx-auto mt-2" src="@/assets/email_sent.png" />
+            <img v-else class="CCard-svg mx-auto mt-2" src="@/assets/load_icon.png" />
             <p class="CCard-icontext">U RAZRADI</p>
           </div>
 
@@ -84,7 +91,7 @@ export default {
 <style>
 .CCard {
   width: 100%;
-  height: 30vw;
+  height: 32vw;
   background: transparent !important;
   box-shadow: 0px 4px 4px var(--Transparent25__Transparent75);
   border-radius: 8px;
@@ -101,6 +108,7 @@ export default {
   width: auto !important;
 }
 .CCard-data {
+  position: relative;
   width: 70%;
   height: 100%;
   background: var(--DustySky__Lead);
@@ -176,7 +184,7 @@ export default {
 }
 .CCard-date {
   position: relative;
-  bottom: 2px;
+  bottom: -4px;
   font-size: 3.2vw;
   font-weight: normal !important;
   letter-spacing: 0.25px;
@@ -212,5 +220,15 @@ export default {
     top:50%;
     transform:translate(-50%,-50%);
     pointer-events: none;
+}
+
+.ping {
+  position: absolute;
+  width: 3.2vw;
+  height: 3.2vw;
+  right: -1.2vw;
+  background-color: var(--ForbiddenFruit__RedPotion);
+  border-radius: 100%;
+  margin-top: -1.4vw;
 }
 </style>
