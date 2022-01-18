@@ -190,7 +190,7 @@
         class="place-self-center mt-4"
         :class="novaCijena && stanje=='U razradi' ? 'active' : 'inactive'"
       >
-      <div @click="novaCijena && stanje=='U razradi' ? updatePrice() : dummy()">
+      <div @click="novaCijena && stanje=='U razradi' ? predloziCijenu() : dummy()">
         <CButtonSingle
           btn="PREDLOŽI"
           :btnClickHandler="0 ? dummy : dummy"
@@ -354,11 +354,12 @@ export default {
           });
           this.stanje = "Prihvaćeno";
         }
+        this.sendEmail();
       })
       .catch(() => {
       });
     },
-    updatePrice() {
+    predloziCijenu() {
       this.$dialog
       .confirm(
         "Jeste li sigurni da želite predložiti novu cijenu? Više nećete moći predložiti novu cijenu."
@@ -389,12 +390,12 @@ export default {
         msg
       )
       .then(() => {
-        this.sendEmail();
         const g = doc(db, "zahtjevi", store.zahtjev.id);
         updateDoc(g, {
           status: status
         });
         this.stanje = status
+        this.sendEmail();
       })
       .catch(() => {
        // NO
