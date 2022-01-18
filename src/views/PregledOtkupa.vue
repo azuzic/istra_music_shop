@@ -251,8 +251,8 @@ import CButtonDecline from "@/components/CButtonDecline.vue";
 import CCard from "@/components/CCard.vue";
 import store from "@/store";
 import { db } from "@/firebase";
-import { doc, collection, getDocs, updateDoc, addDoc} from "@/firebase";
-
+import { doc, collection, getDocs, updateDoc} from "@/firebase";
+import emailjs from "@emailjs/browser";
 export default {
   name: "PregledOtkupa",
   components: {
@@ -283,9 +283,28 @@ export default {
       store,
       darken: false,
       img: [true,true,true,true,true,true],
+      
     };
   },
   methods: {
+    sendEmail(){
+      var params = {
+        ime: this.korisnik.imePrezime,
+        email: store.currentUser,
+        status: this.stanje,
+        sifra: store.zahtjev.sifra,
+        cijena: store.zahtjev.preporucenaCijena,
+      };
+      emailjs.send("service_ox0wdn1", "promjenaStanjaZahtjeva", params).then(
+        (result) => {
+          console.log("SUCCESS! ", result.text);
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+          this.codeIsSent = false;
+        }
+      );
+    },
     async readData() {
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
@@ -371,6 +390,7 @@ export default {
         msg
       )
       .then(function () {
+        this.sendEmail();
         const g = doc(db, "zahtjevi", store.zahtjev.id);
         updateDoc(g, {
           status: status

@@ -285,16 +285,17 @@
   </div>
 </template>
 <script>
+//Components
 import data from "../assets/JSON/InstrumentData.json";
 import CWarning from "@/components/CWarning.vue";
 import CButtonAccept from "@/components/CButtonAccept.vue";
 import CButtonDecline from "@/components/CButtonDecline.vue";
 import CSelect from "@/components/CSelect.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
-
+//Local storage
 import store from "@/store";
 import pictures from "@/pictures";
-
+//Firebase
 import { collection, addDoc } from "@/firebase";
 import { getDocs } from "@/firebase";
 import { db } from "@/firebase";
