@@ -289,8 +289,8 @@ export default {
   methods: {
     sendEmail(){
       var params = {
-        ime: this.korisnik.imePrezime,
-        email: this.korisnik.email,
+        ime: this.korisnik[0].imePrezime,
+        email: this.korisnik[0].email,
         status: this.stanje,
         sifra: store.zahtjev.sifra,
         cijena: store.zahtjev.preporucenaCijena,
