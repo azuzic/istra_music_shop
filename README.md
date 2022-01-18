@@ -15,12 +15,14 @@ Web aplikacija za otkup glazbenih instrumenata.
 - Figma: https://bit.ly/30ITpU2
 
 ### Kratki opis funkcionalnosti
-Aplikacija je namijenjena glazbenicima koji žele otkupiti svoje glazbene instrumente zamišljenoj trgovini "IstraMusicShop".
+Aplikacija je namijenjena glazbenicima koji žele prodati svoje glazbene instrumente zamišljenoj trgovini "IstraMusicShop".
 Korisnik odmah nakon same registracije može izraditi novi zahtjev za otkup odabirom svog instrumenta kroz niz formi. 
 Također se od njega traže podaci poput: Koji je vlasnik instrumenta? (prvi, drugi, treći itd.), koje je godine proizveden, upload slika itd.
-Dok korisnik sve popunjava na dnu će mu se generirati predožena cijena koju može dobiti.
+Kako korisnik mijenja podatke kroz forme, na dnu će mu se generirati predložena cijena koju može dobiti za instrument.
+Nakon slanja potvrde, korisnik će na email adresu dobiti potvrdu o zahtjevu za otkup.
+Korisnik može pregledavati sve svoje zahtjeve koje je predao trgovini.
 Drugi dio aplikacije je namijenjen djelatnicima koji će moći pregledavati zaprimljene zahtjeve, prihvatiti ih ili odbiti te korigirati cijenu.
-Ukoliko djelatnik prihvati zahtjev, korisniku će na email biti dostavljen generirani kupoprodajni ugovor.
+Ukoliko djelatnik prihvati zahtjev, korisniku će na email biti dostavljena potvrda.
 
 
 ### Organizacija
