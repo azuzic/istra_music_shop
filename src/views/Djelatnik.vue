@@ -117,6 +117,7 @@ export default {
                 date: (`${doc.data().zahtjevPredan}`),
                 id: (`${doc.id}`),
                 novaCijena: `${doc.data().novaCijena}`,
+                sifra: `${doc.data().sifra}`,
             });
             b++;
             }, time += delay);

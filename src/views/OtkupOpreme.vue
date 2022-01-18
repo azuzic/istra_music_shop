@@ -335,7 +335,7 @@ export default {
       vlasnik: "1",
       stanje: "Novo",
       napomena: "",
-
+      sifra: "",
       cijeneSerija: {},
       preporucenaCijena: 0,
       zahtjevPredan: false,
@@ -457,6 +457,7 @@ export default {
     },
     async otkupi() {
       try {
+        this.sifra = new Date().getFullYear()+"-"+Math.floor(100000 + Math.random() * 900000);
         const docRef = await addDoc(collection(db, "zahtjevi"), {
           korisnik: store.currentUser,
           instrument: [
@@ -481,6 +482,7 @@ export default {
           status: "U razradi",
           novaCijena: false,
           preporucenaCijena: Math.round(this.preporucenaCijena),
+          sifra: this.sifra,
         });
         console.log("Predan zahtjev za otkup sa ID: ", docRef.id);
         this.zahtjevPredan = true;
@@ -505,7 +507,9 @@ export default {
         godina_proizvodnje: this.godinaProizvodnje,
         vlasnik: this.vlasnik,
         stanje: this.stanje,
-        cijena: this.preporucenaCijena
+        cijena: this.preporucenaCijena,
+        sifra: this.sifra,
+        napomena: this.napomena,
       };
       emailjs.send("service_ox0wdn1", "noviZahtjev", params).then(
         (result) => {

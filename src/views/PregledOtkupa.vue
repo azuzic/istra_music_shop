@@ -25,6 +25,13 @@
     <!--==============LIST ===================================-->
     <div class="grid grid-rows-auto gap-2 pl-2 pr-2 pb-16 pt-16">
       <div>
+        <p><u class="text-20px">Šifra zahtjeva:</u></p>
+        <p class="mt-1 text-18px"><b>{{store.zahtjev.sifra}}</b></p>
+      </div>
+      <div>
+        <hr class="dotted mt-2 mb-2" />
+      </div>
+      <div>
         <p><u class="text-20px">Vrsta instrumenta:</u></p>
         <p class="mt-1 text-18px"><b>{{store.zahtjev.instrument[0]}}</b></p>
       </div>

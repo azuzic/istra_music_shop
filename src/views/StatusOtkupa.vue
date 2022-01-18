@@ -80,6 +80,7 @@ export default {
                   novaCijena: `${doc.data().novaCijena}`,
                   novaPreporucenaCijena: `${doc.data().novaPreporucenaCijena}`,
                   id: (`${doc.id}`),
+                  sifra: `${doc.data().sifra}`,
                 });
 
                 b++;

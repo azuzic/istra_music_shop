@@ -83,7 +83,7 @@
         <!--===================/THEME===================-->
         <!--==============SPREMI================-->
         <div class="place-self-center mt-12" :class="IsAllFilled ? 'active' : 'inactive'">
-          <CButtonAccept btn="SPREMI" :btnClickHandler="IsAllFilled ? updateKorisnik : dummy" />
+          <CButtonAccept btn="AŽURIRAJ PODATKE" :btnClickHandler="IsAllFilled ? updateKorisnik : dummy" />
         </div>
         <!--==============/SPREMI============-->
         <CSuccess
@@ -147,7 +147,6 @@ export default {
   },
   methods: {
     async readData() {
-      console.log("asd");
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
         if (store.currentUser === `${doc.data().email}`) {

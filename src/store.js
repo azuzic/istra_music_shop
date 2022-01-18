@@ -5,6 +5,7 @@ export default {
   darkToggle: true,
   pictureUpload: "",
   zahtjev: {
+    sifra: "",
     instrument: ["","","","","","",""],
     korisnik: "",
     napomena: "",
