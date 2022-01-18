@@ -300,7 +300,7 @@ import { collection, addDoc } from "@/firebase";
 import { getDocs } from "@/firebase";
 import { db } from "@/firebase";
 //Picture upload
-import { storage, ref, uploadBytes, getDownloadURL } from "@/firebase";
+import { storage, ref, uploadBytes, getDownloadURL, deleteObject, getStorage} from "@/firebase";
 
 import router from "@/router";
 
@@ -336,7 +336,7 @@ export default {
       vlasnik: "1",
       stanje: "Novo",
       napomena: "",
-      sifra: "",
+      sifra : new Date().getFullYear()+"-"+Math.floor(100000 + Math.random() * 900000),
       cijeneSerija: {},
       preporucenaCijena: 0,
       zahtjevPredan: false,
@@ -388,11 +388,12 @@ export default {
     else{
       this.$dialog
         .confirm ("Jeste li sigurni da želite napustiti stranicu? Promjene neće biti spremljene.")
-        .then(function () {
-          pictures.resetData();
-          next();
+        .then(() => {
+            this.deleteImages();
+            pictures.resetData();
+            next();
         })
-        .catch(function () {
+        .catch(()=> {
           next(false);
         });
     }
@@ -401,6 +402,13 @@ export default {
     this.fetchUserData();
   },
   methods: {
+    deleteImages(){
+      const storage = getStorage();
+        pictures.guitarPictures.filter(picture => picture.name!="").forEach((picture) => {
+          let imagesRef = ref(storage, "zahtjevi/" + store.currentUser + "/" + this.sifra + "/" + picture.name);
+          deleteObject(imagesRef);
+        });
+    },
     async fetchUserData() {
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
@@ -417,14 +425,15 @@ export default {
       this.canUpload = false;
       this.isUploading = true;
       this.imageReference.generateBlob((blobData) => {
-        let imageName =
-          "zahtjevi/" + store.currentUser + "/" + Date.now() + ".png";
+        let objectName = Date.now() + ".png";
+        let imageName = "zahtjevi/" + store.currentUser + "/" + this.sifra + "/" + objectName;
         const storageRef = ref(storage, imageName);
         // 'file' comes from the Blob or File API
         uploadBytes(storageRef, blobData)
           .then((result) => {
             console.log("Image uploaded! ->", result);
             this.currentPictureObj.uploaded = true;
+            this.currentPictureObj.name = objectName;
             this.mode = false;
             this.isUploading = false;
             pictures.mode = false;
@@ -455,10 +464,10 @@ export default {
       this.currentPictureObj = picture;
       this.currentPictureObj.url = '';
       this.uploadText = picture.text;
+      
     },
     async otkupi() {
       try {
-        this.sifra = new Date().getFullYear()+"-"+Math.floor(100000 + Math.random() * 900000);
         const docRef = await addDoc(collection(db, "zahtjevi"), {
           korisnik: store.currentUser,
           instrument: [
