@@ -71,45 +71,45 @@
           <div>
             <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">
 
-              <div>
+              <div class="ct">
                 <p class="otkup-img-text">Gornja prednja</p>
-                <div class="square img_1-1 img-top-left">
-                    <img @click="enlarge('0')" :class="img[0] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[0]"/>
+                <div @click="enlarge('0')" class="square img_1-1 img-top-left">
+                    <img :class="img[0] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[0]"/>
                 </div>
               </div> 
 
               <div>
                 <p class="otkup-img-text">Gornja stražnja</p>
-                <div class="square img_1-1 img-top">
-                    <img @click="enlarge('1')" :class="img[1] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[1]"/>
+                <div @click="enlarge('1')" class="square img_1-1 img-top">
+                    <img :class="img[1] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[1]"/>
                 </div>
               </div> 
 
               <div>
                 <p class="otkup-img-text">Bočna desna</p>
-                <div class="square img_1-1 img-top-right">
-                    <img @click="enlarge('2')" :class="img[2] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[2]"/>
+                <div @click="enlarge('2')" class="square img_1-1 img-top-right">
+                    <img :class="img[2] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[2]"/>
                 </div>
               </div> 
 
               <div>
                 <p class="otkup-img-text">Bočna lijeva</p>
-                <div class="square img_1-1 img-bottom-left">
-                    <img @click="enlarge('3')" :class="img[3] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[3]"/>
+                <div @click="enlarge('3')" class="square img_1-1 img-bottom-left">
+                    <img :class="img[3] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[3]"/>
                 </div>
               </div> 
 
               <div>
                 <p class="otkup-img-text">Vrat gitare</p>
-                <div class="square img_1-1 img-bottom">
-                    <img @click="enlarge('4')" :class="img[4] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[4]"/>
+                <div @click="enlarge('4')" class="square img_1-1 img-bottom">
+                    <img :class="img[4] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[4]"/>
                 </div>
               </div> 
 
               <div>
                 <p class="otkup-img-text">Glava gitare</p>
-                <div class="square img_1-1 img-bottom-right">
-                    <img @click="enlarge('5')" :class="img[5] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[5]"/>
+                <div @click="enlarge('5')" class="square img_1-1 img-bottom-right">
+                    <img :class="img[5] ?'square-img' : 'fullscreen-img'" :src="store.zahtjev.slike[5]"/>
                 </div>
               </div> 
               
@@ -297,10 +297,10 @@ export default {
       };
       emailjs.send("service_ox0wdn1", "promjenaStanjaZahtjeva", params).then(
         (result) => {
-          console.log("SUCCESS! ", result.text);
+          //console.log("SUCCESS! ", result.text);
         },
         (error) => {
-          console.log("FAILED...", error.text);
+          //console.log("FAILED...", error.text);
           this.codeIsSent = false;
         }
       );
@@ -464,7 +464,7 @@ export default {
 }
 
 .square {
-  background-color: var(--DustySky__Grey);
+    background-color: var(--DustySky__Grey);
     overflow: hidden;
     float:left;
     position: relative;
