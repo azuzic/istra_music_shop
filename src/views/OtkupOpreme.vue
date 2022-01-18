@@ -212,7 +212,7 @@
 
 <!--=================================IMAGE UPLOAD=========================================-->
 <!--======================================================================================-->
-<div :class="mode ? 'show-ucitaj' : 'hide-ucitaj'">
+<div :class="!mode ? 'show-ucitaj' : 'hide-ucitaj'">
     <div class="CDodavanje-bottom grid grid-cols-1">
       <div class="place-self-center">
           <CButtonSingle
@@ -276,6 +276,13 @@
         @new-image="canUpload = true"
         @image-remove="canUpload = false"
       ></croppa>
+
+      <div class="menu-bottom-dodavanje grid grid-cols-1 mt-4">
+        <div @click="imageReference.rotate(), animateRotate=!animateRotate" class="mx-auto menu-item7">
+          <img :class="animateRotate ? 'photo-iconR' : 'photo-icon'" src="@/assets/rotate.png" />
+        </div>
+      </div>
+
     </div>
   </div>
 <!--======================================================================================-->
@@ -352,6 +359,7 @@ export default {
       isUploading: false,
       isUploadingPicture: [false,false,false,false,false,false],
       refresh: true,
+      animateRotate: false,
     };
   },
   components: {
@@ -881,5 +889,32 @@ export default {
   width: 100%;
   height: 100%;
   z-index: 999999;
+}
+
+.menu-bottom-dodavanje {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 50px;
+  background-color: transparent;
+}
+.menu-item7 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 54px;
+  height: 54px;
+  margin-top: 23px;
+  border-radius: 100%;
+  background-color: var(--FluorescentRed__FrenchWine);
+  z-index: 42069;
+}
+.photo-icon {
+  height: 34px;
+}
+.photo-iconR {
+  height: 34px;
+  transform: rotate(360deg);
 }
 </style>
