@@ -575,10 +575,10 @@ export default {
           this.preporucenaCijena += this.preporucenaCijena * 0.1;
           break;
         case "Rabljeno":
-          this.preporucenaCijena -= this.preporucenaCijena * 0.32;
+          this.preporucenaCijena -= this.preporucenaCijena * 0.30;
           break;
         case "Neispravno":
-          this.preporucenaCijena -= this.preporucenaCijena * 0.6;
+          this.preporucenaCijena -= this.preporucenaCijena * 0.55;
           break;
       }
       var year = parseInt(this.godinaProizvodnje);
@@ -604,13 +604,11 @@ export default {
       this.prikazaneSerije = [];
       this.cijeneSerija = [];
 
-      if (this.odabranaVrsta === "Gitara") {
-        for (const data in this.jsonData) {
-          for (const data1 in this.jsonData[data]) {
-            this.prikazaniProizvodaci.push(`${data1}`);
+      for (const data in this.jsonData) {
+        for (const data1 in this.jsonData[data]) {
+          this.prikazaniProizvodaci.push(`${data1}`);
           }
         }
-      } else this.prikazaniProizvodaci = [];
       this.odabraniProizvodac = this.prikazaniProizvodaci[0];
       return this.prikazaniProizvodaci;
     },

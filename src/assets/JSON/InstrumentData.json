@@ -40,6 +40,9 @@
     "Fender": {
       "Stratocaster": {
         "American Original": 9200,
+        "Mexican Original" : 6200,
+        "American Traditional" : 8150,
+        "Mexican Traditional" : 5000,
         "Artist": 12000,
         "American Acoustasonic": 7500,
         "American Performer": 6000,
@@ -54,6 +57,9 @@
       },
       "Telecaster": {
         "American Original": 7200,
+        "Mexican Original" : 5200,
+        "American Traditional" : 7150,
+        "Mexican Traditional" : 4000,
         "Artist": 8000,
         "Special": 5500,
         "American Acoustasonic": 3500,
@@ -69,6 +75,9 @@
       },
       "Jazzmaster": {
         "American Original": 7000,
+        "Mexican Original" : 5150,
+        "American Traditional" : 6000,
+        "Mexican Traditional" : 4750,
         "Artist": 9000,
         "American Acoustasonic": 5500,
         "American Performer": 6500,
@@ -81,12 +90,19 @@
       },
       "Jaguar": {
         "American Original": 10000,
+        "Mexican Original" : 7500,
+        "American Traditional" : 8150,
+        "Mexican Traditional" : 6000,
         "Artist": 12000,
         "Contemporary": 7000,
         "Player": 5500,
         "Vintera": 5750
       },
       "Mustang": {
+        "American Original": 9200,
+        "Mexican Original" : 7000,
+        "American Traditional" : 7750,
+        "Mexican Traditional" : 5000,
         "Artist": 6000,
         "American Performer": 5500,
         "Player": 4000,
@@ -224,6 +240,7 @@
     "Epiphone": {
       "Epi-Les Paul": {
         "Standard": 3000,
+        "Traditional":3250,
         "Junior": 1850,
         "Special": 3250,
         "Custom": 2750,
