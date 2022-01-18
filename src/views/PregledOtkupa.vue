@@ -389,7 +389,7 @@ export default {
       .confirm(
         msg
       )
-      .then(function () {
+      .then(() => {
         this.sendEmail();
         const g = doc(db, "zahtjevi", store.zahtjev.id);
         updateDoc(g, {
@@ -397,7 +397,7 @@ export default {
         });
         this.stanje = status
       })
-      .catch(function () {
+      .catch(() => {
        // NO
       });
     },
