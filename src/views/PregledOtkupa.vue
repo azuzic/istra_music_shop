@@ -293,7 +293,7 @@ export default {
         email: this.korisnik[0].email,
         status: this.stanje,
         sifra: store.zahtjev.sifra,
-        cijena: store.zahtjev.preporucenaCijena,
+        cijena: this.preporucenaCijena,
       };
       emailjs.send("service_ox0wdn1", "promjenaStanjaZahtjeva", params).then(
         (result) => {
@@ -353,6 +353,7 @@ export default {
             status: "Prihvaćeno"
           });
           this.stanje = "Prihvaćeno";
+          this.preporucenaCijena = this.novaPreporucenaCijena;
         }
         this.sendEmail();
       })
