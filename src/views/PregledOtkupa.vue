@@ -290,18 +290,17 @@ export default {
     sendEmail(){
       var params = {
         ime: this.korisnik.imePrezime,
-        email: store.currentUser,
+        email: this.korisnik.email,
         status: this.stanje,
         sifra: store.zahtjev.sifra,
         cijena: store.zahtjev.preporucenaCijena,
       };
       emailjs.send("service_ox0wdn1", "promjenaStanjaZahtjeva", params).then(
         (result) => {
-          //console.log("SUCCESS! ", result.text);
+          console.log("SUCCESS! ", result.text);
         },
         (error) => {
-          //console.log("FAILED...", error.text);
-          this.codeIsSent = false;
+          console.log("FAILED...", error.text);
         }
       );
     },

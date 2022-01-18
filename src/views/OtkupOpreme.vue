@@ -527,7 +527,6 @@ export default {
         },
         (error) => {
           console.log("FAILED...", error.text);
-          this.codeIsSent = false;
         }
       );
     },
