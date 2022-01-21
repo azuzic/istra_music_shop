@@ -145,7 +145,7 @@ export default {
         });
       },
     login() {
-      console.log("login..." + this.email);
+      console.log("logging in...");
       
       signInWithEmailAndPassword(getAuth(), this.email, this.password)
         //Koristi lambda/arrow funkcije u kombinaciji sa .then kako bi se sacuvao this iz parent konteksta

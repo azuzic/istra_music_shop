@@ -3,7 +3,6 @@
     <div v-if="store.theme ? loadTheme() : loadTheme()"></div>
     <div class="CBg" :class="store.darkToggle ? 'CBg-light' : 'CBg-dark'"></div>
     <div v-if="store.currentUser">
-
     <!--==============DJELATNIK============================-->
 
     <!--Paragraph routes-->
@@ -27,7 +26,6 @@
 
       </div>
       <!--/Div routes-->
-
     </div>
     <!--==============/DJELATNIK=========================-->
 
@@ -40,22 +38,22 @@
                     currentRouteName == 'Racun' ? 'menu-item2 menu-top2-item-grid2' : ''">
       </div>
       <!--Div routes-->
-    <div v-if="currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-3 mb-4">
+      <div v-if="currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-3 mb-4">
 
-      <div :class="currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'">
-        <p><router-link to="status-otkupa"><p> Status otkupa </p></router-link></p>
+        <div :class="currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'">
+          <p><router-link to="status-otkupa"><p> Status otkupa </p></router-link></p>
+        </div>
+
+        <div :class="currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'">
+          <p><router-link to="otkup-opreme"><p> Otkup opreme </p></router-link></p>
+        </div>
+
+        <div :class="currentRouteName == 'Racun' ? 'menu-item-active' : 'menu-item'">
+          <p><router-link to="racun"><p> Račun </p></router-link></p>
+        </div>
+
       </div>
-
-      <div :class="currentRouteName == 'OtkupOpreme' ? 'menu-item-active' : 'menu-item'">
-        <p><router-link to="otkup-opreme"><p> Otkup opreme </p></router-link></p>
-      </div>
-
-      <div :class="currentRouteName == 'Racun' ? 'menu-item-active' : 'menu-item'">
-        <p><router-link to="racun"><p> Račun </p></router-link></p>
-      </div>
-
-    </div>
-    <!--/Div routes-->
+      <!--/Div routes-->
     </div>
     <!--/Paragraph routes-->
     
@@ -81,17 +79,30 @@ onAuthStateChanged(auth, (user) => {
   if (user) {
     console.log("LOGGED IN: " + user.email);
     store.currentUser = user.email;
-    if (Object.keys(store.zahtjev).length == 0 || currentRoute.name == "PregledOtkupa") {
+
+    //Posebni slucaj kad korisnik napusta PregledOtkupa (dodano zbog gubitka podataka)
+    if (currentRoute.name == "PregledOtkupa") {
       store.currentUser === "djelatnik@gmail.com"
         ? router.replace({ name: "Djelatnik" })
         : router.replace({ name: "StatusOtkupa" });
     }
-    if (!currentRoute.meta.needsUser || (currentRoute=="" && store.zahtjev)) {
+    //Ako korisnik pokusava otic na admin stranicu
+    else if(currentRoute.meta.admin && store.currentUser!= "djelatnik@gmail.com"){
+      router.push({ name: "OtkupOpreme" });
+    }
+    //Ako djelatnik pokusa otici na korisnik stranicu
+    else if(currentRoute.meta.clientOnly && store.currentUser=== "djelatnik@gmail.com"){
+      router.push({ name: "Djelatnik" });
+    }
+    //Ako prijavljeni korisnik pokusava otici na Home/Login/Register
+    else if (!currentRoute.meta.needsUser) {
       store.currentUser === "djelatnik@gmail.com"
         ? router.replace({ name: "Djelatnik" })
         : router.replace({ name: "OtkupOpreme" });
     }
-  } else {
+  } 
+  //Nema korisnika
+  else {
     console.log("NO USER");
     store.currentUser = null;
     if (currentRoute.meta.needsUser) {

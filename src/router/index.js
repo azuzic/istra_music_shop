@@ -38,6 +38,7 @@ const routes = [
     name: "OtkupOpreme",
     meta: {
       needsUser: true,
+      clientOnly: true,
     },
     component: () => import("../views/OtkupOpreme.vue"),
   },
@@ -46,6 +47,7 @@ const routes = [
     name: "StatusOtkupa",
     meta: {
       needsUser: true,
+      clientOnly: true,
     },
     component: () => import("../views/StatusOtkupa.vue"),
   },
@@ -73,31 +75,33 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
+
 let wait = function (seconds) {
   return new Promise((resolveFn) => {
     setTimeout(resolveFn, seconds * 1000);
   });
 };
-//next() -> slazem se s promjenom rute
+
+
 router.beforeEach((to, from, next) => {
 
   const noUser = store.currentUser === null;
+  //Ako nema korisnika, a potreban je
   if (noUser && to.meta.needsUser) {
-    next("Prijava");
-  } else {
-    if(to.meta.admin && store.currentUser!== "djelatnik@gmail.com"){
-      next("Racun");
-    }
-    else if(
+    next("Prijava"); //next() -> slazem se s promjenom rute
+  } 
+  else {
+    //Delay nakon registracije radi prikaza poruke 
+    if (
       from.name === "Registracija" &&
       to.name !== "Prijava" &&
-      to.name !== "Home"
-    ) {
-      wait(3).then(() => {
+      to.name !== "Home") {
+        wait(3).then(() => {
+          next();
+        });
+      } 
+      else {
         next();
-      });
-    } else {
-      next();
     }
   }
 });
