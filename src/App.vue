@@ -2,37 +2,45 @@
   <div id="app">
     <div v-if="store.theme ? loadTheme() : loadTheme()"></div>
     <div class="CBg" :class="store.darkToggle ? 'CBg-light' : 'CBg-dark'"></div>
-    <!--==============DJELATNIK ============================-->
+    <div v-if="store.currentUser">
+
+    <!--==============DJELATNIK============================-->
+
+    <!--Paragraph routes-->
     <div v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-2 mb-4">
   
       <div :class=" currentRouteName == 'Djelatnik' ? 'menu-item2 menu-top-item-grid0' : 
                     currentRouteName == 'Racun' ? 'menu-item2 menu-top-item-grid1' : ''"> 
       </div>
+      <!--/Paragraph routes-->
+
+      <!--Div routes-->
+      <div v-if="currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-2 mb-4">
+        
+        <div :class="currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'">
+          <p><router-link to="djelatnik"> <p>Pregled otkupa</p> </router-link></p>
+        </div>
+
+        <div :class="currentRouteName == 'Racun' ? 'menu-item-active' : 'menu-item'">
+          <p><router-link to="racun"> <p>Račun</p> </router-link></p>
+        </div>
+
+      </div>
+      <!--/Div routes-->
 
     </div>
-    <!--===============================-->
-    <div v-if="store.currentUser == 'djelatnik@gmail.com' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-2 mb-4">
-      
-      <div :class="currentRouteName == 'Djelatnik' ? 'menu-item-active' : 'menu-item'">
-        <p><router-link to="djelatnik"> <p>Pregled otkupa</p> </router-link></p>
-      </div>
+    <!--==============/DJELATNIK=========================-->
 
-      <div :class="currentRouteName == 'Racun' ? 'menu-item-active' : 'menu-item'">
-        <p><router-link to="racun"> <p>Račun</p> </router-link></p>
-      </div>
-
-    </div>
-    <!--==============DJELATNIK END=========================-->
     <!--==============KORISNIK =============================-->
-    <div v-if="store.currentUser != null && store.currentUser != 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-3 mb-4">
+    <!--Paragraph routes-->
+    <div v-else class="menu2 top-0 grid grid-cols-3 mb-4">
 
       <div :class=" currentRouteName == 'StatusOtkupa' ? 'menu-item2 menu-top2-item-grid0' : 
                     currentRouteName == 'OtkupOpreme'   ? 'menu-item2 menu-top2-item-grid1' : 
                     currentRouteName == 'Racun' ? 'menu-item2 menu-top2-item-grid2' : ''">
       </div>
-    </div>
-    <!--========================================-->
-    <div v-if="store.currentUser != null && store.currentUser != 'djelatnik@gmail.com' && currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-3 mb-4">
+      <!--Div routes-->
+    <div v-if="currentRouteName != 'PregledOtkupa'" class="menu top-0 grid grid-cols-3 mb-4">
 
       <div :class="currentRouteName == 'StatusOtkupa' ? 'menu-item-active' : 'menu-item'">
         <p><router-link to="status-otkupa"><p> Status otkupa </p></router-link></p>
@@ -47,6 +55,12 @@
       </div>
 
     </div>
+    <!--/Div routes-->
+    </div>
+    <!--/Paragraph routes-->
+    
+    <!--==============/KORISNIK==========================-->
+    </div>
     <!--==============KORISNIK END==========================-->
     <router-view />
   </div>
@@ -55,11 +69,10 @@
 import store from "@/store";
 import pictures from "@/pictures";
 import router from "@/router";
+
 import { collection, getDocs } from "@/firebase";
 import { db } from "@/firebase";
-
 import { getAuth, onAuthStateChanged } from "@/firebase";
-
 
 const auth = getAuth();
 
@@ -69,7 +82,9 @@ onAuthStateChanged(auth, (user) => {
     console.log("LOGGED IN: " + user.email);
     store.currentUser = user.email;
     if (Object.keys(store.zahtjev).length == 0 || currentRoute.name == "PregledOtkupa") {
-      router.replace({ name: "Djelatnik" })
+      store.currentUser === "djelatnik@gmail.com"
+        ? router.replace({ name: "Djelatnik" })
+        : router.replace({ name: "StatusOtkupa" });
     }
     if (!currentRoute.meta.needsUser || (currentRoute=="" && store.zahtjev)) {
       store.currentUser === "djelatnik@gmail.com"
