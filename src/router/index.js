@@ -1,14 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
 import store from "@/store";
+
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home,
+    component: () => import("../views/Home.vue"),
   },
   {
     path: "/registracija",
@@ -84,9 +84,9 @@ let wait = function (seconds) {
 
 
 router.beforeEach((to, from, next) => {
-
+  
   const noUser = store.currentUser === null;
-  //Ako nema korisnika, a potreban je
+
   if (noUser && to.meta.needsUser) {
     next("Prijava"); //next() -> slazem se s promjenom rute
   } 
@@ -99,7 +99,8 @@ router.beforeEach((to, from, next) => {
         wait(3).then(() => {
           next();
         });
-      } 
+      }
+
       else {
         next();
     }

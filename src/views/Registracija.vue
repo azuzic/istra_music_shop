@@ -12,7 +12,7 @@
           Kreirajte račun da možete započeti.
         </h1>
       </div>
-      <!--===================TITLE END===================-->
+      <!--===================/TITLE===================-->
       <div class="grid auto-rows-auto gap-4 pl-4 pr-4">
         <!--===================IME I PREZIME=============-->
         <div>
@@ -25,7 +25,7 @@
           />
           <hr />
         </div>
-        <!--===================IME I PREZIME END===========-->
+        <!--===================/IME I PREZIME===========-->
         <!--===================EMAIL=======================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Email</p>
@@ -39,7 +39,7 @@
             Email nije točno napisan!
           </h2>
         </div>
-        <!--===================EMAIL END===================-->
+        <!--===================/EMAIL===================-->
         <!--===================OIB=========================-->
         <div>
           <p class="text-left text-18px m-0 p-0">OIB</p>
@@ -56,7 +56,7 @@
             OIB mora sadržavati 11 brojeva!
           </h2>
         </div>
-        <!--===================OIB END=====================-->
+        <!--===================/OIB=====================-->
         <!--===================BROJ MOBITELA===============-->
         <div>
           <p class="text-left text-18px m-0 p-0">Broj mobitela</p>
@@ -82,7 +82,7 @@
             Broj mobitela mora sadržavati 10 ili 11 brojeva!
           </h2>
         </div>
-        <!--===================BROJ MOBITELA END===========-->
+        <!--===================/BROJ MOBITELA===========-->
         <!--===================LOZINKA=====================-->
         <div>
           <div class="text-left text-18px m-0 p-0 flex items-center">
@@ -158,7 +158,7 @@
             />
           </div>
         </div>
-        <!--===================LOZINKA END=================-->
+        <!--===================/LOZINKA=================-->
         <!--===================POTVRDI LOZINKU=============-->
         <div :class="!password || PasswordStrength < 3 ? 'tranparent' : ''">
           <p class="text-left text-18px m-0 p-0">Potvrdi lozinku</p>
@@ -205,20 +205,20 @@
             Lozinke se ne podudaraju!
           </h2>
         </div>
-        <!--===================POTVRDI LOZINKU END=========-->
+        <!--===================/POTVRDI LOZINKU=========-->
         <!--================ALERT========================-->
         <CWarning
-          v-if="greska != '0' && !registered"
+          v-if="greska && !registered"
           msg1="Upozorenje!"
-          msg2="Upisani email je već registriran."
+          msg2="Korisnički račun s navedenom adresom e-pošte već postoji."
         /> 
         <CSuccess
           v-if="registered"
           msg1="Uspješna registracija!"
-          msg2="Molimo potvrdite račun preko poveznice koju smo vam poslali na email."
+          msg2="Molimo potvrdite račun preko poveznice koju smo Vam poslali na email."
         />
-        <!--================ALERT END====================-->
-        <!--===================REGISTRIRAJ SE BUTTON=======-->
+        <!--================/ALERT====================-->
+        <!--===============REGISTRIRAJ SE=======-->
         <div
           class="place-self-center mb-8"
           :class="IsAllFilled ? 'active' : 'inactive'"
@@ -232,18 +232,20 @@
             :btnClickHandler="IsAllFilled ? signup : dummy"
           />
         </div>
-        <!--===================REGISTRIRAJ SE BUTTON END===-->
+        <!--===============/REGISTRIRAJ SE===-->
       </div>
     </div>
   </div>
 </template>
 <script>
+import store from "@/store";
+//Komponente
 import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
 import CSuccess from "@/components/CSuccess.vue";
 import CWarning from "@/components/CWarning.vue";
-import store from "@/store";
 
+//Firebase
 import { getAuth, createUserWithEmailAndPassword } from "@/firebase";
 import { collection, addDoc } from "@/firebase";
 import { db } from "@/firebase";
@@ -262,7 +264,7 @@ export default {
       password: "",
       passwordRepeat: "",
       registered: false,
-      greska: "0",
+      greska: false,
       store,
     };
   },
@@ -279,8 +281,8 @@ export default {
       } else {
         createUserWithEmailAndPassword(auth, this.email, this.password)
           .then(async (userCredential) => {
-            // Signed in
-            console.log("Uspjesna registracija!");
+            // Uspješna prijava, spremanje u bazu
+            console.log("Uspješna registracija!");
             this.registered = true;
             try {
               const docRef = await addDoc(collection(db, "users"), {
@@ -299,7 +301,7 @@ export default {
             let error = e.message.slice(22, -2).replace(/-/g, " ");
             error = error.charAt(0).toUpperCase() + error.slice(1) + "!";
             console.error(error);
-            if (error == "Email already in use!") this.greska = "1";
+            if (error == "Email already in use!") this.greska = true;
           });
       }
     },
@@ -383,7 +385,6 @@ export default {
     },
   },
 };
-//SET CLASS
 </script>
 
 <style>

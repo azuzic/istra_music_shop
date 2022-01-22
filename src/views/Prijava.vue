@@ -18,7 +18,6 @@
             type="email"
             class="border rounded"
             id="emailInput"
-            aria-describedby="emailHelp"
           />
           <hr />
           <h2
@@ -29,7 +28,7 @@
             Email nije točno napisan!
           </h2>
         </div>
-        <!--===================EMAIL END===================-->
+        <!--===================/EMAIL===================-->
         <!--===================PASSWORD====================-->
         <div>
           <p class="text-left text-18px m-0 p-0">Lozinka</p>
@@ -76,7 +75,7 @@
             <u class="href-link">Zaboravili ste lozinku?</u>
           </router-link>
         </div>
-        <!--================PASSWORD END===================-->
+        <!--================/PASSWORD===================-->
         <!--================WARNING========================-->
         <CWarning
           v-if="greska"
@@ -105,12 +104,14 @@
   </div>
 </template>
 <script>
+import store from "@/store";
+//Komponente
 import CTitle from "@/components/CTitle.vue";
 import CWarning from "@/components/CWarning.vue";
 import CButton from "@/components/CButton.vue";
 import CSelect from "@/components/CSelect.vue";
-import store from "@/store";
 
+//Firebase
 import { getAuth, signInWithEmailAndPassword } from "@/firebase";
 import { collection, getDocs } from "@/firebase";
 import { db } from "@/firebase";
@@ -135,15 +136,16 @@ export default {
 
   methods: {
     
-  async getUserData() {
-        const querySnapshot = await getDocs(collection(db, "users"));
-        querySnapshot.forEach((doc) => {
-          if (store.currentUser === `${doc.data().email}`) {
-            store.theme = `${doc.data().theme}`;
-            store.userID = `${doc.id}`;
-          }
-        });
-      },
+    //Radi promjene izgleda aplikacije
+    async getUserData() {
+          const querySnapshot = await getDocs(collection(db, "users"));
+          querySnapshot.forEach((doc) => {
+            if (store.currentUser === `${doc.data().email}`) {
+              store.theme = `${doc.data().theme}`;
+              store.userID = `${doc.id}`;
+            }
+          });
+        },
     login() {
       console.log("logging in...");
       

@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -8,8 +9,22 @@ import {
   signOut,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { collection, doc, addDoc, getDocs, updateDoc } from "firebase/firestore";
-import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
+
+import { 
+  collection, 
+  doc, 
+  addDoc, 
+  getDocs, 
+  updateDoc 
+} from "firebase/firestore";
+
+import { 
+  getStorage, 
+  ref, 
+  uploadBytes, 
+  getDownloadURL, 
+  deleteObject 
+} from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
