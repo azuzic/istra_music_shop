@@ -15,10 +15,7 @@ import {
   doc, 
   addDoc, 
   getDocs, 
-  updateDoc,
-  query,
-  where,
-  onSnapshot, 
+  updateDoc 
 } from "firebase/firestore";
 
 import { 
@@ -60,9 +57,6 @@ export { addDoc };
 export { getDocs };
 export { updateDoc };
 export { doc };
-export { query };
-export { where };
-export { onSnapshot };
 
 //FirebaseStorage exports
 export { storage, ref, uploadBytes, getDownloadURL, deleteObject, getStorage };

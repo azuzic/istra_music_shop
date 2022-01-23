@@ -21,9 +21,6 @@ import CCard from "@/components/CCard.vue";
 //Firebase
 import { collection, getDocs } from "@/firebase";
 import { db } from "@/firebase";
-import { query, where, onSnapshot } from "@/firebase";
-
-
 
 export default {
   name: "StatusOtkupa",
@@ -38,17 +35,6 @@ export default {
     CTitle,
     CButton,
     CCard,
-  },
-  computed:{
-    snapshotHandler(){
-      //Snapshot handler
-      const q = query(collection(db, "zahtjevi"), where("novaPreporucenaCijena", "!=", 0));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            this.zahtjevi.filter(zahtjev => doc.data().novaPreporucenaCijena).forEach(zahtjev => zahtjev.novaPreporucenaCijena=doc.data().novaPreporucenaCijena);
-        });
-      });
-    }
   },
   mounted() {
     this.readData();
