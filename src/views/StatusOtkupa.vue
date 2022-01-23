@@ -36,6 +36,7 @@ export default {
     CButton,
     CCard,
   },
+    
   mounted() {
     this.readData();
   },
