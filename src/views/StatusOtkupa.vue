@@ -13,12 +13,14 @@
 </template>
 
 <script>
+import store from "@/store";
+//Komponente
 import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
 import CCard from "@/components/CCard.vue";
+//Firebase
 import { collection, getDocs } from "@/firebase";
 import { db } from "@/firebase";
-import store from "@/store";
 
 export default {
   name: "StatusOtkupa",
@@ -38,8 +40,8 @@ export default {
     this.readData();
   },
   methods: {
-    async readData(state2) {
-      if (this.state != state2 && state2) {
+    async readData(state) {
+      if (this.state != state && state) {
         const querySnapshot = await getDocs(collection(db, "zahtjevi"));
         var highestTimeoutId = setTimeout(";");
         for (var i = 0; i < highestTimeoutId; i++) {
@@ -48,7 +50,7 @@ export default {
         let b = 0;
         let delay = 250; //ADJUST TIME DELAY BETWEEN CARDS
         let time = 0 - delay;
-        this.state = state2;
+        this.state = state;
         this.zahtjevi = [];
         this.canLoad = false;
         querySnapshot.forEach((doc) => {

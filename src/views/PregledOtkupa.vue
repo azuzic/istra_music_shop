@@ -235,7 +235,7 @@
           />
           <p class="pl-4 price-size" >
             Predložena cijena:
-            <b class="price">{{preporucenaCijena}}</b>
+            <b class="price">{{preporucenaCijena}} kn</b>
           </p>
         </div>
       </div>
@@ -244,14 +244,17 @@
 </template>
 
 <script>
+import store from "@/store";
+//Komponente
 import CTitle from "@/components/CTitle.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
 import CButtonAccept from "@/components/CButtonAccept.vue";
 import CButtonDecline from "@/components/CButtonDecline.vue";
 import CCard from "@/components/CCard.vue";
-import store from "@/store";
+//Firebase
 import { db } from "@/firebase";
 import { doc, collection, getDocs, updateDoc} from "@/firebase";
+
 import emailjs from "@emailjs/browser";
 export default {
   name: "PregledOtkupa",

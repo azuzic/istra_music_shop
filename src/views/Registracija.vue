@@ -215,7 +215,7 @@
         <CSuccess
           v-if="registered"
           msg1="Uspješna registracija!"
-          msg2="Molimo potvrdite račun preko poveznice koju smo Vam poslali na email."
+          msg2="Odmah ćemo Vas prebaciti na mjesto gdje možete prodati svoje instrumente"
         />
         <!--================/ALERT====================-->
         <!--===============REGISTRIRAJ SE=======-->
@@ -276,13 +276,13 @@ export default {
   },
   methods: {
     async signup() {
-      if (this.password !== this.passwordRepeat) {
+      if (this.password !== this.passwordRepeat)
         return;
-      } else {
+      else {
         createUserWithEmailAndPassword(auth, this.email, this.password)
           .then(async (userCredential) => {
             // Uspješna prijava, spremanje u bazu
-            console.log("Uspješna registracija!");
+            console.log("Uspješna registracija!" + userCredential);
             this.registered = true;
             try {
               const docRef = await addDoc(collection(db, "users"), {
@@ -301,7 +301,8 @@ export default {
             let error = e.message.slice(22, -2).replace(/-/g, " ");
             error = error.charAt(0).toUpperCase() + error.slice(1) + "!";
             console.error(error);
-            if (error == "Email already in use!") this.greska = true;
+            if (error == "Email already in use!") 
+              this.greska = true;
           });
       }
     },

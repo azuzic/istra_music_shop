@@ -8,7 +8,7 @@
           :zahtjev = z
     />
     </transition-group>
-    <!--==============LIST END=========================-->
+    <!--==============/LIST=========================-->
     <!--==============FOOTER===========================-->
     <div class="menu-bottom2 grid grid-cols-4 mt-4">
       <div 
@@ -21,39 +21,46 @@
     </div>
     <!--=======================-->
     <div class="menu-bottom grid grid-cols-4 mt-4">
+
       <div 
       class="menu-item" 
       :class="state == 'U razradi' ? 'menu-item-selected' : ''"
       @click="readData('U razradi')">
         <p><a><p>U razradi</p></a></p>
       </div>
+
       <div 
       class="menu-item" 
       :class="state == 'Prihvaćeno' ? 'menu-item-selected' : ''"
       @click="readData('Prihvaćeno')">
         <p><a><p>Prihvaćeno</p></a></p>
       </div>
+
       <div 
       class="menu-item" 
       :class="state == 'Riješeno' ? 'menu-item-selected' : ''"
       @click="readData('Riješeno')">
         <p><a><p>Riješeno</p></a></p>
       </div>
+
       <div 
       class="menu-item" 
       :class="state == 'Odbijeno' ? 'menu-item-selected' : ''"
       @click="readData('Odbijeno')">
         <p><a><p>Odbijeno</p></a></p>
       </div>
+
     </div>
-    <!--==============FOOTER END========================-->
+    <!--==============/FOOTER========================-->
   </div>
 </template>
 
 <script>
+//Komponente
 import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
 import CCard from "@/components/CCard.vue";
+//Firebase
 import { collection, getDocs } from "@/firebase";
 import { db } from "@/firebase";
 
@@ -74,8 +81,8 @@ export default {
     this.readData();
   },
   methods: {
-    async readData(state2) {
-      if (this.state != state2 && state2) {
+    async readData(state) {
+      if (this.state != state && state) {
         const querySnapshot = await getDocs(collection(db, "zahtjevi"));
         var highestTimeoutId = setTimeout(";");
         for (var i = 0 ; i < highestTimeoutId ; i++) {
@@ -84,7 +91,7 @@ export default {
         let b = 0;
         let delay = 250; //ADJUST TIME DELAY BETWEEN CARDS
         let time = 0-delay;
-        this.state = state2;
+        this.state = state;
         this.zahtjevi = [];
         this.canLoad = false;
         querySnapshot.forEach((doc) => {
@@ -101,7 +108,8 @@ export default {
                   (`${doc.data().instrument[5]}`),
                   (`${doc.data().instrument[6]}`),
                 ],
-                slike:[
+                slike:
+                [
                   (`${doc.data().slike[0]}`),
                   (`${doc.data().slike[1]}`),
                   (`${doc.data().slike[2]}`),
@@ -120,7 +128,8 @@ export default {
                 sifra: `${doc.data().sifra}`,
             });
             b++;
-            }, time += delay);
+            },
+            time += delay);
           }
         });
       }

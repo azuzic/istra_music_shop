@@ -209,10 +209,10 @@
       <!--==============FOOTER END==============================-->
     </div>
 
-
 <!--=================================IMAGE UPLOAD=========================================-->
 <!--======================================================================================-->
 <div :class="mode ? 'show-ucitaj' : 'hide-ucitaj'">
+
     <div class="CDodavanje-bottom grid grid-cols-1">
       <div class="place-self-center">
           <CButtonSingle
@@ -237,10 +237,9 @@
           <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6 mr-2"></div>
           Učitavanje slike
         </div>
-        
       </div>
-
     </div>
+
     <div class="CDodavanje-top">
       <div class="menu-item6 mx-auto">
         <img v-if="store.theme=='Svijetla'" class="dodavanje-icon" src="@/assets/upload.svg" />
@@ -285,10 +284,9 @@
 
     </div>
   </div>
+  
 <!--======================================================================================-->
 <!--=================================/IMAGE UPLOAD========================================-->
-
-
   </div>
 </template>
 <script>
@@ -310,7 +308,6 @@ import { db } from "@/firebase";
 import { storage, ref, uploadBytes, getDownloadURL, deleteObject, getStorage} from "@/firebase";
 
 import router from "@/router";
-
 import emailjs from "@emailjs/browser";
 
 export default {
@@ -348,6 +345,7 @@ export default {
       preporucenaCijena: 0,
       zahtjevPredan: false,
 
+      //Data
       store,
       pictures,
       
@@ -466,9 +464,7 @@ export default {
       pictures.mode = true;
       this.mode = true;
 
-      var picture = pictures.guitarPictures.find(
-      (picture) => picture.id === image
-       );
+      var picture = pictures.guitarPictures.find((picture) => picture.id === image);
       this.currentPictureObj = picture;
       this.currentPictureObj.url = '';
       this.uploadText = picture.text;
@@ -545,8 +541,9 @@ export default {
         this.prikazanaStanja =  ['Novo', 'Rabljeno', 'Neispravno'];
       }
       else {
-        if (this.stanje != 'Neispravno')
+        if (this.stanje != 'Neispravno') {
           this.stanje = 'Rabljeno';
+        }
         this.prikazanaStanja =  ['Rabljeno', 'Neispravno'];
       }
 

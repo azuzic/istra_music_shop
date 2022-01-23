@@ -40,7 +40,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 const storage = getStorage(app);
-//Firebase
+
+//Firebase exports
 export { getAuth };
 export { createUserWithEmailAndPassword };
 export { signInWithEmailAndPassword };
@@ -49,7 +50,7 @@ export { signOut };
 export { sendPasswordResetEmail };
 export { app };
 
-//Firestore
+//Firestore exports
 export { db };
 export { collection };
 export { addDoc };
@@ -57,5 +58,5 @@ export { getDocs };
 export { updateDoc };
 export { doc };
 
-//FirebaseStorage
+//FirebaseStorage exports
 export { storage, ref, uploadBytes, getDownloadURL, deleteObject, getStorage };

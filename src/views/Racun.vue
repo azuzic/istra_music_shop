@@ -97,30 +97,33 @@
             <CButtonDecline btn="RESETIRAJ LOZINKU" :btnClickHandler="dummy" />
           </router-link>
         </div>
-        <!--================/RESETIRAJ LOZINKU LOZINKU===================-->
+        <!--================/RESETIRAJ LOZINKU===================-->
         
       </div>
     </div>
-    <!--==============LOGUT - TEMPORARY================-->
+    <!--==============LOGUT================-->
     <button class="logout" @click="signout()">
       <p class="pr-2 pb-1">Odjava</p>
       <img class="exit-icon" src="@/assets/exit_icon.svg" />
     </button>
-    <!--==============/LOGUT - TEMPORARY================-->
+    <!--==============/LOGUT================-->
   </div>
 </template>
 <script>
+import store from "@/store";
+//Komponente
 import CTitle from "@/components/CTitle.vue";
 import CWarning from "@/components/CWarning.vue";
 import CSelect from "@/components/CSelect.vue";
 import CButtonAccept from "@/components/CButtonAccept.vue";
 import CButtonDecline from "@/components/CButtonDecline.vue";
 import CSuccess from "@/components/CSuccess.vue";
-import store from "@/store";
+//Firebase
 import { getAuth, signOut } from "@/firebase";
 import { collection, getDocs } from "@/firebase";
-import { db } from "@/firebase";
 import {doc, updateDoc} from "@/firebase";
+import { db } from "@/firebase";
+
 export default {
   name: "Racun",
   data() {
@@ -169,24 +172,24 @@ export default {
         oib: this.oib,
         theme: this.theme,
       }).then(() => {
-        console.log("Spremljeno!");
+        console.log("Podaci o korisniku spremljeni!");
         setTimeout(() => {
           this.canSave = true;
         }, 5000);
       }).catch((error) =>{
-        console.log("Nije spremljeno!");
+        console.error("Neuspješno spremanje podataka o korisniku!" + error);
       });
     },
     dummy() {},
     signout() {
-      store.theme="Svijetla";
+      store.theme="Svijetla"; //Theme reset
       const auth = getAuth();
       signOut(auth)
         .then(() => {
           console.log("Signed out!");
         })
         .catch((error) => {
-          console.error("Signed out error!");
+          console.error("Error signing out!" + error);
         });
     },
     checkEmail(email) {
