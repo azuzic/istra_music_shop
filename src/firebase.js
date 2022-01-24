@@ -24,6 +24,7 @@ import {
   onSnapshot,
   query,
   where,
+  orderBy,
 } from "firebase/firestore";
 
 import { 
@@ -75,7 +76,8 @@ export {
   updateDoc, 
   where, 
   query, 
-  onSnapshot 
+  onSnapshot,
+  orderBy, 
 };
 //FirebaseStorage exports
 export { 
