@@ -83,7 +83,10 @@ export default {
   methods: {
     async readData(state) {
       if (this.state != state && state) {
+        
         const q = query(collection(db, "zahtjevi"), orderBy("zahtjevPredan", "desc"));
+        const querySnapshot = await getDocs(q);
+
         var highestTimeoutId = setTimeout(";");
         for (var i = 0 ; i < highestTimeoutId ; i++) {
             clearTimeout(i); 
@@ -94,7 +97,6 @@ export default {
         this.state = state;
         this.zahtjevi = [];
         this.canLoad = false;
-         onSnapshot(q, (querySnapshot) => {
           querySnapshot.forEach((doc) => {
             if (`${doc.data().status}` == this.state) {
               setTimeout(() => {
@@ -127,12 +129,11 @@ export default {
                   sifra: `${doc.id}`,
               });
               b++;
-              },
-              time += delay);
-            }
-          });
-        }
-      )}
+            },
+            time += delay);
+          }
+        });
+      }
     },
     dummy() {},
   },

@@ -19,7 +19,7 @@ import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
 import CCard from "@/components/CCard.vue";
 //Firebase
-import { collection, query, orderBy, onSnapshot } from "@/firebase";
+import { collection, query, getDocs, orderBy, onSnapshot } from "@/firebase";
 import { db } from "@/firebase";
 
 export default {
@@ -43,7 +43,10 @@ export default {
   methods: {
     async readData(state) {
       if (this.state != state && state) {
+        
         const q = query(collection(db, "zahtjevi"), orderBy("zahtjevPredan", "desc"));
+        const querySnapshot = await getDocs(q);
+
         var highestTimeoutId = setTimeout(";");
         for (var i = 0; i < highestTimeoutId; i++) {
           clearTimeout(i);
@@ -52,44 +55,42 @@ export default {
         let delay = 250; //ADJUST TIME DELAY BETWEEN CARDS
         let time = 0 - delay;
         this.state = state;
-        this.zahtjevi = [];
         this.canLoad = false;
-        onSnapshot(q, (querySnapshot) => {
+        this.zahtjevi = [];
           querySnapshot.forEach((doc) => {
             if (doc.data().korisnik === store.currentUser) {
-                setTimeout(() => {
-                  this.$set(this.zahtjevi, b, {
-                    instrument: [
-                      `${doc.data().instrument[0]}`,
-                      `${doc.data().instrument[1]}`,
-                      `${doc.data().instrument[2]}`,
-                      `${doc.data().instrument[3]}`,
-                      `${doc.data().instrument[4]}`,
-                      `${doc.data().instrument[5]}`,
-                      `${doc.data().instrument[6]}`,
-                    ],
-                    slike:[
-                      `${doc.data().slike[0]}`,
-                      `${doc.data().slike[1]}`,
-                      `${doc.data().slike[2]}`,
-                      `${doc.data().slike[3]}`,
-                      `${doc.data().slike[4]}`,
-                      `${doc.data().slike[5]}`,
-                    ],
-                    korisnik: `${doc.data().korisnik}`,
-                    napomena: `${doc.data().napomena}`,
-                    preporucenaCijena: `${doc.data().preporucenaCijena}`,
-                    status: `${doc.data().status}`,
-                    date: `${doc.data().zahtjevPredan}`,
-                    novaPreporucenaCijena: `${doc.data().novaPreporucenaCijena}`,
-                    sifra: `${doc.id}`,
-                  });
-                  b++;
-                }, (time += delay));
-              }
-            });
-          }
-        )}
+              setTimeout(() => {
+                this.$set(this.zahtjevi, b, {
+                  instrument: [
+                    `${doc.data().instrument[0]}`,
+                    `${doc.data().instrument[1]}`,
+                    `${doc.data().instrument[2]}`,
+                    `${doc.data().instrument[3]}`,
+                    `${doc.data().instrument[4]}`,
+                    `${doc.data().instrument[5]}`,
+                    `${doc.data().instrument[6]}`,
+                  ],
+                  slike:[
+                    `${doc.data().slike[0]}`,
+                    `${doc.data().slike[1]}`,
+                    `${doc.data().slike[2]}`,
+                    `${doc.data().slike[3]}`,
+                    `${doc.data().slike[4]}`,
+                    `${doc.data().slike[5]}`,
+                  ],
+                  korisnik: `${doc.data().korisnik}`,
+                  napomena: `${doc.data().napomena}`,
+                  preporucenaCijena: `${doc.data().preporucenaCijena}`,
+                  status: `${doc.data().status}`,
+                  date: `${doc.data().zahtjevPredan}`,
+                  novaPreporucenaCijena: `${doc.data().novaPreporucenaCijena}`,
+                  sifra: `${doc.id}`,
+                });
+                b++;
+              }, (time += delay));
+            }
+          });
+        }
       },
     dummy() {},
   },
