@@ -61,7 +61,7 @@ import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
 import CCard from "@/components/CCard.vue";
 //Firebase
-import { collection, query, orderBy, onSnapshot } from "@/firebase";
+import { collection, query, orderBy, getDocs } from "@/firebase";
 import { db } from "@/firebase";
 
 export default {
