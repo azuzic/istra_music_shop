@@ -123,9 +123,7 @@ export default {
                 novaPreporucenaCijena: `${doc.data().novaPreporucenaCijena}`,
                 status: (`${doc.data().status}`),
                 date: (`${doc.data().zahtjevPredan}`),
-                id: (`${doc.id}`),
-                novaCijena: `${doc.data().novaCijena}`,
-                sifra: `${doc.data().sifra}`,
+                sifra: `${doc.id}`,
             });
             b++;
             },

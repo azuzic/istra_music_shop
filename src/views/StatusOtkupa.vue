@@ -80,10 +80,8 @@ export default {
                   preporucenaCijena: `${doc.data().preporucenaCijena}`,
                   status: `${doc.data().status}`,
                   date: `${doc.data().zahtjevPredan}`,
-                  novaCijena: `${doc.data().novaCijena}`,
                   novaPreporucenaCijena: `${doc.data().novaPreporucenaCijena}`,
-                  id: (`${doc.id}`),
-                  sifra: `${doc.data().sifra}`,
+                  sifra: `${doc.id}`,
                 });
 
                 b++;

@@ -301,7 +301,7 @@ import CButtonSingle from "@/components/CButtonSingle.vue";
 import store from "@/store";
 import pictures from "@/pictures";
 //Firebase
-import { collection, addDoc } from "@/firebase";
+import { collection, setDoc, doc} from "@/firebase";
 import { getDocs } from "@/firebase";
 import { db } from "@/firebase";
 //Picture upload
@@ -472,7 +472,7 @@ export default {
     },
     async otkupi() {
       try {
-        const docRef = await addDoc(collection(db, "zahtjevi"), {
+        await setDoc(doc(db, "zahtjevi", this.sifra), {
           korisnik: store.currentUser,
           instrument: [
             this.odabranaVrsta,
@@ -496,9 +496,8 @@ export default {
           status: "U razradi",
           novaCijena: false,
           preporucenaCijena: Math.round(this.preporucenaCijena),
-          sifra: this.sifra,
         });
-        console.log("Predan zahtjev za otkup sa ID: ", docRef.id);
+        console.log("Predan zahtjev za otkup");
         this.zahtjevPredan = true;
         this.sendEmail();
         router.push('status-otkupa');

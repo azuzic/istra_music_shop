@@ -123,7 +123,7 @@
       </div>
       <hr class="dotted mt-2 mb-2" />
       <p v-if="store.currentUser != 'djelatnik@gmail.com' && cijenaUpdated"
-      class="text-20px text-center">Nova ponuđena cijena: <b class="price">{{novaPreporucenaCijena}} kn</b></p>
+      class="text-20px text-center">Nova predložena cijena: <b class="price">{{novaPreporucenaCijena}} kn</b></p>
       <!--===================ODBIJ OTKUP====================-->
       <div v-if="store.currentUser != 'djelatnik@gmail.com' && cijenaUpdated"
             class="place-self-center mt-4" 
@@ -254,6 +254,7 @@ import CCard from "@/components/CCard.vue";
 //Firebase
 import { db } from "@/firebase";
 import { doc, collection, getDocs, updateDoc} from "@/firebase";
+import { query, where, onSnapshot, } from "@/firebase";
 
 import emailjs from "@emailjs/browser";
 export default {
@@ -272,7 +273,7 @@ export default {
     return {
       novaCijena: "",
       preporucenaCijena: "",
-      novaPreporucenaCijena: "0",
+      novaPreporucenaCijena: 0,
       cijenaUpdated: "false",
       mob: "",
       korisnik: [{
@@ -289,6 +290,14 @@ export default {
       
     };
   },
+  /*
+  created(){
+  const unsub = onSnapshot(doc(db, "zahtjevi", "SF"), (doc) => {
+  const source = doc.metadata.hasPendingWrites ? "Local" : "Server";
+  console.log(source, " data: ", doc.data());
+  });
+  },
+  */
   methods: {
     sendEmail(){
       var params = {
@@ -341,7 +350,7 @@ export default {
         msg
       )
       .then(() => {
-        const g = doc(db, "zahtjevi", store.zahtjev.id);
+        const g = doc(db, "zahtjevi", store.zahtjev.sifra);
         if(rezultat){
           updateDoc(g, {
             status: "Odbijeno"
@@ -369,20 +378,17 @@ export default {
         "Jeste li sigurni da želite predložiti novu cijenu? Više nećete moći predložiti novu cijenu."
       )
       .then(() => {
-        const g = doc(db, "zahtjevi", store.zahtjev.id);
+        const g = doc(db, "zahtjevi", store.zahtjev.sifra);
         updateDoc(g, {
           novaPreporucenaCijena: this.novaCijena,
-          novaCijena: true,
         });
         this.novaPreporucenaCijena = this.novaCijena;
         this.preporucenaCijena = this.novaCijena;
         this.cijenaUpdated = true;
-        this.novaCijena = '';
+        this.novaCijena = "";
       })
-      .catch(() => {
-      });
+      .catch(() => {});
     },
-
     updateStatus(status) {
       let msg = "";
       if(status == "Odbijeno")
@@ -394,7 +400,7 @@ export default {
         msg
       )
       .then(() => {
-        const g = doc(db, "zahtjevi", store.zahtjev.id);
+        const g = doc(db, "zahtjevi", store.zahtjev.sifra);
         updateDoc(g, {
           status: status
         });

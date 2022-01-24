@@ -14,8 +14,6 @@ export default {
     status: "",
     img: "",
     date: "",
-    id: "",
     slike: ["","","","","",""],
-    novaCijena: false,
   }
 };

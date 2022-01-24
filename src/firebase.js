@@ -13,9 +13,13 @@ import {
 import { 
   collection, 
   doc, 
+  setDoc,
   addDoc, 
   getDocs, 
-  updateDoc 
+  updateDoc ,
+  onSnapshot,
+  query,
+  where,
 } from "firebase/firestore";
 
 import { 
@@ -42,21 +46,35 @@ const db = getFirestore();
 const storage = getStorage(app);
 
 //Firebase exports
-export { getAuth };
-export { createUserWithEmailAndPassword };
-export { signInWithEmailAndPassword };
-export { onAuthStateChanged };
-export { signOut };
-export { sendPasswordResetEmail };
-export { app };
+export { 
+  getAuth,
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  onAuthStateChanged, 
+  signOut, 
+  sendPasswordResetEmail, 
+  app 
+};
 
 //Firestore exports
-export { db };
-export { collection };
-export { addDoc };
-export { getDocs };
-export { updateDoc };
-export { doc };
-
+export { 
+  db,
+  doc,
+  collection, 
+  setDoc, 
+  addDoc,
+  getDocs, 
+  updateDoc, 
+  where, 
+  query, 
+  onSnapshot 
+};
 //FirebaseStorage exports
-export { storage, ref, uploadBytes, getDownloadURL, deleteObject, getStorage };
+export { 
+  storage, 
+  ref, 
+  uploadBytes, 
+  getDownloadURL, 
+  deleteObject, 
+  getStorage 
+};

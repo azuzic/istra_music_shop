@@ -69,11 +69,11 @@
   </div>
 </template>
 <script>
+//Data
 import moment from "moment";
 import store from "@/store";
+//Firebase
 import {db, query, where, onSnapshot, collection } from "@/firebase";
-
-  
 
 export default {
   name: "CCard",
@@ -85,19 +85,19 @@ export default {
       store
     };
   },
+  created(){
+  //Firebase evenet listener
+  const q = query(collection(db, "zahtjevi"), where("novaPreporucenaCijena", "!=", null));
+  onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      this.zahtjev.novaPreporucenaCijena = doc.data().novaPreporucenaCijena;
+    });
+  });
+  },
   computed: {
     receivedFromNow() {
       return moment(parseInt(this.zahtjev.date)).fromNow();
     },
-    eventListener(){
-      //Snapshot handler
-      const q = query(collection(db, "zahtjevi"), where("novaPreporucenaCijena", "!=", 0));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          this.zahtjev.novaPreporucenaCijena = doc.data().novaPreporucenaCijena;
-        });
-      });
-    }
   },
 };
 </script>
