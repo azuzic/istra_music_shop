@@ -177,6 +177,10 @@ export default {
     },
     async updateKorisnik() {
       if(this.email !== this.oldEmail) {
+          setTimeout(() => {
+            //Promjena 
+            document.getElementById('dg-input-elem').type = 'password';
+          }, 100);
           this.$dialog
           .prompt({
             title: "Promjena email adrese",
@@ -210,7 +214,7 @@ export default {
           .catch(() => {  
             console.log('Prompt closed');
           });
-
+          
       }
       else this.saveData();
     },
