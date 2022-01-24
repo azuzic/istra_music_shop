@@ -268,7 +268,7 @@
       </div>
 
         <croppa
-          :class="isUploading ? 'hide-x' : 'show-x'"
+          :class="isUploading || isSpining ? 'hide-x' : 'show-x'"
           v-if="refresh"
           id="checkForUpload"
           v-model="imageReference"
