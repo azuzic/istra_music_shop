@@ -6,7 +6,7 @@
       
     <!--==============DJELATNIK============================-->
       <div v-if="currentRouteName != 'Registracija' && currentRouteName != 'Prijava' && currentRouteName != 'PasswordReset'">
-        <div v-if="store.currentUser == 'djelatnik@gmail.com'" class="menu2 top-0 grid grid-cols-2 mb-4"> <!--Paragraph routes-->
+        <div v-if="store.currentUser == 'istramusicshop@gmail.com'" class="menu2 top-0 grid grid-cols-2 mb-4"> <!--Paragraph routes-->
       
           <div :class=" currentRouteName == 'Djelatnik' ? 'menu-item2 menu-top-item-grid0' : 
                         currentRouteName == 'Racun' ? 'menu-item2 menu-top-item-grid1' : ''"> 
@@ -71,26 +71,33 @@ onAuthStateChanged(auth, (user) => {
     console.log("LOGGED IN: " + user.email);
     store.currentUser = user.email;
     store.userID = user.uid;
-    
+    store.emailVerified = user.emailVerified;
+
+    if(!user.emailVerified && currentRoute.name != "Registracija"){
+      console.log("Error, email not verified")
+      router.push({ name: "Prijava" }).catch(error => {});
+    }
+    else {
     //Posebni slucaj kad korisnik napusta PregledOtkupa (dodano zbog gubitka podataka)
     if (currentRoute.name == "PregledOtkupa") {
-      store.currentUser === "djelatnik@gmail.com"
+      store.currentUser === "istramusicshop@gmail.com"
         ? router.replace({ name: "Djelatnik" })
         : router.replace({ name: "StatusOtkupa" });
     }
     //Ako korisnik pokusava otic na admin stranicu
-    else if(currentRoute.meta.admin && store.currentUser!= "djelatnik@gmail.com"){
+    else if(currentRoute.meta.admin && store.currentUser!= "istramusicshop@gmail.com"){
       router.push({ name: "OtkupOpreme" });
     }
     //Ako djelatnik pokusa otici na korisnik stranicu
-    else if(currentRoute.meta.clientOnly && store.currentUser=== "djelatnik@gmail.com"){
+    else if(currentRoute.meta.clientOnly && store.currentUser=== "istramusicshop@gmail.com"){
       router.push({ name: "Djelatnik" });
     }
     //Ako prijavljeni korisnik pokusava otici na Home/Login/Register
     else if (!currentRoute.meta.needsUser) {
-      store.currentUser === "djelatnik@gmail.com"
+      store.currentUser === "istramusicshop@gmail.com"
         ? router.replace({ name: "Djelatnik" })
         : router.replace({ name: "OtkupOpreme" });
+    }
     }
   } 
   //Nema korisnika
@@ -98,7 +105,7 @@ onAuthStateChanged(auth, (user) => {
     console.log("NO USER");
     store.currentUser = null;
     if (currentRoute.meta.needsUser) {
-      router.push({ name: "Prijava" });
+      router.push({ name: "Prijava" }).catch(error => {});
     }
   }
 });

@@ -11,7 +11,7 @@ import {
   sendEmailVerification, 
   updateEmail, 
   reauthenticateWithCredential,
-  EmailAuthProvider,
+  EmailAuthProvider, 
 } from "firebase/auth";
 
 import { 
