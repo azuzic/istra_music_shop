@@ -254,7 +254,7 @@ import CCard from "@/components/CCard.vue";
 //Firebase
 import { db } from "@/firebase";
 import { doc, collection, getDocs, updateDoc} from "@/firebase";
-import { query, where, onSnapshot, } from "@/firebase";
+import { onSnapshot, where, query } from "@/firebase";
 
 import emailjs from "@emailjs/browser";
 export default {
@@ -274,7 +274,7 @@ export default {
       novaCijena: "",
       preporucenaCijena: "",
       novaPreporucenaCijena: 0,
-      cijenaUpdated: "false",
+      cijenaUpdated: false,
       mob: "",
       korisnik: [{
             imePrezime: "",
@@ -290,14 +290,23 @@ export default {
       
     };
   },
-  /*
-  created(){
-  const unsub = onSnapshot(doc(db, "zahtjevi", "SF"), (doc) => {
-  const source = doc.metadata.hasPendingWrites ? "Local" : "Server";
-  console.log(source, " data: ", doc.data());
-  });
+  created() {
+    //Firestore event listener
+    const q = query(collection(db, "zahtjevi"), where("novaPreporucenaCijena", "!=", null));
+    onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if(doc.id == store.zahtjev.sifra) {
+          if(doc.data().novaPreporucenaCijena<=0) {
+            this.cijenaUpdated = false;
+            return;
+          }
+          this.novaPreporucenaCijena = doc.data().novaPreporucenaCijena;
+          this.cijenaUpdated = true;
+        }
+        else this.cijenaUpdated = false;
+      });
+    });
   },
-  */
   methods: {
     sendEmail(){
       var params = {
@@ -309,10 +318,10 @@ export default {
       };
       emailjs.send("service_ox0wdn1", "promjenaStanjaZahtjeva", params).then(
         (result) => {
-          console.log("SUCCESS! ", result.text);
+          console.log("Email sent! ", result.text);
         },
         (error) => {
-          console.log("FAILED...", error.text);
+          console.error();("Email NOT sent!", error.text);
         }
       );
     },
@@ -329,11 +338,6 @@ export default {
           this.opis = store.zahtjev.napomena;
           this.stanje = store.zahtjev.status;
           this.preporucenaCijena = store.zahtjev.preporucenaCijena;
-          if(store.zahtjev.novaPreporucenaCijena > 0) {
-            this.novaPreporucenaCijena = store.zahtjev.novaPreporucenaCijena;
-            this.cijenaUpdated = true;
-          }
-          else this.cijenaUpdated = false;
           let m = this.korisnik[0].mob;
           this.mob = m.slice(0,3) + "-" + m.slice(3,6) + "-" + m.slice(6);
         }
@@ -361,7 +365,6 @@ export default {
           updateDoc(g, {
             preporucenaCijena: this.novaPreporucenaCijena,
             novaPreporucenaCijena: 0,
-            novaCijena: false,
             status: "Prihvaćeno"
           });
           this.stanje = "Prihvaćeno";
@@ -384,7 +387,7 @@ export default {
         });
         this.novaPreporucenaCijena = this.novaCijena;
         this.preporucenaCijena = this.novaCijena;
-        this.cijenaUpdated = true;
+        //this.cijenaUpdated = true;
         this.novaCijena = "";
       })
       .catch(() => {});
@@ -402,10 +405,12 @@ export default {
       .then(() => {
         const g = doc(db, "zahtjevi", store.zahtjev.sifra);
         updateDoc(g, {
-          status: status
+          status: status,
+          novaPreporucenaCijena: 0,
         });
         this.stanje = status
         this.sendEmail();
+        
       })
       .catch(() => {
        // NO

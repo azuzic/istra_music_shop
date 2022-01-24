@@ -3,7 +3,6 @@ export default {
   userID: "",
   theme: "Svijetla",
   darkToggle: true,
-  pictureUpload: "",
   zahtjev: {
     sifra: "",
     instrument: ["","","","","","",""],
@@ -12,7 +11,6 @@ export default {
     preporucenaCijena: "",
     novaPreporucenaCijena: "",
     status: "",
-    img: "",
     date: "",
     slike: ["","","","","",""],
   }

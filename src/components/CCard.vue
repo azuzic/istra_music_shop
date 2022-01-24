@@ -85,14 +85,15 @@ export default {
       store
     };
   },
-  created(){
-  //Firebase evenet listener
-  const q = query(collection(db, "zahtjevi"), where("novaPreporucenaCijena", "!=", null));
-  onSnapshot(q, (querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      this.zahtjev.novaPreporucenaCijena = doc.data().novaPreporucenaCijena;
+  created() {
+    //Firestore event listener
+    const q = query(collection(db, "zahtjevi"), where("novaPreporucenaCijena", "!=", null));
+    onSnapshot(q, (querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        if(doc.id == this.zahtjev.sifra)
+        this.zahtjev.novaPreporucenaCijena = doc.data().novaPreporucenaCijena;
+      });
     });
-  });
   },
   computed: {
     receivedFromNow() {

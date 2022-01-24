@@ -494,7 +494,6 @@ export default {
           zahtjevPredan: Date.now(),
           napomena: this.napomena,
           status: "U razradi",
-          novaCijena: false,
           preporucenaCijena: Math.round(this.preporucenaCijena),
         });
         console.log("Predan zahtjev za otkup");
@@ -526,10 +525,10 @@ export default {
       };
       emailjs.send("service_ox0wdn1", "noviZahtjev", params).then(
         (result) => {
-          console.log("SUCCESS! ", result.text);
+          console.log("Email sent! ", result.text);
         },
         (error) => {
-          console.log("FAILED...", error.text);
+          console.error();("Email NOT sent!", error.text);
         }
       );
     },
