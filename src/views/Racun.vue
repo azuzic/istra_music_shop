@@ -91,6 +91,11 @@
            msg1="Spremljeno!"
           msg2="Uneseni podaci su spremljeni. Nakon nestanka ove obavijesti možete ponovno spremiti podatke."
         />
+        <CWarning
+          :class="!wrongPass ? 'hide2' : 'hide'"
+           msg1="Upozorenje!"
+          msg2="Unijeli ste krivu lozinku za promjenu emaila."
+        />
         <!--===================RESETIRAJ LOZINKU====================-->
         <div class="place-self-center mt-6 mb-32"> 
           <router-link to="/password-reset">
@@ -161,6 +166,7 @@ export default {
       mob: "",
       theme: store.theme,
       canSave: true,
+      wrongPass: true
     };
   },
   components: {
@@ -228,7 +234,7 @@ export default {
           .then(dialog => {
             const credential = EmailAuthProvider.credential(
               store.currentUser,
-              dialog.data
+              document.getElementById("dg-input-elem").value,
             );
             const auth = getAuth();
             const user = auth.currentUser;
@@ -244,8 +250,12 @@ export default {
                   console.log("Email not updated." + error);
               })
             })
-            .catch((error) => {
+            .catch(() => {
               console.log("Wrong password!");
+              this.wrongPass = false;
+              setTimeout(() => {
+                this.wrongPass = true;
+              }, 4000);
             });
             
           })
