@@ -72,7 +72,7 @@
         <!--===================BROJ MOBITELA END===========-->
         <!--===================THEME===================-->
         <div @click="updateTheme()">
-          <p class="text-left text-18px m-0 p-0">Izgled aplikacije</p>
+          <p class="text-left text-18px m-0 p-0 mb-1">Izgled aplikacije</p>
           <CSelect
             id="$THEME"
             :options="['Svijetla', 'Tamna Plava', 'Tamna Crvena']"
