@@ -643,4 +643,18 @@ input:-webkit-autofill:active {
 .dg-btn-cancel span {
   color: var(--BalticSea__Lead) !important;
 }
+
+.dg-form {
+  background-color: var(--White__DarkGrey) !important;
+  border: none !important;
+}
+
+.dg-content-footer {
+  background-color: var(--White__DarkGrey) !important;
+  border: none !important;
+}
+
+#dg-input-elem {
+  border: none !important;
+}
 </style>
