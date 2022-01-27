@@ -354,19 +354,12 @@ export default {
         msg
       )
       .then(() => {
-        const g = doc(db, "zahtjevi", store.zahtjev.sifra);
         if(rezultat){
-          updateDoc(g, {
-            status: "Odbijeno"
-          });
+          this.updateDocOdbijanje();
           this.stanje = "Odbijeno";
         }
         else {
-          updateDoc(g, {
-            preporucenaCijena: this.novaPreporucenaCijena,
-            novaPreporucenaCijena: 0,
-            status: "Prihvaćeno"
-          });
+          this.updateDocPrihvacanje();
           this.stanje = "Prihvaćeno";
           this.preporucenaCijena = this.novaPreporucenaCijena;
         }
@@ -375,22 +368,38 @@ export default {
       .catch(() => {
       });
     },
+    async updateDocOdbijanje() {
+      const g = doc(db, "zahtjevi", store.zahtjev.sifra);
+      await updateDoc(g, {
+        status: "Odbijeno"
+      });
+    },
+    async updateDocPrihvacanje() {
+      const g = doc(db, "zahtjevi", store.zahtjev.sifra);
+      await updateDoc(g, {
+        preporucenaCijena: this.novaPreporucenaCijena,
+        novaPreporucenaCijena: 0,
+        status: "Prihvaćeno"
+      });
+    },
     predloziCijenu() {
       this.$dialog
       .confirm(
         "Jeste li sigurni da želite predložiti novu cijenu? Više nećete moći predložiti novu cijenu."
       )
       .then(() => {
-        const g = doc(db, "zahtjevi", store.zahtjev.sifra);
-        updateDoc(g, {
-          novaPreporucenaCijena: this.novaCijena,
-        });
+        this.updateDocNovaPreporucenaCijena();
         this.novaPreporucenaCijena = this.novaCijena;
         this.preporucenaCijena = this.novaCijena;
-        //this.cijenaUpdated = true;
         this.novaCijena = "";
       })
       .catch(() => {});
+    },
+    async updateDocNovaPreporucenaCijena() {
+      const g = doc(db, "zahtjevi", store.zahtjev.sifra);
+      await updateDoc(g, {
+        novaPreporucenaCijena: this.novaCijena,
+      });
     },
     updateStatus(status) {
       let msg = "";

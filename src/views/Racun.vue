@@ -199,11 +199,11 @@ export default {
       });
     },
     //Potrebno kod poništavanja promjene preko emaila
-    updateEmail(){
+    async updateEmail(){
       const g = doc(db, "users", store.userID);
-        updateDoc(g, {
-          email: store.currentUser,
-        });
+      await updateDoc(g, {
+        email: store.currentUser,
+      });
     },
     async updateKorisnik() {
       if(this.email !== this.oldEmail) {
