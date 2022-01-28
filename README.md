@@ -3,7 +3,7 @@
 Web aplikacija za otkup glazbenih instrumenata.
 
 ### Poveznica na aplikaciju
-istramusicshop.web.app/
+- https://istramusicshop.web.app/
 
 ### Autori i zaduženja
 
