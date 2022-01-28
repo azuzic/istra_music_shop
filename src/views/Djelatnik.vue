@@ -89,7 +89,7 @@ export default {
   methods: {
     async readData(state) {
       if (this.state != state && state) {
-        const q = query(collection(db, "zahtjevi"), orderBy("zahtjevPredan"));
+        const q = query(collection(db, "zahtjevi"), orderBy("zahtjevPredan", "desc"));
         const querySnapshot = await getDocs(q);
         var highestTimeoutId = setTimeout(";");
         for (var i = 0 ; i < highestTimeoutId ; i++) {
