@@ -284,10 +284,9 @@ export default {
       }],
       opis: "",
       stanje: "",
-      store,
       darken: false,
       img: [true,true,true,true,true,true],
-      
+      store,
     };
   },
   created() {
@@ -310,7 +309,7 @@ export default {
     });
   },
   methods: {
-    sendEmail(){
+    async sendEmail() {
       var params = {
         ime: this.korisnik[0].imePrezime,
         email: this.korisnik[0].email,
@@ -318,14 +317,8 @@ export default {
         sifra: store.zahtjev.sifra,
         cijena: this.preporucenaCijena,
       };
-      emailjs.send("service_ox0wdn1", "promjenaStanjaZahtjeva", params).then(
-        (result) => {
-          console.log("Email sent! ", result.text);
-        },
-        (error) => {
-          console.error();("Email NOT sent!", error.text);
-        }
-      );
+      let emailSent = await emailjs.send("service_ox0wdn1", "promjenaStanjaZahtjeva", params)
+      console.log("Email sent! ", emailSent.text);
     },
     async readData() {
       const querySnapshot = await getDocs(collection(db, "users"));
@@ -345,87 +338,76 @@ export default {
         }
       });
     },
-    promijeniCijenu(rezultat) {
-      let msg = "";
-      if(rezultat == 1)
-        msg = "Jeste li sigurni da želite odbiti promjenu cijene? Jednom kad se odbije ne može se prihvatiti.";
-      else 
-        msg = "Jeste li sigurni da želite prihvatiti promjenu cijene? Jednom kad se prihvati ne može se odbiti.";
-      this.$dialog
-      .confirm(
-        msg
-      )
-      .then(() => {
-        if(rezultat){
-          this.updateDocOdbijanje();
-          this.stanje = "Odbijeno";
-        }
-        else {
-          this.updateDocPrihvacanje();
-          this.stanje = "Prihvaćeno";
-          this.preporucenaCijena = this.novaPreporucenaCijena;
-        }
-        this.sendEmail();
-      })
-      .catch(() => {
-      });
-    },
-    async updateDocOdbijanje() {
-      const g = doc(db, "zahtjevi", store.zahtjev.sifra);
-      await updateDoc(g, {
-        status: "Odbijeno"
-      });
-    },
-    async updateDocPrihvacanje() {
-      const g = doc(db, "zahtjevi", store.zahtjev.sifra);
-      await updateDoc(g, {
-        preporucenaCijena: this.novaPreporucenaCijena,
-        novaPreporucenaCijena: 0,
-        status: "Prihvaćeno"
-      });
-    },
-    predloziCijenu() {
-      this.$dialog
-      .confirm(
-        "Jeste li sigurni da želite predložiti novu cijenu? Više nećete moći predložiti novu cijenu."
-      )
-      .then(() => {
-        this.updateDocNovaPreporucenaCijena();
-        this.novaPreporucenaCijena = this.novaCijena;
-        this.preporucenaCijena = this.novaCijena;
-        this.novaCijena = "";
-      })
-      .catch(() => {});
-    },
-    async updateDocNovaPreporucenaCijena() {
-      const g = doc(db, "zahtjevi", store.zahtjev.sifra);
-      await updateDoc(g, {
-        novaPreporucenaCijena: this.novaCijena,
-      });
-    },
-    updateStatus(status) {
-      let msg = "";
-      if(status == "Odbijeno")
-        msg = "Jeste li sigurni da želite odbiti otkup? Jednom kad se odbije ne može se prihvatiti.";
-      else 
-        msg = "Jeste li sigurni da želite prihvatiti otkup? Jednom kad se prihvati ne može se odbiti.";
-      this.$dialog
-      .confirm(
-        msg
-      )
-      .then(() => {
+    async promijeniCijenu(rezultat) {
+      try {
+        let msg = "";
+        if(rezultat == 1)
+          msg = "Jeste li sigurni da želite odbiti promjenu cijene? Jednom kad se odbije ne može se prihvatiti.";
+        else 
+          msg = "Jeste li sigurni da želite prihvatiti promjenu cijene? Jednom kad se prihvati ne može se odbiti.";
+        await this.$dialog.confirm(msg);
         const g = doc(db, "zahtjevi", store.zahtjev.sifra);
-        updateDoc(g, {
-          status: status,
-          novaPreporucenaCijena: 0,
-        });
-        this.stanje = status
-        this.sendEmail();
-        
-      })
-      .catch(() => {
-       // NO
-      });
+          if(rezultat) {
+            await updateDoc(g, {
+              status: "Odbijeno"
+            });
+            this.stanje = "Odbijeno";
+          }
+          else {
+            await updateDoc(g, {
+              preporucenaCijena: this.novaPreporucenaCijena,
+              novaPreporucenaCijena: 0,
+              status: "Prihvaćeno"
+            });
+            this.stanje = "Prihvaćeno";
+            this.preporucenaCijena = this.novaPreporucenaCijena;
+          }
+          this.sendEmail();
+      }
+        catch(e) {
+          console.error("Greška" + e);
+        }
+    },
+    async predloziCijenu() {
+      try {
+        await this.$dialog
+        .confirm(
+          "Jeste li sigurni da želite predložiti novu cijenu? Više nećete moći predložiti novu cijenu."
+        )
+          const g = doc(db, "zahtjevi", store.zahtjev.sifra);
+          await updateDoc(g, {
+            novaPreporucenaCijena: this.novaCijena,
+          });
+          this.novaPreporucenaCijena = this.novaCijena;
+          this.preporucenaCijena = this.novaCijena;
+          this.novaCijena = "";
+      }
+      catch(e) {
+        console.error("Greška" + e);
+      }
+    },
+    async updateStatus(status) {
+      try {
+        let msg = "";
+        if(status == "Odbijeno")
+          msg = "Jeste li sigurni da želite odbiti otkup? Jednom kad se odbije ne može se prihvatiti.";
+        else 
+          msg = "Jeste li sigurni da želite prihvatiti otkup? Jednom kad se prihvati ne može se odbiti.";
+        await this.$dialog
+        .confirm(
+          msg
+        )
+          const g = doc(db, "zahtjevi", store.zahtjev.sifra);
+          await updateDoc(g, {
+            status: status,
+            novaPreporucenaCijena: 0,
+          });
+          this.stanje = status
+          this.sendEmail();
+      }
+      catch(e) {
+        console.error("Greška" + e);
+      }
     },
     enlarge(id) {
       this.darken = !this.darken;

@@ -385,8 +385,7 @@ export default {
     CSelect,
     CButtonSingle,
   },
-  beforeRouteLeave(to, from, next) {
-    
+  async beforeRouteLeave(to, from, next) {
     //Provjeri je li doslo do promjene kod promjene rute
     if(
       !this.mode &&
@@ -411,16 +410,15 @@ export default {
       }
     //Ako je doslo do promjene a zahtjev nije predan, upozori korisnika na gubitak podataka
     else {
-      this.$dialog
-        .confirm ("Jeste li sigurni da želite napustiti stranicu? Promjene neće biti spremljene.")
-        .then(() => {
-            this.deleteImages();
-            pictures.resetData();
-            next();
-        })
-        .catch(()=> {
-          next(false);
-        });
+      try {
+        await this.$dialog.confirm ("Jeste li sigurni da želite napustiti stranicu? Promjene neće biti spremljene.");
+          this.deleteImages();
+          pictures.resetData();
+          next();
+      }
+      catch(e) {
+        next(false);
+      }  
     }
   },
  mounted() {
@@ -428,7 +426,6 @@ export default {
   },
   methods: {
     dummy() {},
-
     rotateImg() {
       this.isSpining = true;
       this.animateRotate=!this.animateRotate;
@@ -438,7 +435,6 @@ export default {
         this.isSpining = false;
       }, 100)
     },
-
     uploaded() {
       if (this.imageReference != null)
         if (this.imageReference.chosenFile == null)
@@ -470,22 +466,25 @@ export default {
         });
       });
     },
-    //Ucitaj sliku
+    //Spremi sliku u firebase storage
     async savePhoto() {
       try {
         this.canUpload = false;
         this.isUploading = true;
-        let blobData = await this.getImage()
+        
+        let blobData = await this.getImage();
           let objectName = Date.now() + ".png";
           let imageName = "zahtjevi/" + store.currentUser + "/" + this.sifra + "/" + objectName;
           const storageRef = ref(storage, imageName);
+
         await uploadBytes(storageRef, blobData);
-          console.log("Image " + imageName+ " uploaded!");
+          console.log("Image " + imageName + " uploaded!");
           this.currentPictureObj.uploaded = true;
           this.currentPictureObj.name = objectName;
           this.mode = false;
           this.isUploading = false;
           pictures.mode = false;
+
         let url = await getDownloadURL(ref(storage, imageName))
           this.currentPictureObj.url = url;
           document.getElementById('scroll-slike').scrollIntoView(true);
@@ -494,7 +493,7 @@ export default {
         console.error(e);
       }
     },
-    //Otkup opreme
+    //Odaberi sliku za spremiti
     imageUpload(image) {
       this.refresh = false;
 
@@ -564,8 +563,7 @@ export default {
         napomena: this.napomena,
       };
       let emailSent = await emailjs.send("service_ox0wdn1", "noviZahtjev", params);
-          console.log("Email sent! ", emailSent.text);
-          console.error();("Email NOT sent!");
+        console.log("Email sent! ", emailSent.text);
     },
   },
   computed: {

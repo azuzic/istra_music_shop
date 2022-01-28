@@ -84,7 +84,6 @@ export default {
                   novaPreporucenaCijena: `${doc.data().novaPreporucenaCijena}`,
                   sifra: `${doc.id}`,
                 });
-
                 b++;
               }, (time += delay));
           }

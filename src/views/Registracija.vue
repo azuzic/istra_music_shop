@@ -279,13 +279,12 @@ export default {
       if (this.password !== this.passwordRepeat)
         return;
       else {
-        createUserWithEmailAndPassword(auth, this.email, this.password)
-          .then(async (userCredential) => {
+        try {
+          let userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password);
             // Uspješna prijava, spremanje u bazu
-            console.log("Uspješna registracija!" + userCredential);
+            console.log("Uspješna registracija!");
             this.registered = true;
             const user = userCredential.user;
-            try {
               await setDoc(doc(db, "users",user.uid), {
                 imePrezime: this.nameSurname,
                 email: this.email,
@@ -295,32 +294,19 @@ export default {
               });
               this.signout();
               console.log("Uspješno dodan novi korisnik");
-              sendEmailVerification(auth.currentUser)
-              .then(() =>{
+              await sendEmailVerification(auth.currentUser);
                 console.log("Email verification sent!");
-              });
-            } catch (e) {
-              console.error("Greška kod dodavanja novog korisnika: ", e);
             }
-          })
-          .catch((e) => {
-            let error = e.message.slice(22, -2).replace(/-/g, " ");
-            error = error.charAt(0).toUpperCase() + error.slice(1) + "!";
-            console.error(error);
-            if (error == "Email already in use!") 
-              this.greska = true;
-          });
-      }
+        catch(e) {
+          console.error(e);
+          if (e == "FirebaseError: Firebase: Error (auth/email-already-in-use).") 
+            this.greska = true;
+          };
+        }
     },
-    signout() {
-      const auth = getAuth();
-      signOut(auth)
-        .then(() => {
-          console.log("Signed out!");
-        })
-        .catch((error) => {
-          console.error("Error signing out!" + error);
-        });
+    async signout() {
+      await signOut(auth)
+      console.log("Signed out!");
     },
     eye() {
       let x = document.getElementById("pass1");

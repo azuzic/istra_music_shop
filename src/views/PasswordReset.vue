@@ -27,6 +27,11 @@
           msg2="Na vašu email adresu dobit ćete poveznicu za resetiranje lozinke."
           v-if="sent"
         />
+        <CWarning
+          v-if="greska"
+          msg1="Upozorenje!"
+          msg2="Korisnički račun s unesenom adresom e-pošte ne postoji."
+        /> 
         <!--===================POTVRDI BUTTON==============-->
         <div
           class="place-self-center"
@@ -47,12 +52,14 @@
   </div>
 </template>
 <script>
+import router from "@/router";
+import store from "@/store";
+//Komponente
 import CTitle from "@/components/CTitle.vue";
 import CWarning from "@/components/CWarning.vue";
 import CSuccess from "@/components/CSuccess.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
-import router from "@/router";
-import store from "@/store";
+//Firebase
 import { getAuth, sendPasswordResetEmail } from "@/firebase";
 import { signOut } from "@/firebase";
 
@@ -62,12 +69,15 @@ let wait = function (seconds) {
   });
 };
 
+const auth = getAuth();
+
 export default {
   name: "PasswordReset",
   data() {
     return {
       email: "",
       sent: false,
+      greska: false,
       store,
     };
   },
@@ -87,32 +97,27 @@ export default {
   },
   methods: {
     dummy() {},
-
-    resetPassword() {
-      const auth = getAuth();
-      sendPasswordResetEmail(auth, this.email)
-        .then(() => {
-          console.log("Uspjesno poslano!");
+    async resetPassword() {
+      try {
+        await sendPasswordResetEmail(auth, this.email)
+          console.log("Uspjesno poslan email za resetiranje lozinke!");
           this.sent = true;
           wait(4).then(() => {
             router.replace({ name: "Prijava" });
           });
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          // ..
+      }
+      catch(e) {
+        console.error("Greška " + e);
+        if(e == "FirebaseError: Firebase: Error (auth/user-not-found).")
+          this.greska = true;
+        wait(3).then(() => {
+          this.greska = false;
         });
+      }
     },
-    signout() {
-      const auth = getAuth();
-      signOut(auth)
-        .then(() => {
-          console.log("Signed out!");
-        })
-        .catch((error) => {
-          console.error("Signed out error!");
-        });
+    async signout() {
+      await signOut(auth);
+      console.log("Signed out!");
     },
   },
 };

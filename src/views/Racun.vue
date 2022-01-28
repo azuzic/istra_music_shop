@@ -154,6 +154,12 @@ function bindingFunction() {
   };
 }
 
+let wait = function (seconds) {
+  return new Promise((resolveFn) => {
+    setTimeout(resolveFn, seconds * 1000);
+  });
+};
+
 export default {
   name: "Racun",
   data() {
@@ -185,9 +191,8 @@ export default {
       const querySnapshot = await getDocs(collection(db, "users"));
       querySnapshot.forEach((doc) => {
         if (store.userID === `${doc.id}`) {
-          if(store.currentUser != `${doc.data().email}`){
+          if(store.currentUser != `${doc.data().email}`)
             this.updateEmail();
-          }
           this.imePrezime = `${doc.data().imePrezime}`;
           this.oldEmail = store.currentUser;
           this.email = store.currentUser;
@@ -207,97 +212,87 @@ export default {
     },
     async updateKorisnik() {
       if(this.email !== this.oldEmail) {
-          setTimeout(() => {
-            //Promjena 
-            document.getElementsByClassName("dg-form")[0].innerHTML = ('<label for="dg-input-elem" style="font-size: 13px;">Molimo unesite vašu lozinku:</label>' +
-            '<input type="password" placeholder="" autocomplete="off" id="dg-input-elem" style="width: 100%; margin-top: 10px; padding: 5px 15px; font-size: 16px; border-radius: 4px; border: 2px solid rgb(238, 238, 238);" type = "password">' +
-            ' <hr/>' +
-            ' <img ' +
-              'id="eye1"' +
-              ' @click="eye"' +
-              ' class="eye"' +
-              ' src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/OOjs_UI_icon_eyeClosed.svg/1200px-OOjs_UI_icon_eyeClosed.svg.png"/>' +
-              ' <img ' +
-              'id="eye2"' +
-              ' @click="eye"' +
-              ' class="eye invisible"' +
-              ' src="https://image.flaticon.com/icons/png/512/63/63568.png"/>'
-            );
-            bindingFunction();
-          }, 200);
-          this.$dialog
+        //Password hide icon 
+        wait(0.2).then(() =>{
+          document.getElementsByClassName("dg-form")[0].innerHTML = ('<label for="dg-input-elem" style="font-size: 13px;">Molimo unesite vašu lozinku:</label>' +
+          '<input type="password" placeholder="" autocomplete="off" id="dg-input-elem" style="width: 100%; margin-top: 10px; padding: 5px 15px; font-size: 16px; border-radius: 4px; border: 2px solid rgb(238, 238, 238);" type = "password">' +
+          ' <hr/>' +
+          ' <img ' +
+          'id="eye1"' +
+          ' @click="eye"' +
+          ' class="eye"' +
+          ' src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/OOjs_UI_icon_eyeClosed.svg/1200px-OOjs_UI_icon_eyeClosed.svg.png"/>' +
+          ' <img ' +
+          'id="eye2"' +
+          ' @click="eye"' +
+          ' class="eye invisible"' +
+          ' src="https://image.flaticon.com/icons/png/512/63/63568.png"/>'
+          );
+          bindingFunction();
+        }); 
+        try {
+          await this.$dialog
           .prompt({
             title: "Promjena email adrese",
-          }, {
+            }, {
             promptHelp: 'Molimo unesite vašu lozinku:'
-          })
-          .then(dialog => {
+            })
             const credential = EmailAuthProvider.credential(
-              store.currentUser,
-              document.getElementById("dg-input-elem").value,
+            store.currentUser,
+            document.getElementById("dg-input-elem").value, //Password from dialogue
             );
             const auth = getAuth();
             const user = auth.currentUser;
-            
-            reauthenticateWithCredential(user, credential)
-            .then(() => {
-              updateEmail(user, this.email).then(() => {
+
+            await reauthenticateWithCredential(user, credential);
+              await updateEmail(user, this.email);
                 console.log("Email updated.");
                 store.currentUser = this.email;
-                this.saveData();
-              })
-              .catch((error) => {
-                  console.log("Email not updated." + error);
-              })
-            })
-            .catch(() => {
-              console.log("Wrong password!");
-              this.wrongPass = false;
-              setTimeout(() => {
+                this.saveData();     
+          }
+          catch(e) {  
+            if(e == "FirebaseError: Firebase: Error (auth/wrong-password)."){ 
+                this.wrongPass = false;
+                setTimeout(() => {
                 this.wrongPass = true;
-              }, 4000);
-            });
-            
-          })
-          .catch(() => {  
-            console.log('Prompt closed');
-          });
-          
+                }, 4000);
+            }
+          };
       }
       else this.saveData();
     },
     //Spremi korisničke podatke u firestore
-    async saveData(){
+    async saveData() {
+      try {
       this.canSave = false;
       const g = doc(db, "users", store.userID);
-        await updateDoc(g, {
+      await updateDoc(g, {
           imePrezime: this.imePrezime,
           email: this.email,
           mob: this.mob,
           oib: this.oib,
           theme: this.theme,
         })
-        .then(() => {
-          console.log("Podaci o korisniku spremljeni!");
-          setTimeout(() => {
-            this.canSave = true;
-          }, 5000);
-        })
-        .catch((error) => {
-          console.error("Neuspješno spremanje podataka o korisniku!" + error);
-        });
-      },
+        console.log("Podaci o korisniku spremljeni!");
+        setTimeout(() => {
+          this.canSave = true;
+        }, 5000);
+      }  
+      catch(e) {
+        console.error("Neuspješno spremanje podataka o korisniku!" + e);
+      }
+    },
     dummy() {},
-    signout() {
+    async signout() {
       store.theme="Svijetla"; //Theme reset
-      const auth = getAuth();
-      signOut(auth)
-        .then(() => {
-          console.log("Signed out!");
-        })
-        .catch((error) => {
-          console.error("Error signing out!" + error);
-        });
+      try {
+        const auth = getAuth();
+        await signOut(auth);
+        console.log("Signed out!");
+      }
+      catch(e) {
+        console.error("Error signing out!" + e);
+      }
     },
     checkEmail(email) {
       let re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -307,14 +302,14 @@ export default {
       store.theme=this.theme;
     },
     mobLoad() {
-          let br = this.mobTemp.slice(2);
-          this.mob = this.mobTemp;
-          let l = br.length;
-          if (l >= 1 && l < 5 && br)
-            this.mobTemp = br.slice(0, 1) + "-" + br.slice(1);
-          else if (l >= 5)
-            this.mobTemp =
-              br.slice(0, 1) + "-" + br.slice(1, 4) + "-" + br.slice(4);
+      let br = this.mobTemp.slice(2);
+      this.mob = this.mobTemp;
+      let l = br.length;
+      if (l >= 1 && l < 5 && br)
+        this.mobTemp = br.slice(0, 1) + "-" + br.slice(1);
+      else if (l >= 5)
+        this.mobTemp =
+        br.slice(0, 1) + "-" + br.slice(1, 4) + "-" + br.slice(4);
     },
   },
   computed: {

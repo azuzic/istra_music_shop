@@ -64,12 +64,6 @@ import CCard from "@/components/CCard.vue";
 import { collection, getDocs, query, orderBy } from "@/firebase";
 import { db } from "@/firebase";
 
-let wait = function (seconds) {
-  return new Promise((resolveFn) => {
-    setTimeout(resolveFn, seconds * 1000);
-  });
-};
-
 export default {
   name: "Djelatnik",
   data() {
