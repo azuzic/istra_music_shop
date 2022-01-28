@@ -179,6 +179,7 @@ export default {
     background-color: var(--Transparent__BleachedSilk);
     font-size: 4.5vw;
     & p {
+      transition: 0.1s; 
       width: 100%;
       color: var(--Fresco__KinglyCloud);  
       & a {
@@ -192,9 +193,7 @@ export default {
     }
   }
   .menu-item-selected p { 
-    transition: all;
-    transition-timing-function: ease-in-out;
-    transition: 1s; 
+    transition: 0.5s; 
     font-weight: bold;
     color: var(--DwarfFortress__Belladonna) !important;
   }

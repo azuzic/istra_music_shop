@@ -68,5 +68,9 @@ export default {
   display: flex;
   align-items: center;
   color: var(--SolidEmpire__DarkSouls);
+  .href-link {
+    font-size: 14px;
+    color: var(--PaleFlower__RavensBanquet);
+  }
 }
 </style>

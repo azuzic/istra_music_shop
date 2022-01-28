@@ -216,7 +216,7 @@
     <div class="CDodavanje-bottom grid grid-cols-1">
       <div class="place-self-center" :class="isSpining ? 'photo-iconD' : ''">
           <CButtonSingle
-            :class="canUpload && !isSpining? '' : 'tranparent-25'"
+            :class="canUpload && !isSpining? '' : 'transparent-25'"
             btn="PRENESI  "
             :btnClickHandler="canUpload && !isSpining ? savePhoto : dummy"
           />
@@ -240,7 +240,7 @@
       </div>
       <div v-if="isSpining" class="place-self-center">
           <CButtonSingle
-            :class="canUpload && !isSpining? '' : 'tranparent-25'"
+            :class="canUpload && !isSpining? '' : 'transparent-25'"
             btn="PRENESI  "
             :btnClickHandler="canUpload && !isSpining ? savePhoto : dummy"
           />

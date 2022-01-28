@@ -92,38 +92,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.menu-item-selected p {
-  transition: all;
-  transition-timing-function: ease-in-out;
-  transition: 1s;
-  width: 100%;
-  font-weight: bold;
-  color: #3f2c28;
-}
-.menu-bottom2 {
-  position: fixed;
-  bottom: -1px;
-  width: 100%;
-  height: 50px;
-  background-color: #3d3d3f;
-  box-shadow: 0px -4px 4px var(--Transparent25__Transparent75);
-}
-.menu-item-grid0 {
-  margin-left: 0%;
-  background-color: var(--LimonFresco__Anime);
-}
-.menu-item-grid1 {
-  margin-left: 100%;
-  background-color: var(--SnowPea__RichGreen);
-}
-.menu-item-grid2 {
-  margin-left: 200%;
-  background-color: var(--SnowPea__RichGreen);
-}
-.menu-item-grid3 {
-  margin-left: 300%;
-  background-color: var(--ForbiddenFruit__RedPotion);
-}
-</style>

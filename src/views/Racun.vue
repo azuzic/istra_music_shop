@@ -48,7 +48,7 @@
         <div>
           <p class="text-left text-18px m-0 p-0">Broj mobitela</p>
           <div class="flex">
-            <div class="mtc2" style="color: grey !important">09</div>
+            <div class="Cmt-3" style="color: grey !important">09</div>
             <div class="w-full">
               <input
                 type="text"
@@ -108,8 +108,8 @@
     </div>
     <!--==============LOGUT================-->
     <button class="logout" @click="signout()">
-      <p class="pr-2 pb-1">Odjava</p>
-      <img class="exit-icon" src="@/assets/exit_icon.svg" />
+      <p class="pr-2 pb-1 text-24px">Odjava</p>
+      <img src="@/assets/exit_icon.svg" />
     </button>
     <!--==============/LOGUT================-->
   </div>
@@ -345,7 +345,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 .logout {
   position: fixed;
   bottom: 0;
@@ -354,48 +354,39 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1500;
   filter: drop-shadow(0px -4px 4px rgba(0, 0, 0, 0.25));
   background: var(--FluorescentRed__FrenchWine);
-}
-
-.logout p {
-  font-family: Alike;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 24px;
-  line-height: 30px;
-  display: flex;
-  align-items: center;
-  color: #000000d0;
-  font-weight: bold;
-}
-
-.exit-icon {
-  width: 32px;
-  height: 32px;
-  opacity: 0.75;
-}
-
-.mtc2 {
-  margin-top: 3px;
+  & p {
+    display: flex;
+    align-items: center;
+    color: #000000d0;
+    font-weight: bold;
+  }
+  & img {
+    width: 32px;
+    height: 32px;
+    opacity: 0.75;
+  }
 }
 
 .hide {
   overflow: hidden;
   height: 0px;
 }
-
 .hide2 {
   overflow: hidden;
   height: 106px;
 }
+
 .eye {
   float: right;
   margin-top: -28px;
   position: relative;
   z-index: 1;
-  cursor: pointer;
   height: 20px;
+}
+
+.Cmt-3 {
+  margin-top: 3px;
 }
 </style>

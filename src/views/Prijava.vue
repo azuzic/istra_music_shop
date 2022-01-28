@@ -206,13 +206,16 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 .eye {
   float: right;
   margin-top: -28px;
   position: relative;
   z-index: 1;
-  cursor: pointer;
   height: 20px;
+}
+.href-link {
+  font-size: 14px;
+  color: var(--PaleFlower__RavensBanquet);
 }
 </style>

@@ -120,7 +120,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped lang="scss">
 .arrow {
   position: absolute;
   bottom: 0px;

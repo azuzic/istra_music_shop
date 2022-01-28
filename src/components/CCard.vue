@@ -42,7 +42,7 @@
           <div
             v-if="zahtjev.status != 'Riješeno'"
             class="CCard-icon-1"
-            :class="zahtjev.status != 'Odbijeno' ? 'tranparent-10' : ''" >
+            :class="zahtjev.status != 'Odbijeno' ? 'transparent-10' : ''" >
             <img class="CCard-svg mx-auto mt-2" src="@/assets/deny_icon.png" />
             <p class="CCard-icontext">ODBIJENO</p>
           </div>
@@ -50,7 +50,7 @@
           <div 
             v-if="zahtjev.status != 'Riješeno'"
             class="CCard-icon-2"
-            :class="zahtjev.status != 'U razradi' ? 'tranparent-10' : ''" >
+            :class="zahtjev.status != 'U razradi' ? 'transparent-10' : ''" >
             <img v-if="zahtjev.novaPreporucenaCijena > 0 && zahtjev.status == 'U razradi' && store.currentUser == 'istramusicshop@gmail.com'"
             class="CCard-svg mx-auto mt-2" src="@/assets/email_sent.png" />
             <img v-else class="CCard-svg mx-auto mt-2" src="@/assets/load_icon.png" />
@@ -60,7 +60,7 @@
           <div 
             v-if="zahtjev.status != 'Riješeno'"
             class="CCard-icon-3"
-            :class="zahtjev.status != 'Prihvaćeno' ? 'tranparent-10' : ''">
+            :class="zahtjev.status != 'Prihvaćeno' ? 'transparent-10' : ''">
             <img class="CCard-svg mx-auto mt-2" src="@/assets/accept_icon.png" />
             <p class="CCard-icontext">PRIHVAĆENO</p>
           </div>

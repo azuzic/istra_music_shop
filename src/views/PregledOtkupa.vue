@@ -171,7 +171,7 @@
         <hr class="dotted mt-2 mb-2" />
       </div>
       <!--==============NOVA CIJENA==============================-->
-      <div v-if="store.currentUser == 'istramusicshop@gmail.com'" :class="stanje=='U razradi' && !cijenaUpdated ? '' : 'tranparent'">
+      <div v-if="store.currentUser == 'istramusicshop@gmail.com'" :class="stanje=='U razradi' && !cijenaUpdated ? '' : 'transparent'">
         <p class="text-left text-18px m-0 p-0 mt-6">Nova predložena cijena:</p>
         <input
           :disabled="stanje!='U razradi' || cijenaUpdated"
@@ -233,7 +233,7 @@
             class="money"
             src="@/assets/money_icon_dark.svg"
           />
-          <p class="pl-4 price-size" >
+          <p class="pl-4 text-24px" >
             Predložena cijena:
             <b class="price">{{preporucenaCijena}} kn</b>
           </p>
@@ -421,87 +421,110 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.menu-item-red {
-  background-color: var(--ForbiddenFruit__RedPotion);
-  & p {
-    color: var(--GraniteBrown__Lead);
-  }
-}
-.menu-item-yellow {
-  background-color: var(--LimonFresco__Anime);
-  & p {
-    color: var(--GraniteBrown__Lead);
-  }
-}
-.menu-item-green {
-  background-color: var(--SnowPea__RichGreen);
-  & p {
-    color: var(--GraniteBrown__Lead);
-  }
-}
-.menu-item-selected p {
+<style scoped lang="scss">
+.menu {
+  position: fixed;
+  top: 0px;
   width: 100%;
-  font-weight: bold;
-  color: #3f2c28;
-  font-size: 4.5vw;
-  transition: 0.5s;
-}
-.arrow {
-  width: 26px;
-  opacity: 0.75;
-  transform: scaleX(-1);
-}
-.menu-highlight {
-  background-color: var(--FluorescentRed__FrenchWine);
-}
-.bg-bottom {
-  position: absolute;
-  width: 100%;
-  background-color: var(--Transparent__BleachedSilk);
   height: 50px;
-}
-.menu-item5 p {
-  color: var(--Snow__Lead) !important;
-}
-.otkup-textarea:focus {
-  outline: none !important;
-  border-color: var(--FluorescentRed__FrenchWine);
-}
-
-.square {
-    background-color: var(--DustySky__Grey);
-    overflow: hidden;
-    float:left;
-    position: relative;
-    display: flex;
+  z-index: 3000;
+  background-color: var(--BalticSea__DarkToneInk);
+  box-shadow: 0px 4px 4px var(--Transparent25__Transparent75);
+  .menu-item {
     display: flex;
     align-items: center;
     text-align: center;
+    font-size: 4.5vw;
+    & p {
+      width: 100%;
+      height: 100%;
+      color: var(--Fresco__KinglyCloud);  
+      font-size: 4.5vw;
+      & a {
+        width: 100%;
+        font-size: 4.5vw;
+        & p {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100%;
+        }
+      }
+    }
+  }
+  .menu-item-red {
+    background-color: var(--ForbiddenFruit__RedPotion);
+    & p {
+      color: var(--GraniteBrown__Lead);
+    }
+  }
+  .menu-item-yellow {
+    background-color: var(--LimonFresco__Anime);
+    & p {
+      color: var(--GraniteBrown__Lead);
+    }
+  }
+  .menu-item-green {
+    background-color: var(--SnowPea__RichGreen);
+    & p {
+      color: var(--GraniteBrown__Lead);
+    }
+  }
+}
+.menu-item-active {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: var(--Transparent__BleachedSilk);
+    font-size: 4.5vw;
+  }
+  .menu-item-active p {
     width: 100%;
-    padding-bottom: 100%;
-    border-color: var(--StretchLimo__ChromaphobicBlack);
-    box-shadow: 0px 0px 4px var(--Transparent25__Transparent75);
+    font-weight: bold;
+    color: var(--graniteBrown);
+    font-size: 4.5vw;
+  }
+  .menu-item-active p a {
+    width: 100%;
+    font-weight: bold;
+    color: var(--graniteBrown);
+    font-size: 4.5vw;
+  }
+
+.square {
+  display: flex;
+  background-color: var(--DustySky__Grey);
+  overflow: hidden;
+  float:left;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  border-color: var(--StretchLimo__ChromaphobicBlack);
+  box-shadow: 0px 0px 4px var(--Transparent25__Transparent75);
+  .square-img {
+    position: absolute;
+    background-color: var(--DustySky__Grey);
+    width: 100%;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    pointer-events: none;
+  }
+  .fullscreen-img {
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%);
+    position: fixed !important;
+    z-index: 50000000;
+    width: 90% !important;
+    border-radius: 16px;
+    box-shadow: 0px 0px 8px hsl(0, 0%, 0%, 75%);
+  }
 }
 
-.square-img {
-    position: absolute;
-    width: 100%;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-}
-.square-img2 {
-    position: absolute;
-    width: 100%;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    color: var(--BalticSea__Squant);
-    font-size: 3.2vw; 
-    letter-spacing: 0.25px;
-}
 .undarken-bg {
+  top: 0px;
   width: 100%;
   height: 100%;
   position: fixed;
@@ -509,8 +532,8 @@ export default {
   background-color: hsl(0, 0%, 0%, 0%);
   backdrop-filter: blur(0px);
 }
-
 .darken-bg {
+  top: 0px;
   width: 100%;
   height: 100%;
   position: fixed;
@@ -519,15 +542,41 @@ export default {
   backdrop-filter: blur(4px);
 }
 
-.fullscreen-img {
-  position: absolute;
-  left:50%;
-  top:50%;
-  transform:translate(-50%,-50%);
-  position: fixed !important;
-  z-index: 50000000;
-  width: 90% !important;
-  border-radius: 16px;
-  box-shadow: 0px 0px 8px hsl(0, 0%, 0%, 75%);
+.menu-bottom {
+  position: fixed;
+  bottom: -1px;
+  width: 100%;
+  height: 50px;
+  background-color: var(--BalticSea__DarkToneInk);
+  box-shadow: 0px -4px 4px var(--Transparent25__Transparent75);
+  .bg-bottom {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+  }
+  .menu-item-bottom {
+    display: flex;
+    align-items: center;
+    font-size: 4.5vw;
+    & p {
+      color: var(--Snow__Lead) !important;
+    }
+    .money {
+      width: 43px;
+      opacity: 0.75;
+    }
+    .price {
+      color: var(--FluorescentRed__FrenchWine);
+    }
+  }
+}
+
+.arrow {
+  width: 26px;
+  opacity: 0.75;
+  transform: scaleX(-1);
+}
+.menu-highlight {
+  background-color: var(--FluorescentRed__FrenchWine);
 }
 </style>

@@ -160,7 +160,7 @@
         </div>
         <!--===================/LOZINKA=================-->
         <!--===================POTVRDI LOZINKU=============-->
-        <div :class="!password || PasswordStrength < 3 ? 'tranparent' : ''">
+        <div :class="!password || PasswordStrength < 3 ? 'transparent' : ''">
           <p class="text-left text-18px m-0 p-0">Potvrdi lozinku</p>
           <input
             :disabled="!password || PasswordStrength < 3"
@@ -208,12 +208,12 @@
         <!--===================/POTVRDI LOZINKU=========-->
         <!--================ALERT========================-->
         <CWarning
-          
+          v-if="greska && !registered"
           msg1="Upozorenje!"
           msg2="Korisnički račun s navedenom adresom e-pošte već postoji."
         /> 
         <CSuccess
-          
+          v-if="registered"
           msg1="Uspješna registracija!"
           msg2="Na vašu email adresu poslali smo poveznicu za potvrdu emaila."
         />
@@ -388,7 +388,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 .eye {
   float: right;
   margin-top: -28px;
