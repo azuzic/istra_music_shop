@@ -386,6 +386,7 @@ export default {
     CButtonSingle,
   },
   beforeRouteLeave(to, from, next) {
+    
     //Provjeri je li doslo do promjene kod promjene rute
     if(
       !this.mode &&
@@ -401,15 +402,15 @@ export default {
         pictures.resetData();
         next();
         return; 
-        }
+      }
     //Ako je zahtjev predan, resetiraj slike i prebaci 
-    else if(this.zahtjevPredan){
+    else if(this.zahtjevPredan) {
         pictures.resetData();
         next();
         return; 
       }
     //Ako je doslo do promjene a zahtjev nije predan, upozori korisnika na gubitak podataka
-    else{
+    else {
       this.$dialog
         .confirm ("Jeste li sigurni da želite napustiti stranicu? Promjene neće biti spremljene.")
         .then(() => {
@@ -435,14 +436,13 @@ export default {
         this.imageReference.rotate(); 
         this.animateRotate=!this.animateRotate;
         this.isSpining = false;
-      },100)
+      }, 100)
     },
 
     uploaded() {
       if (this.imageReference != null)
-        if (this.imageReference.chosenFile == null) {
+        if (this.imageReference.chosenFile == null)
           return true;
-        }
       return false;
     },
     deleteImages(){
@@ -463,36 +463,41 @@ export default {
         }
       });
     },
-    //Ucitaj sliku
-    savePhoto() {
-      this.canUpload = false;
-      this.isUploading = true;
-      this.imageReference.generateBlob((blobData) => {
-        let objectName = Date.now() + ".png";
-        let imageName = "zahtjevi/" + store.currentUser + "/" + this.sifra + "/" + objectName;
-        const storageRef = ref(storage, imageName);
-        // 'file' comes from the Blob or File API
-        uploadBytes(storageRef, blobData)
-          .then((result) => {
-            console.log("Image uploaded! ->", result);
-            this.currentPictureObj.uploaded = true;
-            this.currentPictureObj.name = objectName;
-            this.mode = false;
-            this.isUploading = false;
-            pictures.mode = false;
-            getDownloadURL(ref(storage, imageName)).then((url) => {
-              this.currentPictureObj.url = url;
-              document.getElementById('scroll-slike').scrollIntoView(true);
-            });
-          })
-          .catch((e) => {
-            console.error(e);
-          });
+    getImage() {
+      return new Promise((resolveFn, errorFn) => {
+        this.imageReference.generateBlob((data) => {
+          resolveFn(data);
+        });
       });
     },
+    //Ucitaj sliku
+    async savePhoto() {
+      try {
+        this.canUpload = false;
+        this.isUploading = true;
+        let blobData = await this.getImage()
+          let objectName = Date.now() + ".png";
+          let imageName = "zahtjevi/" + store.currentUser + "/" + this.sifra + "/" + objectName;
+          const storageRef = ref(storage, imageName);
+        await uploadBytes(storageRef, blobData);
+          console.log("Image " + imageName+ " uploaded!");
+          this.currentPictureObj.uploaded = true;
+          this.currentPictureObj.name = objectName;
+          this.mode = false;
+          this.isUploading = false;
+          pictures.mode = false;
+        let url = await getDownloadURL(ref(storage, imageName))
+          this.currentPictureObj.url = url;
+          document.getElementById('scroll-slike').scrollIntoView(true);
+      }
+      catch (e) {
+        console.error(e);
+      }
+    },
     //Otkup opreme
-    imageUpload(image){
+    imageUpload(image) {
       this.refresh = false;
+
       setTimeout(() => { 
         this.isUploadingPicture[image] = true;
         this.refresh = true;
@@ -505,7 +510,6 @@ export default {
       this.currentPictureObj = picture;
       this.currentPictureObj.url = '';
       this.uploadText = picture.text;
-      
     },
     async otkupi() {
       try {
@@ -538,10 +542,10 @@ export default {
         this.sendEmail();
         router.push('status-otkupa');
       } catch (e) {
-        console.error("Error adding document: ", e);
+        console.error("Greška kod predaje zahtjeva: ", e);
       }
     },
-    sendEmail(){
+    async sendEmail(){
       this.fetchUserData;
       var params = {
         ime: this.imePrezime,
@@ -559,35 +563,26 @@ export default {
         sifra: this.sifra,
         napomena: this.napomena,
       };
-      emailjs.send("service_ox0wdn1", "noviZahtjev", params).then(
-        (result) => {
-          console.log("Email sent! ", result.text);
-        },
-        (error) => {
-          console.error();("Email NOT sent!", error.text);
-        }
-      );
+      let emailSent = await emailjs.send("service_ox0wdn1", "noviZahtjev", params);
+          console.log("Email sent! ", emailSent.text);
+          console.error();("Email NOT sent!");
     },
   },
   computed: {
     stanjaSet() {
-      if (this.vlasnik == "1") {
+      if (this.vlasnik == "1") 
         this.prikazanaStanja =  ['Novo', 'Rabljeno', 'Neispravno'];
-      }
       else {
-        if (this.stanje != 'Neispravno') {
+        if (this.stanje != 'Neispravno') 
           this.stanje = 'Rabljeno';
-        }
         this.prikazanaStanja =  ['Rabljeno', 'Neispravno'];
       }
-
       return this.prikazanaStanja;
     },
     izracunCijene() {
-      for (var element in this.cijeneSerija) {
+      for (var element in this.cijeneSerija)
         if (this.odabranaSerija === this.cijeneSerija[element].serija)
           this.preporucenaCijena = this.cijeneSerija[element].cijena;
-      }
       var cijenaInstrumenta = this.preporucenaCijena;
 
       switch (parseInt(this.vlasnik)) {
@@ -601,6 +596,7 @@ export default {
           this.preporucenaCijena -= 0.17 * this.preporucenaCijena;
           break;
       }
+
       switch (this.stanje) {
         case "Novo":
           this.preporucenaCijena += this.preporucenaCijena * 0.1;
@@ -612,6 +608,7 @@ export default {
           this.preporucenaCijena -= this.preporucenaCijena * 0.55;
           break;
       }
+
       var year = parseInt(this.godinaProizvodnje);
       if (year >= 1950 && year < 1960)
         this.preporucenaCijena += this.preporucenaCijena * 2.00;
@@ -636,9 +633,8 @@ export default {
       this.cijeneSerija = [];
 
       for (const data in this.jsonData) {
-        for (const data1 in this.jsonData[data]) {
+        for (const data1 in this.jsonData[data])
           this.prikazaniProizvodaci.push(`${data1}`);
-          }
         }
       this.odabraniProizvodac = this.prikazaniProizvodaci[0];
       return this.prikazaniProizvodaci;
@@ -650,9 +646,8 @@ export default {
       for (const data in this.jsonData) {
         for (const data1 in this.jsonData[data]) {
           if (data1 === this.odabraniProizvodac)
-            for (const data2 in this.jsonData[data][data1]) {
+            for (const data2 in this.jsonData[data][data1]) 
               this.prikazaniModeli.push(`${data2}`);
-            }
         }
       }
       this.odabraniModel = this.prikazaniModeli[0];
