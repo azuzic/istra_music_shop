@@ -114,7 +114,6 @@
 <script>
 import store from "@/store";
 //Komponente
-import CTitle from "@/components/CTitle.vue";
 import CWarning from "@/components/CWarning.vue";
 import CButton from "@/components/CButton.vue";
 import CSelect from "@/components/CSelect.vue";
@@ -137,7 +136,6 @@ export default {
     };
   },
   components: {
-    CTitle,
     CWarning,
     CButton,
     CSelect,

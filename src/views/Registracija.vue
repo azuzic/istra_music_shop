@@ -208,12 +208,12 @@
         <!--===================/POTVRDI LOZINKU=========-->
         <!--================ALERT========================-->
         <CWarning
-          v-if="greska && !registered"
+          
           msg1="Upozorenje!"
           msg2="Korisnički račun s navedenom adresom e-pošte već postoji."
         /> 
         <CSuccess
-          v-if="registered"
+          
           msg1="Uspješna registracija!"
           msg2="Na vašu email adresu poslali smo poveznicu za potvrdu emaila."
         />
@@ -240,7 +240,6 @@
 <script>
 import store from "@/store";
 //Komponente
-import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
 import CSuccess from "@/components/CSuccess.vue";
 import CWarning from "@/components/CWarning.vue";
@@ -269,7 +268,6 @@ export default {
     };
   },
   components: {
-    CTitle,
     CButton,
     CSuccess,
     CWarning,

@@ -187,9 +187,9 @@
         <!--===================/OTKUPI===================-->
       </div>
       <!--==============FOOTER==================================-->
-      <div class="menu-bottom3 grid grid-cols-1 mt-4">
+      <div class="menu-bottom grid grid-cols-1 mt-4">
         <div class="bg-bottom"></div>
-        <div class="menu-item5 text-left mx-auto">
+        <div class="menu-item-bottom text-left mx-auto">
           <img
             v-if="store.darkToggle"
             class="money"
@@ -231,7 +231,7 @@
           isUploadingPicture[4] = false,
           isUploadingPicture[5] = false) : ''" 
           :class="!isUploading && !isSpining ? '' : 'hide-loading'"
-          class="arrow2" src="@/assets/arrow_icon.png" />
+          class="arrow" src="@/assets/arrow_icon.png" />
         </a>
         <div class="loading flex mt-4" :class="!isUploading ? 'hide-loading' : 'show-loading'">
           <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6 mr-2"></div>
@@ -252,7 +252,7 @@
     </div>
 
     <div class="CDodavanje-top">
-      <div v-if="uploaded()" class="menu-item6 mx-auto">
+      <div v-if="uploaded()" class="mx-auto">
         <img v-if="store.theme=='Svijetla'" class="dodavanje-icon" src="@/assets/upload.svg" />
         <img v-if="store.theme=='Tamna Plava'" class="dodavanje-icon" src="@/assets/upload_dark_blue.svg" />
         <img v-if="store.theme=='Tamna Crvena'" class="dodavanje-icon" src="@/assets/upload_dark_red.svg" />
@@ -293,7 +293,7 @@
         ></croppa>
 
       <div class="menu-bottom-dodavanje grid grid-cols-1 mt-4">
-        <div class="mx-auto menu-item7" :class="isSpining ? '' : ''"> 
+        <div class="mx-auto" :class="isSpining ? '' : ''"> 
           <img @click="rotateImg()" class="photo-icon" :class="isSpining ? 'photo-iconD' : ''" src="@/assets/rotate.png" />
           <img v-if="isSpining" class="photo-iconR" src="@/assets/rotate.png" />
         </div>
@@ -704,55 +704,50 @@ export default {
 };
 </script>
 
-<style>
-.otkup-div-image {
-  width: 120px;
-  overflow: hidden;
-}
-.otkup-div-image img {
-  border-color: var(--StretchLimo__ChromaphobicBlack);
-  height: 120px;
-  border-width: 2px;
-}
+<style scoped lang="scss">
 .otkup-textarea:focus {
   outline: none !important;
   border-color: var(--FluorescentRed__FrenchWine);
 }
-.bg-bottom {
-  position: absolute;
+.menu-bottom {
+  position: fixed;
+  bottom: -1px;
   width: 100%;
-  background-color: var(--Transparent__BleachedSilk);
   height: 50px;
-}
-.menu-item5 p {
-  color: var(--Snow__Lead) !important;
-}
-.CCard-img2 {
-  width: auto;
-  height: 100%;
-  background-color: rgb(80, 59, 59);
-}
-.img-upload {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-.square {
-    background-color: var(--DustySky__Grey);
-    overflow: hidden;
-    float:left;
-    position: relative;
-    display: flex;
+  background-color: var(--BalticSea__DarkToneInk);
+  box-shadow: 0px -4px 4px var(--Transparent25__Transparent75);
+  .bg-bottom {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+  }
+  .menu-item-bottom {
     display: flex;
     align-items: center;
-    text-align: center;
-    width: 100%;
-    padding-bottom: 100%;
-    border-color: var(--StretchLimo__ChromaphobicBlack);
-    box-shadow: 0px 0px 4px var(--Transparent25__Transparent75);
+    font-size: 4.5vw;
+    & p {
+      color: var(--Snow__Lead) !important;
+    }
+    .money {
+      width: 43px;
+      opacity: 0.75;
+    }
+    .price {
+      color: var(--FluorescentRed__FrenchWine);
+    }
+  }
 }
-
-.square-img {
+.square {
+  display: flex;
+  background-color: var(--DustySky__Grey);
+  overflow: hidden;
+  float:left;
+  position: relative;
+  width: 100%;
+  padding-bottom: 100%;
+  border-color: var(--StretchLimo__ChromaphobicBlack);
+  box-shadow: 0px 0px 4px var(--Transparent25__Transparent75);
+  .square-img {
     position: absolute;
     background-color: var(--DustySky__Grey);
     width: 100%;
@@ -760,8 +755,8 @@ export default {
     top:50%;
     transform:translate(-50%,-50%);
     pointer-events: none;
-}
-.square-img2 {
+  }
+  .square-img2 {
     position: absolute;
     width: 100%;
     height: 100% !important;
@@ -771,12 +766,14 @@ export default {
     color: var(--BalticSea__Squant);
     font-size: 3.2vw; 
     letter-spacing: 0.25px;
+  }
+  .hide-text {
+    opacity: 0;
+  }
+  .show-text {
+    opacity: 1;
+  }
 }
-
-/*=================================================================== */
-/*=================================================================== */
-/*=================================================================== */
-/*=================================================================== */
 
 .CDodavanje-top {
   position: absolute;
@@ -787,6 +784,40 @@ export default {
   width: 100%;
   height: 72%;
   box-shadow: 0px 4px 4px var(--Transparent25__Transparent75);
+  & div:nth-child(1) {
+    align-items: center;
+    text-align: center;
+    & p:nth-child(2) {
+      color: var(--Fresco__KinglyCloud) !important;
+      letter-spacing: 0.5px;
+      margin-top: 8px;
+      font-size: 14px;
+    }
+    & p:nth-child(3) {
+      color: var(--Fresco__KinglyCloud) !important;
+      margin-top: 4px;
+      letter-spacing: -1.5px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    & p:nth-child(4) {
+      color: var(--Fresco__KinglyCloud) !important;
+      margin-top: 4px;
+      letter-spacing: 0px;
+      font-size: 22px;
+    }
+    .dodavanje-icon {
+      width: 100%;
+      height: 123px;
+    }
+  }
+  .loading2 {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: var(--Snow__Lead);
+  }
 }
 .CDodavanje-bottom {
   position: absolute;
@@ -796,36 +827,14 @@ export default {
   bottom: 0px;
   width: 100%;
   height: 28%;
-}
-.dodavanje-icon {
-  width: 100%;
-  height: 123px;
-}
-.icon-remove {
-  height: 28px;
-}
-.menu-item6 {
-  align-items: center;
-  text-align: center;
-}
-.menu-item6 p:nth-child(2) {
-  color: var(--Fresco__KinglyCloud) !important;
-  letter-spacing: 0.5px;
-  margin-top: 8px;
-  font-size: 14px;
-}
-.menu-item6 p:nth-child(3) {
-  color: var(--Fresco__KinglyCloud) !important;
-  margin-top: 4px;
-  letter-spacing: -1.5px;
-  font-size: 24px;
-  font-weight: bold;
-}
-.menu-item6 p:nth-child(4) {
-  color: var(--Fresco__KinglyCloud) !important;
-  margin-top: 4px;
-  letter-spacing: 0px;
-  font-size: 22px;
+  .arrow {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    margin: 8px;
+    width: 42px;
+    transform: scaleX(-1);
+  }
 }
 
 .croppa-container {
@@ -835,35 +844,6 @@ export default {
   color: transparent;
   height: 100% !important;
   background-color: transparent;
-}
-
-.show-x svg {
-  width: 35px !important;
-  height: 35px !important;
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.hide-x svg {
-  width: 0px !important;
-  height: 0px !important;
-  margin-top: 25px;
-  margin-right: 25px;
-  opacity: 0% !important;
-}
-
-.arrow2 {
-  position: absolute;
-  bottom: 0px;
-  left: 0px;
-  margin: 8px;
-  width: 42px;
-  transform: scaleX(-1);
-}
-
-.loader {
-  border-color: var(--BalticSea__SilverMedal);
-  border-top-color: var(--FluorescentRed__FrenchWine);
 }
 
 .loader-squre-img {
@@ -883,14 +863,6 @@ export default {
   color: var(--BalticSea__BlackMana);
 }
 
-.loading2 {
-  width: 100%;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
-  color: var(--Snow__Lead);
-}
-
 .hide-loading {
   overflow: hidden;
   height: 0px;
@@ -901,12 +873,9 @@ export default {
   height: auto;
 }
 
-.hide-text {
-  opacity: 0;
-}
-
-.show-text {
-  opacity: 1;
+.loader {
+  border-color: var(--BalticSea__SilverMedal);
+  border-top-color: var(--FluorescentRed__FrenchWine);
 }
 
 .show-ucitaj {
@@ -933,18 +902,18 @@ export default {
   width: 100%;
   height: 50px;
   background-color: transparent;
-}
-.menu-item7 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 54px;
-  height: 54px;
-  margin-top: 23px;
-  border-radius: 100%;
-  background-color: var(--FluorescentRed__FrenchWine);
-  z-index: 42069;
+  & div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 54px;
+    height: 54px;
+    margin-top: 23px;
+    border-radius: 100%;
+    background-color: var(--FluorescentRed__FrenchWine);
+    z-index: 42069;
+  }
 }
 .photo-icon {
   height: 34px;
@@ -952,6 +921,9 @@ export default {
 .photo-iconR {
   height: 34px;
   animation:spin 1s linear infinite;
+  @keyframes spin { 
+    100% { transform: rotate(360deg); } 
+  }
 }
 .photo-iconD {
   position: fixed;
@@ -959,8 +931,5 @@ export default {
   opacity: 0%;
   bottom: 0px;
   height: 0px;
-}
-@keyframes spin { 
-    100% { transform: rotate(360deg); } 
 }
 </style>

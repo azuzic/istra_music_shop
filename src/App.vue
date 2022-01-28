@@ -432,25 +432,11 @@ input:-webkit-autofill:active {
   background-color: transparent;
   box-shadow: 0px -4px 4px var(--Transparent25__Transparent75);
 }
-.menu-bottom3 {
-  position: fixed;
-  bottom: -1px;
-  width: 100%;
-  height: 50px;
-  background-color: var(--BalticSea__DarkToneInk);
-  box-shadow: 0px -4px 4px var(--Transparent25__Transparent75);
-}
 .menu-item {
   display: flex;
   align-items: center;
   text-align: center;
   background-color: var(--Transparent__BleachedSilk);
-  font-size: 4.5vw;
-}
-.menu-item5 {
-  display: flex;
-  align-items: center;
-  text-align: center;
   font-size: 4.5vw;
 }
 
@@ -575,16 +561,8 @@ input:-webkit-autofill:active {
   border-bottom-right-radius: 2.5px !important;
   caret-color: var(--FluorescentRed__FrenchWine);
 }
-.money {
-  width: 43px;
-  opacity: 0.75;
-}
 .price-size {
   font-size: 6.4vw; //24px
-}
-
-.price {
-  color: var(--FluorescentRed__FrenchWine);
 }
 .fade-enter-active, .fade-leave-active {
   margin-left: 0%;
@@ -656,5 +634,20 @@ input:-webkit-autofill:active {
 
 #dg-input-elem {
   border: none !important;
+}
+
+.show-x svg {
+  width: 35px !important;
+  height: 35px !important;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.hide-x svg {
+  width: 0px !important;
+  height: 0px !important;
+  margin-top: 25px;
+  margin-right: 25px;
+  opacity: 0% !important;
 }
 </style>

@@ -220,9 +220,9 @@
     </div>
     <!--==============LIST END================================-->
     <!--==============FOOTER==================================-->
-    <div class="menu-bottom3 grid grid-cols-1 mt-4">
+    <div class="menu-bottom grid grid-cols-1 mt-4">
         <div class="bg-bottom"></div>
-        <div class="menu-item5 text-left mx-auto">
+        <div class="menu-item-bottom text-left mx-auto">
           <img
             v-if="store.darkToggle"
             class="money"
@@ -246,7 +246,6 @@
 <script>
 import store from "@/store";
 //Komponente
-import CTitle from "@/components/CTitle.vue";
 import CButtonSingle from "@/components/CButtonSingle.vue";
 import CButtonAccept from "@/components/CButtonAccept.vue";
 import CButtonDecline from "@/components/CButtonDecline.vue";
@@ -260,7 +259,6 @@ import emailjs from "@emailjs/browser";
 export default {
   name: "PregledOtkupa",
   components: {
-    CTitle,
     CButtonSingle,
     CButtonAccept,
     CButtonDecline,
@@ -423,24 +421,24 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .menu-item-red {
   background-color: var(--ForbiddenFruit__RedPotion);
+  & p {
+    color: var(--GraniteBrown__Lead);
+  }
 }
 .menu-item-yellow {
   background-color: var(--LimonFresco__Anime);
+  & p {
+    color: var(--GraniteBrown__Lead);
+  }
 }
 .menu-item-green {
   background-color: var(--SnowPea__RichGreen);
-}
-.menu-item-red p {
-  color: var(--GraniteBrown__Lead);
-}
-.menu-item-yellow p {
-  color: var(--GraniteBrown__Lead);
-}
-.menu-item-green p {
-  color: var(--GraniteBrown__Lead);
+  & p {
+    color: var(--GraniteBrown__Lead);
+  }
 }
 .menu-item-selected p {
   width: 100%;

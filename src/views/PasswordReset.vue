@@ -43,7 +43,7 @@
           />
         </div>
         <router-link to="/prijava">
-          <img class="arrow2" src="@/assets/arrow_icon.png" />
+          <img class="arrow" src="@/assets/arrow_icon.png" />
         </router-link>
         <!--===================POTVRDI BUTTON END==========-->
         <br />
@@ -121,10 +121,7 @@ export default {
 };
 </script>
 <style>
-.disabled-click {
-  pointer-events: none;
-}
-.arrow2 {
+.arrow {
   position: absolute;
   bottom: 0px;
   left: 0px;

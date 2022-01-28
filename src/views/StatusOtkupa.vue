@@ -15,7 +15,6 @@
 <script>
 import store from "@/store";
 //Komponente
-import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
 import CCard from "@/components/CCard.vue";
 //Firebase
@@ -32,7 +31,6 @@ export default {
     };
   },
   components: {
-    CTitle,
     CButton,
     CCard,
   },

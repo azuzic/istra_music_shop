@@ -2,21 +2,19 @@
   <div>
     <!--==============LIST ============================-->
     <transition-group class="grid grid-rows-auto gap-5 pl-2 pr-2 pb-16 pt-16" name="fade" tag="div">
-    <CCard  
-      v-for="(z, i) of zahtjevi"
-          :key="`key-${i}`"
-          :zahtjev = z
-    />
+      <CCard v-for="(z, i) of zahtjevi"
+            :key="`key-${i}`"
+            :zahtjev = z />
     </transition-group>
     <!--==============/LIST=========================-->
     <!--==============FOOTER===========================-->
-    <div class="menu-bottom2 grid grid-cols-4 mt-4">
-      <div 
-      class="menu-item2" 
-      :class="state == 'U razradi'  ? 'menu-item-selected menu-item-grid0' : 
-              state == 'Prihvaćeno' ? 'menu-item-selected menu-item-grid1' : 
-              state == 'Riješeno'   ? 'menu-item-selected menu-item-grid2' :
-              state == 'Odbijeno'   ? 'menu-item-selected menu-item-grid3' : ''">
+    <div class="menu-bottom-back grid grid-cols-4 mt-4">
+      <div  
+       class="menu-item" 
+      :class="state == 'U razradi'  ? 'menu-item-grid0' : 
+              state == 'Prihvaćeno' ? 'menu-item-grid1' : 
+              state == 'Riješeno'   ? 'menu-item-grid2' :
+              state == 'Odbijeno'   ? 'menu-item-grid3' : ''">
       </div>
     </div>
     <!--=======================-->
@@ -57,7 +55,6 @@
 
 <script>
 //Komponente
-import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
 import CCard from "@/components/CCard.vue";
 //Firebase
@@ -73,7 +70,6 @@ export default {
     };
   },
   components: {
-    CTitle,
     CButton,
     CCard,
   },
@@ -138,44 +134,69 @@ export default {
 };
 </script>
 
-<style>
-.menu-item-selected p {  
-  transition: all;
-  transition-timing-function: ease-in-out;
-  transition: 0.5s;
-  width: 100%;
-  font-weight: bold;
-  font-size: 4.5vw;
-  color: var(--DwarfFortress__Belladonna);
-}
-.menu-bottom2 {
+<style scoped lang="scss">
+.menu-bottom-back {
   position: fixed;
-  bottom: -1px;
+  bottom: 0px;
   width: 100%;
   height: 50px;
   background-color: var(--BalticSea__EerieBlack);
   box-shadow: 0px -4px 4px var(--Transparent25__Transparent75);
+  & .menu-item {
+    position: absolute;
+    height: inherit;
+    width: inherit;
+    grid-column-start: 1;
+    grid-column-end: 2;
+  }
+  .menu-item-grid0 {
+    margin-left: 0%;
+    background-color: var(--LimonFresco__Anime);
+  }
+  .menu-item-grid1 {
+    margin-left: 100%;
+    background-color: var(--SnowPea__RichGreen);
+  }
+  .menu-item-grid2 {
+    margin-left: 200%;
+    background-color: var(--SnowPea__RichGreen);
+  }
+  .menu-item-grid3 {
+    margin-left: 300%;
+    background-color: var(--ForbiddenFruit__RedPotion);
+  }
 }
-.menu-item-grid0 {
-  margin-left: 0%;
-  background-color: var(--LimonFresco__Anime);
-}
-.menu-item-grid1 {
-  margin-left: 100%;
-  background-color: var(--SnowPea__RichGreen);
-}
-.menu-item-grid2 {
-  margin-left: 200%;
-  background-color: var(--SnowPea__RichGreen);
-}
-.menu-item-grid3 {
-  margin-left: 300%;
-  background-color: var(--ForbiddenFruit__RedPotion);
-}
-.menu-item-card {
-  display: flex;
-  align-items: center;
-  text-align: center;
-  background-color: var(--Transparent__BleachedSilk);
+.menu-bottom {
+  position: fixed;
+  bottom: -1px;
+  width: 100%;
+  height: 50px;
+  box-shadow: 0px -4px 4px var(--Transparent25__Transparent75);
+  .menu-item {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background-color: var(--Transparent__BleachedSilk);
+    font-size: 4.5vw;
+    & p {
+      width: 100%;
+      color: var(--Fresco__KinglyCloud);  
+      & a {
+        color: var(--Fresco__KinglyCloud);
+        & p {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      }
+    }
+  }
+  .menu-item-selected p { 
+    transition: all;
+    transition-timing-function: ease-in-out;
+    transition: 1s; 
+    font-weight: bold;
+    color: var(--DwarfFortress__Belladonna) !important;
+  }
 }
 </style>
