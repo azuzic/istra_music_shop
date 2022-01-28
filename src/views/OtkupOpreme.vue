@@ -327,6 +327,12 @@ import { storage, ref, uploadBytes, getDownloadURL, deleteObject, getStorage} fr
 import router from "@/router";
 import emailjs from "@emailjs/browser";
 
+let wait = function (seconds) {
+  return new Promise((resolveFn) => {
+    setTimeout(resolveFn, seconds * 1000);
+  });
+};
+
 export default {
   name: "OtkupOpreme",
   data() {
@@ -494,21 +500,19 @@ export default {
       }
     },
     //Odaberi sliku za spremiti
-    imageUpload(image) {
+    async imageUpload(image) {
       this.refresh = false;
-
-      setTimeout(() => { 
-        this.isUploadingPicture[image] = true;
-        this.refresh = true;
-      }, 275)
       document.getElementById('scroll-slike').scrollIntoView(true);
       pictures.mode = true;
       this.mode = true;
-
       var picture = pictures.guitarPictures.find((picture) => picture.id === image);
       this.currentPictureObj = picture;
       this.currentPictureObj.url = '';
       this.uploadText = picture.text;
+
+      await wait(0.275);
+        this.isUploadingPicture[image] = true;
+        this.refresh = true;
     },
     async otkupi() {
       try {

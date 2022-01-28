@@ -102,17 +102,15 @@ export default {
         await sendPasswordResetEmail(auth, this.email)
           console.log("Uspjesno poslan email za resetiranje lozinke!");
           this.sent = true;
-          wait(4).then(() => {
+          await wait(4);
             router.replace({ name: "Prijava" });
-          });
       }
       catch(e) {
         console.error("Greška " + e);
         if(e == "FirebaseError: Firebase: Error (auth/user-not-found).")
           this.greska = true;
-        wait(3).then(() => {
+        await wait(3)
           this.greska = false;
-        });
       }
     },
     async signout() {

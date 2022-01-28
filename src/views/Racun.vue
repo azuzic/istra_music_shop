@@ -213,7 +213,7 @@ export default {
     async updateKorisnik() {
       if(this.email !== this.oldEmail) {
         //Password hide icon 
-        wait(0.2).then(() =>{
+        await wait(0.2);
           document.getElementsByClassName("dg-form")[0].innerHTML = ('<label for="dg-input-elem" style="font-size: 13px;">Molimo unesite vašu lozinku:</label>' +
           '<input type="password" placeholder="" autocomplete="off" id="dg-input-elem" style="width: 100%; margin-top: 10px; padding: 5px 15px; font-size: 16px; border-radius: 4px; border: 2px solid rgb(238, 238, 238);" type = "password">' +
           ' <hr/>' +
@@ -229,7 +229,6 @@ export default {
           ' src="https://image.flaticon.com/icons/png/512/63/63568.png"/>'
           );
           bindingFunction();
-        }); 
         try {
           await this.$dialog
           .prompt({
