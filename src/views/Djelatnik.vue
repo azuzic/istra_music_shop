@@ -61,8 +61,14 @@ import CTitle from "@/components/CTitle.vue";
 import CButton from "@/components/CButton.vue";
 import CCard from "@/components/CCard.vue";
 //Firebase
-import { collection, getDocs } from "@/firebase";
+import { collection, getDocs, query, orderBy } from "@/firebase";
 import { db } from "@/firebase";
+
+let wait = function (seconds) {
+  return new Promise((resolveFn) => {
+    setTimeout(resolveFn, seconds * 1000);
+  });
+};
 
 export default {
   name: "Djelatnik",
@@ -83,7 +89,8 @@ export default {
   methods: {
     async readData(state) {
       if (this.state != state && state) {
-        const querySnapshot = await getDocs(collection(db, "zahtjevi"));
+        const q = query(collection(db, "zahtjevi"), orderBy("zahtjevPredan"));
+        const querySnapshot = await getDocs(q);
         var highestTimeoutId = setTimeout(";");
         for (var i = 0 ; i < highestTimeoutId ; i++) {
             clearTimeout(i); 

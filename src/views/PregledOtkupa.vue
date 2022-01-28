@@ -311,7 +311,7 @@ export default {
   },
   methods: {
     sendEmail(){
-      /*var params = {
+      var params = {
         ime: this.korisnik[0].imePrezime,
         email: this.korisnik[0].email,
         status: this.stanje,
@@ -325,7 +325,7 @@ export default {
         (error) => {
           console.error();("Email NOT sent!", error.text);
         }
-      );*/
+      );
     },
     async readData() {
       const querySnapshot = await getDocs(collection(db, "users"));
