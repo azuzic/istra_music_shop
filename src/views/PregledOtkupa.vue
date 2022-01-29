@@ -123,11 +123,23 @@
       </div>
       <hr class="dotted mt-2 mb-2" />
       <p v-if="store.currentUser != 'istramusicshop@gmail.com' && cijenaUpdated"
-      class="text-20px text-center">Nova predložena cijena: <b class="price">{{novaPreporucenaCijena}} kn</b></p>
+      class="text-20px text-center" :class="stanje!='U razradi' ? 'hide' : 'hide3'">Nova predložena cijena: <b class="price">{{novaPreporucenaCijena}} kn</b></p>
+      <!--===================ALERT====================-->
+        <CSuccess
+          :class="prihvaceno ? 'hide2' : 'hide'"
+          msg1="Uspješno prihvaćeno!"
+          msg2="Na vašu email adresu poslana je potvrda o prihvaćanju nove predložene cijene."
+        />
+        <CDeny
+          :class="odbijeno ? 'hide2' : 'hide'"
+          msg1="Uspješno odbijeno!"
+          msg2="Na vašu email adresu poslana je potvrda o odbijanju nove predložene cijene."
+        />
+      <!--===================/ALERT====================-->
       <!--===================ODBIJ OTKUP====================-->
       <div v-if="store.currentUser != 'istramusicshop@gmail.com' && cijenaUpdated"
             class="place-self-center mt-4" 
-            :class="stanje=='U razradi' ? 'active' : 'inactive'">
+            :class="stanje!='U razradi' ? 'hide' : 'hide3'">
         <div @click="stanje=='U razradi' ? promijeniCijenu(1) : dummy()">
           <CButtonDecline btn="ODBIJ" :btnClickHandler="dummy" />
         </div>
@@ -136,7 +148,7 @@
       <!--=================PRIHVATI OTKUP===================-->
       <div v-if="store.currentUser != 'istramusicshop@gmail.com' && cijenaUpdated"
             class="place-self-center mt-4 mb-4" 
-            :class="stanje=='U razradi' ? 'active' : 'inactive'">
+            :class="stanje!='U razradi' ? 'hide' : 'hide3'">
         <div @click="stanje=='U razradi' ? promijeniCijenu(0) : dummy()">
           <CButtonAccept btn="PRIHVATI" :btnClickHandler="dummy" />
         </div>
@@ -254,7 +266,9 @@ import store from "@/store";
 import CButtonSingle from "@/components/CButtonSingle.vue";
 import CButtonAccept from "@/components/CButtonAccept.vue";
 import CButtonDecline from "@/components/CButtonDecline.vue";
+import CSuccess from '@/components/CSuccess.vue';
 import CCard from "@/components/CCard.vue";
+import CDeny from '@/components/CDeny.vue';
 //Firebase
 import { db } from "@/firebase";
 import { doc, collection, getDocs, updateDoc} from "@/firebase";
@@ -268,8 +282,11 @@ export default {
     CButtonAccept,
     CButtonDecline,
     CCard,
+    CSuccess,
+    CDeny,
   },
-   beforeMount(){
+  
+  beforeMount(){
     this.readData();
   },
   data() {
@@ -291,6 +308,8 @@ export default {
       darken: false,
       img: [true,true,true,true,true,true],
       store,
+      prihvaceno: false,
+      odbijeno: false,
     };
   },
   created() {
@@ -357,6 +376,7 @@ export default {
               status: "Odbijeno"
             });
             this.stanje = "Odbijeno";
+            this.odbijeno = true;
           }
           else {
             await updateDoc(g, {
@@ -365,6 +385,7 @@ export default {
               status: "Prihvaćeno"
             });
             this.stanje = "Prihvaćeno";
+            this.prihvaceno = true;
             this.preporucenaCijena = this.novaPreporucenaCijena;
           }
           this.sendEmail();
@@ -572,10 +593,11 @@ export default {
       width: 43px;
       opacity: 0.75;
     }
-    .price {
-      color: var(--FluorescentRed__FrenchWine);
-    }
   }
+}
+
+.price {
+  color: var(--FluorescentRed__FrenchWine);
 }
 
 .arrow {
@@ -585,5 +607,17 @@ export default {
 }
 .menu-highlight {
   background-color: var(--FluorescentRed__FrenchWine);
+}
+
+.hide {
+  overflow: hidden;
+  height: 0px;
+}
+.hide2 {
+  overflow: hidden;
+  height: 106px;
+}
+.hide3 {
+  height: auto;
 }
 </style>
