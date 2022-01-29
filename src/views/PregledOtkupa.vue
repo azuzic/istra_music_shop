@@ -142,33 +142,38 @@
         </div>
       </div>
       <!--================/PRIHVATI OTKUP===================-->      
-
-      <div v-if="store.currentUser == 'istramusicshop@gmail.com'">
-        <hr class="dotted mt-2 mb-2" />
-      </div>
-      <div v-if="store.currentUser == 'istramusicshop@gmail.com'">
-        <p class="text-center mb-2">
-          <b class="text-24px">PODACI O KLIJENTU</b>
-        </p>
-      </div>
-      <div v-if="store.currentUser == 'istramusicshop@gmail.com'">
-        <p><u class="text-20px">Ime i prezime:</u></p>
-        <p class="mt-1 text-18px"><b>{{korisnik[0].imePrezime}}</b></p>
-      </div>
-      <div v-if="store.currentUser == 'istramusicshop@gmail.com'">
-        <p><u class="text-20px">Email:</u></p>
-        <p class="mt-1 text-18px"><b>{{korisnik[0].email}}</b></p>
-      </div>
-      <div v-if="store.currentUser == 'istramusicshop@gmail.com'">
-        <p><u class="text-20px">OIB:</u></p>
-        <p class="mt-1 text-18px"><b>{{korisnik[0].oib}}</b></p>
-      </div>
-      <div v-if="store.currentUser == 'istramusicshop@gmail.com'">
-        <p><u class="text-20px">Broj telefona:</u></p>
-        <p class="mt-1 text-18px"><b>{{mob}}</b></p>
-      </div>
-      <div v-if="store.currentUser == 'istramusicshop@gmail.com'">
-        <hr class="dotted mt-2 mb-2" />
+      <div class="grid grid-rows-auto gap-2" v-if="store.currentUser == 'istramusicshop@gmail.com'">
+        <div >
+          <hr class="dotted mt-2 mb-2" />
+        </div>
+        <div>
+          <p class="text-center mb-2">
+            <b class="text-24px">PODACI O KLIJENTU</b>
+          </p>
+        </div>
+        <div>
+          <p><u class="text-20px">Ime i prezime:</u></p>
+          <p class="mt-1 text-18px"><b>{{korisnik[0].imePrezime}}</b></p>
+        </div>
+        <div>
+          <p><u class="text-20px">Email:</u></p>
+          <p class="mt-1 text-18px"><b>{{korisnik[0].email}}</b></p>
+        </div>
+        <div>
+          <p><u class="text-20px">OIB:</u></p>
+          <p class="mt-1 text-18px"><b>{{korisnik[0].oib}}</b></p>
+        </div>
+        <div>
+          <p><u class="text-20px">Broj telefona:</u></p>
+          <p class="mt-1 text-18px"><b>{{mob}}</b></p>
+        </div>
+        <div>
+          <p><u class="text-20px">IBAN:</u></p>
+          <p class="mt-1 text-18px"><b>{{korisnik[0].iban}}</b></p>
+        </div>
+        <div>
+          <hr class="dotted mt-2 mb-2" />
+        </div>
       </div>
       <!--==============NOVA CIJENA==============================-->
       <div v-if="store.currentUser == 'istramusicshop@gmail.com'" :class="stanje=='U razradi' && !cijenaUpdated ? '' : 'transparent'">
@@ -278,6 +283,7 @@ export default {
             imePrezime: "",
             email: "",
             mob: "",
+            iban: "",
             oib: ""
       }],
       opis: "",
@@ -326,6 +332,7 @@ export default {
             imePrezime: (`${doc.data().imePrezime}`),
             email: (`${doc.data().email}`),
             mob: (`${doc.data().mob}`),
+            iban: (`${doc.data().iban}`),
             oib: (`${doc.data().oib}`)
           });
           this.opis = store.zahtjev.napomena;

@@ -70,6 +70,32 @@
           </h2>
         </div>
         <!--===================BROJ MOBITELA END===========-->
+        <!--===================IBAN===============-->
+        <div v-if="store.currentUser!='istramusicshop@gmail.com'">
+          <p class="text-left text-18px m-0 p-0">IBAN</p>
+          <div class="flex">
+            <div class="Cmt-3" style="color: grey !important">HR</div>
+            <div class="w-full">
+              <input
+                type="text"
+                name="iban"
+                id="iban"
+                v-model="iban"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                maxlength="19"
+              />
+              <hr />
+            </div>
+          </div>
+          <h2
+            v-if="iban.length != 19 && iban!=''"
+            class="CWarning mt-1"
+            id="resultIban"
+          >
+            IBAN mora sadržavati 19 brojeva!
+          </h2>
+        </div>
+        <!--===================/IBAN===========-->
         <!--===================THEME===================-->
         <div @click="updateTheme()">
           <p class="text-left text-18px m-0 p-0 mb-1">Izgled aplikacije</p>
@@ -169,9 +195,11 @@ export default {
       oib: "",
       mobTemp: "",
       mob: "",
+      iban: "",
       theme: store.theme,
       canSave: true,
-      wrongPass: true
+      wrongPass: true,
+      store
     };
   },
   components: {
@@ -196,6 +224,7 @@ export default {
           this.email = store.currentUser;
           this.oib = `${doc.data().oib}`;
           this.mobTemp = `${doc.data().mob}`;
+          this.iban = `${doc.data().iban}`.slice(2);
           this.mobLoad();
           store.userID = `${doc.id}`;
         }
@@ -211,22 +240,21 @@ export default {
     async updateKorisnik() {
       if(this.email !== this.oldEmail) {
         //Password hide icon 
-        await wait(0.2);
+        setTimeout(() => {
           document.getElementsByClassName("dg-form")[0].innerHTML = ('<label for="dg-input-elem" style="font-size: 13px;">Molimo unesite vašu lozinku:</label>' +
-          '<input type="password" placeholder="" autocomplete="off" id="dg-input-elem" style="width: 100%; margin-top: 10px; padding: 5px 15px; font-size: 16px; border-radius: 4px; border: 2px solid rgb(238, 238, 238);" type = "password">' +
-          ' <hr/>' +
-          ' <img ' +
-          'id="eye1"' +
-          ' @click="eye"' +
-          ' class="eye"' +
-          ' src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/OOjs_UI_icon_eyeClosed.svg/1200px-OOjs_UI_icon_eyeClosed.svg.png"/>' +
-          ' <img ' +
-          'id="eye2"' +
-          ' @click="eye"' +
-          ' class="eye invisible"' +
-          ' src="https://image.flaticon.com/icons/png/512/63/63568.png"/>'
-          );
+            '<input type="password" placeholder="" autocomplete="off" id="dg-input-elem" style="width: 100%; margin-top: 10px; padding: 5px 15px; font-size: 16px; border-radius: 4px; border: 2px solid rgb(238, 238, 238);" type = "password">' +
+            ' <hr/>' +
+            ' <img ' +
+            'id="eye1"' +
+            ' class="eye"' +
+            ' src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/OOjs_UI_icon_eyeClosed.svg/1200px-OOjs_UI_icon_eyeClosed.svg.png"/>' +
+            ' <img ' +
+            'id="eye2"' +
+            ' class="eye invisible"' +
+            ' src="https://image.flaticon.com/icons/png/512/63/63568.png"/>'
+            );
           bindingFunction();
+        }, 100)
         try {
           await this.$dialog
           .prompt({
@@ -279,6 +307,21 @@ export default {
         console.error("Neuspješno spremanje podataka o korisniku!" + e);
       }
     },
+    eye() {
+      console.log("eye");
+      let x = document.getElementById("dg-input-elem");
+      let y = document.getElementById("eye1");
+      let z = document.getElementById("eye2");
+      if (x.type === "password") {
+        x.type = "text";
+        y.classList.add("invisible");
+        z.classList.remove("invisible");
+      } else {
+        x.type = "password";
+        z.classList.add("invisible");
+        y.classList.remove("invisible");
+      }
+    },
     dummy() {},
     async signout() {
       store.theme="Svijetla"; //Theme reset
@@ -317,6 +360,7 @@ export default {
         this.oib &&
         this.oib.length == 11 &&
         this.UpdateMob.length > 8 &&
+        this.iban.length == 19 &&
         this.UpdateMob &&
         this.canSave
         ? true
@@ -376,14 +420,6 @@ export default {
 .hide2 {
   overflow: hidden;
   height: 106px;
-}
-
-.eye {
-  float: right;
-  margin-top: -28px;
-  position: relative;
-  z-index: 1;
-  height: 20px;
 }
 
 .Cmt-3 {

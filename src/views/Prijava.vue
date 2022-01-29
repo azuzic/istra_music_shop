@@ -208,6 +208,7 @@ export default {
 
 <style scoped lang="scss">
 .eye {
+  transition: all 0s !important;
   float: right;
   margin-top: -28px;
   position: relative;
@@ -217,5 +218,10 @@ export default {
 .href-link {
   font-size: 14px;
   color: var(--PaleFlower__RavensBanquet);
+}
+.invisible {
+  transition: all 0s !important;
+  width: 0px;
+  height: 0px;
 }
 </style>

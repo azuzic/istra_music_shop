@@ -2,7 +2,7 @@
   <div>
     <!--==============LIST ============================-->
     <transition-group
-      class="grid grid-rows-auto gap-5 pl-2 pr-2 pb-16 pt-16"
+      class="grid grid-rows-auto gap-5 pl-2 pr-2 pb-16 pt-16 overflow-x-hidden"
       name="fade"
       tag="div"
     >

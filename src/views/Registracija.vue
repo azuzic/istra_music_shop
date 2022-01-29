@@ -33,7 +33,7 @@
           <hr />
           <h2
             v-if="!checkEmail(email) && email"
-            class="CWarning"
+            class="CWarning mt-1"
             id="resultEmail"
           >
             Email nije točno napisan!
@@ -52,7 +52,7 @@
             maxlength="11"
           />
           <hr />
-          <h2 v-if="oib.length != 11 && oib" class="CWarning" id="resultOIB">
+          <h2 v-if="oib.length != 11 && oib" class="CWarning mt-1" id="resultOIB">
             OIB mora sadržavati 11 brojeva!
           </h2>
         </div>
@@ -76,13 +76,39 @@
           </div>
           <h2
             v-if="UpdateMob.length != 9 && UpdateMob.length != 10 && UpdateMob"
-            class="CWarning"
+            class="CWarning mt-1"
             id="resultMob"
           >
             Broj mobitela mora sadržavati 10 ili 11 brojeva!
           </h2>
         </div>
         <!--===================/BROJ MOBITELA===========-->
+        <!--===================IBAN===============-->
+        <div>
+          <p class="text-left text-18px m-0 p-0">IBAN</p>
+          <div class="flex">
+            <div class="mtc" style="color: grey !important">HR</div>
+            <div class="w-full">
+              <input
+                type="text"
+                name="iban"
+                id="iban"
+                v-model="iban"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                maxlength="19"
+              />
+              <hr />
+            </div>
+          </div>
+          <h2
+            v-if="iban.length != 19 && iban!=''"
+            class="CWarning mt-1"
+            id="resultIban"
+          >
+            IBAN mora sadržavati 19 brojeva!
+          </h2>
+        </div>
+        <!--===================/IBAN===========-->
         <!--===================LOZINKA=====================-->
         <div>
           <div class="text-left text-18px m-0 p-0 flex items-center">
@@ -200,7 +226,7 @@
           />
           <h2
             v-if="password != passwordRepeat && passwordRepeat"
-            class="CWarning"
+            class="CWarning mt-1"
           >
             Lozinke se ne podudaraju!
           </h2>
@@ -262,6 +288,7 @@ export default {
       mob: "",
       password: "",
       passwordRepeat: "",
+      iban: "",
       registered: false,
       greska: false,
       store,
@@ -288,6 +315,7 @@ export default {
                 email: this.email,
                 oib: this.oib,
                 mob: this.mob,
+                iban: 'HR' + this.iban,
                 theme: "Svijetla",
               });
               this.signout();
@@ -348,6 +376,7 @@ export default {
         this.email &&
         this.oib &&
         this.oib.length == 11 &&
+        this.iban.length == 19 &&
         this.UpdateMob.length > 8 &&
         this.UpdateMob &&
         this.password &&
@@ -390,11 +419,11 @@ export default {
 
 <style scoped lang="scss">
 .eye {
+  transition: all 0s !important;
   float: right;
   margin-top: -28px;
   position: relative;
   z-index: 1;
-  cursor: pointer;
   height: 20px;
 }
 .line {
@@ -432,5 +461,11 @@ export default {
 
 .mtc {
   margin-top: 3px;
+}
+
+.invisible {
+  transition: all 0s !important;
+  width: 0px;
+  height: 0px;
 }
 </style>

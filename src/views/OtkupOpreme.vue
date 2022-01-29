@@ -292,9 +292,15 @@
           @image-remove="canUpload = false,dummy()"
         ></croppa>
 
+      
       <div class="menu-bottom-dodavanje grid grid-cols-1 mt-4">
-        <div class="mx-auto" :class="isSpining ? '' : ''"> 
-          <img @click="rotateImg()" class="photo-icon" :class="isSpining ? 'photo-iconD' : ''" src="@/assets/rotate.png" />
+        <div class="mx-auto "> 
+          
+        </div>
+      </div>
+      <div class="menu-bottom-dodavanje grid grid-cols-1 mt-4">
+        <div class="mx-auto" :class="isUploading || !canUpload ? 'transparent' : ''"> 
+          <img @click="canUpload ? rotateImg() : dummy()" class="photo-icon" :class="isSpining ? 'photo-iconD' : ''" src="@/assets/rotate.png" />
           <img v-if="isSpining" class="photo-iconR" src="@/assets/rotate.png" />
         </div>
       </div>

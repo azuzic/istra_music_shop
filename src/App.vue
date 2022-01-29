@@ -278,11 +278,6 @@ export default {
 <style scoped lang="scss">
 @import url("https://fonts.googleapis.com/css2?family=Alike&display=swap");
 
-:root {
-    --Poblano__Poblano:                           #068020;    //var(--Poblano__Poblano);
-    --RichGreen__RichGreen:                       #258843;    //var(--RichGreen__RichGreen);
-}
-
 .CBg {
   position: fixed;
   left: 0;
