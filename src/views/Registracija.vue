@@ -9,7 +9,7 @@
       <!--===================TITLE=======================-->
       <div>
         <h1 class="text-center text-22px">
-          Kreirajte račun da možete započeti.
+          Registrirajte se da možete započeti
         </h1>
       </div>
       <!--===================/TITLE===================-->
