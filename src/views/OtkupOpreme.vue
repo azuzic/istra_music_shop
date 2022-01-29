@@ -349,6 +349,7 @@ export default {
       email: "",
       oib: "",
       mob: "",
+      iban: "",
 
       //Page switch
       mode: false,
@@ -468,6 +469,7 @@ export default {
           this.email = `${doc.data().email}`;
           this.oib = `${doc.data().oib}`;
           this.mob = `${doc.data().mob}`;
+          this.iban = `${doc.data().iban}`;
         }
       });
     },
@@ -571,6 +573,7 @@ export default {
         cijena: this.preporucenaCijena,
         sifra: this.sifra,
         napomena: this.napomena,
+        iban: this.iban,
       };
       let emailSent = await emailjs.send("service_ox0wdn1", "noviZahtjev", params);
         console.log("Email sent! ", emailSent.text);

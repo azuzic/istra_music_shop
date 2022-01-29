@@ -127,13 +127,13 @@
       <!--===================ALERT====================-->
         <CSuccess
           :class="prihvaceno ? 'hide2' : 'hide'"
-          msg1="Uspješno prihvaćeno!"
-          msg2="Na vašu email adresu poslana je potvrda o prihvaćanju nove predložene cijene."
+          msg1="Otkup prihvaćen!"
+          msg2="Na vašu email adresu poslana je potvrda o uspješnom otkupu."
         />
         <CDeny
           :class="odbijeno ? 'hide2' : 'hide'"
-          msg1="Uspješno odbijeno!"
-          msg2="Na vašu email adresu poslana je potvrda o odbijanju nove predložene cijene."
+          msg1="Otkup poništen!"
+          msg2="Na vašu email adresu poslana je potvrda o poništavanju otkupa."
         />
       <!--===================/ALERT====================-->
       <!--===================ODBIJ OTKUP====================-->
