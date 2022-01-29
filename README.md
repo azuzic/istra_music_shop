@@ -3,7 +3,8 @@
 Web aplikacija za otkup glazbenih instrumenata.
 
 ### Poveznica na aplikaciju
-- https://istramusicshop.web.app/
+- https://istramusicshop.netlify.app/
+- [![Netlify Status](https://api.netlify.com/api/v1/badges/b1afdd0e-78a7-40c6-8f03-0edf4b235b02/deploy-status)](https://app.netlify.com/sites/istramusicshop/deploys)
 
 ### Autori i zaduženja
 
