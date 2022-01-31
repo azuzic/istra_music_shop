@@ -288,7 +288,7 @@
           :reverse-scroll-to-zoom="false"
           :show-remove-button="true"
           :remove-button-color="'gray'"
-          @new-image="canUpload = true,dummy(), uploading = false"
+          @new-image="canUpload = true, dummy(), uploading = false"
           @image-remove="canUpload = false,dummy()"
         ></croppa>
 
@@ -313,8 +313,8 @@
   </div>
 </template>
 <script>
-//Components
 import data from "../assets/JSON/InstrumentData.json";
+//Components
 import CWarning from "@/components/CWarning.vue";
 import CButtonAccept from "@/components/CButtonAccept.vue";
 import CButtonDecline from "@/components/CButtonDecline.vue";
@@ -350,18 +350,18 @@ export default {
       oib: "",
       mob: "",
       iban: "",
-
       //Page switch
       mode: false,
-
       //Instrument data
       jsonData: data,
       vrste: ["Gitara"],
       prikazaniProizvodaci: [],
       prikazaniModeli: [],
       prikazaneSerije: [],
+      //Pomocni podaci
       prikazanaStanja: [],
-
+      cijeneSerija: {},
+      //Odabrani podaci
       odabranaVrsta: "Gitara",
       odabraniProizvodac: "Gibson",
       odabraniModel: "Les Paul",
@@ -370,8 +370,8 @@ export default {
       vlasnik: "1",
       stanje: "Novo",
       napomena: "",
+      //Calculated
       sifra : new Date().getFullYear()+"-"+Math.floor(100000 + Math.random() * 900000),
-      cijeneSerija: {},
       preporucenaCijena: 0,
       zahtjevPredan: false,
 

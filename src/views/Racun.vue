@@ -115,7 +115,8 @@
         <CSuccess
           :class="!canSave ? 'hide2' : 'hide'"
            msg1="Spremljeno!"
-          msg2="Uneseni podaci su spremljeni. Nakon nestanka ove obavijesti možete ponovno spremiti podatke."
+          :msg2="!emailUpdated ? 'Uneseni podaci su spremljeni. Nakon nestanka ove obavijesti možete ponovno spremiti podatke.'
+          : 'Uneseni podaci su spremljeni. Odjavit ćemo Vas kako biste se prijavili novim emailom'"
         />
         <CWarning
           :class="!wrongPass ? 'hide2' : 'hide'"
@@ -199,7 +200,8 @@ export default {
       theme: store.theme,
       canSave: true,
       wrongPass: true,
-      store
+      store,
+      emailUpdated: false,
     };
   },
   components: {
@@ -273,7 +275,10 @@ export default {
               await updateEmail(user, this.email);
                 console.log("Email updated.");
                 store.currentUser = this.email;
-                this.saveData();     
+                this.saveData();
+                this.emailUpdated = true;
+                await wait(5);
+                  this.signout();
           }
           catch(e) {  
             if(e == "FirebaseError: Firebase: Error (auth/wrong-password)."){ 
