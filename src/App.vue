@@ -461,7 +461,7 @@ export default {
 }
 
 .helpPopup {
-  position: absolute;
+  position: fixed;
   left:50%;
   top:50%;
   transform:translate(-50%,-50%);
@@ -475,7 +475,7 @@ export default {
   box-shadow: 0px 0px 8px hsl(0, 0%, 0%, 75%);
 }
 .closeHelp {
-  position: absolute;
+  position: fixed;
   overflow: hidden;
   left:50%;
   top:50%;
