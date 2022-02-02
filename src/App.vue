@@ -413,4 +413,57 @@ export default {
     }
   }
 }
+<<<<<<< HEAD
+=======
+
+.help {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  height: 40px;
+  margin: 4px;
+}
+.undarken-bg {
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: -100;
+  background-color: hsl(0, 0%, 0%, 0%);
+  backdrop-filter: blur(0px);
+}
+.darken-bg {
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 40000000;
+  background-color: hsl(0, 0%, 0%, 50%);
+  backdrop-filter: blur(4px);
+}
+
+.helpPopup {
+  position: absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  position: fixed !important;
+  z-index: 50000000;
+  width: 90% !important;
+  height: 400px;
+  overflow-y: scroll;
+  border-radius: 16px;
+  background-color: var(--Snow__DarkToneInk);
+  box-shadow: 0px 0px 8px hsl(0, 0%, 0%, 75%);
+}
+.closeHelp {
+  position: absolute;
+  overflow: hidden;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  width: 90% !important;
+  height: 0%;
+}
+>>>>>>> parent of 66d2a98 (Help position adjusted)
 </style>
