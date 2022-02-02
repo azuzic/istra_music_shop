@@ -51,6 +51,25 @@
       </div>
     </div>
 
+    <!--==============HELP==============-->
+    <div v-if="currentRouteName == 'Home' || currentRouteName == 'Prijava'">
+      <img @click="helpPopup = true" class="help" src="https://cdn0.iconfinder.com/data/icons/cosmo-symbols/40/help_1-512.png">
+      
+      <div :class="helpPopup ? 'darken-bg' : 'undarken-bg'"></div>
+      
+      <div @click="helpPopup = false" class="pl-4 pr-4" :class="helpPopup ? 'helpPopup' : 'closeHelp'">
+        <ol class="p-4 list-disc">
+          <h1 class="text-center mb-4 text-24px"><b>Kratke upute kako koristiti aplikaciju</b></h1>
+          <li>Aplikacija služi svima koji žele prodati svoje glazbene instrumente. </li><br>
+          <li>Prilikom registracije tražit ćemo vas OIB iz sigurnosnih razloga te radi generiranja kupoprodajnog ugovora. Također, morate unijeti IBAN računa gdje želite da Vam uplatimo novac.</li><br>
+          <li>Nakon registracije odmah možete predati zahtjev za otkup na <b>OtkupOpreme</b> odabirom vašeg instrumenta među ponuđenima i popunjavanjem ostalih podataka koje vas budemo tražili.</li><br>
+          <li>Tražit ćemo Vas i slike vašeg instrumenta. Zahtjev možemo odbiti ukoliko slike nisu dovoljno dobre kvalitete.</li><br>
+          <li>Status vašeg zahtjeva možete pratiti na <b>StatusOtkupa</b>. Obratite pažnju ukoliko Vam naš djelatnik predloži drugu cijenu za vaš instrument, možete ju prihvatiti ili odbiti. </li><br>
+        </ol>
+      </div>
+    </div>
+    <!--==============HELP==============-->
+
     <router-view />
   </div>
 </template>
@@ -413,9 +432,6 @@ export default {
     }
   }
 }
-<<<<<<< HEAD
-=======
-
 .help {
   position: absolute;
   right: 0px;
@@ -465,5 +481,4 @@ export default {
   width: 90% !important;
   height: 0%;
 }
->>>>>>> parent of 66d2a98 (Help position adjusted)
 </style>
