@@ -1,6 +1,6 @@
 # "IstraMusicShop"
 
-Mobilna Web aplikacija za otkup glazbenih instrumenata.
+Mobilna web aplikacija za otkup glazbenih instrumenata
 
 ### Poveznica na aplikaciju
 - https://istramusicshop.netlify.app/
@@ -24,6 +24,9 @@ Korisnik može pregledavati sve svoje zahtjeve koje je predao trgovini.
 Drugi dio aplikacije je namijenjen djelatnicima koji će moći pregledavati zaprimljene zahtjeve, prihvatiti ih ili odbiti te korigirati cijenu.
 Ukoliko djelatnik prihvati zahtjev, korisniku će na email biti dostavljena potvrda.
 
+### Youtube video
+
+[Link](https://www.youtube.com/watch?v=-_FJPBhNL2c&t=6s)
 
 ### Organizacija
 
