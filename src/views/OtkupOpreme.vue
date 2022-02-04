@@ -82,83 +82,20 @@
         <!--===================SLIKE===================-->
         <div id="scroll-slike">
           <p class="text-left text-18px m-0 p-0">Slike</p>
-          <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2">
+          <div class="grid grid-rows-2 grid-cols-3 gap-3 mt-2" >
 
-            <div>
-              <p class="otkup-img-text">Prednja</p>
-              <div class="square img_1-1 img-top-left">
-                  <div :class="!isUploadingPicture[0] ? 'hide-loading' : 'show-loading'" 
+            <div v-for="(z, i) of instrumentSlike"
+            :key="`key-${i}`">
+              <p class="otkup-img-text">{{z}}</p>
+              <div class="square img_1-1" :class="{'img-top-left' : i==0, 'img-top' : i==1, 'img-top-right' : i==2,
+                                                    'img-bottom-left' : i==3, 'img-bottom' : i==4, 'img-bottom-right' : i==5}">
+                  <div :class="!isUploadingPicture[i] ? 'hide-loading' : 'show-loading'" 
                         class="loader-squre-img">
                     <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
                   </div>
-                  <button :class="isUploadingPicture[0] ? 'hide-text' : 'show-text'" 
-                          class="square-img2" @click="imageUpload(0)">Učitaj sliku</button> 
-                  <img class="square-img" :src="pictures.guitarPictures[0].url"/>
-              </div>
-            </div> 
-
-            <div>
-              <p class="otkup-img-text">Stražnja</p>
-              <div class="square img_1-1 img-top">
-                  <div :class="!isUploadingPicture[1] ? 'hide-loading' : 'show-loading'" 
-                        class="loader-squre-img">
-                    <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
-                  </div>
-                  <button :class="isUploadingPicture[1] ? 'hide-text' : 'show-text'" 
-                          class="square-img2" @click="imageUpload(1)">Učitaj sliku</button> 
-                  <img class="square-img" :src="pictures.guitarPictures[1].url"/>
-              </div>
-            </div> 
-
-            <div>
-              <p class="otkup-img-text">Bočna desna</p>
-              <div class="square img_1-1 img-top-right">
-                  <div :class="!isUploadingPicture[2] ? 'hide-loading' : 'show-loading'" 
-                        class="loader-squre-img">
-                    <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
-                  </div>
-                  <button :class="isUploadingPicture[2] ? 'hide-text' : 'show-text'" 
-                          class="square-img2" @click="imageUpload(2)">Učitaj sliku</button> 
-                  <img class="square-img" :src="pictures.guitarPictures[2].url"/>
-              </div>
-            </div> 
-
-            <div>
-              <p class="otkup-img-text">Bočna lijeva</p>
-              <div class="square img_1-1 img-bottom-left">
-                  <div :class="!isUploadingPicture[3] ? 'hide-loading' : 'show-loading'" 
-                        class="loader-squre-img">
-                    <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
-                  </div>
-                  <button :class="isUploadingPicture[3] ? 'hide-text' : 'show-text'" 
-                          class="square-img2" @click="imageUpload(3)">Učitaj sliku</button> 
-                  <img class="square-img" :src="pictures.guitarPictures[3].url"/>
-              </div>
-            </div> 
-
-            <div>
-              <p class="otkup-img-text">Serijski broj</p>
-              <div class="square img_1-1 img-bottom">
-                  <div :class="!isUploadingPicture[4] ? 'hide-loading' : 'show-loading'" 
-                        class="loader-squre-img">
-                    <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
-                  </div>
-                  <button :class="isUploadingPicture[4] ? 'hide-text' : 'show-text'" 
-                          class="square-img2" @click="imageUpload(4)">Učitaj sliku</button> 
-                  <img class="square-img" :src="pictures.guitarPictures[4].url"/>
-              </div>
-            </div> 
-
-            <div>
-              <p class="otkup-img-text">Glava gitare</p>
-              <div class="square img_1-1 img-bottom-right">
-                  <div :class="!isUploadingPicture[5] ? 'hide-loading' : 'show-loading'" 
-                        class="loader-squre-img">
-                    <div class="loader animate-spin rounded-full border-4 border-t-4 h-6 w-6"></div>
-                  </div>
-                  <button :class="isUploadingPicture[5] ? 'hide-text' : 'show-text'" 
-                          class="square-img2" @click="imageUpload(5)">Učitaj sliku</button> 
-                  <img class="square-img" :src="pictures.guitarPictures[5].url"/>
+                  <button :class="isUploadingPicture[i] ? 'hide-text' : 'show-text'" 
+                          class="square-img2" @click="imageUpload(i)">Učitaj sliku</button> 
+                  <img class="square-img" :src="pictures.guitarPictures[i].url"/>
               </div>
             </div> 
             
@@ -358,6 +295,7 @@ export default {
       prikazaniProizvodaci: [],
       prikazaniModeli: [],
       prikazaneSerije: [],
+      instrumentSlike: ['Prednja', 'Stražnja', 'Bočna desna', 'Bočna lijeva', 'Serijski broj', 'Glava gitare'],
       //Pomocni podaci
       prikazanaStanja: [],
       cijeneSerija: {},
