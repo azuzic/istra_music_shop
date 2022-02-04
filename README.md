@@ -26,7 +26,7 @@ Ukoliko djelatnik prihvati zahtjev, korisniku će na email biti dostavljena potv
 
 ### Youtube video
 
-[Link](https://www.youtube.com/watch?v=-_FJPBhNL2c&t=6s)
+[Link](https://www.youtube.com/watch?v=-_FJPBhNL2c&t)
 
 ### Organizacija
 
